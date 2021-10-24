@@ -1,0 +1,17 @@
+.navbar-brand { margin-left: 20px; }
+
+.right-section {
+    position: absolute;
+    right: 20px;
+}
+
+li .active {
+    background-color: rgb(51, 51, 51);
+}
+
+.fa { color: #fff; }
+
+li a:hover {
+    background-color: #54483d;
+    color: #b64f0b;
+}

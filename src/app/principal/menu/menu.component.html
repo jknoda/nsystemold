@@ -1,0 +1,18 @@
+﻿<nav id="left-panel" role="navigation" class="navbar menu-left" >
+    <div class="row">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a routerLink="home" routerLinkActive="active" class="nav-link">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="isAuthenticated">
+                <a routerLink="usuario" routerLinkActive="active" class="nav-link">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <span>Cadastro</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

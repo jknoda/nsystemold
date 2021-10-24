@@ -1,0 +1,19 @@
+﻿<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+    <div class="row">
+        <a class="navbar-brand" routerLink="/" routerLinkActive="active">
+            Associação Yamazaki de Judô
+        </a>
+        <ul class="nav right-section navbar-nav">
+            <li *ngIf="!isAuthenticated">
+                <a routerLink="auth" routerLinkActive="active" class="nav-link" title="login">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li *ngIf="isAuthenticated">
+                <a style="cursor: pointer;" (click)="onLogout()" title="logout">
+                    <i class="fa fa-sign-out " aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

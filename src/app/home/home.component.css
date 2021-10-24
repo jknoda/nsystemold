@@ -1,0 +1,69 @@
+.ul-icons{
+    list-style-type: none;
+    padding-left: 40px; 
+}
+.ul-icons li{
+    display: inline-block;
+    /* font-size: 2em; */
+    color: #49bf9d;
+    padding-right: 5px;
+}
+
+.googleplay img{
+    text-align: left; 
+    padding: 0px 10px;
+    width: 150px;
+    height: auto;
+}
+.setup{
+    text-align: left; 
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.textarea {
+    display: block;
+    padding: 10px;
+    line-height: 1.1;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+    width: 300px;
+    height: 400px;
+    overflow: scroll;
+}
+
+.principal
+{
+    width: 250px;
+    text-align: center; 
+    padding: 0px 10px 0px 90px;
+}
+
+
+@media screen and (min-width: 800px) {
+    .googleplay img{
+        text-align: left; 
+        padding: 0px 10px;
+        width: 250px;
+        height: auto;
+    }
+
+    .setup{
+        text-align: left; 
+        padding: 10px 20px;
+        font-size: 24px;
+    }
+
+    .textarea {
+        display: block;
+        padding: 10px;
+        line-height: 1.1;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-shadow: 1px 1px 1px #999;
+        width: 500px;
+        height: 400px;
+        overflow: scroll;
+    }    
+  } 
