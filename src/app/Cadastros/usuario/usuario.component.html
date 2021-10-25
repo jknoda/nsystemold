@@ -1,16 +1,56 @@
-<h1>usuario</h1>
-<form>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" formControlName="email" id="email" readonly>
+            </div>
+            <div class="col-md-3">
                 <label for="cpf">CPF</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
-                <input class="form-control" data-inputmask="'alias': 'currency'" style="text-align: right;">
+                <input type="text" class="form-control" formControlName="cpf" id="CPF" placeholder="CPF">
             </div>
             <div class="col-md-6">
-                <label for="formGroupExampleInput2">Another label</label>
-                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" formControlName="nome" id="nome" placeholder="Nome">
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="logradouro">Endereço</label>
+                <input type="text" class="form-control" formControlName="logradouro" id="logadouro" placeholder="Endereço">
+            </div>
+            <div class="col-md-1">
+                <label for="lognum">Nº</label>
+                <input type="text" class="form-control" formControlName="lognum" id="lognum" placeholder="nº">
+            </div>
+            <div class="col-md-3">
+                <label for="bairro">Bairro</label>
+                <input type="text" class="form-control" formControlName="bairro" id="bairro" placeholder="Bairro">
+            </div>
+            <div class="col-md-4">
+                <label for="cidade">Cidade</label>
+                <input type="text" class="form-control" formControlName="cidade" id="cidade" placeholder="Cidade">
+            </div>
+            <div class="col-md-1">
+                <label for="uf">UF</label>
+                <input type="text" class="form-control" formControlName="uf" id="uf" placeholder="UF">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="celular">Celular</label>
+                <input type="text" class="form-control" formControlName="celular" id="celular" placeholder="Celular">
+            </div>
+            <div class="col-md-3">
+                <label for="fone">Fone</label>
+                <input type="text" class="form-control" formControlName="fone" id="fone" placeholder="Fone">
+            </div>
+            <div class="col-md-6">
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  [disabled]="!userForm.valid">Salvar</button>
+            </div>       
         </div>
     </div>
   </form>
