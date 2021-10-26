@@ -13,14 +13,6 @@ export class HomeComponent implements OnInit {
     constructor() { }
 
   ngOnInit(): void {
-    localStorage.removeItem("jogador");
-    localStorage.removeItem("parceiro");
-    localStorage.removeItem("avatars");
-    localStorage.removeItem("avatarspar");
-  }
-
-  showDialog(){
-    this.display = true;
   }
 
 }

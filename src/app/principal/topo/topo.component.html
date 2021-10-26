@@ -10,9 +10,12 @@
                 </a>
             </li>
             <li *ngIf="isAuthenticated">
-                <a style="cursor: pointer;" (click)="onLogout()" title="logout">
-                    <i class="fa fa-sign-out " aria-hidden="true"></i>
-                </a>
+                <a style="cursor: pointer; padding: 5px; align-items: right;" (click)="onLogout()" title="logout">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </a>                
+                <div style="color: white;">
+                    {{userEmail}}
+                </div>
             </li>
         </ul>
     </div>

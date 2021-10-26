@@ -13,6 +13,21 @@ export class UsuarioService {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<UsuarioModel>(this.url + "api/usuario/create", body, httpOptions);
+        return this.http.post<UsuarioModel>(this.url + "/api/usuario/create", body, httpOptions);
     }
+
+    getDados(body:any): Observable<UsuarioModel> {
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
+        };        
+        return this.http.post<UsuarioModel>(this.url + "/api/usuario/find", body, httpOptions);
+    }
+
+    updateDados(body:any): Observable<UsuarioModel> {
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
+        };        
+        return this.http.post<UsuarioModel>(this.url + "/api/usuario/update", body, httpOptions);
+    }
+
 }

@@ -6,6 +6,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import {InputTextModule} from 'primeng/inputtext';
+import {DropdownModule} from 'primeng/dropdown';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import {InputMaskModule} from 'primeng/inputmask';
+import {ToastModule} from 'primeng/toast';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -15,6 +19,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AuthComponent } from './auth/auth.component';
 import { UsuarioComponent } from './Cadastros/usuario/usuario.component';
+import { TopoService } from './principal/topo/topo.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +38,10 @@ import { UsuarioComponent } from './Cadastros/usuario/usuario.component';
     HttpClientModule,
     CommonModule,
     InputTextModule,
+    DropdownModule,
+    BrowserAnimationsModule,
+    InputMaskModule,
+    ToastModule,
     MenuModule,    
     TopoModule    
   ],
@@ -41,7 +50,8 @@ import { UsuarioComponent } from './Cadastros/usuario/usuario.component';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true
-    }
+    },
+    TopoService
   ],
   bootstrap: [AppComponent]
 })

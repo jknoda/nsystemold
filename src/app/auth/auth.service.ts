@@ -2,6 +2,7 @@ import { Injectable, OnDestroy  } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth } from "@angular/fire/auth";
+import { TopoService } from '../principal/topo/topo.service';
 
 import { User } from './user.model';
 import { ServiceConfig } from '../_config/services.config';
@@ -24,8 +25,9 @@ export class AuthService implements OnDestroy {
   private tokenExpirationTimer: any;
   private url: string = ServiceConfig.API_ENDPOINT;
   getUsuarioSubscription: Subscription;
-  
-  constructor(public auth: Auth, private router: Router, private http: HttpClient) {}
+
+   
+  constructor(public auth: Auth, private router: Router, private http: HttpClient, private topoService: TopoService) {}
   ngOnDestroy(): void {
     this.getUsuarioSubscription.unsubscribe();
   }
@@ -41,8 +43,10 @@ export class AuthService implements OnDestroy {
         userCredential.user['stsTokenManager']['accessToken'],
         +userCredential.user['stsTokenManager']['expirationTime']
       );
+      this.topoService.isAuthenticated.emit(true);
       return userCredential;
     }).catch((error) => {
+      this.topoService.isAuthenticated.emit(false);
       this.handleError(error);
     });
   }
@@ -58,8 +62,10 @@ export class AuthService implements OnDestroy {
         userCredential.user['stsTokenManager']['accessToken'],
         +userCredential.user['stsTokenManager']['expirationTime']
       );
+      this.topoService.isAuthenticated.emit(true);
       return userCredential;
     }).catch((error) => {
+      this.topoService.isAuthenticated.emit(false);
       this.handleError(error);
     });
   }
@@ -100,6 +106,7 @@ export class AuthService implements OnDestroy {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
+    this.topoService.isAuthenticated.emit(false);
   }
 
   autoLogout(expirationDuration: number) {
@@ -122,12 +129,12 @@ export class AuthService implements OnDestroy {
       usuemail: email
     };
     let empidf = dados.empidf;
-    let usuidf = null;
+    let usuidf = 0;
     this.getUsuarioSubscription = this.getUsuario(dados).subscribe(
       data => {
         if (typeof(data) != 'undefined' && data != null)
         {
-          usuidf = data["UsuIdf"];
+          usuidf = data["usuidf"];
         }
       },
       err => {
@@ -138,8 +145,11 @@ export class AuthService implements OnDestroy {
         const user = new User(email, userId, token, expirationDate, empidf, usuidf);
         this.user.next(user);
         localStorage.setItem('userData', JSON.stringify(user));
-        if (usuidf == null)
+        if (usuidf == null){
           this.router.navigate(["usuario"]);
+        }else{
+          this.router.navigate(["home"]);
+        }
       }
     )
   }

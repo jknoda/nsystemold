@@ -1,55 +1,88 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
     <div class="form-group">
         <div class="row">
             <div class="col-md-3">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" formControlName="email" id="email" readonly>
+                <span class="p-float-label">
+                    <input type="text" class="form-control" formControlName="email" id="email" pInputText readonly>
+                    <label for="email">Email</label>
+                </span>
             </div>
             <div class="col-md-3">
-                <label for="cpf">CPF</label>
-                <input type="text" class="form-control" formControlName="cpf" id="CPF" placeholder="CPF">
+                <span class="p-float-label">
+                    <p-inputMask formControlName="cpf" id="CPF" mask="999.999.999-99" ></p-inputMask>
+                    <label for="cpf">CPF</label>
+                </span>
             </div>
             <div class="col-md-6">
-                <label for="nome">Nome</label>
-                <input type="text" class="form-control" formControlName="nome" id="nome" placeholder="Nome">
+                <span class="p-float-label">
+                    <input type="text" class="form-control" formControlName="nome" id="nome" pInputText>
+                    <label for="nome">Nome</label>
+                </span>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3">
-                <label for="logradouro">Endereço</label>
-                <input type="text" class="form-control" formControlName="logradouro" id="logadouro" placeholder="Endereço">
+            <div class="col-md-6">
+                <span class="p-float-label">
+                    <input type="text" class="form-control" formControlName="logradouro" id="logradouro" pInputText>
+                    <label for="logradouro">Endereço</label>                    
+                </span>
             </div>
-            <div class="col-md-1">
-                <label for="lognum">Nº</label>
-                <input type="text" class="form-control" formControlName="lognum" id="lognum" placeholder="nº">
-            </div>
-            <div class="col-md-3">
-                <label for="bairro">Bairro</label>
-                <input type="text" class="form-control" formControlName="bairro" id="bairro" placeholder="Bairro">
+            <div class="col-md-2">
+                <span class="p-float-label">
+                    <input type="text" class="form-control" formControlName="lognum" id="lognum" pInputText>
+                    <label for="lognum">Nº</label>
+                </span>
             </div>
             <div class="col-md-4">
-                <label for="cidade">Cidade</label>
-                <input type="text" class="form-control" formControlName="cidade" id="cidade" placeholder="Cidade">
-            </div>
-            <div class="col-md-1">
-                <label for="uf">UF</label>
-                <input type="text" class="form-control" formControlName="uf" id="uf" placeholder="UF">
+                <span class="p-float-label">
+                    <input type="text" class="form-control" formControlName="bairro" id="bairro" pInputText>
+                    <label for="bairro">Bairro</label>
+                </span>
             </div>
         </div>
         <div class="row">
+            <div class="col-md-6">
+                <span class="p-float-label">
+                    <input type="text" class="form-control" formControlName="cidade" id="cidade" pInputText>
+                    <label for="cidade">Cidade</label>                    
+                </span>
+            </div>
+            <div class="col-md-6">
+                <span class="p-float-label">
+                    <p-dropdown id="uf" [options]="estados" formControlName="uf" optionLabel="name" optionValue="code">
+                    </p-dropdown>
+                    <label for="uf">UF</label>  
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-3">
-                <label for="celular">Celular</label>
-                <input type="text" class="form-control" formControlName="celular" id="celular" placeholder="Celular">
+                <span class="p-float-label">
+                    <p-inputMask formControlName="celular" id="celular" mask="(99) 99999-9999" ></p-inputMask>
+                    <label for="celular">Celular</label>
+                </span>
             </div>
             <div class="col-md-3">
-                <label for="fone">Fone</label>
-                <input type="text" class="form-control" formControlName="fone" id="fone" placeholder="Fone">
+                <span class="p-float-label">
+                    <p-inputMask formControlName="fone" id="fone" mask="(99) 9999-9999" ></p-inputMask>
+                    <label for="fone">Fone</label>                    
+                </span>
             </div>
             <div class="col-md-6">
                 <button
                   type="submit"
                   class="btn btn-success"
-                  [disabled]="!userForm.valid">Salvar</button>
+                  [disabled]="!userForm.valid" *ngIf="!editMode">Salvar</button>
+                  <button
+                  type="submit"
+                  class="btn btn-success"
+                  [disabled]="!userForm.valid" *ngIf="editMode">Alterar</button>
+
             </div>       
         </div>
     </div>
