@@ -55,7 +55,6 @@ export class AuthService implements OnDestroy {
     //console.log(email,password);
     return signInWithEmailAndPassword(this.auth, email, password)
     .then((userCredential)=>{
-      //console.log('resp signin: ', userCredential);
       this.handleAuthentication(
         userCredential.user['email'],
         userCredential.user['reloadUserInfo']['localId'],
@@ -138,14 +137,15 @@ export class AuthService implements OnDestroy {
         }
       },
       err => {
-         console.log(err);
+         console.log('ERRO:',err);
+         this.handleError(err);
          this.router.navigate(["auth"]);
       },
       () => {
         const user = new User(email, userId, token, expirationDate, empidf, usuidf);
         this.user.next(user);
         localStorage.setItem('userData', JSON.stringify(user));
-        if (usuidf == null){
+        if (usuidf == null || usuidf == 0){
           this.router.navigate(["usuario"]);
         }else{
           this.router.navigate(["home"]);
