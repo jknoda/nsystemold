@@ -35,7 +35,10 @@ export class TopoComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.userSub = this.authService.user.subscribe(user => {
             this.isAuthenticated = !!user;
-            this.userEmail = user.email;
+            if (!user || user.email == null)
+                this.userEmail = "";
+            else
+                this.userEmail = user.email;
         });
     }
 

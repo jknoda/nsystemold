@@ -99,6 +99,7 @@ export class AuthService implements OnDestroy {
   }
 
   logout() {
+    this.topoService.isAuthenticated.emit(false);    
     this.user.next(null);
     this.router.navigate(['auth']);
     localStorage.removeItem('userData');
@@ -106,7 +107,6 @@ export class AuthService implements OnDestroy {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
-    this.topoService.isAuthenticated.emit(false);
   }
 
   autoLogout(expirationDuration: number) {
