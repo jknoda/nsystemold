@@ -61,29 +61,39 @@
         </div>
 
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <span class="p-float-label">
                     <p-inputMask formControlName="celular" id="celular" mask="(99) 99999-9999" ></p-inputMask>
                     <label for="celular">Celular</label>
                 </span>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <span class="p-float-label">
                     <p-inputMask formControlName="fone" id="fone" mask="(99) 9999-9999" ></p-inputMask>
                     <label for="fone">Fone</label>                    
                 </span>
             </div>
-            <div class="col-md-6">
-                <button
-                  type="submit"
-                  class="btn btn-success"
-                  [disabled]="!userForm.valid" *ngIf="!editMode">Salvar</button>
-                  <button
-                  type="submit"
-                  class="btn btn-success"
-                  [disabled]="!userForm.valid" *ngIf="editMode">Alterar</button>
-
-            </div>       
         </div>
+        <div class="row">
+            <div class="col-md-4">
+                <span class="p-float-label">
+                    <p-inputNumber formControlName="peso" id="peso" [minFractionDigits]="2"></p-inputNumber>
+                    <label for="peso">Peso</label>
+                </span>
+            </div>
+            <div class="col-md-4">
+                <span class="p-float-label">
+                    <p-inputNumber formControlName="altura" id="altura" [minFractionDigits]="2"></p-inputNumber>
+                    <label for="altura">Altura</label>                    
+                </span>
+            </div>
+            <div class="col-md-4">
+                <span class="p-float-label">
+                    <p-inputMask formControlName="nascimento" id="nascimento" mask="99/99/9999" placeholder="99/99/9999" slotChar="dd/mm/yyyy"></p-inputMask>
+                    <label for="altura">nascimento</label>                    
+                </span>
+            </div>
+        </div>
+
     </div>
   </form>

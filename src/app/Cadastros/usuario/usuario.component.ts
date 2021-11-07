@@ -1,10 +1,8 @@
 import { Component, OnInit, OnDestroy, ComponentFactoryResolver } from '@angular/core';
-import { discardPeriodicTasks } from '@angular/core/testing';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MessageService} from 'primeng/api';
 import { Subscription } from 'rxjs';
-import { mergeScan } from 'rxjs/operators';
 import { UsuarioModel } from 'src/app/model/usuario.model';
 import { ServiceConfig } from 'src/app/_config/services.config';
 import { UsuarioService } from './usuario.service';
@@ -76,12 +74,12 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.usuidf = JSON.parse(localStorage.getItem('userData')).usuidf;
+    this.usuidf = JSON.parse(localStorage.getItem('userData')).UsuIdf;
     if (this.usuidf != 0 && this.usuidf != null){
       this.editMode = true;
       let dados = {
-        empidf: this.EmpIdf,
-        usuidf: this.usuidf
+        EmpIdf: this.EmpIdf,
+        UsuIdf: this.usuidf
       };
       let dadosOk : UsuarioModel;
       this.addDadosUsuario = this.srvUsuario.getDados(dados).subscribe(
@@ -108,22 +106,25 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     let dados = {
-      empidf: this.EmpIdf,
-      usunome:  this.userForm.value['nome'],
-      usucpf:  this.userForm.value['cpf'].replace(/[^\d]+/g,''),
-      usulogradouro:  this.userForm.value['logradouro'],
-      usulognum:  this.userForm.value['lognum'],
-      usubairro:  this.userForm.value['bairro'],
-      usucidade:  this.userForm.value['cidade'],
-      usuuf:  this.userForm.value['uf'],
-      usucelular:  this.userForm.value['celular'],
-      usufone:  this.userForm.value['fone']
+      EmpIdf: this.EmpIdf,
+      UsuNome:  this.userForm.value['nome'],
+      UsuCPF:  this.userForm.value['cpf'].replace(/[^\d]+/g,''),
+      UsuLogradouro:  this.userForm.value['logradouro'],
+      UsuLogNum:  this.userForm.value['lognum'],
+      UsuBairro:  this.userForm.value['bairro'],
+      UsuCidade:  this.userForm.value['cidade'],
+      UsuUF:  this.userForm.value['uf'],
+      UsuCelular:  this.userForm.value['celular'],
+      UsuFone:  this.userForm.value['fone'],
+      UsuPeso:  this.userForm.value['peso'],
+      UsuAltura:  this.userForm.value['altura'],
+      UsuDataNasc:  this.userForm.value['nascimento'],
     };    
     if (this.editMode)
     {
       let dadosUpdate = {
         ...dados,
-        usuidf: this.usuidf
+        UsuIdf: this.usuidf
       }
       this.updateDadosUsuario = this.srvUsuario.updateDados(dadosUpdate).subscribe(
         () => {
@@ -170,17 +171,24 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     let UserUf = "SP";
     let UserCelular = null;
     let UserFone = null;
+    let UserPeso = null;
+    let UserAltura = null;
+    let UserNascimento = null;
     if (dados != null)
     {
-      UserNome = dados.usunome;
-      UserCpf = dados.usucpf;
-      UserLogradouro = dados.usulogradouro;
-      UserLognum = dados.usulognum;
-      UserBairro = dados.usubairro;
-      UserCidade = dados.usucidade;
-      UserUf = dados.usuuf;
-      UserCelular = dados.usucelular;
-      UserFone = dados.usufone
+      UserNome = dados.UsuNome;
+      UserCpf = dados.UsuCPF;
+      UserLogradouro = dados.UsuLogradouro;
+      UserLognum = dados.UsuLogNum;
+      UserBairro = dados.UsuBairro;
+      UserCidade = dados.UsuCidade;
+      UserUf = dados.UsuUF;
+      UserCelular = dados.UsuCelular;
+      UserFone = dados.UsuFone;
+      UserPeso = dados.UsuPeso;
+      UserAltura = dados.UsuAltura;
+      UserNascimento = dados.UsuDataNasc;
+
     }
     this.userForm = new FormGroup({
       'email': new FormControl(UserEmail, Validators.required),
@@ -192,7 +200,10 @@ export class UsuarioComponent implements OnInit, OnDestroy {
       'cidade': new FormControl(UserCidade),
       'uf': new FormControl(UserUf),
       'celular': new FormControl(UserCelular),
-      'fone': new FormControl(UserFone)
+      'fone': new FormControl(UserFone),
+      'peso': new FormControl(UserPeso),
+      'altura': new FormControl(UserAltura),
+      'nascimento': new FormControl(UserNascimento)
     });
   }
 

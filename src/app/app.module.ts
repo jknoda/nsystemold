@@ -9,6 +9,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {DropdownModule} from 'primeng/dropdown';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {InputMaskModule} from 'primeng/inputmask';
+import {InputNumberModule} from 'primeng/inputnumber';
 import {ToastModule} from 'primeng/toast';
 
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ import { TopoService } from './principal/topo/topo.service';
     HttpClientModule,
     CommonModule,
     InputTextModule,
+    InputNumberModule,
     DropdownModule,
     BrowserAnimationsModule,
     InputMaskModule,
