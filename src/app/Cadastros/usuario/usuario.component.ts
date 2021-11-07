@@ -1,3 +1,5 @@
+import { isFormattedError } from '@angular/compiler';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, OnDestroy, ComponentFactoryResolver } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,41 +25,18 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   private EmpIdf: number = ServiceConfig.EMPIDF;
   editMode = false;
 
-  estados: UF[];
-  selectedEstado: UF;
-  usuidf = 0;
-
+  perfis: DropDown[];
+  selectedPerfil: DropDown;
+  UsuIdf = 0;
+  UsuPerfil = 'U';
+  
+  isAdm = false;
   isLoading = true;
 
   constructor(private srvUsuario: UsuarioService, private route: ActivatedRoute, private router: Router, private messageService: MessageService) { 
-    this.estados = [
-      {name: 'Acre', code: 'AC'},
-      {name: 'Alagoas', code: 'AL'},
-      {name: 'Amapá', code: 'AP'},
-      {name: 'Amazonas', code: 'AM'},
-      {name: 'Bahia', code: 'BA'},
-      {name: 'Ceará', code: 'CE'},
-      {name: 'Distrito Federal', code: 'DF'},
-      {name: 'Espirito Santo', code: 'ES'},
-      {name: 'Goiás', code: 'GO'},
-      {name: 'Maranhão', code: 'MA'},
-      {name: 'Mato Grosso do Sul', code: 'MS'},
-      {name: 'Mato Grosso', code: 'MT'},
-      {name: 'Minas Gerais', code: 'MG'},
-      {name: 'Paraná', code: 'PR'},
-      {name: 'Paraíba', code: 'PB'},
-      {name: 'Pará', code: 'PA'},
-      {name: 'Pernambuco', code: 'PE'},
-      {name: 'Piauí', code: 'PI'},
-      {name: 'Rio Grande do Norte', code: 'RN'},
-      {name: 'Rio Grande do Sul', code: 'RS'},
-      {name: 'Rio de Janeiro', code: 'RJ'},
-      {name: 'Rondonia', code: 'RO'},
-      {name: 'Roraima', code: 'RR'},
-      {name: 'Santa Catarina', code: 'SC'},
-      {name: 'Sergipe', code: 'SE'},
-      {name: 'São Paulo', code: 'SP'},
-      {name: 'Tocantins', code: 'TO'}
+    this.perfis = [
+      {name: 'Administrador', code: 'A'},
+      {name: 'Usuário', code: 'U'}
     ];
   }
   ngOnDestroy(): void {
@@ -74,12 +53,12 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.usuidf = JSON.parse(localStorage.getItem('userData')).UsuIdf;
-    if (this.usuidf != 0 && this.usuidf != null){
+    this.UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
+    if (this.UsuIdf != 0 && this.UsuIdf != null){
       this.editMode = true;
       let dados = {
         EmpIdf: this.EmpIdf,
-        UsuIdf: this.usuidf
+        UsuIdf: this.UsuIdf
       };
       let dadosOk : UsuarioModel;
       this.addDadosUsuario = this.srvUsuario.getDados(dados).subscribe(
@@ -107,24 +86,16 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   onSubmit() {
     let dados = {
       EmpIdf: this.EmpIdf,
+      UsuEmail: this.userForm.value['email'],
       UsuNome:  this.userForm.value['nome'],
       UsuCPF:  this.userForm.value['cpf'].replace(/[^\d]+/g,''),
-      UsuLogradouro:  this.userForm.value['logradouro'],
-      UsuLogNum:  this.userForm.value['lognum'],
-      UsuBairro:  this.userForm.value['bairro'],
-      UsuCidade:  this.userForm.value['cidade'],
-      UsuUF:  this.userForm.value['uf'],
-      UsuCelular:  this.userForm.value['celular'],
-      UsuFone:  this.userForm.value['fone'],
-      UsuPeso:  this.userForm.value['peso'],
-      UsuAltura:  this.userForm.value['altura'],
-      UsuDataNasc:  this.userForm.value['nascimento'],
+      UsuPerfil:  this.userForm.value['perfil']
     };    
     if (this.editMode)
     {
       let dadosUpdate = {
         ...dados,
-        UsuIdf: this.usuidf
+        UsuIdf: this.UsuIdf,
       }
       this.updateDadosUsuario = this.srvUsuario.updateDados(dadosUpdate).subscribe(
         () => {
@@ -138,7 +109,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     }else{
       let dadosAdd = {
         ...dados,
-        usuemail: this.userForm.value['email']
+        UsuEmail: this.userForm.value['email']
       }
       this.addDadosUsuario = this.srvUsuario.addDados(dadosAdd).subscribe(
         () => {
@@ -164,46 +135,19 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     let UserEmail = JSON.parse(localStorage.getItem('userData')).email;
     let UserNome = null;
     let UserCpf = null;
-    let UserLogradouro = null;
-    let UserLognum = null;
-    let UserBairro = null;
-    let UserCidade = null;
-    let UserUf = "SP";
-    let UserCelular = null;
-    let UserFone = null;
-    let UserPeso = null;
-    let UserAltura = null;
-    let UserNascimento = null;
+    let UserPerfil = 'U';
     if (dados != null)
     {
       UserNome = dados.UsuNome;
       UserCpf = dados.UsuCPF;
-      UserLogradouro = dados.UsuLogradouro;
-      UserLognum = dados.UsuLogNum;
-      UserBairro = dados.UsuBairro;
-      UserCidade = dados.UsuCidade;
-      UserUf = dados.UsuUF;
-      UserCelular = dados.UsuCelular;
-      UserFone = dados.UsuFone;
-      UserPeso = dados.UsuPeso;
-      UserAltura = dados.UsuAltura;
-      UserNascimento = dados.UsuDataNasc;
-
+      UserPerfil = dados.UsuPerfil;
     }
+    this.isAdm = UserPerfil == 'A';
     this.userForm = new FormGroup({
       'email': new FormControl(UserEmail, Validators.required),
       'nome': new FormControl(UserNome, Validators.required),
       'cpf': new FormControl(UserCpf, Validators.required),
-      'logradouro': new FormControl(UserLogradouro),
-      'lognum': new FormControl(UserLognum),
-      'bairro': new FormControl(UserBairro),
-      'cidade': new FormControl(UserCidade),
-      'uf': new FormControl(UserUf),
-      'celular': new FormControl(UserCelular),
-      'fone': new FormControl(UserFone),
-      'peso': new FormControl(UserPeso),
-      'altura': new FormControl(UserAltura),
-      'nascimento': new FormControl(UserNascimento)
+      'perfil': new FormControl(UserPerfil, Validators.required)
     });
   }
 
@@ -212,7 +156,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   }  
 }
 
-interface UF {
+interface DropDown {
   name: string,
   code: string
 }

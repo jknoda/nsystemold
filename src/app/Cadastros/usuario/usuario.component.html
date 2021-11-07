@@ -17,83 +17,33 @@
                     <label for="cpf">CPF</label>
                 </span>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <span class="p-float-label">
                     <input type="text" class="form-control" formControlName="nome" id="nome" pInputText>
                     <label for="nome">Nome</label>
                 </span>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <span class="p-float-label">
-                    <input type="text" class="form-control" formControlName="logradouro" id="logradouro" pInputText>
-                    <label for="logradouro">Endereço</label>                    
-                </span>
-            </div>
-            <div class="col-md-2">
-                <span class="p-float-label">
-                    <input type="text" class="form-control" formControlName="lognum" id="lognum" pInputText>
-                    <label for="lognum">Nº</label>
-                </span>
-            </div>
-            <div class="col-md-4">
-                <span class="p-float-label">
-                    <input type="text" class="form-control" formControlName="bairro" id="bairro" pInputText>
-                    <label for="bairro">Bairro</label>
-                </span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <span class="p-float-label">
-                    <input type="text" class="form-control" formControlName="cidade" id="cidade" pInputText>
-                    <label for="cidade">Cidade</label>                    
-                </span>
-            </div>
-            <div class="col-md-6">
-                <span class="p-float-label">
-                    <p-dropdown id="uf" [options]="estados" formControlName="uf" optionLabel="name" optionValue="code">
+                    <p-dropdown id="perfil" [options]="perfis" 
+                    formControlName="perfil" optionLabel="name" 
+                    optionValue="code"  [readonly]="!isAdm">
                     </p-dropdown>
-                    <label for="uf">UF</label>  
-                </span>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <span class="p-float-label">
-                    <p-inputMask formControlName="celular" id="celular" mask="(99) 99999-9999" ></p-inputMask>
-                    <label for="celular">Celular</label>
-                </span>
-            </div>
-            <div class="col-md-6">
-                <span class="p-float-label">
-                    <p-inputMask formControlName="fone" id="fone" mask="(99) 9999-9999" ></p-inputMask>
-                    <label for="fone">Fone</label>                    
+                    <label for="perfil">Perfil</label>  
                 </span>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <span class="p-float-label">
-                    <p-inputNumber formControlName="peso" id="peso" [minFractionDigits]="2"></p-inputNumber>
-                    <label for="peso">Peso</label>
-                </span>
-            </div>
-            <div class="col-md-4">
-                <span class="p-float-label">
-                    <p-inputNumber formControlName="altura" id="altura" [minFractionDigits]="2"></p-inputNumber>
-                    <label for="altura">Altura</label>                    
-                </span>
-            </div>
-            <div class="col-md-4">
-                <span class="p-float-label">
-                    <p-inputMask formControlName="nascimento" id="nascimento" mask="99/99/9999" placeholder="99/99/9999" slotChar="dd/mm/yyyy"></p-inputMask>
-                    <label for="altura">nascimento</label>                    
-                </span>
-            </div>
+            <div class="col-md-1">
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  [disabled]="!userForm.valid" *ngIf="!editMode">Salvar</button>
+                  <button
+                  type="submit"
+                  class="btn btn-success"
+                  [disabled]="!userForm.valid" *ngIf="editMode">Alterar</button>
+            </div>       
         </div>
-
     </div>
   </form>

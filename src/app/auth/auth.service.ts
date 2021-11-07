@@ -129,11 +129,13 @@ export class AuthService implements OnDestroy {
     };
     let empidf = dados.EmpIdf;
     let usuidf = 0;
+    let perfil = 'U';
     this.getUsuarioSubscription = this.getUsuario(dados).subscribe(
       data => {
         if (typeof(data) != 'undefined' && data != null)
         {
-          usuidf = data["usuidf"];
+          usuidf = data["UsuIdf"];
+          perfil = data["UsuPerfil"];
         }
       },
       err => {
@@ -142,7 +144,7 @@ export class AuthService implements OnDestroy {
          this.router.navigate(["auth"]);
       },
       () => {
-        const user = new User(email, userId, token, expirationDate, empidf, usuidf);
+        const user = new User(email, userId, token, expirationDate, empidf, usuidf, perfil);
         this.user.next(user);
         localStorage.setItem('userData', JSON.stringify(user));
         if (usuidf == null || usuidf == 0){
