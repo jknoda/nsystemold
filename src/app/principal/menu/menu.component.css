@@ -2,6 +2,13 @@
     background-color: rgb(110, 177, 136) !important;
 }
 
+.accordion {
+    background-color: white;
+}
+a.accordion{
+    color: black !important;
+}
+
 .menu-left {
     background: #344154;
     height: 100%;

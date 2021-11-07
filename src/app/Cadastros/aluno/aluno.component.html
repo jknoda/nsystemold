@@ -1,0 +1,118 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Novo aluno" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="Alunos" [rows]="10" [paginator]="true" 
+        [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" [showCurrentPageReport]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="AluIdf">Idf <p-sortIcon field="AluIdf"></p-sortIcon></th>
+                <th pSortableColumn="AluNome">Nome <p-sortIcon field="AluNome"></p-sortIcon></th>
+                <th pSortableColumn="AluFone">Fone <p-sortIcon field="AluFone"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-Aluno>
+            <tr>
+                <td>{{Aluno.AluIdf}}</td>
+                <td>{{Aluno.AluNome}}</td>
+                <td>{{Aluno.AluFone}}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editAluno(Aluno)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteAluno(Aluno)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="alunoDialog" [style]="{width: '500px'}" header="Cadastro de Aluno" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" [(ngModel)]="Aluno.AluNome" pInputText required>
+                <small class="p-error" *ngIf="submitted && !Aluno.AluNome">Name is required.</small>
+            </div>
+            <div class="col-md-6">
+                <label for="cpf">CPF</label>
+                <p-inputMask id="cpf" [(ngModel)]="Aluno.AluCPF" mask="999.999.999-99" ></p-inputMask>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="nascimento">Data Nascimento</label>
+                <p-calendar [(ngModel)]="Aluno.AluDataNasc" dateFormat="dd/mm/yy"></p-calendar>
+            </div>
+            <div class="col-md-6">
+                <label for="fone">Fone</label>  
+                <p-inputMask id="fone" [(ngModel)]="Aluno.AluFone" mask="(99)9999-9999" ></p-inputMask>                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="resp">Responsável</label>
+                <input type="text" id="resp" [(ngModel)]="Aluno.AluNomeResp" pInputText>
+            </div>
+            <div class="col-md-6">
+                <label for="foneresp">Fone Responsável</label>
+                <input type="text" id="foneresp" [(ngModel)]="Aluno.AluFoneResp" pInputText>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="logradouro">Endereço</label>
+                <input type="text" id="logradouro" [(ngModel)]="Aluno.AluLogradouro" pInputText>
+            </div>
+            <div class="col-md-6">
+                <label for="lognum">nº</label>  
+                <input type="number" id="lognum" [(ngModel)]="Aluno.AluLogNum" pInputText>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="bairro">Baairro</label>
+                <input type="text" id="bairro" [(ngModel)]="Aluno.AluBairro" pInputText>
+            </div>
+            <div class="col-md-6">
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" [(ngModel)]="Aluno.AluCidade" pInputText>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="uf">UF</label>
+                <p-dropdown id="uf" [options]="estados" [(ngModel)]="Aluno.AluUF" optionLabel="name" optionValue="code">
+                </p-dropdown>
+            </div>
+            <div class="col-md-6">
+                <label for="email">eMail</label>  
+                <input type="email" id="email" [(ngModel)]="Aluno.AluEmail" pInputText>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="peso">Peso</label>
+                <p-inputNumber [(ngModel)]="Aluno.AluPeso" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+            </div>
+            <div class="col-md-6">
+                <label for="altura">Altura</label>
+                <p-inputNumber [(ngModel)]="Aluno.AluAltura" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-text" (click)="saveAluno()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}" translate="yes">
+</p-confirmDialog>

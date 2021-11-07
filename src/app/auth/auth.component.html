@@ -29,6 +29,18 @@
           minlength="6"
         />
       </div>
+      <div class="form-group" *ngIf="!isLoginMode">
+        <label for="password">Confirme Senha</label>
+        <input
+          type="password"
+          id="passwordRep"
+          class="form-control"
+          ngModel
+          name="passwordRep"
+          required
+          minlength="6"
+        />
+      </div>
       <div>
         <button
           class="btn btn-primary"

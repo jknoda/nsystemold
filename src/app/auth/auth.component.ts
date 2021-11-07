@@ -26,6 +26,7 @@ export class AuthComponent {
     }
     const email = form.value.email;
     const password = form.value.password;
+    const passwordRep = form.value.passwordRep;
 
     let authObs: any; //Observable<AuthResponseData>;
 
@@ -39,12 +40,16 @@ export class AuthComponent {
         this.messageService.add({severity:'error', summary: 'Erro', detail: errorMessage});
       });
     } else {
-      authObs = this.authService.signup(email, password)
-      .then(()=>{
-        this.router.navigate(['home']);
-      }).catch(errorMessage=>{
-        this.messageService.add({severity:'error', summary: 'Erro', detail: errorMessage});
-      });
+      if (password != passwordRep){
+        this.messageService.add({severity:'error', summary: 'Erro', detail: "Senha diferente da confirmação!"});
+      }else{
+        authObs = this.authService.signup(email, password)
+        .then(()=>{
+          this.router.navigate(['home']);
+        }).catch(errorMessage=>{
+          this.messageService.add({severity:'error', summary: 'Erro', detail: errorMessage});
+        });
+      }
     }
     this.isLoading = false;
     form.reset();

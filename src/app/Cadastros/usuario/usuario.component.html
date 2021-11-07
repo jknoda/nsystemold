@@ -6,31 +6,23 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-3">
-                <span class="p-float-label">
-                    <input type="text" class="form-control" formControlName="email" id="email" pInputText readonly>
-                    <label for="email">Email</label>
-                </span>
+                <label for="email">Email</label>
+                <input type="text" class="form-control" formControlName="email" id="email" pInputText readonly>
             </div>
             <div class="col-md-3">
-                <span class="p-float-label">
-                    <p-inputMask formControlName="cpf" id="CPF" mask="999.999.999-99" ></p-inputMask>
-                    <label for="cpf">CPF</label>
-                </span>
+                <label for="cpf">CPF</label>
+                <p-inputMask class="form-control" formControlName="cpf" id="CPF" mask="999.999.999-99" ></p-inputMask>
             </div>
             <div class="col-md-3">
-                <span class="p-float-label">
-                    <input type="text" class="form-control" formControlName="nome" id="nome" pInputText>
-                    <label for="nome">Nome</label>
-                </span>
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" formControlName="nome" id="nome" pInputText>
             </div>
             <div class="col-md-3">
-                <span class="p-float-label">
-                    <p-dropdown id="perfil" [options]="perfis" 
-                    formControlName="perfil" optionLabel="name" 
-                    optionValue="code"  [readonly]="!isAdm">
-                    </p-dropdown>
-                    <label for="perfil">Perfil</label>  
-                </span>
+                <label for="perfil">Perfil</label>  
+                <p-dropdown class="form-control" id="perfil" [options]="perfis" 
+                formControlName="perfil" optionLabel="name" 
+                optionValue="code"  [readonly]="!isAdm">
+                </p-dropdown>
             </div>
         </div>
         <div class="row">

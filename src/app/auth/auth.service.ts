@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy  } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth } from "@angular/fire/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, user } from "@angular/fire/auth";
 import { TopoService } from '../principal/topo/topo.service';
 
 import { User } from './user.model';
@@ -77,6 +77,7 @@ export class AuthService implements OnDestroy {
       _tokenExpirationDate: string;
       empidf: number;
       usuidf: number;
+      perfil: string;
     } = JSON.parse(localStorage.getItem('userData'));
     if (!userData) {
       return;

@@ -11,6 +11,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {InputMaskModule} from 'primeng/inputmask';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {ToastModule} from 'primeng/toast';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {DialogModule} from 'primeng/dialog';
+import {TableModule} from 'primeng/table';
+import {ToolbarModule} from 'primeng/toolbar';
+import {CalendarModule} from 'primeng/calendar';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -21,13 +26,15 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AuthComponent } from './auth/auth.component';
 import { UsuarioComponent } from './Cadastros/usuario/usuario.component';
 import { TopoService } from './principal/topo/topo.service';
+import { AlunoComponent } from './Cadastros/aluno/aluno.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     LoadingSpinnerComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    AlunoComponent
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(firebase)),
@@ -44,6 +51,11 @@ import { TopoService } from './principal/topo/topo.service';
     BrowserAnimationsModule,
     InputMaskModule,
     ToastModule,
+    ConfirmDialogModule,
+    TableModule,
+    DialogModule,
+    ToolbarModule,
+    CalendarModule,
     MenuModule,    
     TopoModule    
   ],
