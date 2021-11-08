@@ -1,0 +1,12 @@
+.form-group{
+    margin-top: 50px;
+    padding: 10px;
+}
+.row
+{
+    margin-bottom: 40px;
+}
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}

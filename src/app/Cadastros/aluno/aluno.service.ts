@@ -16,11 +16,11 @@ export class AlunoService {
         return this.http.post<AlunoModel>(this.url + "/api/aluno/create", body, httpOptions);
     }
 
-    getDados(body:any): Observable<AlunoModel[]> {
+    getDados(body:any): Observable<AlunoModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel[]>(this.url + "/api/aluno/find", body, httpOptions);
+        return this.http.post<AlunoModel>(this.url + "/api/aluno/find", body, httpOptions);
     }
 
     getTodos(body:any): Observable<AlunoModel> {

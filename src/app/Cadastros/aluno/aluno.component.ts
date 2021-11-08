@@ -4,6 +4,9 @@ import { AlunoService } from './aluno.service';
 import { AlunoModel } from 'src/app/model/aluno.model';
 import { ServiceConfig } from 'src/app/_config/services.config';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-aluno',
@@ -13,25 +16,31 @@ import { Subscription } from 'rxjs';
 })
 export class AlunoComponent implements OnInit, OnDestroy {
   private EmpIdf: number = ServiceConfig.EMPIDF;
+  private AluIdf: number = 0;
+
+  dadosForm: FormGroup;
+
   addDadosAluno: Subscription;
   updateDadosAluno: Subscription;
   deleteDadosAluno: Subscription;
   lerDadosAluno: Subscription;
+
+  isLoading = true;
+  editMode = false;
 
   estados: UF[];
   selectedEstado: UF;
   
   alunoDialog: boolean;
 
-  Alunos: AlunoModel[];
-
-  Aluno: AlunoModel;
-
   submitted: boolean;
 
   isUpdate = true;
 
-  constructor(private srvAluno: AlunoService, private messageService: MessageService, private confirmationService: ConfirmationService) {
+  constructor(private router: Router, private route: ActivatedRoute, 
+    private srvAluno: AlunoService, private messageService: MessageService,
+    private confirmationService: ConfirmationService) {
+
     this.estados = [
       {name: 'Acre', code: 'AC'},
       {name: 'Alagoas', code: 'AL'},
@@ -62,99 +71,79 @@ export class AlunoComponent implements OnInit, OnDestroy {
       {name: 'Tocantins', code: 'TO'}
     ];    
    }
-
-  ngOnInit() {
-    this.getAlunos();
+  ngOnDestroy(): void {
+    if (this.lerDadosAluno != null){
+      this.lerDadosAluno.unsubscribe();
+    }
+    if (this.addDadosAluno != null){
+      this.addDadosAluno.unsubscribe();
+    }
+    if (this.updateDadosAluno != null){
+      this.updateDadosAluno.unsubscribe();
+    }
   }
 
-  private getAlunos() {
+  ngOnInit() {
+    this.route.queryParams
+      .subscribe(params => {
+        this.EmpIdf = params.EmpIdf;
+        this.AluIdf = params.AluIdf;
+        if (params.Modo == "EDIT")
+        {
+          this.editMode = true;
+          this.getAluno();
+        } else {
+          this.editMode = false;
+          let Aluno: AlunoModel;
+          this.initForm(Aluno);
+        }
+      }
+    );
+  }
+
+  private getAluno() {
+    let Aluno: AlunoModel;
     let dados = {
-      EmpIdf: this.EmpIdf
+      EmpIdf: this.EmpIdf,
+      AluIdf: this.AluIdf
     };
-    this.lerDadosAluno = this.srvAluno.getTodos(dados).subscribe(
+    this.lerDadosAluno = this.srvAluno.getDados(dados).subscribe(
       (dados) => {
-        this.Alunos = JSON.parse(JSON.stringify(dados));
-        this.Alunos.forEach(item=>{
-          item.AluDataNasc = new Date(item.AluDataNasc);
-        })
+        Aluno = JSON.parse(JSON.stringify(dados));
+        Aluno.AluDataNasc = new Date(Aluno.AluDataNasc);
       },
       err => { 
         let msg = err.error.errors.toString();
         this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
       },
       ()=>{
-        return;
+        this.isLoading = false;
+        this.initForm(Aluno);
       });
   }
 
-  openNew() {
-    this.Aluno = new AlunoModel();
-    this.submitted = false;
-    this.alunoDialog = true;
-    this.isUpdate = false;
-  }
-
-  editAluno(Aluno: AlunoModel) {
-    this.isUpdate = true;
-    this.Aluno = {...Aluno};
-    this.alunoDialog = true;
-  }
-
-  deleteAluno(Aluno: AlunoModel) {
-    this.confirmationService.confirm({
-      message: 'Confirma exclusão de <b>' + Aluno.AluNome + '</b> ?',
-      header: 'Confirmar',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: "Sim",
-      rejectLabel: "Não",
-      accept: () => {
-        let dados = {
-          EmpIdf: Aluno.EmpIdf,
-          AluIdf: Aluno.AluIdf
-        };
-        this.deleteDadosAluno = this.srvAluno.deleteDados(dados).subscribe(
-          () => {
-            this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Aluno excluido!', life: 3000});
-          },
-          err => { 
-            let msg = err.error.errors.toString();
-            this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
-          },
-          ()=>{
-            this.refresh();
-          });
-        }
-    });
-  }
-
-  hideDialog() {
-      this.alunoDialog = false;
-      this.submitted = false;
-  }
-
-  saveAluno() {
+  onSubmit() {
     let dados = {
       EmpIdf: this.EmpIdf,
-      AluNome: this.Aluno.AluNome,
-      AluCPF: this.Aluno.AluCPF,
-      AluDataNasc: this.Aluno.AluDataNasc,
-      AluNomeResp: this.Aluno.AluNomeResp,
-      AluFoneResp: this.Aluno.AluFoneResp,
-      AluFone: this.Aluno.AluFone,
-      AluLogradouro: this.Aluno.AluLogradouro,
-      AluLogNum: this.Aluno.AluLogNum,
-      AluBairro: this.Aluno.AluBairro,
-      AluCidade: this.Aluno.AluCidade,
-      AluUF: this.Aluno.AluUF,
-      AluEmail: this.Aluno.AluEmail,
-      AluPeso: this.Aluno.AluPeso,
-      AluAltura: this.Aluno.AluAltura,
-      AluStatus: this.Aluno.AluStatus
+      AluNome: this.dadosForm.value['nome'],
+      AluCPF:  this.dadosForm.value['cpf'],
+      AluDataNasc: this.dadosForm.value['nascimento'],
+      AluNomeResp: this.dadosForm.value['resp'],
+      AluFoneResp: this.dadosForm.value['foneresp'],
+      AluFone: this.dadosForm.value['fone'],
+      AluLogradouro: this.dadosForm.value['logradouro'],
+      AluLogNum: this.dadosForm.value['lognum'],
+      AluBairro: this.dadosForm.value['bairro'],
+      AluCidade: this.dadosForm.value['cidade'],
+      AluUF: this.dadosForm.value['uf'],
+      AluEmail: this.dadosForm.value['email'],
+      AluPeso: this.dadosForm.value['peso'],
+      AluAltura: this.dadosForm.value['altura']
     };    
-    if (this.isUpdate){
+    if (this.editMode)
+    {
       let dadosUpdate = {
-        ...dados,
-        AluIdf: this.Aluno.AluIdf
+        ...dados
       }
       this.updateDadosAluno = this.srvAluno.updateDados(dadosUpdate).subscribe(
         () => {
@@ -164,44 +153,100 @@ export class AlunoComponent implements OnInit, OnDestroy {
           let msg = err.error.errors.toString();
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
         },
-        ()=>{
-          this.refresh();
+        () => {
+          this.retorno();
         }
       );
-    }
-    else{
+    }else{
       let dadosAdd = {
-        ...dados
-      }
+        ...dados,
+        AluStatus: 'A'
+     }
       this.addDadosAluno = this.srvAluno.addDados(dadosAdd).subscribe(
         () => {
-              this.messageService.add({severity:'success', summary: 'Successo', detail: 'Aluno incluido!'});
+          this.messageService.add({severity:'success', summary: 'Successo', detail: 'Aluno incluido!'});
         },
         err => { 
           let msg = err.error.errors.toString();
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
         },
-        ()=>{
-          this.refresh();
+        () => {
+          this.retorno();
         }
       );
     }
   }
 
-  private refresh(){
-    this.submitted = true;
-    this.getAlunos();
-    this.alunoDialog = false;
-    this.Aluno = new AlunoModel();
-
+  cancelar() {
+    this.retorno();
   }
 
-  ngOnDestroy() {
-      this.addDadosAluno.unsubscribe();
-      this.updateDadosAluno.unsubscribe();
-      this.lerDadosAluno.unsubscribe();
-      this.deleteDadosAluno.unsubscribe();
+  private retorno(){
+    setTimeout(() => 
+    {
+      this.router.navigate(['../alunolista'], {relativeTo: this.route});
+    },
+    3010);
   }
+
+  private initForm(dados:AlunoModel) {   
+    this.isLoading = false;
+    let AluNome = null;
+    let AluCPF = null;
+    let AluDataNasc = null;
+    let AluNomeResp = null;
+    let AluFoneResp = null;
+    let AluFone = null;
+    let AluLogradouro = null;
+    let AluLogNum = null;
+    let AluBairro = null;
+    let AluCidade = null;
+    let AluUF = null;
+    let AluEmail = null;
+    let AluPeso = null;
+    let AluAltura = null;
+   
+    if (dados != null)
+    {
+      AluNome = dados.AluNome;
+      AluCPF = dados.AluCPF;
+      AluNome = dados.AluNome;
+      AluCPF = dados.AluCPF;		
+      AluDataNasc = dados.AluDataNasc;
+      AluNomeResp = dados.AluNomeResp;
+      AluFoneResp = dados.AluFoneResp;
+      AluFone = dados.AluFone;
+      AluLogradouro = dados.AluLogradouro;
+      AluLogNum = dados.AluLogNum;
+      AluBairro = dados.AluBairro;
+      AluCidade = dados.AluCidade;
+      AluUF = dados.AluUF;
+      AluEmail = dados.AluEmail;
+      AluPeso = dados.AluPeso;
+      AluAltura = dados.AluAltura;    
+    }
+    this.dadosForm = new FormGroup({
+      'nome': new FormControl(AluNome, Validators.required),
+      'cpf': new FormControl(AluCPF),
+      'nascimento': new FormControl(AluDataNasc),
+      'resp': new FormControl(AluNomeResp),
+      'foneresp': new FormControl(AluFoneResp),
+      'fone': new FormControl(AluFone),
+      'logradouro': new FormControl(AluLogradouro),
+      'lognum': new FormControl(AluLogNum),
+      'bairro': new FormControl(AluBairro),
+      'cidade': new FormControl(AluCidade),
+      'uf': new FormControl(AluUF),
+      'email': new FormControl(AluEmail, Validators.email),
+      'peso': new FormControl(AluPeso, Validators.max(300)),
+      'altura': new FormControl(AluAltura, Validators.max(2.9))
+    });
+  }
+
+  clear() {
+    this.messageService.clear();
+  }    
+
 }
 
 interface UF {

@@ -26,6 +26,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AuthComponent } from './auth/auth.component';
 import { UsuarioComponent } from './Cadastros/usuario/usuario.component';
 import { TopoService } from './principal/topo/topo.service';
+import { AlunoListaComponent } from './Cadastros/aluno/alunolista.component';
 import { AlunoComponent } from './Cadastros/aluno/aluno.component';
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AlunoComponent } from './Cadastros/aluno/aluno.component';
     AuthComponent,
     LoadingSpinnerComponent,
     UsuarioComponent,
-    AlunoComponent
+    AlunoComponent,
+    AlunoListaComponent
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(firebase)),
