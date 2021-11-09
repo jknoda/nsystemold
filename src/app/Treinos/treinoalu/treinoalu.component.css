@@ -1,0 +1,22 @@
+.form-group{
+    margin-top: 10px;
+    padding: 10px;
+}
+.row
+{
+    margin-bottom: 40px;
+}
+
+.form-group .row label
+{
+    padding-top: 10px;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.floatLeft{
+    display: inline-block;
+}
