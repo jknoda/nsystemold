@@ -1,0 +1,41 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="card" *ngIf="!isLoading">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Novo treino" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="Treinos" [rows]="10" [paginator]="true" 
+        [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" [showCurrentPageReport]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="mostracoluna" pSortableColumn="TreIdf">Idf <p-sortIcon field="TreIdf"></p-sortIcon></th>
+                <th pSortableColumn="TreTitulo">Titulo <p-sortIcon field="TreTitulo"></p-sortIcon></th>
+                <th pSortableColumn="TreData">Data <p-sortIcon field="TreData"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-Treino>
+            <tr>
+                <td class="mostracoluna">{{Treino.TreIdf}}</td>
+                <td>{{Treino.TreTitulo}}</td>
+                <td>{{Treino.DataStr}}</td>
+                <td>
+                    <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editTreino(Treino)" title="Alterar"></button>
+                    <button pButton pRipple icon="fas fa-running" class="p-button-rounded p-button-default" (click)="editAtividades(Treino)" title="Atividades"></button>
+                    <button pButton pRipple icon="fas fa-users" class="p-button-rounded p-button-default" (click)="editAlunos(Treino)" title="Participantes"></button>
+                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-warning" (click)="deleteTreino(Treino)" title="Excluir"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}" translate="yes">
+</p-confirmDialog>

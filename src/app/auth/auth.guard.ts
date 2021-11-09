@@ -27,11 +27,33 @@ export class AuthGuard implements CanActivate {
       take(1),
       map(user => {
         const isAuth = !!user;
-        if (isAuth) {
-          return true;
+        if (isAuth) {          
+          return this.checarRota(route);
         }
         return this.router.createUrlTree(['auth']);
       })
     );
+  }
+
+  private checarRota(route: ActivatedRouteSnapshot){
+    let rolesRota = '';
+    let roles = '';
+    if (typeof route.data['roles'] !== 'undefined' && route.data['roles']){
+      rolesRota = route.data['roles'];
+      const perfil = JSON.parse(localStorage.getItem('userData')).perfil;
+      switch(perfil){
+        case 'A' : roles = 'ADM';
+          break;
+        case 'T' : roles = 'TEC';
+          break;
+        default: roles = 'USU';
+          break;
+      }
+      if (rolesRota != roles && roles != 'ADM')
+      {        
+        this.router.navigate(['/denied']);
+      }
+    }
+    return true;
   }
 }

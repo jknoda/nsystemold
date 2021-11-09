@@ -1,47 +1,46 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ServiceConfig } from '../../_config/services.config'
+import { ServiceConfig } from '../../_config/services.config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {AlunoModel} from '../../model/aluno.model';
+import {TreinoModel} from '../../model/treino.model';
 
 @Injectable()
-export class AlunoService {
+export class TreinoService {
     private url: string = ServiceConfig.API_ENDPOINT;
     constructor(private http: HttpClient) { }
 
-    addAluDados(body:any): Observable<AlunoModel> {
+    addTreDados(body:any): Observable<TreinoModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/create", body, httpOptions);
+        return this.http.post<TreinoModel>(this.url + "/api/treino/create", body, httpOptions);
     }
 
-    getAluDados(body:any): Observable<AlunoModel> {
+    getTreDados(body:any): Observable<TreinoModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/find", body, httpOptions);
+        return this.http.post<TreinoModel>(this.url + "/api/treino/find", body, httpOptions);
     }
 
-    getAluTodos(body:any): Observable<AlunoModel> {
+    getTreTodos(body:any): Observable<TreinoModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/findall", body, httpOptions);
+        return this.http.post<TreinoModel>(this.url + "/api/treino/findall", body, httpOptions);
     }
 
-    updateAluDados(body:any): Observable<AlunoModel> {
+    updateTreDados(body:any): Observable<TreinoModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/update", body, httpOptions);
+        return this.http.post<TreinoModel>(this.url + "/api/treino/update", body, httpOptions);
     }
 
-    deleteAluDados(body:any): Observable<AlunoModel> {
+    deleteTreDados(body:any): Observable<TreinoModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/delete", body, httpOptions);
+        return this.http.post<TreinoModel>(this.url + "/api/treino/delete", body, httpOptions);
     }
-
 }

@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class MenuComponent implements OnInit, OnDestroy {
     isAuthenticated = false;
     isAdm = false;
+    isTecnico = false;
     private userSub: Subscription;
     
     constructor(private authService: AuthService) {
@@ -19,12 +20,15 @@ export class MenuComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.userSub = this.authService.user.subscribe(user => {
             this.isAuthenticated = !!user;
+            let perfil = '';
             if (JSON.parse(localStorage.getItem('userData')) != null){
-                this.isAdm = JSON.parse(localStorage.getItem('userData')).perfil == 'A';
+                perfil = JSON.parse(localStorage.getItem('userData')).perfil;
             }else if (user != null){
-                this.isAdm = user.perfil == 'A';
+                perfil = user.perfil;
             }
-          });
+            this.isAdm = (perfil == 'A');
+            this.isTecnico = (perfil == 'A' || perfil == 'T');
+        });
     }
 
     ngOnDestroy() {

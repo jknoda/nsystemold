@@ -32,7 +32,7 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
     let dados = {
       EmpIdf: this.EmpIdf
     };
-    this.lerDadosAluno = this.srvAluno.getTodos(dados).subscribe(
+    this.lerDadosAluno = this.srvAluno.getAluTodos(dados).subscribe(
       (dados) => {
         this.Alunos = JSON.parse(JSON.stringify(dados));
         this.Alunos.forEach(item=>{
@@ -68,7 +68,7 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
           EmpIdf: Aluno.EmpIdf,
           AluIdf: Aluno.AluIdf
         };
-        this.deleteDadosAluno = this.srvAluno.deleteDados(dados).subscribe(
+        this.deleteDadosAluno = this.srvAluno.deleteAluDados(dados).subscribe(
           () => {
             this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Aluno excluido!', life: 3000});
           },
@@ -81,6 +81,11 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
           });
         }
     });
+  }
+
+  esportesAluno(Aluno: AlunoModel) {
+    //this.router.navigate(['aluno'], { queryParams: { Modo:'EDIT', EmpIdf: Aluno.EmpIdf, AluIdf: Aluno.AluIdf } });
+    console.log('esportes');
   }
 
   private refresh(){

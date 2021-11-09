@@ -6,13 +6,12 @@ import { ServiceConfig } from 'src/app/_config/services.config';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-aluno',
   templateUrl: './aluno.component.html',
   styleUrls: ['./aluno.component.css'],
-  providers: [MessageService,ConfirmationService,AlunoService,MessageService]
+  providers: [ConfirmationService,AlunoService,MessageService]
 })
 export class AlunoComponent implements OnInit, OnDestroy {
   private EmpIdf: number = ServiceConfig.EMPIDF;
@@ -31,15 +30,10 @@ export class AlunoComponent implements OnInit, OnDestroy {
   estados: UF[];
   selectedEstado: UF;
   
-  alunoDialog: boolean;
-
-  submitted: boolean;
-
   isUpdate = true;
 
   constructor(private router: Router, private route: ActivatedRoute, 
-    private srvAluno: AlunoService, private messageService: MessageService,
-    private confirmationService: ConfirmationService) {
+    private srvAluno: AlunoService, private messageService: MessageService) {
 
     this.estados = [
       {name: 'Acre', code: 'AC'},
@@ -107,7 +101,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
       EmpIdf: this.EmpIdf,
       AluIdf: this.AluIdf
     };
-    this.lerDadosAluno = this.srvAluno.getDados(dados).subscribe(
+    this.lerDadosAluno = this.srvAluno.getAluDados(dados).subscribe(
       (dados) => {
         Aluno = JSON.parse(JSON.stringify(dados));
         Aluno.AluDataNasc = new Date(Aluno.AluDataNasc);
@@ -125,6 +119,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
   onSubmit() {
     let dados = {
       EmpIdf: this.EmpIdf,
+      AluIdf: this.AluIdf,
       AluNome: this.dadosForm.value['nome'],
       AluCPF:  this.dadosForm.value['cpf'],
       AluDataNasc: this.dadosForm.value['nascimento'],
@@ -145,7 +140,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
       let dadosUpdate = {
         ...dados
       }
-      this.updateDadosAluno = this.srvAluno.updateDados(dadosUpdate).subscribe(
+      this.updateDadosAluno = this.srvAluno.updateAluDados(dadosUpdate).subscribe(
         () => {
           this.messageService.add({severity:'success', summary: 'Successo', detail: 'Aluno atualizado!'});
         },
@@ -162,7 +157,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
         ...dados,
         AluStatus: 'A'
      }
-      this.addDadosAluno = this.srvAluno.addDados(dadosAdd).subscribe(
+      this.addDadosAluno = this.srvAluno.addAluDados(dadosAdd).subscribe(
         () => {
           this.messageService.add({severity:'success', summary: 'Successo', detail: 'Aluno incluido!'});
         },
@@ -178,15 +173,15 @@ export class AlunoComponent implements OnInit, OnDestroy {
   }
 
   cancelar() {
-    this.retorno();
+    this.retorno(0);
   }
 
-  private retorno(){
+  private retorno(tempo=3010){
     setTimeout(() => 
     {
       this.router.navigate(['../alunolista'], {relativeTo: this.route});
     },
-    3010);
+    tempo);
   }
 
   private initForm(dados:AlunoModel) {   
@@ -201,7 +196,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
     let AluLogNum = null;
     let AluBairro = null;
     let AluCidade = null;
-    let AluUF = null;
+    let AluUF = "SP";
     let AluEmail = null;
     let AluPeso = null;
     let AluAltura = null;

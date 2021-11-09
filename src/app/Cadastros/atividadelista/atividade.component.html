@@ -1,0 +1,49 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<form [formGroup]="dadosForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+    <div class="form-group">
+        <div>CADASTRO DE ATIVIDADE</div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <label for="titulo">Título</label>
+                <input type="text" class="form-control" formControlName="titulo" id="titulo" pInputText>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <label for="objetivo">Objetivo</label>
+                <textarea rows="5" pInputTextarea id="objetivo" class="form-control" formControlName="objetivo"></textarea>                
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <label for="descricao">Descrição detalhada (execução)</label>
+                <textarea rows="5" pInputTextarea id="descricao" class="form-control" formControlName="descricao"></textarea>                
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <label for="material">Material</label>
+                <textarea rows="5" pInputTextarea id="material" class="form-control" formControlName="material"></textarea>                
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <label for="obs">Observação</label>
+                <textarea rows="5" pInputTextarea id="obs" class="form-control" formControlName="obs"></textarea>                
+            </div>
+        </div>
+        <div class="row">            
+            <div class="floatLeft col-sm-1">
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  [disabled]="!dadosForm.valid" *ngIf="!editMode">Salvar</button>
+                <button
+                  type="submit"
+                  class="floatLeft btn btn-success"
+                  [disabled]="!dadosForm.valid" *ngIf="editMode">Alterar</button>
+            </div>       
+            <div class="floatLeft col-sm-1">
+                <button
+                type="button"
+                class="btn btn-danger"
+                (click)="cancelar()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+  </form>

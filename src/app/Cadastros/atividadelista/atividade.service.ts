@@ -1,47 +1,46 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ServiceConfig } from '../../_config/services.config'
+import { ServiceConfig } from '../../_config/services.config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {AlunoModel} from '../../model/aluno.model';
+import {AtividadeModel} from '../../model/atividade.model';
 
 @Injectable()
-export class AlunoService {
+export class AtividadeService {
     private url: string = ServiceConfig.API_ENDPOINT;
     constructor(private http: HttpClient) { }
 
-    addAluDados(body:any): Observable<AlunoModel> {
+    addAtvDados(body:any): Observable<AtividadeModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/create", body, httpOptions);
+        return this.http.post<AtividadeModel>(this.url + "/api/atividade/create", body, httpOptions);
     }
 
-    getAluDados(body:any): Observable<AlunoModel> {
+    getAtvDados(body:any): Observable<AtividadeModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/find", body, httpOptions);
+        return this.http.post<AtividadeModel>(this.url + "/api/atividade/find", body, httpOptions);
     }
 
-    getAluTodos(body:any): Observable<AlunoModel> {
+    getAtvTodos(body:any): Observable<AtividadeModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/findall", body, httpOptions);
+        return this.http.post<AtividadeModel>(this.url + "/api/atividade/findall", body, httpOptions);
     }
 
-    updateAluDados(body:any): Observable<AlunoModel> {
+    updateAtvDados(body:any): Observable<AtividadeModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/update", body, httpOptions);
+        return this.http.post<AtividadeModel>(this.url + "/api/atividade/update", body, httpOptions);
     }
 
-    deleteAluDados(body:any): Observable<AlunoModel> {
+    deleteAtvDados(body:any): Observable<AtividadeModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/delete", body, httpOptions);
+        return this.http.post<AtividadeModel>(this.url + "/api/atividade/delete", body, httpOptions);
     }
-
 }

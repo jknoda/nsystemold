@@ -16,11 +16,13 @@ import {DialogModule} from 'primeng/dialog';
 import {TableModule} from 'primeng/table';
 import {ToolbarModule} from 'primeng/toolbar';
 import {CalendarModule} from 'primeng/calendar';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { MenuModule } from './principal/menu/menu.module';
 import { TopoModule } from './principal/topo/topo.module';
+
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AuthComponent } from './auth/auth.component';
@@ -28,6 +30,13 @@ import { UsuarioComponent } from './Cadastros/usuario/usuario.component';
 import { TopoService } from './principal/topo/topo.service';
 import { AlunoListaComponent } from './Cadastros/aluno/alunolista.component';
 import { AlunoComponent } from './Cadastros/aluno/aluno.component';
+import { DeniedComponent } from './principal/denied/denied.component';
+import { AtividadeComponent } from './Cadastros/atividadelista/atividade.component';
+import { AtividadeListaComponent } from './Cadastros/atividadelista/atividadelista.component';
+import { TreinoComponent } from './Treinos/treino/treino.component';
+import { TreinoListaComponent } from './Treinos/treino/treinolista.component';
+import { TreinoatvComponent } from './Treinos/treinoatv/treinoatv.component';
+import { TreinoatvlistaComponent } from './Treinos/treinoatv/treinoatvlista.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +45,14 @@ import { AlunoComponent } from './Cadastros/aluno/aluno.component';
     LoadingSpinnerComponent,
     UsuarioComponent,
     AlunoComponent,
-    AlunoListaComponent
+    AlunoListaComponent,
+    DeniedComponent,
+    AtividadeListaComponent,
+    AtividadeComponent,
+    TreinoComponent,
+    TreinoListaComponent,
+    TreinoatvComponent,
+    TreinoatvlistaComponent
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(firebase)),
@@ -58,8 +74,10 @@ import { AlunoComponent } from './Cadastros/aluno/aluno.component';
     DialogModule,
     ToolbarModule,
     CalendarModule,
+    InputTextareaModule,
+
     MenuModule,    
-    TopoModule    
+    TopoModule
   ],
   providers: [    
     {

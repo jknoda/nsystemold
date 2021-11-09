@@ -20,7 +20,19 @@
                                 <span>Aluno</span>
                             </a>
                         </div>
+                        <div *ngIf="isTecnico">
+                            <a routerLink="atividadelista" routerLinkActive="active" class="nav-link accordion">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                <span>Atividade</span>
+                            </a>
+                        </div>
                     </p-accordionTab>
+                    <p-accordionTab  header="Treinos" *ngIf="isTecnico">
+                        <a routerLink="treinolista" routerLinkActive="active" class="nav-link accordion">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            <span>Treino</span>
+                        </a>                        
+                    </p-accordionTab>                    
                 </p-accordion>
             </li>
         </ul>

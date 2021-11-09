@@ -1,0 +1,35 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Nova atvidade" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="Atividades" [rows]="10" [paginator]="true" 
+        [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" [showCurrentPageReport]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="AtvIdf">Idf <p-sortIcon field="AtvIdf"></p-sortIcon></th>
+                <th pSortableColumn="AtvTitulo">Titulo <p-sortIcon field="AtvTitulo"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-Atvidade>
+            <tr>
+                <td>{{Atvidade.AtvIdf}}</td>
+                <td>{{Atvidade.AtvTitulo}}</td>
+                <td>
+                    <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editAtividade(Atvidade)" title="Alterar"></button>
+                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-warning" (click)="deleteAtividade(Atvidade)" title="Excluir"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}" translate="yes">
+</p-confirmDialog>

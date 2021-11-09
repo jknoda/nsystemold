@@ -1,0 +1,9 @@
+.mostracoluna{
+    display: block; 
+}
+
+@media screen and (max-width: 800px) {
+   .mostracoluna{
+       display: none !important; 
+   }
+ } 

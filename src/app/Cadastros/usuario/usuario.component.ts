@@ -36,6 +36,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   constructor(private srvUsuario: UsuarioService, private route: ActivatedRoute, private router: Router, private messageService: MessageService) { 
     this.perfis = [
       {name: 'Administrador', code: 'A'},
+      {name: 'Técnico', code: 'T'},
       {name: 'Usuário', code: 'U'}
     ];
   }

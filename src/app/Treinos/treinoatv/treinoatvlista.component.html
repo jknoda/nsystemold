@@ -1,0 +1,49 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="card" *ngIf="!isLoading">
+    <h1 class="treino">{{Param.TreTitulo}} do dia {{Param.Data}}</h1>
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Nova Atividade" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+            <button style="margin-left: 5px;" pButton pRipple label="Retornar" icon="pi pi-arrow-left" class="p-button-default" (click)="retornar()"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="Treinoatvs" [rows]="10" [paginator]="true" 
+        [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" [showCurrentPageReport]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="mostracoluna" pSortableColumn="TreAtvOrdem">Ordem <p-sortIcon field="TreAtvOrdem"></p-sortIcon></th>
+                <th pSortableColumn="TreAtvDesc">Descrição <p-sortIcon field="TreAtvDesc"></p-sortIcon></th>
+                <th class="mostracoluna">Tempo</th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-Treinoatv>
+            <tr>
+                <td class="mostracoluna">{{Treinoatv.TreAtvOrdem}}</td>
+                <td>{{Treinoatv.TreAtvDesc}}</td>
+                <td class="mostracoluna">{{Treinoatv.TreAtvMin}}</td>
+                <td>
+                    <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editTreinoatv(Treinoatv)" title="Alterar"></button>
+                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-warning" (click)="deleteTreinoatv(Treinoatv)" title="Excluir"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <tr>
+                <td class="mostracoluna">{{totalAtividades}} atividades</td>
+                <td></td>
+                <td class="mostracoluna">{{totalTempo}} minutos</td>
+                <td></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}" translate="yes">
+</p-confirmDialog>

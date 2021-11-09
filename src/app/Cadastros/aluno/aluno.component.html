@@ -4,93 +4,84 @@
 </div>
 <form [formGroup]="dadosForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
     <div class="form-group">
+        <div>CADASTRO DE ALUNO</div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" formControlName="nome" id="nome" pInputText>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <label for="cpf">CPF</label>
                 <p-inputMask class="form-control" formControlName="cpf" id="cpf" mask="999.999.999-99" ></p-inputMask>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <label for="nascimento">Data Nascimento</label>
                 <p-calendar class="form-control" formControlName="nascimento" id="nascimento" dateFormat="dd/mm/yy"></p-calendar>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <label for="fone">Fone</label>  
                 <p-inputMask id="fone" class="form-control" formControlName="fone" mask="(99)9999-9999" ></p-inputMask>                
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+
+            <div class="col-lg-3 col-md-6">
                 <label for="resp">Responsável</label>
                 <input type="text" id="resp" class="form-control" formControlName="resp" pInputText>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <label for="foneresp">Fone Responsável</label>
                 <input type="text" id="foneresp" class="form-control" formControlName="foneresp" pInputText>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <label for="logradouro">Endereço</label>
                 <input type="text" id="logradouro" class="form-control" formControlName="logradouro"pInputText>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <label for="lognum">nº</label>  
                 <input type="number" id="lognum" class="form-control" formControlName="lognum"pInputText>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <label for="bairro">Baairro</label>
+
+            <div class="col-lg-3 col-md-6">
+                <label for="bairro">Bairro</label>
                 <input type="text" id="bairro" class="form-control" formControlName="bairro" pInputText>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <label for="cidade">Cidade</label>
                 <input type="text" id="cidade" class="form-control" formControlName="cidade" pInputText>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <label for="uf">UF</label>
                 <p-dropdown id="uf" [options]="estados" class="form-control" formControlName="uf" optionLabel="name" optionValue="code">
                 </p-dropdown>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <label for="email">eMail</label>  
                 <input type="email" id="email" class="form-control" formControlName="email" pInputText>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+
+            <div class="col-lg-3 col-md-6">
                 <label for="peso">Peso</label>
                 <p-inputNumber id="peso" class="form-control" formControlName="peso" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <label for="altura">Altura</label>
                 <p-inputNumber id="altura" class="form-control" formControlName="altura" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
             </div>
         </div>
-
-
-        <div class="row">
-            <div class="col-md-1">
+        <div class="row">            
+            <div class="floatLeft col-sm-1">
                 <button
                   type="submit"
                   class="btn btn-success"
                   [disabled]="!dadosForm.valid" *ngIf="!editMode">Salvar</button>
                 <button
                   type="submit"
-                  class="btn btn-success"
+                  class="floatLeft btn btn-success"
                   [disabled]="!dadosForm.valid" *ngIf="editMode">Alterar</button>
             </div>       
-            <div class="col-md-1">
+            <div class="floatLeft col-sm-1">
                 <button
-                class="btn btn-success"
+                type="button"
+                class="btn btn-danger"
                 (click)="cancelar()">Cancelar</button>
             </div>
         </div>
