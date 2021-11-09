@@ -17,6 +17,8 @@ import {TableModule} from 'primeng/table';
 import {ToolbarModule} from 'primeng/toolbar';
 import {CalendarModule} from 'primeng/calendar';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {InputSwitchModule} from 'primeng/inputswitch';
+import {FieldsetModule} from 'primeng/fieldset';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -37,6 +39,9 @@ import { TreinoComponent } from './Treinos/treino/treino.component';
 import { TreinoListaComponent } from './Treinos/treino/treinolista.component';
 import { TreinoatvComponent } from './Treinos/treinoatv/treinoatv.component';
 import { TreinoatvlistaComponent } from './Treinos/treinoatv/treinoatvlista.component';
+import { AnamneseComponent } from './Cadastros/aluno/anamnese/anamnese.component';
+import { TreinoalulistaComponent } from './Treinos/treinoalu/treinoalulista.component';
+import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
 @NgModule({
   declarations: [
@@ -46,13 +51,17 @@ import { TreinoatvlistaComponent } from './Treinos/treinoatv/treinoatvlista.comp
     UsuarioComponent,
     AlunoComponent,
     AlunoListaComponent,
+    AnamneseComponent,
     DeniedComponent,
     AtividadeListaComponent,
     AtividadeComponent,
     TreinoComponent,
     TreinoListaComponent,
     TreinoatvComponent,
-    TreinoatvlistaComponent
+    TreinoatvlistaComponent,
+    TreinoalulistaComponent,
+    TreinoaluComponent
+    
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(firebase)),
@@ -75,6 +84,8 @@ import { TreinoatvlistaComponent } from './Treinos/treinoatv/treinoatvlista.comp
     ToolbarModule,
     CalendarModule,
     InputTextareaModule,
+    InputSwitchModule,
+    FieldsetModule,
 
     MenuModule,    
     TopoModule

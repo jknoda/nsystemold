@@ -19,4 +19,5 @@ export class AlunoModel {
     public UsuIdf: number;
     public DataInc: Date;
     public DataAlt: Date;
+    public HasAnamnese: Boolean;
 }

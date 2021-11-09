@@ -1,6 +1,8 @@
 <p-toast></p-toast>
-
-<div class="card">
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="card" *ngIf="!isLoading">
     <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
             <button pButton pRipple label="Novo aluno" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
@@ -26,7 +28,8 @@
                 <td>{{Aluno.AluFone}}</td>
                 <td>
                     <button pButton pRipple icon="fas fa-user-edit" class="p-button-rounded p-button-success" (click)="editAluno(Aluno)" title="Alterar"></button>
-                    <button pButton pRipple icon="fas fa-sitemap" class="p-button-rounded" (click)="esportesAluno(Aluno)" title="Selecionar esportes"></button>
+                    <button *ngIf="Aluno.HasAnamnese" pButton pRipple icon="fas fa-briefcase-medical" class="p-button-rounded" (click)="anamneseAluno(Aluno)" title="Anamnese"></button>
+                    <button *ngIf="!Aluno.HasAnamnese" pButton pRipple icon="fas fa-briefcase-medical" class="p-button-rounded p-button-danger" (click)="anamneseAluno(Aluno)" title="Falta Anamnese"></button>
                     <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-warning" (click)="deleteAluno(Aluno)" title="Excluir"></button>
                 </td>
             </tr>

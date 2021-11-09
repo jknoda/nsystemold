@@ -20,3 +20,11 @@ textarea.ng-invalid.ng-touched {
 .floatLeft{
     display: inline-block;
 }
+
+.emergencia{
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-left: 20px;
+    width: 90%;
+}
+

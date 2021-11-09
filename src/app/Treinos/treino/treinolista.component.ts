@@ -66,7 +66,7 @@ export class TreinoListaComponent implements OnInit, OnDestroy {
     }
 
     editAlunos(Treino: TreinoModel) {
-      console.log('alunos');
+      this.router.navigate(['treinoalulista'], { queryParams: { EmpIdf: Treino.EmpIdf, TreIdf: Treino.TreIdf, TreTitulo: Treino.TreTitulo, Data: Treino.DataStr } });
     }
 
     deleteTreino(Treino: TreinoModel) {

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import { TreinoService } from './treino.service';
-import { TreinoModel } from 'src/app/model/Treino.model';
+import { TreinoModel } from 'src/app/model/treino.model';
 import { ServiceConfig } from 'src/app/_config/services.config';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';

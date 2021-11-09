@@ -2,6 +2,16 @@
     display: block; 
 }
 
+.tituloLista{
+    background-color: rgb(194, 245, 200);
+    color: rgb(11, 1, 20);
+}
+
+.tituloCadastro{
+    background-color: rgb(194, 245, 200);
+    color: rgb(11, 1, 20);
+}
+
 @media screen and (max-width: 800px) {
    .mostracoluna{
        display: none !important; 

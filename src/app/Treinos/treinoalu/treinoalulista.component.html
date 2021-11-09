@@ -6,7 +6,7 @@
     <h1 class="tituloLista">{{Param.TreTitulo}} do dia {{Param.Data}}</h1>
     <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
-            <button pButton pRipple label="Nova Atividade" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+            <button pButton pRipple label="Novo Aluno" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
             <button style="margin-left: 5px;" pButton pRipple label="Retornar" icon="pi pi-arrow-left" class="p-button-default" (click)="retornar()"></button>
         </ng-template>
     </p-toolbar>
@@ -16,18 +16,14 @@
         currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" [showCurrentPageReport]="true">
         <ng-template pTemplate="header">
             <tr>
-                <th class="mostracoluna" pSortableColumn="TreAtvOrdem">Ordem <p-sortIcon field="TreAtvOrdem"></p-sortIcon></th>
-                <th pSortableColumn="TreAtvDesc">Descrição <p-sortIcon field="TreAtvDesc"></p-sortIcon></th>
-                <th class="mostracoluna">Tempo</th>
+                <th pSortableColumn="AluIdf">Idf Aluno <p-sortIcon field="AluIdf"></p-sortIcon></th>
                 <th></th>
             </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-Treinoatv>
             <tr>
-                <td class="mostracoluna">{{Treinoatv.TreAtvOrdem}}</td>
-                <td>{{Treinoatv.TreAtvDesc}}</td>
-                <td class="mostracoluna">{{Treinoatv.TreAtvMin}}</td>
+                <td>{{Treinoatv.AluIdf}}</td>
                 <td>
                     <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editTreinoatv(Treinoatv)" title="Alterar"></button>
                     <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-warning" (click)="deleteTreinoatv(Treinoatv)" title="Excluir"></button>
@@ -36,9 +32,7 @@
         </ng-template>
         <ng-template pTemplate="footer">
             <tr>
-                <td class="mostracoluna">{{totalAtividades}} atividades</td>
-                <td></td>
-                <td class="mostracoluna">{{totalTempo}} minutos</td>
+                <td class="mostracoluna">{{totalQde}} alunos</td>
                 <td></td>
             </tr>
         </ng-template>

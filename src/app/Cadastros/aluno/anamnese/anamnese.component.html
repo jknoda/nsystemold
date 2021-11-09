@@ -1,0 +1,114 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<form [formGroup]="dadosForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+    <div class="form-group">
+        <div class="tituloCadastro">CADASTRO DE ANAMNESE DO ALUNO: {{aluno}}</div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <label for="data">Data</label>
+                <p-calendar class="form-control" formControlName="data" id="data" dateFormat="dd/mm/yy"></p-calendar>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <label for="convenio">Nome convênio</label>
+                <input type="text" class="form-control" formControlName="convenio" id="convenio" pInputText>
+            </div>
+
+            <div class="emergencia col-lg-12 col-md-12">
+                <div class="row" style="padding: 0 0 0 0; margin-bottom: 0px;">
+                    <span style="color: red;">Em caso de emergência</span>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label for="respemer">Responsável</label>
+                    <input type="text" class="form-control" formControlName="respemer" id="respemer" pInputText>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label for="foneemer">Fone</label>
+                    <input type="text" class="form-control" formControlName="foneemer" id="foneemer" pInputText>
+                </div>
+                <div class="col-lg-12 col-md-12">
+                    <label for="obsemer">Observações</label>
+                    <input type="text" class="form-control" formControlName="obsemer" id="obsemer" pInputText>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3">
+                <label for="hipertenso">Hipertenso</label>
+                <p-inputSwitch class="form-control" formControlName="hipertenso" id="hipertenso" ></p-inputSwitch>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <label for="diabetes">Diabetes</label>
+                <p-inputSwitch class="form-control" formControlName="diabetes" id="diabetes" ></p-inputSwitch>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <label for="cardiaco">Cardiaco</label>
+                <p-inputSwitch class="form-control" formControlName="cardiaco" id="cardiaco" ></p-inputSwitch>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <label for="labirintite">Labirintite</label>
+                <p-inputSwitch class="form-control" formControlName="labirintite" id="labirintite" ></p-inputSwitch>
+            </div>
+
+            <div class="col-lg-3 col-md-3">
+                <label for="asma">Asma</label>
+                <p-inputSwitch class="form-control" formControlName="asma" id="asma" ></p-inputSwitch>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <label for="convulcoes">Convulções</label>
+                <p-inputSwitch class="form-control" formControlName="convulcoes" id="convulcoes" ></p-inputSwitch>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <label for="depressao">Depressão</label>  
+                <p-inputSwitch class="form-control" formControlName="depressao" id="depressao" ></p-inputSwitch>
+            </div>            
+            <div class="col-lg-3 col-md-3">
+                <label for="outras">Outras patologias</label>  
+                <input type="text" id="outras" class="form-control" formControlName="outras" pInputText>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <label for="sangue">Tipo sanguíneo</label>
+                <input type="text" class="form-control" formControlName="sangue" id="sangue" pInputText>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <label for="alergia">Alergia</label>  
+                <input type="text" id="alergia" class="form-control" formControlName="alergia" pInputText>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <label for="medicamentos">Medicamentos</label>  
+                <input type="text" id="medicamentos" class="form-control" formControlName="medicamentos" pInputText>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <label for="cirurgia">Cirurgias</label>  
+                <input type="text" id="cirurgia" class="form-control" formControlName="cirurgia" pInputText>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <label for="osseo">Osseoarticular</label>  
+                <input type="text" id="osseo" class="form-control" formControlName="osseo" pInputText>
+            </div>       
+            <div class="col-lg-6 col-md-6">
+                <label for="fratura">Fratura</label>  
+                <input type="text" id="fratura" class="form-control" formControlName="fratura" pInputText>
+            </div>            
+        </div>
+        <div class="row">            
+            <div class="floatLeft col-sm-1">
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  [disabled]="!dadosForm.valid" *ngIf="!editMode">Salvar</button>
+                <button
+                  type="submit"
+                  class="floatLeft btn btn-success"
+                  [disabled]="!dadosForm.valid" *ngIf="editMode">Alterar</button>
+            </div>       
+            <div class="floatLeft col-sm-1">
+                <button
+                type="button"
+                class="btn btn-danger"
+                (click)="cancelar()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+  </form>

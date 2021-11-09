@@ -1,54 +1,54 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ServiceConfig } from '../../_config/services.config'
+import { ServiceConfig } from '../../../_config/services.config'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {AlunoModel} from '../../model/aluno.model';
-import { AnamneseModel } from 'src/app/model/anamnese.model';
+import {AnamneseModel} from '../../../model/anamnese.model';
 
 @Injectable()
-export class AlunoService {
+export class AnamneseService {
     private url: string = ServiceConfig.API_ENDPOINT;
     constructor(private http: HttpClient) { }
 
-    addAluDados(body:any): Observable<AlunoModel> {
+    addAnaDados(body:any): Observable<AnamneseModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/create", body, httpOptions);
+        return this.http.post<AnamneseModel>(this.url + "/api/anamnese/create", body, httpOptions);
     }
 
-    getAluDados(body:any): Observable<AlunoModel> {
+    getAnaDados(body:any): Observable<AnamneseModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/find", body, httpOptions);
+        return this.http.post<AnamneseModel>(this.url + "/api/anamnese/find", body, httpOptions);
     }
 
-    getAluTodos(body:any): Observable<AlunoModel> {
+    lastAnaDados(body:any): Observable<AnamneseModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/findall", body, httpOptions);
+        return this.http.post<AnamneseModel>(this.url + "/api/anamnese/findlast", body, httpOptions);
     }
 
-    updateAluDados(body:any): Observable<AlunoModel> {
+    getAnaTodos(body:any): Observable<AnamneseModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/update", body, httpOptions);
+        return this.http.post<AnamneseModel>(this.url + "/api/anamnese/findall", body, httpOptions);
     }
 
-    deleteAluDados(body:any): Observable<AlunoModel> {
+    updateAnaDados(body:any): Observable<AnamneseModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/delete", body, httpOptions);
+        return this.http.post<AnamneseModel>(this.url + "/api/anamnese/update", body, httpOptions);
     }
 
-    hasAnamnese(body:any): Observable<boolean> {
+    deleteAnaDados(body:any): Observable<AnamneseModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<boolean>(this.url + "/api/anamnese/has", body, httpOptions);
+        return this.http.post<AnamneseModel>(this.url + "/api/anamnese/delete", body, httpOptions);
     }
+
 }

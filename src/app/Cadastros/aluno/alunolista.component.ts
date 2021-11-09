@@ -16,10 +16,12 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
   private EmpIdf: number = ServiceConfig.EMPIDF;
   deleteDadosAluno: Subscription;
   lerDadosAluno: Subscription;
+  lerDadosAnamnese: Subscription;
 
   Alunos: AlunoModel[];
   submitted: boolean;
   isUpdate = true;
+  isLoading = true;
 
   constructor(private router: Router, private srvAluno: AlunoService, 
     private messageService: MessageService, private confirmationService: ConfirmationService) {}
@@ -44,8 +46,32 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
         this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
       },
       ()=>{
+        this.verAnamnese();
+        this.isLoading = false;
         return;
       });
+  }
+
+  private verAnamnese()
+  {
+    let ret = false;
+    this.Alunos.forEach(item=>{
+      let dados = {
+        EmpIdf: item.EmpIdf,
+        AluIdf: item.AluIdf
+      };
+      this.lerDadosAnamnese = this.srvAluno.hasAnamnese(dados).subscribe(
+        (dados) => {
+          ret = dados;
+        },
+        err => { 
+          let msg = err.error.errors.toString();
+          this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+        },
+        ()=>{
+          item.HasAnamnese = ret;
+      });
+    })
   }
 
   openNew() {
@@ -54,6 +80,10 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
 
   editAluno(Aluno: AlunoModel) {
     this.router.navigate(['aluno'], { queryParams: { Modo:'EDIT', EmpIdf: Aluno.EmpIdf, AluIdf: Aluno.AluIdf } });
+  }
+
+  anamneseAluno(Aluno: AlunoModel) {
+    this.router.navigate(['anamnese'], { queryParams: { EmpIdf: Aluno.EmpIdf, AluIdf: Aluno.AluIdf, AluNome: Aluno.AluNome } });
   }
 
   deleteAluno(Aluno: AlunoModel) {

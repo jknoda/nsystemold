@@ -13,6 +13,9 @@ import { TreinoComponent } from './Treinos/treino/treino.component';
 import { TreinoListaComponent } from './Treinos/treino/treinolista.component';
 import { TreinoatvComponent } from './Treinos/treinoatv/treinoatv.component';
 import { TreinoatvlistaComponent } from './Treinos/treinoatv/treinoatvlista.component';
+import { AnamneseComponent } from './Cadastros/aluno/anamnese/anamnese.component';
+import { TreinoalulistaComponent } from './Treinos/treinoalu/treinoalulista.component';
+import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
 
 const appRoutes: Routes = [
@@ -22,12 +25,15 @@ const appRoutes: Routes = [
         {path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard]},
         {path: 'alunolista', component: AlunoListaComponent, canActivate: [AuthGuard], data: {roles:['ADM']}},
         {path: 'aluno', component: AlunoComponent, canActivate: [AuthGuard], data: {roles:['ADM']}},
+        {path: 'anamnese', component: AnamneseComponent, canActivate: [AuthGuard], data: {roles:['ADM']}},
         {path: 'atividadelista', component: AtividadeListaComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'atividade', component: AtividadeComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treinolista', component: TreinoListaComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treino', component: TreinoComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treinoatvlista', component: TreinoatvlistaComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treinoatv', component: TreinoatvComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
+        {path: 'treinoalulista', component: TreinoalulistaComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
+        {path: 'treinoalu', component: TreinoaluComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'auth', component: AuthComponent},
         {path: 'denied', component: DeniedComponent},
         {path: '**', component: HomeComponent}
