@@ -21,8 +21,8 @@ export class TreinoatvlistaComponent implements OnInit, OnDestroy {
 
     TreAtvItem = 0;
 
-    totalTempo = 0;
-    totalAtividades = 0;
+    totalTempoTxt = "";
+    totalAtividadesTxt = "";
 
     deleteDadosTreinoatv: Subscription;
     lerDadosTreinoatv: Subscription;
@@ -61,8 +61,8 @@ export class TreinoatvlistaComponent implements OnInit, OnDestroy {
             qde++;
             tot += item.TreAtvMin;
           })
-          this.totalAtividades = qde;
-          this.totalTempo = tot;
+          this.totalAtividadesTxt = qde.toString() + " atividade" + (qde > 1? "s" : "");
+          this.totalTempoTxt = tot.toString() + " minuto" + (tot > 1? "s" : "");
         },
         err => { 
           let msg = err.error.errors.toString();

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import { TreinoaluModel } from 'src/app/model/treinoalu.model';
-import { Subscription } from 'rxjs';
+import { iif, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TreinoaluService } from './Treinoalu.service';
 
@@ -21,7 +21,7 @@ export class TreinoalulistaComponent implements OnInit, OnDestroy {
 
     AluIdf = 0;
 
-    totalQde = 0;
+    totalQdeTxt = "";
 
     deleteDadosTreinoalu: Subscription;
     lerDadosTreinoalu: Subscription;
@@ -58,7 +58,7 @@ export class TreinoalulistaComponent implements OnInit, OnDestroy {
           this.Treinoalus.forEach(item=>{
             qde++;
           })
-          this.totalQde = qde;
+          this.totalQdeTxt = qde.toString() + " aluno" + (qde > 1 ?"s" : "");
         },
         err => { 
           let msg = err.error.errors.toString();
@@ -82,7 +82,7 @@ export class TreinoalulistaComponent implements OnInit, OnDestroy {
 
     deleteTreinoalu(Treinoalu: TreinoaluModel) {
       this.confirmationService.confirm({
-        message: 'Confirma exclusão de <b>' + Treinoalu.AluIdf + '</b> ?',
+        message: 'Confirma exclusão de <b>' + Treinoalu.TreAluNome + '</b> ?',
         header: 'Confirmar',
         icon: 'pi pi-exclamation-triangle',
         acceptLabel: "Sim",
@@ -95,7 +95,7 @@ export class TreinoalulistaComponent implements OnInit, OnDestroy {
           };
           this.deleteDadosTreinoalu = this.srvTreinoalu.deleteTreAluDados(dados).subscribe(
             () => {
-              this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Treinoalu excluido!', life: 3000});
+              this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Aluno excluido!', life: 3000});
             },
             err => { 
               let msg = err.error.errors.toString();

@@ -41,6 +41,7 @@ import { TreinoatvComponent } from './Treinos/treinoatv/treinoatv.component';
 import { TreinoatvlistaComponent } from './Treinos/treinoatv/treinoatvlista.component';
 import { AnamneseComponent } from './Cadastros/aluno/anamnese/anamnese.component';
  import { TreinoalulistaComponent } from './Treinos/treinoalu/treinoalulista.component';
+import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
 @NgModule({
@@ -59,8 +60,9 @@ import { AnamneseComponent } from './Cadastros/aluno/anamnese/anamnese.component
     TreinoListaComponent,
     TreinoatvComponent,
     TreinoatvlistaComponent,
-     TreinoalulistaComponent,
-    // TreinoaluComponent
+    TreinoalulistaComponent,
+    TreinoaluComponent
+    
     
   ],
   imports: [

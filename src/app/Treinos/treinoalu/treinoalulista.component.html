@@ -11,28 +11,31 @@
         </ng-template>
     </p-toolbar>
 
-    <p-table #dt [value]="Treinoatvs" [rows]="10" [paginator]="true" 
+    <p-table #dt [value]="Treinoalus" [rows]="10" [paginator]="true" 
         [rowHover]="true" dataKey="id"
         currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" [showCurrentPageReport]="true">
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="AluIdf">Idf Aluno <p-sortIcon field="AluIdf"></p-sortIcon></th>
+                <th>Aluno</th>
                 <th></th>
             </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-Treinoatv>
+        <ng-template pTemplate="body" let-Treinoalu>
             <tr>
-                <td>{{Treinoatv.AluIdf}}</td>
+                <td>{{Treinoalu.AluIdf}}</td>
+                <td>{{Treinoalu.TreAluNome}}</td>
                 <td>
-                    <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editTreinoatv(Treinoatv)" title="Alterar"></button>
-                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-warning" (click)="deleteTreinoatv(Treinoatv)" title="Excluir"></button>
+                    <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editTreinoalu(Treinoalu)" title="Alterar"></button>
+                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-warning" (click)="deleteTreinoalu(Treinoalu)" title="Excluir"></button>
                 </td>
             </tr>
         </ng-template>
         <ng-template pTemplate="footer">
             <tr>
-                <td class="mostracoluna">{{totalQde}} alunos</td>
+                <td class="mostracoluna">{{totalQdeTxt}}</td>
+                <td></td>
                 <td></td>
             </tr>
         </ng-template>

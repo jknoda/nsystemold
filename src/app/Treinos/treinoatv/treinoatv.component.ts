@@ -38,7 +38,6 @@ export class TreinoatvComponent implements OnInit, OnDestroy {
   isUpdate = true;
 
   atvs: ATV[];
-  selectedAtv: ATV;
 
   atividades: AtividadeModel[];
 
@@ -51,6 +50,7 @@ export class TreinoatvComponent implements OnInit, OnDestroy {
     this.route.queryParams
       .subscribe(params => {
         this.Param = JSON.parse(params.Param);
+        this.carregaAtv();
         if (params.Modo == "EDIT")
         {
           this.editMode = true;
@@ -61,7 +61,6 @@ export class TreinoatvComponent implements OnInit, OnDestroy {
           let TreinoAtv: TreinoatvModel;
           this.initForm(TreinoAtv);
         }
-        this.carregaAtv();
       }
     );
   }
@@ -120,19 +119,20 @@ export class TreinoatvComponent implements OnInit, OnDestroy {
       TreIdf: this.Param.TreIdf,
       TreAtvItem: this.TreAtvItem,
       TreAtvOrdem: this.dadosForm.value['ordem'],
-      AtvIdf:  this.dadosForm.value['atv'],
+      AtvIdf:  parseInt(this.dadosForm.value['atv']),
       TreAtvDesc:  this.dadosForm.value['descricao'],
       TreAtvRep:  this.dadosForm.value['repeticao'],
       TreAtvMin:  this.dadosForm.value['minutos'],
       TreObs: this.dadosForm.value['obs'],
     };    
-    if (dados.TreAtvDesc == ""){
-      this.atvs.forEach(item=>{
-        if (item.code == dados.AtvIdf.toString()){
-          dados.TreAtvDesc = item.name;
-        }
-      })
-    }
+    //if (dados.TreAtvDesc == ""){
+      dados.TreAtvDesc = this.atvs.find(x=>x.code == dados.AtvIdf.toString()).name;
+      // this.atvs.forEach(item=>{
+      //   if (item.code == dados.AtvIdf.toString()){
+      //     dados.TreAtvDesc = item.name;
+      //   }
+      //})
+    //}
     if (this.editMode)
     {
       let dadosUpdate = {
@@ -201,7 +201,7 @@ export class TreinoatvComponent implements OnInit, OnDestroy {
     }
     this.dadosForm = new FormGroup({
       'ordem': new FormControl(TreAtvOrdem),
-      'atv': new FormControl(AtvIdf),
+      'atv': new FormControl(AtvIdf.toString()),
       'descricao': new FormControl(TreAtvDesc),
       'repeticao': new FormControl(TreAtvRep),
       'minutos': new FormControl(TreAtvMin),
@@ -217,6 +217,9 @@ export class TreinoatvComponent implements OnInit, OnDestroy {
     }
     if (this.updateDadosTreinoAtv != null){
       this.updateDadosTreinoAtv.unsubscribe();
+    }
+    if (this.lerDadosAtividade != null){
+      this.lerDadosAtividade.unsubscribe();
     }
   }
 

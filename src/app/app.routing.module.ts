@@ -15,6 +15,7 @@ import { TreinoatvComponent } from './Treinos/treinoatv/treinoatv.component';
 import { TreinoatvlistaComponent } from './Treinos/treinoatv/treinoatvlista.component';
 import { AnamneseComponent } from './Cadastros/aluno/anamnese/anamnese.component';
 import { TreinoalulistaComponent } from './Treinos/treinoalu/treinoalulista.component';
+import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
 
@@ -33,7 +34,7 @@ const appRoutes: Routes = [
         {path: 'treinoatvlista', component: TreinoatvlistaComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treinoatv', component: TreinoatvComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treinoalulista', component: TreinoalulistaComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
-        // {path: 'treinoalu', component: TreinoaluComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
+         {path: 'treinoalu', component: TreinoaluComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'auth', component: AuthComponent},
         {path: 'denied', component: DeniedComponent},
         {path: '**', component: HomeComponent}
