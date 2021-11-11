@@ -10,8 +10,8 @@ import { AtividadeService } from 'src/app/Cadastros/atividadelista/atividade.ser
 
 @Component({
   selector: 'app-TreinoAtv',
-  templateUrl: './treinoAtv.component.html',
-  styleUrls: ['./treinoAtv.component.css'],
+  templateUrl: './treinoatv.component.html',
+  styleUrls: ['./treinoatv.component.css'],
   providers: [ConfirmationService,TreinoatvService,MessageService,AtividadeService]
 })
 
