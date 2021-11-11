@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import { TreinoaluModel } from 'src/app/model/treinoalu.model';
-import { iif, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TreinoaluService } from './Treinoalu.service';
+import { TreinoalunoService } from './treinoaluno.service';
 
 @Component({
   selector: 'app-treinoalulista',
   templateUrl: './treinoalulista.component.html',
   styleUrls: ['./treinoalu.component.css'],
-  providers: [MessageService,ConfirmationService,TreinoaluService,MessageService]
+  providers: [MessageService,ConfirmationService,MessageService]
 })
 export class TreinoalulistaComponent implements OnInit, OnDestroy {
     Param = {
@@ -31,7 +31,7 @@ export class TreinoalulistaComponent implements OnInit, OnDestroy {
     isUpdate = true;
     isLoading = true;
   
-    constructor(private router: Router, private srvTreinoalu: TreinoaluService, 
+    constructor(private router: Router, private srvTreinoalu: TreinoalunoService, 
       private messageService: MessageService, private confirmationService: ConfirmationService,
       private route: ActivatedRoute) {}
   

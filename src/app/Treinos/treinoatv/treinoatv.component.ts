@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {ConfirmationService, MessageService, TreeDragDropService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import { TreinoatvService } from './treinoatv.service';
 import { TreinoatvModel } from 'src/app/model/treinoatv.model';
 import { AtividadeModel } from 'src/app/model/atividade.model';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AtividadeService } from 'src/app/Cadastros/atividadelista/atividade.service';
 
 @Component({

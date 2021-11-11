@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import { AnamneseService } from './Anamnese.service';
-import { AnamneseModel } from 'src/app/model/Anamnese.model';
+import { AnamneseService } from './anamnese.service';
+import { AnamneseModel } from 'src/app/model/anamnese.model';
 import { ServiceConfig } from 'src/app/_config/services.config';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';

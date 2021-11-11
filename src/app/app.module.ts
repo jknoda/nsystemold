@@ -42,7 +42,6 @@ import { TreinoatvlistaComponent } from './Treinos/treinoatv/treinoatvlista.comp
 import { AnamneseComponent } from './Cadastros/aluno/anamnese/anamnese.component';
  import { TreinoalulistaComponent } from './Treinos/treinoalu/treinoalulista.component';
 import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
-// import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
 @NgModule({
   declarations: [
@@ -60,10 +59,8 @@ import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
     TreinoListaComponent,
     TreinoatvComponent,
     TreinoatvlistaComponent,
-    TreinoalulistaComponent,
-    TreinoaluComponent
-    
-    
+    TreinoaluComponent,
+    TreinoalulistaComponent
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(firebase)),

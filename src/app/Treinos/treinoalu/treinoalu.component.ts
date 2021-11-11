@@ -3,16 +3,16 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import { TreinoaluModel } from 'src/app/model/treinoalu.model';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TreinoaluService } from './Treinoalu.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AlunoModel } from 'src/app/model/aluno.model';
 import { AlunoService } from 'src/app/Cadastros/aluno/aluno.service';
+import { TreinoalunoService } from './treinoaluno.service';
 
 @Component({
   selector: 'app-treinoalu',
   templateUrl: './treinoalu.component.html',
   styleUrls: ['./treinoalu.component.css'],
-  providers: [MessageService,ConfirmationService,TreinoaluService,MessageService,AlunoService]
+  providers: [MessageService,ConfirmationService,TreinoalunoService,MessageService,AlunoService]
 })
 
 export class TreinoaluComponent implements OnInit, OnDestroy {
@@ -42,7 +42,7 @@ export class TreinoaluComponent implements OnInit, OnDestroy {
   alunos: AlunoModel[];
 
   constructor(private router: Router, private route: ActivatedRoute, 
-    private srvTreinoAlu: TreinoaluService, private srvAluno: AlunoService,
+    private srvTreinoAlu: TreinoalunoService, private srvAluno: AlunoService,
     private messageService: MessageService) {
     }
 
