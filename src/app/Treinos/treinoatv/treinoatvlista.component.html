@@ -16,18 +16,18 @@
         currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" [showCurrentPageReport]="true">
         <ng-template pTemplate="header">
             <tr>
-                <th class="mostracoluna" pSortableColumn="TreAtvOrdem">Ordem <p-sortIcon field="TreAtvOrdem"></p-sortIcon></th>
+                <th pSortableColumn="TreAtvOrdem">Ordem <p-sortIcon field="TreAtvOrdem"></p-sortIcon></th>
                 <th pSortableColumn="TreAtvDesc">Descrição <p-sortIcon field="TreAtvDesc"></p-sortIcon></th>
-                <th class="mostracoluna">Tempo</th>
+                <th>Tempo</th>
                 <th></th>
             </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-Treinoatv>
-            <tr>
-                <td class="mostracoluna">{{Treinoatv.TreAtvOrdem}}</td>
+            <tr class="listaSystem">
+                <td>{{Treinoatv.TreAtvOrdem}}</td>
                 <td>{{Treinoatv.TreAtvDesc}}</td>
-                <td class="mostracoluna">{{Treinoatv.TreAtvMin}}</td>
+                <td>{{Treinoatv.TreAtvMin}}</td>
                 <td>
                     <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editTreinoatv(Treinoatv)" title="Alterar"></button>
                     <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-warning" (click)="deleteTreinoatv(Treinoatv)" title="Excluir"></button>
@@ -36,9 +36,9 @@
         </ng-template>
         <ng-template pTemplate="footer">
             <tr>
-                <td class="mostracoluna">{{totalAtividadesTxt}}</td>
+                <td>{{totalAtividadesTxt}}</td>
                 <td></td>
-                <td class="mostracoluna">{{totalTempoTxt}}</td>
+                <td>{{totalTempoTxt}}</td>
                 <td></td>
             </tr>
         </ng-template>

@@ -14,7 +14,7 @@
         currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" [showCurrentPageReport]="true">
         <ng-template pTemplate="header">
             <tr>
-                <th class="mostracoluna" pSortableColumn="TreIdf">Idf <p-sortIcon field="TreIdf"></p-sortIcon></th>
+                <th pSortableColumn="TreIdf">Idf <p-sortIcon field="TreIdf"></p-sortIcon></th>
                 <th pSortableColumn="TreTitulo">Titulo <p-sortIcon field="TreTitulo"></p-sortIcon></th>
                 <th pSortableColumn="TreData">Data <p-sortIcon field="TreData"></p-sortIcon></th>
                 <th></th>
@@ -22,8 +22,8 @@
         </ng-template>
 
         <ng-template pTemplate="body" let-Treino>
-            <tr>
-                <td class="mostracoluna">{{Treino.TreIdf}}</td>
+            <tr class="listaSystem">
+                <td>{{Treino.TreIdf}}</td>
                 <td>{{Treino.TreTitulo}}</td>
                 <td>{{Treino.DataStr}}</td>
                 <td>

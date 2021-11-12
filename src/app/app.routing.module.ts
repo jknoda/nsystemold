@@ -36,7 +36,7 @@ const appRoutes: Routes = [
         {path: 'treinoatvlista', component: TreinoatvlistaComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treinoatv', component: TreinoatvComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treinoalulista', component: TreinoalulistaComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
-         {path: 'treinoalu', component: TreinoaluComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
+        {path: 'treinoalu', component: TreinoaluComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'auth', component: AuthComponent},
         {path: 'denied', component: DeniedComponent},
         {path: '**', component: HomeComponent}

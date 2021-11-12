@@ -9,7 +9,7 @@ import { TreinoalunoService } from './treinoaluno.service';
   selector: 'app-treinoalulista',
   templateUrl: './treinoalulista.component.html',
   styleUrls: ['./treinoalu.component.css'],
-  providers: [MessageService,ConfirmationService,MessageService]
+  providers: [MessageService,ConfirmationService,MessageService,TreinoalunoService]
 })
 export class TreinoalulistaComponent implements OnInit, OnDestroy {
     Param = {
