@@ -18,6 +18,8 @@ export class AtividadeComponent implements OnInit, OnDestroy {
   private EmpIdf: number = ServiceConfig.EMPIDF;
   private AtvIdf: number = 0;
 
+  text1 = "";
+
   dadosForm: FormGroup;
 
   addDadosAtividade: Subscription;

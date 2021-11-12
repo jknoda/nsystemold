@@ -4,6 +4,8 @@
 @import  "../node_modules/primeicons/primeicons.css";
 @import "./assets/css/normalize.css";
 @import "./assets/css/nsystem.css";
+@import "../node_modules/quill/dist/quill.core.css";
+@import "../node_modules/quill/dist/quill.snow.css";
 
 body:before {
     content: "";

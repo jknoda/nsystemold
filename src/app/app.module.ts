@@ -19,6 +19,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {FieldsetModule} from 'primeng/fieldset';
+import {EditorModule} from 'primeng/editor';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -85,9 +86,9 @@ import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
     InputTextareaModule,
     InputSwitchModule,
     FieldsetModule,
-
+    EditorModule,
     MenuModule,    
-    TopoModule
+    TopoModule,
   ],
   providers: [    
     {

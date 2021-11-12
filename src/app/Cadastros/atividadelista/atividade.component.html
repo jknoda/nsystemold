@@ -6,17 +6,40 @@
     <div class="form-group">
         <div class="tituloCadastro">CADASTRO DE ATIVIDADE</div>
         <div class="row">
-            <div class="col-lg-12 col-md-12">
+            <div class="col-lg-6 col-md-6">
                 <label for="titulo">Título</label>
                 <input type="text" class="form-control" formControlName="titulo" id="titulo" pInputText>
             </div>
             <div class="col-lg-6 col-md-6">
                 <label for="objetivo">Objetivo</label>
-                <textarea rows="5" pInputTextarea id="objetivo" class="form-control" formControlName="objetivo"></textarea>                
+                <textarea rows="3" pInputTextarea id="objetivo" class="form-control" formControlName="objetivo"></textarea>                
             </div>
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-12 col-md-12">
                 <label for="descricao">Descrição detalhada (execução)</label>
-                <textarea rows="5" pInputTextarea id="descricao" class="form-control" formControlName="descricao"></textarea>                
+                <!-- <textarea rows="5" pInputTextarea id="descricao" class="form-control" formControlName="descricao"></textarea>                 -->
+                <p-editor id="descricao" formControlName="descricao" [style]="{'height':'220px'}">
+                    <ng-template pTemplate="header">
+                        <span class="ql-formats">
+                            <button type="button" class="ql-bold" aria-label="Bold"></button>
+                            <button type="button" class="ql-italic" aria-label="Italic"></button>
+                            <button type="button" class="ql-underline" aria-label="Underline"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <select class="ql-align" [title]="'Aligment'">
+                                <option selected></option>
+                                <option value="center"></option>
+                                <option value="right"></option>
+                                <option value="justify"></option>
+                            </select>
+                        </span>
+                        <span class="ql-formats">
+                            <select class="ql-size"></select>
+                            <select class="ql-color"></select>
+                            <select class="ql-background"></select>
+                        </span>
+                    </ng-template>
+                </p-editor>
+
             </div>
             <div class="col-lg-6 col-md-6">
                 <label for="material">Material</label>
