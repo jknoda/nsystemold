@@ -1,0 +1,29 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-table #dt [value]="Usuarios" [rows]="10" [paginator]="true" 
+        [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" [showCurrentPageReport]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="UsuIdf">Idf <p-sortIcon field="UsuIdf"></p-sortIcon></th>
+                <th pSortableColumn="UsuNome">Nome <p-sortIcon field="UsuNome"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-Usuario>
+            <tr>
+                <td>{{Usuario.UsuIdf}}</td>
+                <td>{{Usuario.UsuNome}}</td>
+                <td>
+                    <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editUsuario(Usuario)" title="Alterar"></button>
+                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-warning" (click)="deleteUsuario(Usuario)" title="Excluir"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}" translate="yes">
+</p-confirmDialog>

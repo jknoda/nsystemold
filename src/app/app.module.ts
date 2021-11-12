@@ -43,6 +43,7 @@ import { TreinoatvlistaComponent } from './Treinos/treinoatv/treinoatvlista.comp
 import { AnamneseComponent } from './Cadastros/aluno/anamnese/anamnese.component';
  import { TreinoalulistaComponent } from './Treinos/treinoalu/treinoalulista.component';
 import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
+import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
     AuthComponent,
     LoadingSpinnerComponent,
     UsuarioComponent,
+    UsuarioListaComponent,
     AlunoComponent,
     AlunoListaComponent,
     AnamneseComponent,

@@ -36,7 +36,13 @@
                   type="submit"
                   class="btn btn-success"
                   [disabled]="!userForm.valid" *ngIf="editMode">Alterar</button>
-            </div>       
+            </div>      
+            <div class="floatLeft col-sm-1" *ngIf="viaLista">
+                <button
+                type="button"
+                class="btn btn-danger"
+                (click)="cancelar()">Cancelar</button>
+            </div> 
         </div>
     </div>
   </form>

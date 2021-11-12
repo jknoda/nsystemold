@@ -10,20 +10,28 @@
             <li class="nav-item" *ngIf="isAuthenticated">
                 <p-accordion>
                     <p-accordionTab  header="Cadastros">
-                        <a routerLink="usuario" routerLinkActive="active" class="nav-link accordion">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            <span>Usuário</span>
-                        </a>
+                        <div *ngIf="!isAdm">
+                            <a routerLink="usuario" routerLinkActive="active" class="nav-link accordion">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                <span>Usuário</span>
+                            </a>
+                        </div>
+                        <div *ngIf="isAdm">
+                            <a routerLink="usuariolista" routerLinkActive="active" class="nav-link accordion">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                <span>Usuários</span>
+                            </a>
+                        </div>
                         <div *ngIf="isAdm">
                             <a routerLink="alunolista" routerLinkActive="active" class="nav-link accordion">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                <span>Aluno</span>
+                                <span>Alunos</span>
                             </a>
                         </div>
                         <div *ngIf="isTecnico">
                             <a routerLink="atividadelista" routerLinkActive="active" class="nav-link accordion">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                <span>Atividade</span>
+                                <span>Atividades</span>
                             </a>
                         </div>
                     </p-accordionTab>

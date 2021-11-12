@@ -1,5 +1,6 @@
 export class UsuarioModel {
     public EmpIdf: number;
+    public UsuIdf: number;
     public UsuEmail: number;
     public UsuNome: string;
     public UsuCPF: number;

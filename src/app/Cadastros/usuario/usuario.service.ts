@@ -23,11 +23,25 @@ export class UsuarioService {
         return this.http.post<UsuarioModel>(this.url + "/api/usuario/find", body, httpOptions);
     }
 
+    getTodos(body:any): Observable<UsuarioModel> {
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
+        };        
+        return this.http.post<UsuarioModel>(this.url + "/api/usuario/findall", body, httpOptions);
+    }
+
     updateDados(body:any): Observable<UsuarioModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
         return this.http.post<UsuarioModel>(this.url + "/api/usuario/update", body, httpOptions);
+    }
+
+    deleteDados(body:any): Observable<UsuarioModel> {
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
+        };        
+        return this.http.post<UsuarioModel>(this.url + "/api/usuario/delete", body, httpOptions);
     }
 
 }

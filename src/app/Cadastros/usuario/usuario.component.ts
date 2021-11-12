@@ -1,7 +1,5 @@
-import { isFormattedError } from '@angular/compiler';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit, OnDestroy, ComponentFactoryResolver } from '@angular/core';
-import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MessageService} from 'primeng/api';
 import { Subscription } from 'rxjs';
@@ -19,6 +17,7 @@ import { UsuarioService } from './usuario.service';
 export class UsuarioComponent implements OnInit, OnDestroy {
   addDadosUsuario: Subscription;
   getDadosUsuario: Subscription;
+  lerDadosUsuario: Subscription;
   updateDadosUsuario: Subscription;
   userForm: FormGroup;
 
@@ -32,6 +31,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   
   isAdm = false;
   isLoading = true;
+  viaLista = false;
 
   constructor(private srvUsuario: UsuarioService, private route: ActivatedRoute, private router: Router, private messageService: MessageService) { 
     this.perfis = [
@@ -40,21 +40,21 @@ export class UsuarioComponent implements OnInit, OnDestroy {
       {name: 'Usuário', code: 'U'}
     ];
   }
-  ngOnDestroy(): void {
-    if (this.addDadosUsuario != null){
-      this.addDadosUsuario.unsubscribe();
-    }
-    if (this.getDadosUsuario != null){
-      this.getDadosUsuario.unsubscribe();
-    }
-    if (this.updateDadosUsuario != null){
-      this.updateDadosUsuario.unsubscribe();
-    }
-  }
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
+    this.route.queryParams.subscribe(params => {
+      if (params.Modo == "EDIT")
+      {
+        this.EmpIdf = params.EmpIdf;
+        this.viaLista = true;
+        this.editMode = true;
+      } else{
+        this.viaLista = false;
+      }
+    });
+    if (!this.viaLista){
+      this.UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
+    }
     if (this.UsuIdf != 0 && this.UsuIdf != null){
       this.editMode = true;
       let dados = {
@@ -84,6 +84,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     }    
   }
 
+  
   onSubmit() {
     let dados = {
       EmpIdf: this.EmpIdf,
@@ -105,7 +106,11 @@ export class UsuarioComponent implements OnInit, OnDestroy {
         err => { 
           let msg = err.error.errors.toString();
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+        },
+        ()=>{
+          this.retorno();
         }
+
       );
     }else{
       let dadosAdd = {
@@ -122,6 +127,9 @@ export class UsuarioComponent implements OnInit, OnDestroy {
             msg = 'Email já cadastrado!';
           }
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+        },
+        ()=>{
+          this.retorno();
         }
       );
     }
@@ -152,8 +160,38 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     });
   }
 
+  cancelar() {
+    this.retorno(0);
+  }
+
+  private retorno(tempo=3010){
+    if (this.viaLista)
+    {
+      setTimeout(() => 
+      {
+        this.router.navigate(['../usuariolista'], {relativeTo: this.route});
+      },
+      tempo);
+    }
+  }
+
   clear() {
     this.messageService.clear();
+  }
+
+  ngOnDestroy(): void {
+    if (this.addDadosUsuario != null){
+      this.addDadosUsuario.unsubscribe();
+    }
+    if (this.getDadosUsuario != null){
+      this.getDadosUsuario.unsubscribe();
+    }
+    if (this.updateDadosUsuario != null){
+      this.updateDadosUsuario.unsubscribe();
+    }
+    if (this.lerDadosUsuario != null){
+      this.lerDadosUsuario.unsubscribe();
+    }
   }  
 }
 

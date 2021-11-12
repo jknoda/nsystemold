@@ -16,6 +16,7 @@ import { TreinoatvlistaComponent } from './Treinos/treinoatv/treinoatvlista.comp
 import { AnamneseComponent } from './Cadastros/aluno/anamnese/anamnese.component';
 import { TreinoalulistaComponent } from './Treinos/treinoalu/treinoalulista.component';
 import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
+import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
 
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
     
         {path: '', component: HomeComponent},
         {path: 'home', component: HomeComponent},
+        {path: 'usuariolista', component: UsuarioListaComponent, canActivate: [AuthGuard], data: {roles:['ADM']}},
         {path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard]},
         {path: 'alunolista', component: AlunoListaComponent, canActivate: [AuthGuard], data: {roles:['ADM']}},
         {path: 'aluno', component: AlunoComponent, canActivate: [AuthGuard], data: {roles:['ADM']}},
