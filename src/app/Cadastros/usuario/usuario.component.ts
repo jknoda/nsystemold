@@ -28,6 +28,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   selectedPerfil: DropDown;
   UsuIdf = 0;
   UsuPerfil = 'U';
+  UsuEmail = "";
   
   isAdm = false;
   isLoading = true;
@@ -46,6 +47,8 @@ export class UsuarioComponent implements OnInit, OnDestroy {
       if (params.Modo == "EDIT")
       {
         this.EmpIdf = params.EmpIdf;
+        this.UsuIdf = params.UsuIdf;
+        this.UsuEmail = params.UsuEmail;
         this.viaLista = true;
         this.editMode = true;
       } else{
@@ -54,6 +57,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     });
     if (!this.viaLista){
       this.UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
+      this.UsuEmail = JSON.parse(localStorage.getItem('userData')).email;
     }
     if (this.UsuIdf != 0 && this.UsuIdf != null){
       this.editMode = true;
@@ -68,9 +72,6 @@ export class UsuarioComponent implements OnInit, OnDestroy {
         },
         err => { 
           let msg = err.error.errors.toString();
-          if (msg.includes('usuemail_UNIQUE')){
-            msg = 'Email já cadastrado!';
-          }
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
         },
         ()=>{
@@ -141,7 +142,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 
   private initForm(dados:UsuarioModel) {   
     this.isLoading = false;
-    let UserEmail = JSON.parse(localStorage.getItem('userData')).email;
+    let UserEmail = this.UsuEmail;
     let UserNome = null;
     let UserCpf = null;
     let UserPerfil = 'U';

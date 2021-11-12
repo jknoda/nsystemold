@@ -46,7 +46,7 @@ export class UsuarioListaComponent implements OnInit, OnDestroy {
   }
 
   editUsuario(Usuario: UsuarioModel) {
-    this.router.navigate(['usuario'], { queryParams: { Modo:'EDIT', EmpIdf: Usuario.EmpIdf, UsuIdf: Usuario.UsuIdf } });
+    this.router.navigate(['usuario'], { queryParams: { Modo:'EDIT', EmpIdf: Usuario.EmpIdf, UsuIdf: Usuario.UsuIdf , UsuEmail: Usuario.UsuEmail} });
   }
 
   deleteUsuario(Usuario: UsuarioModel) {
