@@ -15,3 +15,34 @@ li a:hover {
     background-color: #54483d;
     color: #b64f0b;
 }
+
+.maxDisplay{
+    display: block;
+}
+
+.minDisplay{
+    display: none;
+}
+
+@media screen and (max-width: 800px) {
+    .listaSystem td {
+         white-space: nowrap;
+         display: table-cell !important;
+     }
+ 
+     .listaSystem button {
+         display: inline-block;
+     }
+ 
+     .editButtonSystem {
+         display: flex;
+     }
+
+     .maxDisplay{
+        display: none;
+    }
+    
+    .minDisplay{
+        display: block;
+    }
+  } 

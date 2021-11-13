@@ -1,7 +1,8 @@
 ﻿<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
     <div class="row">
         <a class="navbar-brand" routerLink="/" routerLinkActive="active">
-            Associação Yamazaki de Judô
+            <span class="maxDisplay">Associação Yamazaki de Judô</span>
+            <span class="minDisplay">AYJudô</span>
         </a>
         <ul class="nav right-section navbar-nav">
             <li *ngIf="!isAuthenticated">
@@ -13,7 +14,7 @@
                 <a style="cursor: pointer; padding: 5px; align-items: right;" (click)="onLogout()" title="logout">
                     <i class="fa fa-sign-out" aria-hidden="true"></i>
                 </a>                
-                <div style="color: white;">
+                <div class="maxDisplay" style="color: white;">
                     {{userEmail}}
                 </div>
             </li>

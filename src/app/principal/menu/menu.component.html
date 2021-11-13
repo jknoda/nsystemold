@@ -8,8 +8,8 @@
                 </a>
             </li>
             <li class="nav-item" *ngIf="isAuthenticated">
-                <p-accordion>
-                    <p-accordionTab  header="Cadastros">
+                <!-- <p-accordion>
+                    <p-accordionTab header="Cadastros">
                         <div *ngIf="!isAdm">
                             <a routerLink="usuario" routerLinkActive="active" class="nav-link accordion">
                                 <i class="fas fa-user" aria-hidden="true"></i>
@@ -41,7 +41,10 @@
                             <span>Treino</span>
                         </a>                        
                     </p-accordionTab>                    
-                </p-accordion>
+                </p-accordion> -->
+
+                <p-panelMenu [model]="items" [style]="{'width':'300px'}"></p-panelMenu>
+
             </li>
         </ul>
     </div>

@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {DialogModule} from 'primeng/dialog';
-import {AccordionModule} from 'primeng/accordion';
+import {PanelMenuModule} from 'primeng/panelmenu';
 import { HomeComponent } from 'src/app/home/home.component';
 
 
@@ -22,8 +22,7 @@ import { MenuComponent } from './menu.component';
         CommonModule, 
         RouterModule,
         DialogModule,
-        AccordionModule
-
+        PanelMenuModule
     ]
 })
 

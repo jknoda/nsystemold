@@ -20,6 +20,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {FieldsetModule} from 'primeng/fieldset';
 import {EditorModule} from 'primeng/editor';
+import {PanelMenuModule} from 'primeng/panelmenu';
+import {MenuItem} from 'primeng/api';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -91,6 +93,7 @@ import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.componen
     EditorModule,
     MenuModule,    
     TopoModule,
+    PanelMenuModule
   ],
   providers: [    
     {
