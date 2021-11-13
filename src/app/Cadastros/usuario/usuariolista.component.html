@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 
 <div class="card">
-    <p-table #dt [value]="Usuarios" [rows]="10" [paginator]="true" 
+    <p-table responsiveLayout="scroll" #dt [value]="Usuarios" [rows]="10" [paginator]="true" 
         [rowHover]="true" dataKey="id"
         currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" [showCurrentPageReport]="true">
         <ng-template pTemplate="header">
