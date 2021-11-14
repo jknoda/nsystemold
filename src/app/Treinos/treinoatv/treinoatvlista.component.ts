@@ -86,6 +86,7 @@ export class TreinoatvlistaComponent implements OnInit, OnDestroy {
         EmpIdf: treino.EmpIdf,
         TreIdf: treino.TreIdf,
         TreAtvItem: treino.TreAtvItem,
+        TreAtvOrdem: treino.TreAtvOrdem,
         TreAtvMin: treino.TreAtvMin
       };
       this.updateDadosTreinoAtv = this.srvTreinoatv.updateTreAtvDados(dados).subscribe(

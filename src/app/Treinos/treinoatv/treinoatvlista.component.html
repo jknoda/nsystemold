@@ -29,7 +29,17 @@
 
         <ng-template pTemplate="body" let-Treinoatv let-editing="editing" let-ri="rowIndex">
             <tr class="listaSystem" [pEditableRow]="Treinoatv">
-                <td>{{Treinoatv.TreAtvOrdem}}</td>
+                <!-- <td>{{Treinoatv.TreAtvOrdem}}</td> -->
+                <td pEditableColumn>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="number" [(ngModel)]="Treinoatv.TreAtvOrdem">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{Treinoatv.TreAtvOrdem}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>   
                 <td>{{Treinoatv.TreAtvDesc}}</td>
                 <!-- <td>{{Treinoatv.TreAtvMin}}</td> -->
                 <td pEditableColumn>
@@ -43,7 +53,7 @@
                     </p-cellEditor>
                 </td>    
                 <td style="text-align:center">
-                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(Treinoatv)" class="p-button-rounded p-button-text" title="Alterar tempo"></button>
+                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(Treinoatv)" class="p-button-rounded p-button-text" title="Alterar ordem e tempo"></button>
                     <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(Treinoatv)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
                     <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(Treinoatv, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
                 </td>            
