@@ -47,6 +47,7 @@ import { AnamneseComponent } from './Cadastros/aluno/anamnese/anamnese.component
 import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.component';
 import { TesteModule } from './teste/teste.module';
+import { TestepdfComponent } from './testepdf/testepdf.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { TesteModule } from './teste/teste.module';
     TreinoatvComponent,
     TreinoatvlistaComponent,
     TreinoaluComponent,
-    TreinoalulistaComponent
+    TreinoalulistaComponent,
+    TestepdfComponent
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(firebase)),

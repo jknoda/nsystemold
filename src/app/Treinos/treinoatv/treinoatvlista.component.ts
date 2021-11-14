@@ -26,11 +26,14 @@ export class TreinoatvlistaComponent implements OnInit, OnDestroy {
 
     deleteDadosTreinoatv: Subscription;
     lerDadosTreinoatv: Subscription;
+    updateDadosTreinoAtv: Subscription;
   
     Treinoatvs: TreinoatvModel[];
     submitted: boolean;
     isUpdate = true;
     isLoading = true;
+
+    cloneTreinos: { [s: string]: TreinoatvModel; } = {};
   
     constructor(private router: Router, private srvTreinoatv: TreinoatvService, 
       private messageService: MessageService, private confirmationService: ConfirmationService,
@@ -72,6 +75,36 @@ export class TreinoatvlistaComponent implements OnInit, OnDestroy {
           this.isLoading = false;
           return;
         });
+    }
+
+    onRowEditInit(treino: TreinoatvModel) {
+        this.cloneTreinos[treino.TreAtvItem] = {...treino};
+    }
+
+    onRowEditSave(treino: TreinoatvModel) {
+      let dados = {
+        EmpIdf: treino.EmpIdf,
+        TreIdf: treino.TreIdf,
+        TreAtvItem: treino.TreAtvItem,
+        TreAtvMin: treino.TreAtvMin
+      };
+      this.updateDadosTreinoAtv = this.srvTreinoatv.updateTreAtvDados(dados).subscribe(
+        () => {
+          this.messageService.add({severity:'success', summary: 'Successo', detail: 'Atividade do treino atualizado!'});
+        },
+        err => { 
+          let msg = err.error.errors.toString();
+          this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+        },
+        () => {
+          this.refresh();
+        }
+      );
+    }
+
+    onRowEditCancel(treino: TreinoatvModel, index: number) {
+        this.Treinoatvs[index] = this.cloneTreinos[treino.TreAtvItem];
+        delete this.cloneTreinos[treino.TreAtvItem];
     }
   
     openNew() {

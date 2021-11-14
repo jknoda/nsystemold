@@ -11,23 +11,42 @@
         </ng-template>
     </p-toolbar>
 
-    <p-table responsiveLayout="scroll" #dt [value]="Treinoatvs" [rows]="10" [paginator]="true" 
-        [rowHover]="true" dataKey="id"
-        currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" [showCurrentPageReport]="true">
+    <p-table responsiveLayout="scroll" #dt [value]="Treinoatvs" 
+        dataKey="TreAtvItem" editMode="row"
+        [rowHover]="true"
+        [rows]="10" [paginator]="true" 
+        currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros"
+        [showCurrentPageReport]="true">
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="TreAtvOrdem">Ordem <p-sortIcon field="TreAtvOrdem"></p-sortIcon></th>
                 <th pSortableColumn="TreAtvDesc">Descrição <p-sortIcon field="TreAtvDesc"></p-sortIcon></th>
                 <th>Tempo</th>
+                <th style="width:8rem"></th>
                 <th></th>
             </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-Treinoatv>
-            <tr class="listaSystem">
+        <ng-template pTemplate="body" let-Treinoatv let-editing="editing" let-ri="rowIndex">
+            <tr class="listaSystem" [pEditableRow]="Treinoatv">
                 <td>{{Treinoatv.TreAtvOrdem}}</td>
                 <td>{{Treinoatv.TreAtvDesc}}</td>
-                <td>{{Treinoatv.TreAtvMin}}</td>
+                <!-- <td>{{Treinoatv.TreAtvMin}}</td> -->
+                <td pEditableColumn>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="number" [(ngModel)]="Treinoatv.TreAtvMin">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{Treinoatv.TreAtvMin}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>    
+                <td style="text-align:center">
+                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(Treinoatv)" class="p-button-rounded p-button-text" title="Alterar tempo"></button>
+                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(Treinoatv)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(Treinoatv, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                </td>            
                 <td>
                     <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editTreinoatv(Treinoatv)" title="Alterar"></button>
                     <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-warning" (click)="deleteTreinoatv(Treinoatv)" title="Excluir"></button>
@@ -39,6 +58,7 @@
                 <td>{{totalAtividadesTxt}}</td>
                 <td></td>
                 <td>{{totalTempoTxt}}</td>
+                <td></td>
                 <td></td>
             </tr>
         </ng-template>
