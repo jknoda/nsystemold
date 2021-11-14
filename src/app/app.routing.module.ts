@@ -17,6 +17,7 @@ import { AnamneseComponent } from './Cadastros/aluno/anamnese/anamnese.component
 import { TreinoalulistaComponent } from './Treinos/treinoalu/treinoalulista.component';
 import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.component';
+import { TesteComponent } from './teste/teste.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
 
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
         {path: 'treinoalu', component: TreinoaluComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'auth', component: AuthComponent},
         {path: 'denied', component: DeniedComponent},
+        {path: 'teste', component: TesteComponent},
         {path: '**', component: HomeComponent}
    
 ]

@@ -52,7 +52,7 @@ export class MenuComponent implements OnInit, OnDestroy {
                 label: 'Treinos',
                 icon: 'pi pi-pw pi-file',
                 items: [
-                    {label: 'Treinos', icon: 'pi pi-fw pi-external-link', routerLink:'treinolista',visible:this.isTecnico}
+                    {label: 'Treinos', icon: 'pi pi-fw pi-external-link', routerLink:'treinolista',visible:this.isTecnico},
                 ],
                 visible:this.isTecnico
             },

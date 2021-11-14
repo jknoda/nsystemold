@@ -46,6 +46,7 @@ import { AnamneseComponent } from './Cadastros/aluno/anamnese/anamnese.component
  import { TreinoalulistaComponent } from './Treinos/treinoalu/treinoalulista.component';
 import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.component';
+import { TesteModule } from './teste/teste.module';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.componen
     EditorModule,
     MenuModule,    
     TopoModule,
-    PanelMenuModule
+    PanelMenuModule,
+    TesteModule
   ],
   providers: [    
     {
