@@ -41,26 +41,26 @@ export class MenuComponent implements OnInit, OnDestroy {
         this.items = [
             {
                 label: 'Consultas',
-                icon: 'pi pi-pw pi-file',
+                icon: 'fas fa-search',
                 items: [
-                    {label: 'Treinos', icon: 'pi pi-fw pi-external-link', routerLink:'treinoscalendario'},
+                    {label: 'Treinos', icon: 'far fa-calendar-alt', routerLink:'treinoscalendario'},
                 ]
             },
             {
                 label: 'Cadastros',
-                icon: 'pi pi-pw pi-file',
+                icon: 'far fa-edit',
                 items: [
-                    {label: 'Usuário', icon: 'pi pi-fw pi-external-link', routerLink: 'usuario', visible:!this.isAdm},
-                    {label: 'Usuários', icon: 'pi pi-fw pi-times', routerLink: 'usuariolista',visible:this.isAdm},
-                    {label: 'Alunos',  icon: 'pi pi-fw pi-pencil', routerLink: 'alunolista',visible:this.isAdm},
-                    {label: 'Atividades',  icon: 'pi pi-fw pi-pencil', routerLink: 'atividadelista',visible:this.isTecnico}
+                    {label: 'Usuário', icon: 'fas fa-user', routerLink: 'usuario', visible:!this.isAdm},
+                    {label: 'Usuários', icon: 'fas fa-users', routerLink: 'usuariolista',visible:this.isAdm},
+                    {label: 'Alunos',  icon: 'fas fa-user-graduate', routerLink: 'alunolista',visible:this.isAdm},
+                    {label: 'Atividades',  icon: 'fas fa-cogs', routerLink: 'atividadelista',visible:this.isTecnico}
                 ]
             },
             {
                 label: 'Treinos',
-                icon: 'pi pi-pw pi-file',
+                icon: 'fas fa-users-cog',
                 items: [
-                    {label: 'Treinos', icon: 'pi pi-fw pi-external-link', routerLink:'treinolista',visible:this.isTecnico},
+                    {label: 'Treinos', icon: 'fas fa-people-carry', routerLink:'treinolista',visible:this.isTecnico},
                 ],
                 visible:this.isTecnico
             },
