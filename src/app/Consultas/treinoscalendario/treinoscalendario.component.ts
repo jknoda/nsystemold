@@ -25,6 +25,7 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
   lerAtividade: Subscription;
 
   calendarOptions: CalendarOptions;
+  isLoading = true;
 
   listaTreinos = new List<TreinosCalendarioModel>();
   listaAtv: any[];
@@ -60,6 +61,7 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
         }
       }, 
     };
+    this.isLoading = false;
   }
 
   private lerTreinos() {

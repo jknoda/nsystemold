@@ -15,6 +15,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { TreinoscalendarioComponent } from './treinoscalendario/treinoscalendario.component';
+import { SugestoesComponent } from './sugestoes/sugestoes.component';
+import { LoadingSpinner2Component } from '../shared/loading-spinner/loading-spinner2.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -24,7 +26,9 @@ FullCalendarModule.registerPlugins([
 
 @NgModule({
   declarations: [
-    TreinoscalendarioComponent
+    LoadingSpinner2Component,
+    TreinoscalendarioComponent,
+    SugestoesComponent
   ],
   exports: [
   ],
