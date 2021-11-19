@@ -18,6 +18,7 @@ import { TreinoalulistaComponent } from './Treinos/treinoalu/treinoalulista.comp
 import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.component';
 import { TesteComponent } from './teste/teste.component';
+import { TreinoscalendarioComponent } from './Consultas/treinoscalendario/treinoscalendario.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
         {path: 'treinoalu', component: TreinoaluComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'auth', component: AuthComponent},
         {path: 'denied', component: DeniedComponent},
+        {path: 'treinoscalendario', component: TreinoscalendarioComponent},
         {path: 'teste', component: TesteComponent},
         //{path: 'testepdf', component: TestepdfComponent},
         {path: '**', component: HomeComponent}

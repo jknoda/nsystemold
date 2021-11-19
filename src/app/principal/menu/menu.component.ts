@@ -22,7 +22,8 @@ export class MenuComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.userSub = this.authService.user.subscribe(user => {
+        this.userSub = this.authService.user.subscribe(
+        user => {
             this.isAuthenticated = !!user;
             let perfil = '';
             if (JSON.parse(localStorage.getItem('userData')) != null){
@@ -32,12 +33,19 @@ export class MenuComponent implements OnInit, OnDestroy {
             }
             this.isAdm = (perfil == 'A');
             this.isTecnico = (perfil == 'A' || perfil == 'T');
-        });
-        this.menuInit();
+            this.menuInit();
+        });   
     }
 
     private menuInit() {
         this.items = [
+            {
+                label: 'Consultas',
+                icon: 'pi pi-pw pi-file',
+                items: [
+                    {label: 'Treinos', icon: 'pi pi-fw pi-external-link', routerLink:'treinoscalendario'},
+                ]
+            },
             {
                 label: 'Cadastros',
                 icon: 'pi pi-pw pi-file',

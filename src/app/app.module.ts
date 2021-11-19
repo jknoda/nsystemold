@@ -21,7 +21,6 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {FieldsetModule} from 'primeng/fieldset';
 import {EditorModule} from 'primeng/editor';
 import {PanelMenuModule} from 'primeng/panelmenu';
-import {MenuItem} from 'primeng/api';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -47,6 +46,7 @@ import { AnamneseComponent } from './Cadastros/aluno/anamnese/anamnese.component
 import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.component';
 import { TesteModule } from './teste/teste.module';
+import { ConsultasModule } from './Consultas/consultas.module';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 
 @NgModule({
@@ -97,6 +97,7 @@ import { TesteModule } from './teste/teste.module';
     MenuModule,    
     TopoModule,
     PanelMenuModule,
+    ConsultasModule,
     TesteModule
   ],
   providers: [    

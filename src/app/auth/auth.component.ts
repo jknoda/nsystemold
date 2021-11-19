@@ -35,7 +35,7 @@ export class AuthComponent {
     if (this.isLoginMode) {
       authObs = this.authService.login(email, password)
       .then(()=>{
-        this.router.navigate(['home']);
+        this.router.navigate(['']);
       }).catch(errorMessage=>{
         this.messageService.add({severity:'error', summary: 'Erro', detail: errorMessage});
       });
@@ -45,7 +45,7 @@ export class AuthComponent {
       }else{
         authObs = this.authService.signup(email, password)
         .then(()=>{
-          this.router.navigate(['home']);
+          this.router.navigate(['']);
         }).catch(errorMessage=>{
           this.messageService.add({severity:'error', summary: 'Erro', detail: errorMessage});
         });
