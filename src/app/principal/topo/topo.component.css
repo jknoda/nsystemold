@@ -24,7 +24,19 @@ li a:hover {
     display: none;
 }
 
+.menuLateral{
+    display: block;
+}
+
 @media screen and (max-width: 800px) {
+    .showMenu{
+        display:block;
+    }
+    
+    .hideMenu{
+        display: none;
+    }
+    
     .listaSystem td {
          white-space: nowrap;
          display: table-cell !important;

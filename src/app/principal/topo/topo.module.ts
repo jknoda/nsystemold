@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { MenuModule } from '../menu/menu.module';
 import { TopoComponent } from './topo.component';
 
 @NgModule({
@@ -9,7 +10,8 @@ import { TopoComponent } from './topo.component';
     imports: [
         BrowserModule, 
         RouterModule,
-        CommonModule
+        CommonModule,
+        MenuModule
     ],
     exports: [TopoComponent]
 })

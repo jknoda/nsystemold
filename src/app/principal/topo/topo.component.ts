@@ -11,10 +11,11 @@ import { TopoService } from "./topo.service";
 })
 
 export class TopoComponent implements OnInit, OnDestroy {
-    isCollapsed = false;
+    showMenu = false;
     isLoading: boolean = true;
     companyName: string = "";
     isOpen: boolean = true;
+    class = "hideMenu";
 
     isAuthenticated = false;
     private userSub: Subscription;
@@ -50,8 +51,12 @@ export class TopoComponent implements OnInit, OnDestroy {
      * Collapse the menu.
      */
     onMenuCollapse() {
-        this.isCollapsed = !this.isCollapsed;
-        //this.topoService.isCollapsed = this.isCollapsed;
-        //this.topoService.toggle.next(this.isCollapsed);
+        this.showMenu = !this.showMenu;
+        if (this.showMenu){
+            this.class = "showMenu";
+        }else{
+            this.class = "hideMenu";
+        }
     }
+
 }

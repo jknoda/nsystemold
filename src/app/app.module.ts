@@ -24,7 +24,7 @@ import {PanelMenuModule} from 'primeng/panelmenu';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
-import { MenuModule } from './principal/menu/menu.module';
+//import { MenuModule } from './principal/menu/menu.module';
 import { TopoModule } from './principal/topo/topo.module';
 
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
@@ -94,7 +94,7 @@ import { ConsultasModule } from './Consultas/consultas.module';
     InputSwitchModule,
     FieldsetModule,
     EditorModule,
-    MenuModule,    
+    //MenuModule,    
     TopoModule,
     PanelMenuModule,
     ConsultasModule,

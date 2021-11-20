@@ -44,7 +44,7 @@ export class MenuComponent implements OnInit, OnDestroy {
                 icon: 'fas fa-search',
                 items: [
                     {label: 'Treinos', icon: 'far fa-calendar-alt', routerLink:'treinoscalendario'},
-                    //{label: 'Sugestões', icon: 'fas fa-exclamation', routerLink:'sugestoes'},
+                    {label: 'Sugestões', icon: 'fas fa-exclamation', routerLink:'sugestoes'},
                 ]
             },
             {
@@ -59,7 +59,7 @@ export class MenuComponent implements OnInit, OnDestroy {
             },
             {
                 label: 'Treinos',
-                icon: 'fas fa-users-cog',
+                icon: 'icon-judo',
                 items: [
                     {label: 'Programação', icon: 'fas fa-tasks', routerLink:'treinolista',visible:this.isTecnico},
                 ],
