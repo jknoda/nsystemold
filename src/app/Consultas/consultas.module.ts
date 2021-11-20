@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 
 import {ToastModule} from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
 import {TableModule} from 'primeng/table';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {EditorModule} from 'primeng/editor';
+import {DataViewModule} from 'primeng/dataview';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
 
 import {FullCalendarModule} from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -36,10 +39,14 @@ FullCalendarModule.registerPlugins([
     CommonModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     FullCalendarModule,
     ToastModule,
     DialogModule,
     TableModule,
+    EditorModule,
+    DataViewModule,    
+    ConfirmPopupModule,
 
     ConfirmDialogModule
   ]

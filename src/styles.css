@@ -6,7 +6,7 @@
 @import "./assets/css/nsystem.css";
 @import "../node_modules/quill/dist/quill.core.css";
 @import "../node_modules/quill/dist/quill.snow.css";
-@import "../node_modules/icomoon/style.css";
+@import "./assets/icomoon/style.css";
 
 body:before {
     content: "";
