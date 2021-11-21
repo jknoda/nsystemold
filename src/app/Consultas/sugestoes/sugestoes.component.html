@@ -23,7 +23,7 @@
             <p-dataView [value]="msg.comentarios" *ngIf="msg.comentarios.length > 0">
                 <ng-template let-comentario pTemplate="listItem">
                     <div class="itemMsgComentario">
-                        <div style="display: inline;" class="itemCab">{{comentario.MsgEmail}} - {{comentario.DataInc | date : 'dd/MM/yyyy HH:mm'}}</div>
+                        <div style="display: inline;" class="itemCabComentario">{{comentario.MsgEmail}} - {{comentario.DataInc | date : 'dd/MM/yyyy HH:mm'}}</div>
                         <span>&nbsp;&nbsp;&nbsp;</span>
                         <a (click)="confirmComentario($event,comentario)" title="excluir comentário" *ngIf="comentario.MsgEmail == UsuEmail">
                             <i style="color: red;" class="fas fa-trash-alt" aria-hidden="true">&nbsp;&nbsp;</i>

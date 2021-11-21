@@ -25,11 +25,15 @@ textarea.ng-invalid.ng-touched {
 }
 
 .itemMsg:nth-child(even) {
-    background:rgb(209, 231, 195);
+    background: rgb(209, 231, 195);
 }
 
 .itemMsgComentario{
     padding: 10px 10px 10px 50px;
+}
+
+.itemCabComentario{
+    color: rgb(7, 180, 7);
 }
 
 hr {
