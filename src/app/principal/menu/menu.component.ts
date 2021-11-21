@@ -40,11 +40,11 @@ export class MenuComponent implements OnInit, OnDestroy {
     private menuInit() {
         this.items = [
             {
-                label: 'Consultas',
-                icon: 'fas fa-search',
+                label: 'Participe!',
+                icon: 'icon-party',
                 items: [
                     {label: 'Treinos', icon: 'far fa-calendar-alt', routerLink:'treinoscalendario'},
-                    {label: 'Sugestões', icon: 'fas fa-exclamation', routerLink:'sugestoes'},
+                    {label: 'Sugestões', icon: 'icon-chat', routerLink:'sugestoes'},
                 ]
             },
             {
