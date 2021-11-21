@@ -65,6 +65,14 @@ export class MenuComponent implements OnInit, OnDestroy {
                 ],
                 visible:this.isTecnico
             },
+            {
+                label: 'Sair',
+                icon: 'icon-exit',
+                command: ()=>{
+                    this.authService.logout();
+                },
+                url: 'http://www.yamazakijudo.com.br'                
+            },
         ];        
     }
 

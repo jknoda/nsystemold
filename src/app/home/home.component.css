@@ -1,3 +1,9 @@
 .principal {
     text-align: center;
 }
+
+.rodape {
+    font-size: small;
+    text-align: left;
+    margin-left: 10px;
+}

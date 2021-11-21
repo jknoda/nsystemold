@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?s2egv2');
-  src:  url('fonts/icomoon.eot?s2egv2#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?s2egv2') format('truetype'),
-    url('fonts/icomoon.woff?s2egv2') format('woff'),
-    url('fonts/icomoon.svg?s2egv2#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?h9cm0e');
+  src:  url('fonts/icomoon.eot?h9cm0e#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?h9cm0e') format('truetype'),
+    url('fonts/icomoon.woff?h9cm0e') format('woff'),
+    url('fonts/icomoon.svg?h9cm0e#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-exit:before {
+  content: "\e901";
+}
 .icon-judo:before {
   content: "\e900";
   font-size: 24px;
