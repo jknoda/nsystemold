@@ -36,5 +36,4 @@ export class SugestoesService {
         };        
         return this.http.post<MensagemModel>(this.url + "/api/mensagem/delete", body, httpOptions);
     }
-
 }

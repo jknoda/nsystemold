@@ -5,14 +5,15 @@ import { Subscription } from 'rxjs';
 import { ServiceConfig } from 'src/app/_config/services.config';
 import { MensagemModel } from 'src/app/model/mensagem.model';
 import { SugestoesService } from './sugestoes.service';
-import { ThrowStmt } from '@angular/compiler';
+import { SendmailService } from 'src/app/shared/sendmail.service';
+import { MailModel } from 'src/app/model/mail.model';
 
 
 @Component({
   selector: 'app-sugestoes',
   templateUrl: './sugestoes.component.html',
   styleUrls: ['./sugestoes.component.css'],
-  providers: [SugestoesService,MessageService,ConfirmationService]
+  providers: [SugestoesService,MessageService,ConfirmationService,SendmailService]
 })
 
 export class SugestoesComponent implements OnInit, OnDestroy {
@@ -20,10 +21,13 @@ export class SugestoesComponent implements OnInit, OnDestroy {
   private UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
   private UsuEmail = JSON.parse(localStorage.getItem('userData')).email;
 
+  mail = new MailModel();
+
   addDados: Subscription;
   addDadosItem: Subscription;
   getDados: Subscription;
   delDados: Subscription;
+  sendMailSub: Subscription;
   Sugestoes: MensagemModel[];
 
   dadosForm: FormGroup;
@@ -33,9 +37,13 @@ export class SugestoesComponent implements OnInit, OnDestroy {
   displayModal = false;
   MsgIdf = 0;  
   MsgTexto = "";
+  MsgSugestao = "";
 
 
-  constructor(private srvMensagem:SugestoesService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
+  constructor(private srvMensagem:SugestoesService, 
+    private messageService: MessageService, 
+    private confirmationService: ConfirmationService,
+    private sendmailService: SendmailService) { }
 
 
   ngOnInit(): void {
@@ -69,6 +77,7 @@ export class SugestoesComponent implements OnInit, OnDestroy {
     };    
     this.addDados = this.srvMensagem.addDados(dados).subscribe(
       () => {
+        this.sendMail(dados.MsgEmail,dados.MsgTexto,dados.MsgTexto,"S");
         this.messageService.add({severity:'success', summary: 'Successo', detail: 'Sugestão incluida!'});
       },
       err => { 
@@ -133,6 +142,7 @@ export class SugestoesComponent implements OnInit, OnDestroy {
     this.MsgTexto = "";
     this.MsgIdf = msg.MsgIdf;
     this.displayModal = true;
+    this.MsgSugestao = msg.DataInc.toString() + " - " +  msg.MsgTexto;
   }
 
   salvarComentario(){
@@ -145,6 +155,7 @@ export class SugestoesComponent implements OnInit, OnDestroy {
     };    
     this.addDadosItem = this.srvMensagem.addDadosItem(dados).subscribe(
       () => {
+        this.sendMail(dados.MsgEmail,dados.MsgTexto,dados.MsgTexto,"C");
         this.messageService.add({severity:'success', summary: 'Successo', detail: 'Comentário incluído!'});
       },
       err => { 
@@ -156,7 +167,6 @@ export class SugestoesComponent implements OnInit, OnDestroy {
       }
     );
   }
-
 
   confirmComentario(event: Event, msg) {
     this.confirmationService.confirm({
@@ -194,6 +204,23 @@ export class SugestoesComponent implements OnInit, OnDestroy {
     );
   }
 
+  sendMail(email, texto, textoHtml, tipo){
+    this.mail = ServiceConfig.emailConfig;
+    this.mail.subject = tipo == "S" ? "Sugestão" : "Comentário";
+    this.mail.subject += " enviado por " + email;
+    this.mail.text = (tipo == "S" ? "Nova sugestão: " : "Comentário ref. sugestão: " + this.MsgSugestao + "\n") + "( " + texto +" )";
+    this.mail.html = (tipo == "S" ? "Nova sugestão: " : "Comentário ref. sugestão: " + this.MsgSugestao + "<br/>") + "( " + textoHtml +" )";
+    this.sendMailSub = this.sendmailService.sendMail(this.mail).subscribe(
+      () => {
+        //this.messageService.add({severity:'success', summary: 'Successo', detail: 'Comentário excluído!'});
+      },
+      err => { 
+        let msg = err.error.errors.toString();
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+      }
+    );
+  }
+
   clear() {
     this.messageService.clear();
   }  
@@ -210,6 +237,9 @@ export class SugestoesComponent implements OnInit, OnDestroy {
     }
     if (this.addDadosItem != null){
       this.addDadosItem.unsubscribe();
+    }
+    if (this.sendMailSub != null){
+      this.sendMailSub.unsubscribe();
     }
 
   }
