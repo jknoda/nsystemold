@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnDestroy, OnInit } from '@angular/core';
 import { ConfirmationService,MessageService} from 'primeng/api';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ServiceConfig } from 'src/app/_config/services.config';
 import { MensagemModel } from 'src/app/model/mensagem.model';
 import { SugestoesService } from './sugestoes.service';
+import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class SugestoesComponent implements OnInit, OnDestroy {
   private UsuEmail = JSON.parse(localStorage.getItem('userData')).email;
 
   addDados: Subscription;
+  addDadosItem: Subscription;
   getDados: Subscription;
   delDados: Subscription;
   Sugestoes: MensagemModel[];
@@ -27,8 +29,10 @@ export class SugestoesComponent implements OnInit, OnDestroy {
   dadosForm: FormGroup;
 
   isLoading = true;
-
-  text = "";
+  isComentario = false;
+  displayModal = false;
+  MsgIdf = 0;  
+  MsgTexto = "";
 
 
   constructor(private srvMensagem:SugestoesService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
@@ -51,10 +55,10 @@ export class SugestoesComponent implements OnInit, OnDestroy {
         this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
       },
       ()=>{
-        this.initForm(null);
+           this.initForm(null);
         this.isLoading = false;
       });
-  }
+  }  
 
   onSubmit() {
     let dados = {
@@ -103,7 +107,8 @@ export class SugestoesComponent implements OnInit, OnDestroy {
           this.carregaDados();
         }
     });
-}
+  }
+
   deleteMsg(msg) {
     let dados = {
       EmpIdf: this.EmpIdf,
@@ -116,7 +121,72 @@ export class SugestoesComponent implements OnInit, OnDestroy {
       },
       err => { 
         let msg = err.error.errors.toString();
-        this.messageService.add({severity:'warning', summary: 'Aviso', detail: msg});
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+      },
+      () => {
+        this.carregaDados();
+      }
+    );
+  }
+
+  comentar(msg){
+    this.MsgTexto = "";
+    this.MsgIdf = msg.MsgIdf;
+    this.displayModal = true;
+  }
+
+  salvarComentario(){
+    let dados = {
+      EmpIdf: this.EmpIdf,
+      MsgIdf: this.MsgIdf,
+      MsgEmail: this.UsuEmail,
+      UsuIdf: this.UsuIdf,
+      MsgTexto: this.MsgTexto
+    };    
+    this.addDadosItem = this.srvMensagem.addDadosItem(dados).subscribe(
+      () => {
+        this.messageService.add({severity:'success', summary: 'Successo', detail: 'Comentário incluído!'});
+      },
+      err => { 
+        let msg = err.error.errors.toString();
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+      },
+      () => {
+        this.carregaDados();
+      }
+    );
+  }
+
+
+  confirmComentario(event: Event, msg) {
+    this.confirmationService.confirm({
+        target: event.target,
+        message: 'Confirma exclusão deste comentário ?',
+        icon: 'pi pi-exclamation-triangle',
+        acceptLabel: 'Sim',
+        rejectLabel: 'Não',
+        accept: () => {
+            this.deleteComentario(msg);
+        },
+        reject: () => {
+          this.carregaDados();
+        }
+    });
+  }
+
+  deleteComentario(msg) {
+    let dados = {
+      EmpIdf: this.EmpIdf,
+      MsgIdf: msg.MsgIdf,
+      MsgIdfIt: msg.MsgIdfIt
+    };    
+    this.delDados = this.srvMensagem.delDado(dados).subscribe(
+      () => {
+        this.messageService.add({severity:'success', summary: 'Successo', detail: 'Comentário excluído!'});
+      },
+      err => { 
+        let msg = err.error.errors.toString();
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
       },
       () => {
         this.carregaDados();
@@ -137,6 +207,9 @@ export class SugestoesComponent implements OnInit, OnDestroy {
     }
     if (this.delDados != null){
       this.delDados.unsubscribe();
+    }
+    if (this.addDadosItem != null){
+      this.addDadosItem.unsubscribe();
     }
 
   }

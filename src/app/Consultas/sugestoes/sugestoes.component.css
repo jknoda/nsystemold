@@ -28,6 +28,10 @@ textarea.ng-invalid.ng-touched {
     background:rgb(209, 231, 195);
 }
 
+.itemMsgComentario{
+    padding: 10px 10px 10px 50px;
+}
+
 hr {
     height: 3px;
     background-color: black;

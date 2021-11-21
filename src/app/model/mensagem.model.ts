@@ -7,4 +7,5 @@ export class MensagemModel {
     public UsuIdf: number;
     public DataInc: Date;
     public DataAlt: Date;
+    public comentarios: MensagemModel[];
 }

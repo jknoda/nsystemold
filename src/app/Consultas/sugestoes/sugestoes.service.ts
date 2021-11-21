@@ -16,6 +16,13 @@ export class SugestoesService {
         return this.http.post<MensagemModel>(this.url + "/api/mensagem/create", body, httpOptions);
     }
 
+    addDadosItem(body:any): Observable<MensagemModel> {
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
+        };        
+        return this.http.post<MensagemModel>(this.url + "/api/mensagem/createresp", body, httpOptions);
+    }
+
     getTodos(body:any): Observable<MensagemModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
