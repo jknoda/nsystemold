@@ -1,5 +1,7 @@
 <p-toast></p-toast>
-
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
 <div class="card">
     <p-table responsiveLayout="scroll" #dt [value]="Usuarios" [rows]="10" [paginator]="true" 
         [rowHover]="true" dataKey="id"

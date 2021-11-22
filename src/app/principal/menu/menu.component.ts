@@ -1,4 +1,4 @@
-﻿import { Component, OnDestroy, OnInit } from '@angular/core';
+﻿import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import {MenuItem} from 'primeng/api';
@@ -11,6 +11,8 @@ import { mergeScan } from 'rxjs/operators';
 })
 
 export class MenuComponent implements OnInit, OnDestroy {
+    @Output() onMenuCollapse = new EventEmitter<any>();
+    
     isAuthenticated = false;
     isAdm = false;
     isTecnico = false;
@@ -19,6 +21,10 @@ export class MenuComponent implements OnInit, OnDestroy {
     items: MenuItem[];
     
     constructor(private authService: AuthService) {
+    }
+
+    onClick(){
+        this.onMenuCollapse.emit();
     }
 
     ngOnInit() {
@@ -43,25 +49,25 @@ export class MenuComponent implements OnInit, OnDestroy {
                 label: 'Participe!',
                 icon: 'icon-party',
                 items: [
-                    {label: 'Treinos', icon: 'far fa-calendar-alt', routerLink:'treinoscalendario'},
-                    {label: 'Sugestões', icon: 'icon-chat', routerLink:'sugestoes'},
+                    {label: 'Treinos', icon: 'far fa-calendar-alt', routerLink:'treinoscalendario', command:()=>{this.onClick();}},
+                    {label: 'Sugestões', icon: 'icon-chat', routerLink:'sugestoes', command:()=>{this.onClick();}},
                 ]
             },
             {
                 label: 'Cadastros',
                 icon: 'far fa-edit',
                 items: [
-                    {label: 'Usuário', icon: 'fas fa-user', routerLink: 'usuario', visible:!this.isAdm},
-                    {label: 'Usuários', icon: 'fas fa-users', routerLink: 'usuariolista',visible:this.isAdm},
-                    {label: 'Alunos',  icon: 'fas fa-user-graduate', routerLink: 'alunolista',visible:this.isAdm},
-                    {label: 'Atividades',  icon: 'fas fa-cogs', routerLink: 'atividadelista',visible:this.isTecnico}
+                    {label: 'Usuário', icon: 'fas fa-user', routerLink: 'usuario', visible:!this.isAdm, command:()=>{this.onClick();}},
+                    {label: 'Usuários', icon: 'fas fa-users', routerLink: 'usuariolista',visible:this.isAdm, command:()=>{this.onClick();}},
+                    {label: 'Alunos',  icon: 'fas fa-user-graduate', routerLink: 'alunolista',visible:this.isAdm, command:()=>{this.onClick();}},
+                    {label: 'Atividades',  icon: 'fas fa-cogs', routerLink: 'atividadelista',visible:this.isTecnico, command:()=>{this.onClick();}}
                 ]
             },
             {
                 label: 'Treinos',
                 icon: 'icon-judo',
                 items: [
-                    {label: 'Programação', icon: 'fas fa-tasks', routerLink:'treinolista',visible:this.isTecnico},
+                    {label: 'Programação', icon: 'fas fa-tasks', routerLink:'treinolista',visible:this.isTecnico, command:()=>{this.onClick();}},
                 ],
                 visible:this.isTecnico
             },

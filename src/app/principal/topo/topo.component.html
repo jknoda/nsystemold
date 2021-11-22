@@ -1,6 +1,6 @@
 ﻿<nav class="topo navbar navbar-toggleable-md navbar-inverse bg-inverse">
     <div class="row">
-        <a class="navbar-brand" (click)="onMenuCollapse()" title="logout">
+        <a class="navbar-brand" (click)="onMenuCollapse()" title="menu lateral">
             <i class="minDisplay fas fa-bars">&nbsp;</i>
         </a> 
         <a class="navbar-brand" routerLink="/" routerLinkActive="active">
@@ -25,5 +25,5 @@
     </div>
 </nav>
 
-<menu class="menuLateral" [ngClass]="class"></menu>
+<menu class="menuLateral" [ngClass]="class" (onMenuCollapse)="onMenuCollapse()"></menu>
 

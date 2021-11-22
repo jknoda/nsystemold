@@ -47,6 +47,7 @@ import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.component';
 import { TesteModule } from './teste/teste.module';
 import { ConsultasModule } from './Consultas/consultas.module';
+import { ConfiguracaoService } from './shared/configuracao.service';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 
 @NgModule({
@@ -106,7 +107,8 @@ import { ConsultasModule } from './Consultas/consultas.module';
       useClass: AuthInterceptorService,
       multi: true
     },
-    TopoService
+    TopoService,
+    ConfiguracaoService
   ],
   bootstrap: [AppComponent]
 })

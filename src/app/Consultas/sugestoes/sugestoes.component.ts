@@ -47,6 +47,7 @@ export class SugestoesComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.mail = JSON.parse(localStorage.getItem('emailConfig'));
     this.carregaDados();
   }
 
@@ -205,7 +206,6 @@ export class SugestoesComponent implements OnInit, OnDestroy {
   }
 
   sendMail(email, texto, textoHtml, tipo){
-    this.mail = ServiceConfig.emailConfig;
     this.mail.subject = tipo == "S" ? "Sugestão" : "Comentário";
     this.mail.subject += " enviado por " + email;
     this.mail.text = (tipo == "S" ? "Nova sugestão: " : "Comentário ref. sugestão: " + this.MsgSugestao + "\n") + "( " + texto +" )";

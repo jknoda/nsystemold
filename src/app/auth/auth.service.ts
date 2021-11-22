@@ -8,6 +8,7 @@ import { User } from './user.model';
 import { ServiceConfig } from '../_config/services.config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsuarioModel } from '../model/usuario.model';
+import { ConfiguracaoService } from '../shared/configuracao.service';
 
 export interface AuthResponseData {
   kind: string;
@@ -26,11 +27,9 @@ export class AuthService implements OnDestroy {
   private url: string = ServiceConfig.API_ENDPOINT;
   getUsuarioSubscription: Subscription;
 
+  getConfigSubscription: Subscription;
    
-  constructor(public auth: Auth, private router: Router, private http: HttpClient, private topoService: TopoService) {}
-  ngOnDestroy(): void {
-    this.getUsuarioSubscription.unsubscribe();
-  }
+  constructor(public auth: Auth, private router: Router, private http: HttpClient, private topoService: TopoService, private configSrv: ConfiguracaoService) {}
    
   signup (email: string, password: string){
     //console.log(email,password);
@@ -103,6 +102,7 @@ export class AuthService implements OnDestroy {
     this.user.next(null);
     this.router.navigate(['auth']);
     localStorage.removeItem('userData');
+    localStorage.removeItem('emailConfig');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }
@@ -146,6 +146,7 @@ export class AuthService implements OnDestroy {
       },
       () => {
         const user = new User(email, userId, token, expirationDate, empidf, usuidf, perfil);
+        this.setEmail(empidf);
         this.user.next(user);
         localStorage.setItem('userData', JSON.stringify(user));
         if (usuidf == null || usuidf == 0){
@@ -155,6 +156,28 @@ export class AuthService implements OnDestroy {
         }
       }
     )
+  }
+
+  private setEmail(EmpIdf){
+    let dados = {
+      EmpIdf,
+      CfgIdfArray: [10,11,12,13,14]
+
+    }
+    this.getConfigSubscription = this.configSrv.findArray(dados).subscribe(
+      data => {
+        let emailConfig = {
+          "service": data[0].CfgVlrStr,
+          "user": data[1].CfgVlrStr,
+          "pass": data[2].CfgVlrStr,
+          "from": data[3].CfgVlrStr,
+          "to": data[4].CfgVlrStr,
+          "subject": "",
+          "text": "",
+          "html": ""
+        };
+        localStorage.setItem('emailConfig', JSON.stringify(emailConfig));
+    });
   }
 
   private handleError(errorRes) {    
@@ -175,4 +198,16 @@ export class AuthService implements OnDestroy {
     };        
     return this.http.post<UsuarioModel>(this.url + "/api/usuario/finduser", body, httpOptions);
   }
+
+  ngOnDestroy(): void {
+    if (this.getConfigSubscription != null){
+      this.getUsuarioSubscription.unsubscribe();
+    }
+    if (this.getConfigSubscription != null){
+      this.getConfigSubscription.unsubscribe();
+    }
+
+  }
+
 }
+

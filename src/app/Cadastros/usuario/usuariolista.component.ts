@@ -20,6 +20,7 @@ export class UsuarioListaComponent implements OnInit, OnDestroy {
   Usuarios: UsuarioModel[];
   submitted: boolean;
   isUpdate = true;
+  isLoading = true;
 
   constructor(private router: Router, private srvUsuario: UsuarioService, 
     private messageService: MessageService, private confirmationService: ConfirmationService) {}
@@ -41,6 +42,7 @@ export class UsuarioListaComponent implements OnInit, OnDestroy {
         this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
       },
       ()=>{
+        this.isLoading = false;
         return;
       });
   }
