@@ -64,8 +64,7 @@ export class SugestoesComponent implements OnInit, OnDestroy {
         this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
       },
       ()=>{
-           this.initForm(null);
-        this.isLoading = false;
+        this.initForm(null);
       });
   }  
 
