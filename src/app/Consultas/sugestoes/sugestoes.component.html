@@ -60,6 +60,11 @@
                   class="btn btn-success"
                   [disabled]="!dadosForm.valid">Enviar</button>
             </div>  
+            <div class="floatLeft col-sm-1">
+                  <button
+                  type="button"
+                  class="btn btn-success" (click)="carregaDados()" >Atualizar</button>
+            </div>  
         </div>
     </div>
 </form>

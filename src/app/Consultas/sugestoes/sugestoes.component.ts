@@ -52,6 +52,7 @@ export class SugestoesComponent implements OnInit, OnDestroy {
   }
 
   carregaDados(){
+    this.isLoading = true;
     let dados = {
       EmpIdf: this.EmpIdf
     };
