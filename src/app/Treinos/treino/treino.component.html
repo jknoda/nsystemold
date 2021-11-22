@@ -2,13 +2,13 @@
 <div *ngIf="isLoading" style="text-align: center;">
     <app-loading-spinner></app-loading-spinner>
 </div>
-<form [formGroup]="dadosForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+<form [formGroup]="dadosForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading" class="yForm">
     <div class="form-group">
         <div class="tituloCadastro">CADASTRO DE TREINO</div>
         <div class="row">
             <div class="col-lg-4 col-md-4">
                 <label for="data">Data</label>
-                <p-calendar class="form-control" formControlName="data" id="data" dateFormat="dd/mm/yy"></p-calendar>
+                <p-calendar class="form-control" formControlName="data" id="data" dateFormat="dd/mm/yy hh:mm:ss" showTime="true" hourFormat="24"></p-calendar>
             </div>
             <div class="col-lg-4 col-md-4">
                 <label for="titulo">Título</label>
