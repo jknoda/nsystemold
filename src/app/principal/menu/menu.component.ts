@@ -64,7 +64,7 @@ export class MenuComponent implements OnInit, OnDestroy {
                 ]
             },
             {
-                label: 'Treinos',
+                label: 'Eventos',
                 icon: 'icon-judo',
                 items: [
                     {label: 'Programação', icon: 'fas fa-tasks', routerLink:'treinolista',visible:this.isTecnico, command:()=>{this.onClick();}},
