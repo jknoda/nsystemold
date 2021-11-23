@@ -20,6 +20,7 @@ import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.componen
 import { TesteComponent } from './teste/teste.component';
 import { TreinoscalendarioComponent } from './Consultas/treinoscalendario/treinoscalendario.component';
 import { SugestoesComponent } from './Consultas/sugestoes/sugestoes.component';
+import { treinoviacalenComponent } from './Treinos/treinoviacalendario/treinoviacalen.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
         {path: 'atividadelista', component: AtividadeListaComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'atividade', component: AtividadeComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treinolista', component: TreinoListaComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
+        {path: 'treinoviacalen', component: treinoviacalenComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treino', component: TreinoComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treinoatvlista', component: TreinoatvlistaComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treinoatv', component: TreinoatvComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},

@@ -117,12 +117,22 @@ import { ConfiguracaoService } from './shared/configuracao.service';
 export class AppModule { }
 
 const firebase = {
-  apiKey: "AIzaSyDfHXtFhUHbY4yqDgLhT8fklAZKbLkfePg",
-  authDomain: "authentication-cff69.firebaseapp.com",
-  databaseURL: "https://authentication-cff69-default-rtdb.firebaseio.com",
-  projectId: "authentication-cff69",
-  storageBucket: "authentication-cff69.appspot.com",
-  messagingSenderId: "146817382520",
-  appId: "1:146817382520:web:5e9af5d1c75862e8cb558d",
-  measurementId: "G-WSLWFXPMV8"
+  // jknoda
+  // apiKey: "AIzaSyDfHXtFhUHbY4yqDgLhT8fklAZKbLkfePg",
+  // authDomain: "authentication-cff69.firebaseapp.com",
+  // databaseURL: "https://authentication-cff69-default-rtdb.firebaseio.com",
+  // projectId: "authentication-cff69",
+  // storageBucket: "authentication-cff69.appspot.com",
+  // messagingSenderId: "146817382520",
+  // appId: "1:146817382520:web:5e9af5d1c75862e8cb558d",
+  // measurementId: "G-WSLWFXPMV8"
+
+  // YAMAZAKI
+  apiKey: "AIzaSyBxw2_xFwsywg9ni9KmBx1TPu7aRgDwuGk",
+  authDomain: "yamazakijudo-29414.firebaseapp.com",
+  projectId: "yamazakijudo-29414",
+  storageBucket: "yamazakijudo-29414.appspot.com",
+  messagingSenderId: "843591477106",
+  appId: "1:843591477106:web:9b7b55839a718b86c99feb",
+  measurementId: "G-HNKBZHF214"
 }

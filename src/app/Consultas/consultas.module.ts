@@ -16,11 +16,11 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-
 import { BrowserModule } from '@angular/platform-browser';
 import { TreinoscalendarioComponent } from './treinoscalendario/treinoscalendario.component';
 import { SugestoesComponent } from './sugestoes/sugestoes.component';
 import { LoadingSpinner2Component } from '../shared/loading-spinner/loading-spinner2.component';
+import { treinoviacalenComponent } from '../Treinos/treinoviacalendario/treinoviacalen.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -32,7 +32,8 @@ FullCalendarModule.registerPlugins([
   declarations: [
     LoadingSpinner2Component,
     TreinoscalendarioComponent,
-    SugestoesComponent
+    SugestoesComponent,
+    treinoviacalenComponent
   ],
   exports: [
   ],
