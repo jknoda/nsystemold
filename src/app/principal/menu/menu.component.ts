@@ -49,7 +49,7 @@ export class MenuComponent implements OnInit, OnDestroy {
                 label: 'Participe!',
                 icon: 'icon-party',
                 items: [
-                    {label: 'Treinos', icon: 'far fa-calendar-alt', routerLink:'treinoscalendario', command:()=>{this.onClick();}},
+                    {label: 'Calendário', icon: 'far fa-calendar-alt', routerLink:'treinoscalendario', command:()=>{this.onClick();}},
                     {label: 'Sugestões', icon: 'icon-chat', routerLink:'sugestoes', command:()=>{this.onClick();}},
                 ]
             },
