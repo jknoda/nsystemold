@@ -22,8 +22,8 @@
         </ng-template>
     </p-table>
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="displayModal=false; listaParticipantes();" label="Participantes" styleClass="p-button-text"></p-button>
-        <p-button icon="pi pi-check" (click)="displayModal=false; checkin();" label="Check-in" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" (click)="listaParticipantes();" label="Participantes" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" (click)="checkin();" label="Check-in" styleClass="p-button-text"></p-button>
     </ng-template>
 </p-dialog>
  
@@ -38,7 +38,7 @@
 <p-dialog header="Checkin" [(visible)]="displayCheckin" [modal]="true">
     <p-dropdown [options]="alunos" [(ngModel)]="selectedAluno" placeholder="Selecione o aluno" optionLabel="name" [showClear]="true"></p-dropdown>
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="displayModal=false; checkinOk();" label="Ok" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" (click)="checkinOk();" label="Ok" styleClass="p-button-text"></p-button>
     </ng-template>
 </p-dialog>
 
@@ -59,7 +59,7 @@
             </ng-template>
         </p-table>
         <ng-template pTemplate="footer">
-            <p-button icon="pi pi-check" (click)="displayModal=false; participantesOk();" label="Ok" styleClass="p-button-text"></p-button>
+            <p-button icon="pi pi-check" (click)="participantesOk();" label="Ok" styleClass="p-button-text"></p-button>
         </ng-template>
     </div>
 </p-dialog>

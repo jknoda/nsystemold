@@ -10,7 +10,6 @@ import { DatePipe } from '@angular/common'
 import { List } from 'linqts';
 import { AtividadeService } from 'src/app/Cadastros/atividadelista/atividade.service';
 import { AtividadeModel } from 'src/app/model/atividade.model';
-import { AlunoModel } from 'src/app/model/aluno.model';
 import { AlunoService } from 'src/app/Cadastros/aluno/aluno.service';
 import { TreinoalunoService } from 'src/app/Treinos/treinoalu/treinoaluno.service';
 

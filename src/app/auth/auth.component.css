@@ -1,0 +1,9 @@
+.politica{
+    width: 500px;
+}
+
+@media screen and (max-width: 800px) {
+    .politica{
+        width: 340px;
+    }
+}    

@@ -21,6 +21,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {FieldsetModule} from 'primeng/fieldset';
 import {EditorModule} from 'primeng/editor';
 import {PanelMenuModule} from 'primeng/panelmenu';
+import {CheckboxModule} from 'primeng/checkbox';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -99,6 +100,7 @@ import { ConfiguracaoService } from './shared/configuracao.service';
     TopoModule,
     PanelMenuModule,
     ConsultasModule,
+    CheckboxModule,
     TesteModule
   ],
   providers: [    

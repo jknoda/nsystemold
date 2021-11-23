@@ -6,13 +6,16 @@ import {MessageService} from 'primeng/api';
 import { AuthService, AuthResponseData } from './auth.service';
 
 @Component({
-  selector: 'app-auth',
+  selector: 'app-auth',  
   templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.css'],
   providers: [ MessageService]
 })
 export class AuthComponent {
   isLoginMode = true;
   isLoading = false;
+  displayOk = false;
+  aceito = false;
 
   constructor(private authService: AuthService, private router: Router, private messageService: MessageService) {}
 
@@ -22,6 +25,11 @@ export class AuthComponent {
 
   onSubmit(form: NgForm) {
     if (!form.valid) {
+      return;
+    }
+    if (!this.isLoginMode && !this.aceito)
+    {
+      this.messageService.add({severity:'error', summary: 'Erro', detail: "Clique em 'Concordo com a política de privacidade'!"});
       return;
     }
     const email = form.value.email;
@@ -59,4 +67,12 @@ export class AuthComponent {
     this.messageService.clear();
   }  
 
+  clickLer(){
+    this.displayOk = true;
+  }
+
+  aceitoClick(){
+    this.displayOk = false;
+    this.aceito = true;
+  }
 }
