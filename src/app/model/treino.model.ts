@@ -4,6 +4,7 @@ export class TreinoModel {
     public TreData: Date;
     public TreTitulo: string;
     public TreObs: string;
+    public TreResponsavel: string;
     public DataInc: Date;
     public DataAlt: Date;
     public DataStr: string;

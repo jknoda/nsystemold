@@ -4,6 +4,7 @@ export class MensagemModel {
     public MsgIdfIt: number;
     public MsgTexto: string;
     public MsgEmail: string;
+    public MsgNome: string;
     public UsuIdf: number;
     public DataInc: Date;
     public DataAlt: Date;

@@ -21,13 +21,47 @@
             </tr>
         </ng-template>
     </p-table>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="displayModal=false; listaParticipantes();" label="Participantes" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" (click)="displayModal=false; checkin();" label="Check-in" styleClass="p-button-text"></p-button>
+    </ng-template>
 </p-dialog>
  
-<p-dialog [(header)]="titleAtv" [(visible)]="displayAtv" modal=true >
+<p-dialog [(header)]="titleAtv" [(visible)]="displayAtv" [modal]="true">
     <div class="descAtividade">
         <div><b>Objetivo:</b> {{itemAtv.AtvObjetivo}}</div>
         <div><b>Execução:</b></div>
         <div [innerHtml]="itemAtv.AtvDescricao"></div>
     </div>
 </p-dialog>
+
+<p-dialog header="Checkin" [(visible)]="displayCheckin" [modal]="true">
+    <p-dropdown [options]="alunos" [(ngModel)]="selectedAluno" placeholder="Selecione o aluno" optionLabel="name" [showClear]="true"></p-dropdown>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="displayModal=false; checkinOk();" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog header="Participantes" [(visible)]="displayParticipantes" [modal]="true">
+    <div class="divListaAlunos">
+        <p-table [value]="alunos" responsiveLayout="scroll" class="atividades">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th></th>
+                    <th>Aluno</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-aluno  let-i="rowIndex" >
+                <tr class="listaSystem">
+                    <td>{{i+1}}</td>
+                    <td>{{aluno.name}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayModal=false; participantesOk();" label="Ok" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </div>
+</p-dialog>
+ 
  

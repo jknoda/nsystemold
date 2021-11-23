@@ -6,15 +6,19 @@
     <div class="form-group">
         <div class="tituloCadastro">CADASTRO DE TREINO</div>
         <div class="row">
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-3 col-md-3">
                 <label for="data">Data</label>
-                <p-calendar class="form-control" formControlName="data" id="data" dateFormat="dd/mm/yy hh:mm:ss" showTime="true" hourFormat="24"></p-calendar>
+                <p-calendar class="form-control" formControlName="data" id="data" dateFormat="dd/mm/yy" showTime="true" hourFormat="24"></p-calendar>
             </div>
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-3 col-md-3">
                 <label for="titulo">Título</label>
                 <input type="text" class="form-control" formControlName="titulo" id="titulo" pInputText>
             </div>
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-3 col-md-3">
+                <label for="responsavel">Responsável</label>
+                <input type="text" class="form-control" formControlName="responsavel" id="responsavel" pInputText>
+            </div>
+            <div class="col-lg-3 col-md-3">
                 <label for="obs">Observação</label>
                 <textarea rows="5" pInputTextarea id="obs" class="form-control" formControlName="obs"></textarea>                
             </div>

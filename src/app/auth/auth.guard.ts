@@ -5,14 +5,15 @@ import {
   Router,
   UrlTree
 } from '@angular/router';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { map, tap, take } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate , OnDestroy{
+  getUsuarioSubscription: Subscription;
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
@@ -52,8 +53,37 @@ export class AuthGuard implements CanActivate {
       if (rolesRota != roles && roles != 'ADM')
       {        
         this.router.navigate(['/denied']);
+      }else{
+        if (JSON.parse(localStorage.getItem('userData')).email == JSON.parse(localStorage.getItem('userData')).nome || JSON.parse(localStorage.getItem('userData')).nome == null)
+        {
+          this.buscarNome();
+        }
       }
     }
     return true;
   }
+
+  private buscarNome() {
+    let dados = {
+      EmpIdf: JSON.parse(localStorage.getItem('userData')).empidf,
+      UsuEmail: JSON.parse(localStorage.getItem('userData')).email
+    };
+    let nome = "";
+    this.getUsuarioSubscription = this.authService.getUsuario(dados).subscribe(
+      data => {
+        if (typeof(data) != 'undefined' && data != null)
+        {
+          nome = data["UsuNome"];
+          if (nome != null)
+          JSON.parse(localStorage.getItem('userData')).nome = nome;
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    if (this.getUsuarioSubscription != null){
+      this.getUsuarioSubscription.unsubscribe();
+    }
+  }
+
 }

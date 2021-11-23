@@ -131,12 +131,18 @@ export class AuthService implements OnDestroy {
     let empidf = dados.EmpIdf;
     let usuidf = 0;
     let perfil = 'U';
+    let nome = "";
     this.getUsuarioSubscription = this.getUsuario(dados).subscribe(
       data => {
         if (typeof(data) != 'undefined' && data != null)
         {
           usuidf = data["UsuIdf"];
           perfil = data["UsuPerfil"];
+          nome = data["UsuNome"];
+          if (nome == null || nome == "")
+            nome = email;
+        }else{
+          nome = email;
         }
       },
       err => {
@@ -145,7 +151,7 @@ export class AuthService implements OnDestroy {
          this.router.navigate(["auth"]);
       },
       () => {
-        const user = new User(email, userId, token, expirationDate, empidf, usuidf, perfil);
+        const user = new User(email, userId, token, expirationDate, empidf, usuidf, perfil, nome);
         this.setEmail(empidf);
         this.user.next(user);
         localStorage.setItem('userData', JSON.stringify(user));
@@ -192,7 +198,7 @@ export class AuthService implements OnDestroy {
     throw errorMessage;  
   }
 
-  private getUsuario(body:any): Observable<UsuarioModel> {
+  getUsuario(body:any): Observable<UsuarioModel> {
     let httpOptions = {
         headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
     };        

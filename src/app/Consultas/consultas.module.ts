@@ -9,6 +9,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {EditorModule} from 'primeng/editor';
 import {DataViewModule} from 'primeng/dataview';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {DropdownModule} from 'primeng/dropdown';
 
 import {FullCalendarModule} from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -47,6 +48,7 @@ FullCalendarModule.registerPlugins([
     EditorModule,
     DataViewModule,    
     ConfirmPopupModule,
+    DropdownModule,
 
     ConfirmDialogModule
   ]

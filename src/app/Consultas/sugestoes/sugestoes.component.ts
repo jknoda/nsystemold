@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ConfirmationService,MessageService} from 'primeng/api';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -20,6 +20,7 @@ export class SugestoesComponent implements OnInit, OnDestroy {
   private EmpIdf: number = ServiceConfig.EMPIDF;
   private UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
   private UsuEmail = JSON.parse(localStorage.getItem('userData')).email;
+  private MsgNome = JSON.parse(localStorage.getItem('userData')).nome;
 
   mail = new MailModel();
 
@@ -73,12 +74,13 @@ export class SugestoesComponent implements OnInit, OnDestroy {
     let dados = {
       EmpIdf: this.EmpIdf,
       MsgEmail: this.UsuEmail,
+      MsgNome: this.MsgNome,
       UsuIdf: this.UsuIdf,
       MsgTexto: this.dadosForm.value['texto'],
     };    
     this.addDados = this.srvMensagem.addDados(dados).subscribe(
       () => {
-        this.sendMail(dados.MsgEmail,dados.MsgTexto,dados.MsgTexto,"S");
+        this.sendMail(dados.MsgNome,dados.MsgEmail,dados.MsgTexto,dados.MsgTexto,"S");
         this.messageService.add({severity:'success', summary: 'Successo', detail: 'Sugestão incluida!'});
       },
       err => { 
@@ -151,12 +153,13 @@ export class SugestoesComponent implements OnInit, OnDestroy {
       EmpIdf: this.EmpIdf,
       MsgIdf: this.MsgIdf,
       MsgEmail: this.UsuEmail,
+      MsgNome: this.MsgNome,
       UsuIdf: this.UsuIdf,
       MsgTexto: this.MsgTexto
     };    
     this.addDadosItem = this.srvMensagem.addDadosItem(dados).subscribe(
       () => {
-        this.sendMail(dados.MsgEmail,dados.MsgTexto,dados.MsgTexto,"C");
+        this.sendMail(dados.MsgNome, dados.MsgEmail,dados.MsgTexto,dados.MsgTexto,"C");
         this.messageService.add({severity:'success', summary: 'Successo', detail: 'Comentário incluído!'});
       },
       err => { 
@@ -205,9 +208,13 @@ export class SugestoesComponent implements OnInit, OnDestroy {
     );
   }
 
-  sendMail(email, texto, textoHtml, tipo){
+  sendMail(nome, email, texto, textoHtml, tipo){
     this.mail.subject = tipo == "S" ? "Sugestão" : "Comentário";
-    this.mail.subject += " enviado por " + email;
+    this.mail.cc = "";
+    if (tipo == "C"){
+      this.mail.cc = email;
+    }
+    this.mail.subject += " enviado por " + nome + " - "+email;
     this.mail.text = (tipo == "S" ? "Nova sugestão: " : "Comentário ref. sugestão: " + this.MsgSugestao + "\n") + "( " + texto +" )";
     this.mail.html = (tipo == "S" ? "Nova sugestão: " : "Comentário ref. sugestão: " + this.MsgSugestao + "<br/>") + "( " + textoHtml +" )";
     this.sendMailSub = this.sendmailService.sendMail(this.mail).subscribe(

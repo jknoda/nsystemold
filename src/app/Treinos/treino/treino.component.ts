@@ -90,6 +90,7 @@ export class TreinoComponent implements OnInit, OnDestroy {
         TreIdf: this.TreIdf,
         TreData: this.dadosForm.value['data'],
         TreTitulo:  this.dadosForm.value['titulo'],
+        TreResponsavel:  this.dadosForm.value['responsavel'],
         TreObs: this.dadosForm.value['obs'],
       };    
       if (this.editMode)
@@ -144,16 +145,19 @@ export class TreinoComponent implements OnInit, OnDestroy {
       this.isLoading = false;
       let TreData = null;
       let TreTitulo = null;
+      let TreResponsavel = null;
       let TreObs = null;
       if (dados != null)
       {
         TreData = dados.TreData;
-        TreTitulo = dados.TreTitulo;		
+        TreTitulo = dados.TreTitulo;	
+        TreResponsavel = dados.TreResponsavel;	
         TreObs = dados.TreObs;
       }
       this.dadosForm = new FormGroup({
         'data': new FormControl(TreData, Validators.required),
         'titulo': new FormControl(TreTitulo, Validators.required),
+        'responsavel': new FormControl(TreResponsavel, Validators.required),
         'obs': new FormControl(TreObs),
       });
     }

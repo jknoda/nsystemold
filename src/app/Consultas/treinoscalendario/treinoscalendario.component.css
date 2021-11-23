@@ -22,3 +22,12 @@ p {
     background-color: rgb(227, 238, 245);
     padding: 3px;
 }
+
+.divListaAlunos{
+    max-height: 350px;
+    overflow: scroll;
+}
+
+:host ::ng-deep .p-dropdown {
+    width: 14rem;
+}

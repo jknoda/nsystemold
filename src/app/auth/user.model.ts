@@ -6,7 +6,8 @@ export class User {
     private _tokenExpirationDate: Date,
     public empidf?: number,
     public usuidf?: number,
-    public perfil?: string
+    public perfil?: string,
+    public nome?: string
   ) {}
 
   get token() {

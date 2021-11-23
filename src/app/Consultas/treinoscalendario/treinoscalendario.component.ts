@@ -10,19 +10,25 @@ import { DatePipe } from '@angular/common'
 import { List } from 'linqts';
 import { AtividadeService } from 'src/app/Cadastros/atividadelista/atividade.service';
 import { AtividadeModel } from 'src/app/model/atividade.model';
+import { AlunoModel } from 'src/app/model/aluno.model';
+import { AlunoService } from 'src/app/Cadastros/aluno/aluno.service';
+import { TreinoalunoService } from 'src/app/Treinos/treinoalu/treinoaluno.service';
 
 @Component({
   selector: 'app-treinoscalendario',
   templateUrl: './treinoscalendario.component.html',
   styleUrls: ['./treinoscalendario.component.css'],
-  providers: [TreinoscalendarioService,MessageService,DatePipe,AtividadeService]
+  providers: [TreinoscalendarioService,MessageService,DatePipe,AtividadeService,AlunoService,TreinoalunoService]
 })
 export class TreinoscalendarioComponent implements OnInit, OnDestroy {
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   private EmpIdf: number = ServiceConfig.EMPIDF;
+  TreIdf = 0;
   
   dadosTreinos: Subscription;
   lerAtividade: Subscription;
+  lerAlunos: Subscription;
+  addAluno: Subscription;
 
   calendarOptions: CalendarOptions;
   isLoading = true;
@@ -37,8 +43,18 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
 
   display: boolean = false;
   displayAtv: boolean = false;
+  displayCheckin: boolean = false;
+  displayParticipantes: boolean = false;
 
-  constructor(private srvTreinos: TreinoscalendarioService, private srvAtv: AtividadeService, private messageService: MessageService, private datePipe:DatePipe) { }
+  alunos: DropDown[] = [];
+  selectedAluno: DropDown;
+
+  constructor(private srvTreinos: TreinoscalendarioService, 
+    private srvAtv: AtividadeService, 
+    private messageService: MessageService, 
+    private datePipe:DatePipe,
+    private srvAluno: AlunoService,
+    private srvTreinoAlu: TreinoalunoService) {}
 
   ngOnInit(): void {  
     this.eventos = [];
@@ -91,9 +107,10 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
             data,
             index
           });
+          let title = this.datePipe.transform(item.TreData, 'HH:mm') + "-" + item.TreTitulo;
           this.eventos.push({
             id: index,
-            title: item.TreTitulo,
+            title: title,
             date: data
           });
           index++;
@@ -113,7 +130,8 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
 
   handleEventClick(arg) {
     let atividades = this.listaTreinos.First(x=>x.index == arg.event.id);
-    this.title = atividades.TreTitulo;
+    this.title = this.datePipe.transform(atividades.TreData, 'HH:mm') + "- " + atividades.TreTitulo;
+    this.TreIdf = atividades.TreIdf;
     this.listaAtv = [];
     let _this = this;
     if (atividades.TreAtvDesc != null){
@@ -154,6 +172,93 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
       });    
   }
 
+  checkin(){
+    let dados = {
+      EmpIdf: this.EmpIdf
+    }
+    this.isLoading = true;
+    this.alunos = [];
+    this.lerAlunos = this.srvAluno.getAluTodos(dados).subscribe(
+      (dados:any) => {
+        dados.forEach(element => {
+          this.alunos.push({
+            name: element.AluNome,
+            code: element.AluIdf.toString()
+          });
+        });
+      },
+      err => { 
+        let msg = err.error.errors.toString();
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+      },
+      ()=>{
+        this.isLoading = false;
+        this.displayCheckin = true;
+      });    
+  }
+
+  checkinOk(){
+    if (this.selectedAluno == null)
+    {
+      alert("Selecione um aluno!");
+      return;
+    }
+
+    let dados = {
+      EmpIdf: this.EmpIdf,
+      TreIdf: this.TreIdf,
+      AluIdf: parseInt(this.selectedAluno.code),
+      TreAluNome: this.selectedAluno.name,
+      TreAluObs: 'Checkin'
+    }
+    this.addAluno = this.srvTreinoAlu.addTreAluDados(dados).subscribe(
+      (dados) => {
+      },
+      err => { 
+        console.log('error',err);
+        let msg = err.error.errors.toString();
+        if (msg.toUpperCase().includes('PRIMARY'))
+        {
+          msg = "Aluno '" + this.selectedAluno.name + "' já fez checkin neste treino!";
+        }
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+        this.displayCheckin = false;
+      },
+      ()=>{
+        this.displayCheckin = false;
+      });      
+  }
+
+  listaParticipantes(){
+    let dados = {
+      EmpIdf: this.EmpIdf,
+      TreIdf: this.TreIdf
+    }
+    this.isLoading = true;
+    this.alunos = [];
+    this.lerAlunos = this.srvTreinoAlu.getTreAluTodos(dados).subscribe(
+      (dados:any) => {
+        dados.forEach(element => {
+          this.alunos.push({
+            name: element.TreAluNome,
+            code: element.AluIdf.toString()
+          });
+        });
+      },
+      err => { 
+        let msg = err.error.errors.toString();
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+      },
+      ()=>{
+        this.isLoading = false;
+        this.displayParticipantes = true;
+      });    
+  }
+
+  participantesOk(){
+    this.displayParticipantes = false;
+  }
+
   ngOnDestroy(): void {
     if (this.dadosTreinos != null)
     {
@@ -162,6 +267,17 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
     if (this.lerAtividade != null){
       this.lerAtividade.unsubscribe();
     }
+    if (this.lerAlunos != null){
+      this.lerAlunos.unsubscribe();
+    }
+    if (this.addAluno != null){
+      this.addAluno.unsubscribe();
+    }
+
   }
 }
 
+interface DropDown {
+  name: string,
+  code: string
+}
