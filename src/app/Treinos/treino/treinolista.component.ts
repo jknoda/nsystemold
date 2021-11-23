@@ -38,7 +38,7 @@ export class TreinoListaComponent implements OnInit, OnDestroy {
           this.Treinos = JSON.parse(JSON.stringify(dados));
           this.Treinos.forEach(item=>{
             item.TreData = new Date(item.TreData);
-            item.DataStr = item.TreData.getDay().toString().padStart(2,'0') + '/' + 
+            item.DataStr = item.TreData.getDate().toString().padStart(2,'0') + '/' + 
                (item.TreData.getMonth()+1).toString().padStart(2,'0') + '/' +  // janeiro começa com 0
                item.TreData.getFullYear().toString();
           })
