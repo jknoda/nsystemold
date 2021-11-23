@@ -152,7 +152,8 @@ export class UsuarioComponent implements OnInit, OnDestroy {
       UserCpf = dados.UsuCPF;
       UserPerfil = dados.UsuPerfil;
     }
-    this.isAdm = UserPerfil == 'A';
+    let meuPerfil = JSON.parse(localStorage.getItem('userData')).perfil;
+    this.isAdm = meuPerfil == 'A';
     this.userForm = new FormGroup({
       'email': new FormControl(UserEmail, Validators.required),
       'nome': new FormControl(UserNome, Validators.required),
