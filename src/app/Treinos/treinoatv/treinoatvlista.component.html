@@ -14,9 +14,7 @@
     <p-table responsiveLayout="scroll" #dt [value]="Treinoatvs" 
         dataKey="TreAtvItem" editMode="row"
         [rowHover]="true"
-        [rows]="10" [paginator]="true" 
-        currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros"
-        [showCurrentPageReport]="true">
+        [rows]="10" [paginator]="true">
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="TreAtvOrdem">Ordem <p-sortIcon field="TreAtvOrdem"></p-sortIcon></th>

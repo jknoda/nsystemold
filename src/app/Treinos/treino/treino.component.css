@@ -20,3 +20,9 @@ textarea.ng-invalid.ng-touched {
 .floatLeft{
     display: inline-block;
 }
+
+.tredata{
+    width: auto !important;
+    position: absolute !important;
+    z-index: 3000 !important;
+}

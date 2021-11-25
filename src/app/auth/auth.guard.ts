@@ -47,6 +47,8 @@ export class AuthGuard implements CanActivate , OnDestroy{
           break;
         case 'T' : roles = 'TEC';
           break;
+        case 'X' : roles = 'AUX';
+          break;
         default: roles = 'USU';
           break;
       }

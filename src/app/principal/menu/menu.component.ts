@@ -16,6 +16,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     isAuthenticated = false;
     isAdm = false;
     isTecnico = false;
+    isAuxiliar = false;
     private userSub: Subscription;
 
     items: MenuItem[];
@@ -39,6 +40,7 @@ export class MenuComponent implements OnInit, OnDestroy {
             }
             this.isAdm = (perfil == 'A');
             this.isTecnico = (perfil == 'A' || perfil == 'T');
+            this.isAuxiliar = (perfil == 'A' || perfil == 'T' || perfil == 'X');
             this.menuInit();
         });   
     }
@@ -59,18 +61,18 @@ export class MenuComponent implements OnInit, OnDestroy {
                 items: [
                     {label: 'Usuário', icon: 'fas fa-user', routerLink: 'usuario', visible:!this.isAdm, command:()=>{this.onClick();}},
                     {label: 'Usuários', icon: 'fas fa-users', routerLink: 'usuariolista',visible:this.isAdm, command:()=>{this.onClick();}},
-                    {label: 'Alunos',  icon: 'fas fa-user-graduate', routerLink: 'alunolista',visible:this.isAdm, command:()=>{this.onClick();}},
-                    {label: 'Atividades',  icon: 'fas fa-cogs', routerLink: 'atividadelista',visible:this.isTecnico, command:()=>{this.onClick();}}
+                    {label: 'Alunos',  icon: 'fas fa-user-graduate', routerLink: 'alunolista',visible:this.isTecnico, command:()=>{this.onClick();}},
+                    {label: 'Atividades',  icon: 'fas fa-cogs', routerLink: 'atividadelista',visible:this.isAuxiliar, command:()=>{this.onClick();}}
                 ]
             },
             {
                 label: 'Eventos',
                 icon: 'icon-judo',
                 items: [
-                    {label: 'Programação', icon: 'fas fa-tasks', routerLink:'treinolista',visible:this.isTecnico, command:()=>{this.onClick();}},
+                    {label: 'Programação', icon: 'fas fa-tasks', routerLink:'treinolista',visible:this.isAuxiliar, command:()=>{this.onClick();}},
                     //{label: 'via Calendario', icon: 'fas fa-tasks', routerLink:'treinoviacalen',visible:this.isTecnico, command:()=>{this.onClick();}},
                 ],
-                visible:this.isTecnico
+                visible:this.isAuxiliar
             },
             {
                 label: 'Sair',

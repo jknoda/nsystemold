@@ -2,10 +2,10 @@
 <div *ngIf="isLoading" style="text-align: center;">
     <app-loading-spinner></app-loading-spinner>
 </div>
+<div class="tituloCadastro">CADASTRO DE USUÁRIOS</div>
 <div class="card">
     <p-table responsiveLayout="scroll" #dt [value]="Usuarios" [rows]="10" [paginator]="true" 
-        [rowHover]="true" dataKey="id"
-        currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" [showCurrentPageReport]="true">
+        [rowHover]="true" dataKey="id">
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="UsuIdf">Idf <p-sortIcon field="UsuIdf"></p-sortIcon></th>

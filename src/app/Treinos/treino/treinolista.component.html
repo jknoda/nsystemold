@@ -2,7 +2,7 @@
 <div *ngIf="isLoading" style="text-align: center;">
     <app-loading-spinner></app-loading-spinner>
 </div>
-<div class="card" *ngIf="!isLoading">
+<div class="yForm card" *ngIf="!isLoading">
     <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
             <button pButton pRipple label="Novo evento" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
@@ -11,23 +11,19 @@
 
     <p-table responsiveLayout="scroll" #dt [value]="Treinos" [rows]="10" [paginator]="true" 
         [rowHover]="true" dataKey="id"
-        currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" 
-        [showCurrentPageReport]="true"
         [globalFilterFields]="['TreTitulo','TreData']">
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="TreIdf">Idf <p-sortIcon field="TreIdf"></p-sortIcon></th>
-                <th pSortableColumn="TreTitulo">Titulo <p-sortIcon field="TreTitulo"></p-sortIcon></th>
                 <th pSortableColumn="TreData">Data <p-sortIcon field="TreData"></p-sortIcon></th>
+                <th pSortableColumn="TreTitulo">Titulo <p-sortIcon field="TreTitulo"></p-sortIcon></th>                
                 <th></th>
             </tr>
-            <tr>
-                <th></th>
-                <th>
-                    <p-columnFilter type="text" field="TreTitulo"></p-columnFilter>
+            <tr style="background-color: white;">
+                <th class="tredata">
+                    <p-columnFilter  type="date" field="TreData"></p-columnFilter>
                 </th>
-                <th style="width: 20%;">
-                    <p-columnFilter type="date" field="TreData"></p-columnFilter>
+                <th style="align-items: right; width: 30%; margin-left:100px;">
+                    <p-columnFilter type="text" field="TreTitulo"></p-columnFilter>
                 </th>
                 <th></th>
             </tr>
@@ -35,9 +31,8 @@
 
         <ng-template pTemplate="body" let-Treino>
             <tr class="listaSystem">
-                <td>{{Treino.TreIdf}}</td>
+                <td>{{Treino.TreData | date:'dd/MM/yyyy'}}</td>                                
                 <td>{{Treino.TreTitulo}}</td>
-                <td>{{Treino.DataStr}}</td>                
                 <td>
                     <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editTreino(Treino)" title="Alterar"></button>
                     <button pButton pRipple icon="fab fa-steam-square" class="p-button-rounded p-button-default" (click)="editAtividades(Treino)" title="Atividades"></button>

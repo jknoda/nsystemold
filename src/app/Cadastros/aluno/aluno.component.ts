@@ -28,7 +28,6 @@ export class AlunoComponent implements OnInit, OnDestroy {
   editMode = false;
 
   estados: UF[];
-  selectedEstado: UF;
   
   isUpdate = true;
 

@@ -38,6 +38,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     this.perfis = [
       {name: 'Administrador', code: 'A'},
       {name: 'Técnico', code: 'T'},
+      {name: 'Auxiliar Técnico', code: 'X'},
       {name: 'Usuário', code: 'U'}
     ];
   }

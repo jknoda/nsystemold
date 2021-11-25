@@ -32,6 +32,10 @@ textarea.ng-invalid.ng-touched {
     padding: 10px 10px 10px 50px;
 }
 
+.itemMsgComentario div {
+    line-height: 0.5;
+}
+
 .itemCabComentario{
     color: rgb(7, 180, 7);
 }

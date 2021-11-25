@@ -19,6 +19,8 @@ export class TreinoComponent implements OnInit, OnDestroy {
     private TreIdf: number = 0;
   
     dadosForm: FormGroup;
+
+    tipos: DropDown[];
   
     addDadosTreino: Subscription;
     updateDadosTreino: Subscription;
@@ -31,8 +33,15 @@ export class TreinoComponent implements OnInit, OnDestroy {
     isUpdate = true;
   
     constructor(private router: Router, private route: ActivatedRoute, 
-      private srvTreino: TreinoService, private messageService: MessageService) {
-     }
+      private srvTreino: TreinoService, private messageService: MessageService) 
+    {
+      
+      this.tipos = [
+        {name: 'Treino', code: 'T'},
+        {name: 'Campeonato', code: 'C'},
+        {name: 'Evento', code: 'E'}
+      ];
+    }
     ngOnDestroy(): void {
       if (this.lerDadosTreino != null){
         this.lerDadosTreino.unsubscribe();
@@ -88,6 +97,7 @@ export class TreinoComponent implements OnInit, OnDestroy {
       let dados = {
         EmpIdf: this.EmpIdf,
         TreIdf: this.TreIdf,
+        TreTipo: this.dadosForm.value['tipo'],
         TreData: this.dadosForm.value['data'],
         TreTitulo:  this.dadosForm.value['titulo'],
         TreResponsavel:  this.dadosForm.value['responsavel'],
@@ -143,18 +153,21 @@ export class TreinoComponent implements OnInit, OnDestroy {
   
     private initForm(dados:TreinoModel) {   
       this.isLoading = false;
+      let TreTipo = 'T';
       let TreData = null;
       let TreTitulo = null;
       let TreResponsavel = null;
       let TreObs = null;
       if (dados != null)
       {
+        TreTipo = dados.TreTipo;
         TreData = dados.TreData;
         TreTitulo = dados.TreTitulo;	
         TreResponsavel = dados.TreResponsavel;	
         TreObs = dados.TreObs;
       }
       this.dadosForm = new FormGroup({
+        'tipo': new FormControl(TreTipo, Validators.required),
         'data': new FormControl(TreData, Validators.required),
         'titulo': new FormControl(TreTitulo, Validators.required),
         'responsavel': new FormControl(TreResponsavel, Validators.required),
@@ -167,3 +180,8 @@ export class TreinoComponent implements OnInit, OnDestroy {
     }    
   
   } 
+
+  interface DropDown {
+    name: string,
+    code: string
+  }

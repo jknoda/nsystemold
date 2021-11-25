@@ -8,8 +8,7 @@
     </p-toolbar>
 
     <p-table responsiveLayout="scroll" #dt [value]="Atividades" [rows]="10" [paginator]="true" 
-        [rowHover]="true" dataKey="id"
-        currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" [showCurrentPageReport]="true">
+        [rowHover]="true" dataKey="id">
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="AtvIdf">Idf <p-sortIcon field="AtvIdf"></p-sortIcon></th>
