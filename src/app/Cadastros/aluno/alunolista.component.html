@@ -20,7 +20,7 @@
         </ng-template>
 
         <ng-template pTemplate="body" let-Aluno>
-            <tr class="listaSystem">
+            <tr class="listaSystem" *ngIf="Aluno.isUser || isTecnico">
                 <td>{{Aluno.AluIdf}}</td>
                 <td>{{Aluno.AluNome}}</td>
                 <td>{{Aluno.AluFone}}</td>

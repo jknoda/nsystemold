@@ -6,17 +6,21 @@ import { ServiceConfig } from 'src/app/_config/services.config';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AlunoModel } from 'src/app/model/aluno.model';
+import { AlunoService } from '../aluno.service';
 
 @Component({
   selector: 'app-anamnese',
   templateUrl: './anamnese.component.html',
   styleUrls: ['./anamnese.component.css'],
-  providers: [ConfirmationService,AnamneseService,MessageService]
+  providers: [ConfirmationService,AnamneseService,MessageService,AlunoService]
 })
 export class AnamneseComponent implements OnInit, OnDestroy {
   private EmpIdf: number = ServiceConfig.EMPIDF;
   private AluIdf: number = 0;
   private AnaIdf: number = 0;
+  private AluUsuIdf: number = 0;
+  UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
 
   aluno = "";
 
@@ -25,15 +29,17 @@ export class AnamneseComponent implements OnInit, OnDestroy {
   addDadosAnamnese: Subscription;
   updateDadosAnamnese: Subscription;
   deleteDadosAnamnese: Subscription;
-  lerDadosAnamnese: Subscription;
+  lerDados: Subscription;
 
   isLoading = true;
   editMode = true;
 
   isUpdate = true;
+  isOk = false;
 
   constructor(private router: Router, private route: ActivatedRoute, 
-    private srvAnamnese: AnamneseService, private messageService: MessageService) {}
+    private srvAnamnese: AnamneseService, private messageService: MessageService, 
+    private srvAluno: AlunoService,) {}
  
   ngOnInit() {
     this.route.queryParams
@@ -41,18 +47,39 @@ export class AnamneseComponent implements OnInit, OnDestroy {
         this.EmpIdf = params.EmpIdf;
         this.AluIdf = params.AluIdf;
         this.aluno = params.AluNome;
-        this.getAnamnese();
+        this.getAluno();
       }
     );
   }
 
+  private getAluno() {
+    let Aluno: AlunoModel;
+    let dados = {
+      EmpIdf: this.EmpIdf,
+      AluIdf: this.AluIdf
+    };
+    this.lerDados = this.srvAluno.getAluDados(dados).subscribe(
+      (dados) => {
+        Aluno = JSON.parse(JSON.stringify(dados));
+        this.AluUsuIdf = Aluno.UsuIdf;
+      },
+      err => { 
+        let msg = err.error.errors.toString();
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+      },
+      ()=>{
+        this.getAnamnese();
+      });
+  }
+
+  
   private getAnamnese() {
     let Anamnese: AnamneseModel;
     let dados = {
       EmpIdf: this.EmpIdf,
       AluIdf: this.AluIdf
     };
-    this.lerDadosAnamnese = this.srvAnamnese.lastAnaDados(dados).subscribe(
+    this.lerDados = this.srvAnamnese.lastAnaDados(dados).subscribe(
       (dados) => {
         if (dados){
           Anamnese = JSON.parse(JSON.stringify(dados));
@@ -197,6 +224,14 @@ export class AnamneseComponent implements OnInit, OnDestroy {
       AnaOsseo = dados.AnaOsseo;
       AnaFratura = dados.AnaFratura;
     }
+
+    let perfil = JSON.parse(localStorage.getItem('userData')).perfil;
+    let isTecnico = (perfil == 'A' || perfil == 'T');
+    this.isOk = this.AluUsuIdf == this.UsuIdf || isTecnico;
+    if (!this.isOk){
+      this.router.navigate(['/denied']);
+    }
+
     this.dadosForm = new FormGroup({
       'data': new FormControl(AnaData),
       'convenio': new FormControl(AnaConvenio),
@@ -225,8 +260,8 @@ export class AnamneseComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.lerDadosAnamnese != null){
-      this.lerDadosAnamnese.unsubscribe();
+    if (this.lerDados != null){
+      this.lerDados.unsubscribe();
     }
     if (this.addDadosAnamnese != null){
       this.addDadosAnamnese.unsubscribe();

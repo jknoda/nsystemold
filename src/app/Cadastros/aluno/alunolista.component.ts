@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 })
 export class AlunoListaComponent implements OnInit, OnDestroy {
   private EmpIdf: number = ServiceConfig.EMPIDF;
+  UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
+
   deleteDadosAluno: Subscription;
   lerDadosAluno: Subscription;
   lerDadosAnamnese: Subscription;
@@ -22,11 +24,14 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
   submitted: boolean;
   isUpdate = true;
   isLoading = true;
-
+  isTecnico = false;
+  
   constructor(private router: Router, private srvAluno: AlunoService, 
     private messageService: MessageService, private confirmationService: ConfirmationService) {}
 
   ngOnInit() {
+    let perfil = JSON.parse(localStorage.getItem('userData')).perfil;
+    this.isTecnico = (perfil == 'A' || perfil == 'T');
     this.getAlunos();
   }
 
@@ -60,6 +65,7 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
         EmpIdf: item.EmpIdf,
         AluIdf: item.AluIdf
       };
+      item.isUser = (item.UsuIdf == this.UsuIdf);
       this.lerDadosAnamnese = this.srvAluno.hasAnamnese(dados).subscribe(
         (dados) => {
           ret = dados;

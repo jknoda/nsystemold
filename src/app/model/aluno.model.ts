@@ -17,7 +17,10 @@ export class AlunoModel {
     public AluAltura: number;
     public AluStatus: string;
     public UsuIdf: number;
+    public UsuTPri: Date;
+    public UsuTImg: Date;
     public DataInc: Date;
     public DataAlt: Date;
     public HasAnamnese: Boolean;
+    public isUser: Boolean;
 }

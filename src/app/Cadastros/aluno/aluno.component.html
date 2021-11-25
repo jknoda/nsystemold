@@ -20,7 +20,7 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <label for="fone">Fone</label>  
-                <p-inputMask id="fone" class="form-control" formControlName="fone" mask="(99)9999-9999" ></p-inputMask>                
+                <p-inputMask id="fone" class="form-control" formControlName="fone" mask="(99)99999-9999" ></p-inputMask>                
             </div>
 
             <div class="col-lg-3 col-md-6">
@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="row editButtonSystem">            
-            <div class="floatLeft col-sm-1">
+            <div class="floatLeft col-sm-1" *ngIf="isOk">
                 <button
                   type="submit"
                   class="btn btn-success"

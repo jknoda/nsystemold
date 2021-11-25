@@ -61,7 +61,7 @@ export class MenuComponent implements OnInit, OnDestroy {
                 items: [
                     {label: 'Usuário', icon: 'fas fa-user', routerLink: 'usuario', visible:!this.isAdm, command:()=>{this.onClick();}},
                     {label: 'Usuários', icon: 'fas fa-users', routerLink: 'usuariolista',visible:this.isAdm, command:()=>{this.onClick();}},
-                    {label: 'Alunos',  icon: 'fas fa-user-graduate', routerLink: 'alunolista',visible:this.isTecnico, command:()=>{this.onClick();}},
+                    {label: 'Alunos',  icon: 'fas fa-user-graduate', routerLink: 'alunolista', command:()=>{this.onClick();}},
                     {label: 'Atividades',  icon: 'fas fa-cogs', routerLink: 'atividadelista',visible:this.isAuxiliar, command:()=>{this.onClick();}}
                 ]
             },

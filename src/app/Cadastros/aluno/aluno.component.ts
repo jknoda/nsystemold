@@ -16,6 +16,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AlunoComponent implements OnInit, OnDestroy {
   private EmpIdf: number = ServiceConfig.EMPIDF;
   private AluIdf: number = 0;
+  UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
 
   dadosForm: FormGroup;
 
@@ -30,6 +31,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
   estados: UF[];
   
   isUpdate = true;
+  isOk = false;
 
   constructor(private router: Router, private route: ActivatedRoute, 
     private srvAluno: AlunoService, private messageService: MessageService) {
@@ -119,6 +121,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
     let dados = {
       EmpIdf: this.EmpIdf,
       AluIdf: this.AluIdf,
+      UsuIdf: this.UsuIdf,
       AluNome: this.dadosForm.value['nome'],
       AluCPF:  this.dadosForm.value['cpf'],
       AluDataNasc: this.dadosForm.value['nascimento'],
@@ -155,7 +158,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
       let dadosAdd = {
         ...dados,
         AluStatus: 'A'
-     }
+      }
       this.addDadosAluno = this.srvAluno.addAluDados(dadosAdd).subscribe(
         () => {
           this.messageService.add({severity:'success', summary: 'Successo', detail: 'Aluno incluido!'});
@@ -165,7 +168,8 @@ export class AlunoComponent implements OnInit, OnDestroy {
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
         },
         () => {
-          this.retorno();
+          this.router.navigate(['anamnese'], { queryParams: { EmpIdf: dados.EmpIdf, AluIdf: dados.AluIdf, AluNome: dados.AluNome } });
+          //this.retorno();
         }
       );
     }
@@ -217,8 +221,15 @@ export class AlunoComponent implements OnInit, OnDestroy {
       AluUF = dados.AluUF;
       AluEmail = dados.AluEmail;
       AluPeso = dados.AluPeso;
-      AluAltura = dados.AluAltura;    
+      AluAltura = dados.AluAltura;
     }
+    let perfil = JSON.parse(localStorage.getItem('userData')).perfil;
+    let isTecnico = (perfil == 'A' || perfil == 'T');
+    this.isOk = dados.UsuIdf == this.UsuIdf || isTecnico;
+    if (!this.isOk){
+      this.router.navigate(['/denied']);
+    }
+
     this.dadosForm = new FormGroup({
       'nome': new FormControl(AluNome, Validators.required),
       'cpf': new FormControl(AluCPF),

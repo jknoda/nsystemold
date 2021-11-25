@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MessageService} from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { User } from 'src/app/auth/user.model';
 import { UsuarioModel } from 'src/app/model/usuario.model';
 import { ServiceConfig } from 'src/app/_config/services.config';
 import { UsuarioService } from './usuario.service';
@@ -120,8 +121,11 @@ export class UsuarioComponent implements OnInit, OnDestroy {
         UsuEmail: this.userForm.value['email']
       }
       this.addDadosUsuario = this.srvUsuario.addDados(dadosAdd).subscribe(
-        () => {
-              this.messageService.add({severity:'success', summary: 'Successo', detail: 'Cadastro incluido!'});
+        (ret) => {
+            let user = JSON.parse(localStorage.getItem('userData'));
+            user.usuidf = ret;
+            localStorage.setItem('userData', JSON.stringify(user));
+            this.messageService.add({severity:'success', summary: 'Successo', detail: 'Cadastro incluido!'});
         },
         err => { 
           let msg = err.error.errors.toString();
