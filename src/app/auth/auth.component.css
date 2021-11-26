@@ -2,6 +2,9 @@
     width: 500px;
 }
 
+.authform{
+    padding: 10px !important;
+}
 @media screen and (max-width: 800px) {
     .politica{
         width: 340px;

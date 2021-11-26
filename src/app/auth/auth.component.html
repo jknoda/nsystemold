@@ -5,7 +5,7 @@
       <app-loading-spinner></app-loading-spinner>
     </div>
     <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
-      <div class="form-group">
+      <div class="form-group authform">
         <label for="email">e-Mail</label>
         <input
           type="email"
@@ -17,7 +17,7 @@
           email
         />
       </div>
-      <div class="form-group">
+      <div class="form-group authform">
         <label for="password">Senha</label>
         <input
           type="password"
@@ -29,7 +29,7 @@
           minlength="6"
         />
       </div>
-      <div class="form-group" *ngIf="!isLoginMode">
+      <div class="form-group authform" *ngIf="!isLoginMode">
         <label for="password">Confirme Senha</label>
         <input
           type="password"
@@ -41,7 +41,7 @@
           minlength="6"
         />
       </div>
-      <div>
+      <div class="form-group authform">
         <button
           class="btn btn-primary"
           type="submit"
