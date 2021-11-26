@@ -17,7 +17,7 @@ a.accordion{
     width: 150px;
     overflow: hidden;
     display: block;
-    z-index: 9;
+    z-index: 3000;
     top: 54px;
     left: 0px;
 }

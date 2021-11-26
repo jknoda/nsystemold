@@ -13,7 +13,8 @@ export class AlunoService {
     addAluDados(body:any): Observable<AlunoModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
-        };        
+        };    
+        body.AluNome = body.AluNome.toUpperCase();    
         return this.http.post<AlunoModel>(this.url + "/api/aluno/create", body, httpOptions);
     }
 
@@ -31,11 +32,26 @@ export class AlunoService {
         return this.http.post<AlunoModel>(this.url + "/api/aluno/findall", body, httpOptions);
     }
 
+    getAluTodosStatus(body:any): Observable<AlunoModel> {
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
+        };        
+        return this.http.post<AlunoModel>(this.url + "/api/aluno/findallstatus", body, httpOptions);
+    }
+
     updateAluDados(body:any): Observable<AlunoModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
+        body.AluNome = body.AluNome.toUpperCase();
         return this.http.post<AlunoModel>(this.url + "/api/aluno/update", body, httpOptions);
+    }
+
+    statusAluDados(body:any): Observable<AlunoModel> {
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
+        };        
+        return this.http.post<AlunoModel>(this.url + "/api/aluno/status", body, httpOptions);
     }
 
     deleteAluDados(body:any): Observable<AlunoModel> {

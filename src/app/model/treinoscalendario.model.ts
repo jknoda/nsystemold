@@ -4,6 +4,7 @@ export class TreinosCalendarioModel {
     public TreIdf: number;
     public TreData: Date;
     public TreTitulo: string;
+    public TreResponsavel: string;
     public TreAtvDesc: string[];
     public data: string;
 }

@@ -136,7 +136,7 @@ export class AtividadeComponent implements OnInit, OnDestroy {
     this.retorno(0);
   }
 
-  private retorno(tempo=3010){
+  private retorno(tempo=1010){
     setTimeout(() => 
     {
       this.router.navigate(['../atividadelista'], {relativeTo: this.route});

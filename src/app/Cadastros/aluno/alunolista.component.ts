@@ -19,6 +19,7 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
   deleteDadosAluno: Subscription;
   lerDadosAluno: Subscription;
   lerDadosAnamnese: Subscription;
+  statusDadosAluno: Subscription;
 
   Alunos: AlunoModel[];
   submitted: boolean;
@@ -44,6 +45,7 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
         this.Alunos = JSON.parse(JSON.stringify(dados));
         this.Alunos.forEach(item=>{
           item.AluDataNasc = new Date(item.AluDataNasc);
+          item.isAtivo = item.AluStatus == 'A';
         })
       },
       err => { 
@@ -92,6 +94,35 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
     this.router.navigate(['anamnese'], { queryParams: { EmpIdf: Aluno.EmpIdf, AluIdf: Aluno.AluIdf, AluNome: Aluno.AluNome } });
   }
 
+  alterarStatus(Aluno: AlunoModel) {
+    this.isLoading = true;
+    let stsTxt = "";
+    if (Aluno.AluStatus == 'A'){
+      Aluno.AluStatus = 'I';
+      stsTxt = 'inativado';
+    }else{
+      Aluno.AluStatus = 'A';
+      stsTxt = 'ativado';
+    }
+    let dados = {
+      EmpIdf: this.EmpIdf,
+      AluIdf: Aluno.AluIdf,
+      AluStatus: Aluno.AluStatus
+    };
+    this.statusDadosAluno = this.srvAluno.statusAluDados(dados).subscribe(
+      (ret) => {
+        this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Aluno '+stsTxt+'!', life: 3000});
+      },
+      err => { 
+        let msg = err.error.errors.toString();
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+      },
+      ()=>{
+        this.isLoading = false;
+        this.refresh();
+      });
+  }
+
   deleteAluno(Aluno: AlunoModel) {
     this.confirmationService.confirm({
       message: 'Confirma exclusão de <b>' + Aluno.AluNome + '</b> ?',
@@ -104,6 +135,7 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
           EmpIdf: Aluno.EmpIdf,
           AluIdf: Aluno.AluIdf
         };
+        this.isLoading = true;
         this.deleteDadosAluno = this.srvAluno.deleteAluDados(dados).subscribe(
           () => {
             this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Aluno excluido!', life: 3000});
@@ -113,6 +145,7 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
             this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
           },
           ()=>{
+            this.isLoading = false;
             this.refresh();
           });
         }

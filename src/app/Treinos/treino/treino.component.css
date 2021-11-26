@@ -1,16 +1,9 @@
-.form-group{
-    margin-top: 10px;
-    padding: 10px;
-}
+
 .row
 {
     margin-bottom: 40px;
 }
 
-.form-group .row label
-{
-    padding-top: 10px;
-}
 
 input.ng-invalid.ng-touched,
 textarea.ng-invalid.ng-touched {
@@ -24,5 +17,5 @@ textarea.ng-invalid.ng-touched {
 .tredata{
     width: auto !important;
     position: absolute !important;
-    z-index: 3000 !important;
+    z-index: 2900 !important;
 }

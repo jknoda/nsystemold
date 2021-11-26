@@ -22,6 +22,7 @@ import { TreinoalunoService } from 'src/app/Treinos/treinoalu/treinoaluno.servic
 export class TreinoscalendarioComponent implements OnInit, OnDestroy {
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   private EmpIdf: number = ServiceConfig.EMPIDF;
+  UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
   TreIdf = 0;
   
   dadosTreinos: Subscription;
@@ -35,6 +36,7 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
   listaTreinos = new List<TreinosCalendarioModel>();
   listaAtv: any[];
   title = "";
+  titleDet = "";
   titleAtv = "";
   itemAtv: AtividadeModel = new AtividadeModel;
 
@@ -106,7 +108,7 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
             data,
             index
           });
-          let title = this.datePipe.transform(item.TreData, 'HH:mm') + "-" + item.TreTitulo;
+          let title = this.datePipe.transform(item.TreData, 'HH:mm') + "-" + item.TreTitulo;          
           this.eventos.push({
             id: index,
             title: title,
@@ -129,7 +131,7 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
 
   handleEventClick(arg) {
     let atividades = this.listaTreinos.First(x=>x.index == arg.event.id);
-    this.title = this.datePipe.transform(atividades.TreData, 'HH:mm') + "- " + atividades.TreTitulo;
+    this.title = this.datePipe.transform(atividades.TreData, 'HH:mm') + "- " + atividades.TreTitulo + " - " + atividades.TreResponsavel;
     this.TreIdf = atividades.TreIdf;
     this.listaAtv = [];
     let _this = this;
@@ -138,7 +140,8 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
         let aux = item.split('@@');
         let auxItem = {
           idf: aux[0],
-          descricao: aux[1]
+          descricao: aux[1],
+          tempo: aux[2]
         }
         _this.listaAtv.push(auxItem);
       });
@@ -172,18 +175,28 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
   }
 
   checkin(){
-    let dados = {
-      EmpIdf: this.EmpIdf
+    if (this.alunos.length > 0)
+    {
+      this.displayCheckin = true;
+      return;
     }
-    this.isLoading = true;
+    let dados = {
+      EmpIdf: this.EmpIdf,
+      AluStatus: 'A'
+    }
+    this.isLoading = true;    
     this.alunos = [];
-    this.lerAlunos = this.srvAluno.getAluTodos(dados).subscribe(
+    let perfil = JSON.parse(localStorage.getItem('userData')).perfil;
+    let isTecnico = (perfil == 'A' || perfil == 'T');
+    this.lerAlunos = this.srvAluno.getAluTodosStatus(dados).subscribe(
       (dados:any) => {
         dados.forEach(element => {
-          this.alunos.push({
-            name: element.AluNome,
-            code: element.AluIdf.toString()
-          });
+          if (element.UsuIdf == this.UsuIdf || isTecnico){
+            this.alunos.push({
+              name: element.AluNome,
+              code: element.AluIdf.toString()
+            });
+          }
         });
       },
       err => { 

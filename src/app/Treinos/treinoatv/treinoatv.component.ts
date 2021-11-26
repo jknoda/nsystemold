@@ -173,7 +173,7 @@ export class TreinoatvComponent implements OnInit, OnDestroy {
     this.retorno(0);
   }
 
-  private retorno(tempo=3010){
+  private retorno(tempo=1010){
     setTimeout(() => 
     {
       this.router.navigate(['../treinoatvlista'], { queryParams: { EmpIdf: this.Param.EmpIdf, TreIdf: this.Param.TreIdf, TreTitulo: this.Param.TreTitulo, Data: this.Param.Data } });

@@ -9,12 +9,14 @@
         <ng-template pTemplate="header">
             <tr>
                 <th>Atividades</th>
+                <th>Tempo</th>
                 <th></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-atividade>
             <tr class="listaSystem">
                 <td>{{atividade.descricao}}</td>
+                <td>{{atividade.tempo}}</td>
                 <td style="text-align: right !important;">
                     <button pButton icon="fas fa-info" class="p-button-default" (click)="verDetalhe(atividade)" title="Detalhe" style="font-size: smaller;"></button>
                 </td>
@@ -48,7 +50,7 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th></th>
-                    <th>Aluno</th>
+                    <th></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-aluno  let-i="rowIndex" >

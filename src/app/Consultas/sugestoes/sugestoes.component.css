@@ -1,14 +1,6 @@
-.form-group{
-    padding: 10px;
-}
 .row
 {
     margin-bottom: 40px;
-}
-
-.form-group .row label
-{
-    padding-top: 10px;
 }
 
 input.ng-invalid.ng-touched,

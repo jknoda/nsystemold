@@ -1,15 +1,30 @@
+.form-group{
+    margin-top: 10px;
+    /* padding: 10px; */
+    padding-left: 20px;
+}
+
+.form-group .row label
+{
+    padding-top: 10px;
+}
+
 .mostracoluna{
     display: block; 
 }
 
 .tituloLista{
+    height: 20px;
     background-color: rgb(194, 245, 200);
     color: rgb(11, 1, 20);
 }
 
 .tituloCadastro{
-    background-color: rgb(194, 245, 200);
-    color: rgb(11, 1, 20);
+    line-height:30px;
+    background-color: rgb(119, 14, 23);
+    color: rgb(229, 216, 240);
+    text-align: center;
+    vertical-align: middle ;
 }
 
 .transparente{

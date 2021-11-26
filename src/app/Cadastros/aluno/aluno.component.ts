@@ -160,8 +160,9 @@ export class AlunoComponent implements OnInit, OnDestroy {
         AluStatus: 'A'
       }
       this.addDadosAluno = this.srvAluno.addAluDados(dadosAdd).subscribe(
-        () => {
+        (ret:any) => {
           this.messageService.add({severity:'success', summary: 'Successo', detail: 'Aluno incluido!'});
+          dados.AluIdf = ret;
         },
         err => { 
           let msg = err.error.errors.toString();
@@ -179,7 +180,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
     this.retorno(0);
   }
 
-  private retorno(tempo=3010){
+  private retorno(tempo=1010){
     setTimeout(() => 
     {
       this.router.navigate(['../alunolista'], {relativeTo: this.route});
@@ -203,6 +204,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
     let AluEmail = null;
     let AluPeso = null;
     let AluAltura = null;
+    let UsuIdf = this.UsuIdf;
    
     if (dados != null)
     {
@@ -222,10 +224,11 @@ export class AlunoComponent implements OnInit, OnDestroy {
       AluEmail = dados.AluEmail;
       AluPeso = dados.AluPeso;
       AluAltura = dados.AluAltura;
+      UsuIdf = dados.UsuIdf;
     }
     let perfil = JSON.parse(localStorage.getItem('userData')).perfil;
     let isTecnico = (perfil == 'A' || perfil == 'T');
-    this.isOk = dados.UsuIdf == this.UsuIdf || isTecnico;
+    this.isOk = UsuIdf == this.UsuIdf || isTecnico;
     if (!this.isOk){
       this.router.navigate(['/denied']);
     }

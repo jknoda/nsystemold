@@ -22,13 +22,15 @@
         <ng-template pTemplate="body" let-Aluno>
             <tr class="listaSystem" *ngIf="Aluno.isUser || isTecnico">
                 <td>{{Aluno.AluIdf}}</td>
-                <td>{{Aluno.AluNome}}</td>
+                <td [ngClass]="{'vermelho' : !Aluno.isAtivo}">{{Aluno.AluNome}}</td>
                 <td>{{Aluno.AluFone}}</td>
                 <td>
                     <button pButton pRipple icon="fas fa-user-edit" class="p-button-rounded p-button-success" (click)="editAluno(Aluno)" title="Alterar"></button>
                     <button *ngIf="Aluno.HasAnamnese" pButton pRipple icon="fas fa-briefcase-medical" class="p-button-rounded" (click)="anamneseAluno(Aluno)" title="Anamnese"></button>
-                    <button *ngIf="!Aluno.HasAnamnese" pButton pRipple icon="fas fa-briefcase-medical" class="p-button-rounded p-button-danger" (click)="anamneseAluno(Aluno)" title="Falta Anamnese"></button>
-                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-warning" (click)="deleteAluno(Aluno)" title="Excluir"></button>
+                    <button *ngIf="!Aluno.HasAnamnese" pButton pRipple icon="fas fa-briefcase-medical" class="p-button-rounded p-button-warning" (click)="anamneseAluno(Aluno)" title="Falta Anamnese"></button>
+                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-danger" (click)="deleteAluno(Aluno)" title="Excluir"></button>
+                    <button *ngIf="Aluno.isAtivo" pButton pRipple icon="far fa-stop-circle" class="p-button-rounded p-button-default" (click)="alterarStatus(Aluno)" title="Inativar aluno"></button>
+                    <button *ngIf="!Aluno.isAtivo" pButton pRipple icon="far fa-play-circle" class="p-button-rounded p-button-default" (click)="alterarStatus(Aluno)" title="Ativar aluno"></button>
                 </td>
             </tr>
         </ng-template>

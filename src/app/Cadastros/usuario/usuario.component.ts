@@ -171,7 +171,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     this.retorno(0);
   }
 
-  private retorno(tempo=3010){
+  private retorno(tempo=1010){
     if (this.viaLista)
     {
       setTimeout(() => 

@@ -23,4 +23,5 @@ export class AlunoModel {
     public DataAlt: Date;
     public HasAnamnese: Boolean;
     public isUser: Boolean;
+    public isAtivo: Boolean;
 }
