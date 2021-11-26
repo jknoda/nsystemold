@@ -79,6 +79,10 @@ export class AuthGuard implements CanActivate , OnDestroy{
           if (nome != null)
           JSON.parse(localStorage.getItem('userData')).nome = nome;
         }
+        else
+        {
+          this.router.navigate(["usuario"]);
+        }
       });
   }
 
