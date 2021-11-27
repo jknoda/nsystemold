@@ -5,9 +5,10 @@
 <form [formGroup]="dadosForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
     <div class="form-group">
         <div class="tituloCadastro">CADASTRO DE ATIVIDADE</div>
+        <div><em>*</em>Campos obrigatórios</div> 
         <div class="row">
             <div class="col-lg-6 col-md-6">
-                <label for="titulo">Título</label>
+                <em>*</em><label for="titulo">Título</label>
                 <input type="text" class="form-control" formControlName="titulo" id="titulo" pInputText>
             </div>
             <div class="col-lg-6 col-md-6">
@@ -15,7 +16,7 @@
                 <textarea rows="3" pInputTextarea id="objetivo" class="form-control" formControlName="objetivo"></textarea>                
             </div>
             <div class="col-lg-12 col-md-12">
-                <label for="descricao">Descrição detalhada (execução)</label>
+                <em>*</em><label for="descricao">Descrição detalhada (execução)</label>
                 <!-- <textarea rows="5" pInputTextarea id="descricao" class="form-control" formControlName="descricao"></textarea>                 -->
                 <p-editor id="descricao" formControlName="descricao" [style]="{'height':'220px'}">
                     <ng-template pTemplate="header">
