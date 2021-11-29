@@ -58,7 +58,7 @@ export class AlunoService {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<AlunoModel>(this.url + "/api/aluno/delete", body, httpOptions);
+        return this.http.post<AlunoModel>(this.url + "/api/aluno/deletealuno", body, httpOptions);
     }
 
     hasAnamnese(body:any): Observable<boolean> {

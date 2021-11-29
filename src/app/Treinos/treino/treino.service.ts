@@ -41,6 +41,6 @@ export class TreinoService {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<TreinoModel>(this.url + "/api/treino/delete", body, httpOptions);
+        return this.http.post<TreinoModel>(this.url + "/api/treino/deletetreino", body, httpOptions);
     }
 }

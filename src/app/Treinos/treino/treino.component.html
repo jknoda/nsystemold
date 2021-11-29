@@ -5,6 +5,7 @@
 <form [formGroup]="dadosForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading" class="yForm">
     <div class="form-group">
         <div class="tituloCadastro">CADASTRO DE EVENTO</div>
+        <div><em>*</em> Campo obrigatório</div> 
         <div class="row">
             <div class="col-lg-4 col-md-6">
                 <label for="tipo">Tipo</label>
@@ -12,16 +13,16 @@
                 </p-dropdown>
             </div>
             <div class="col-lg-4 col-md-6">
-                <label for="data">Data</label>
+                <em>*</em><label for="data">Data</label>
                 <p-calendar class="form-control" formControlName="data" id="data" dateFormat="dd/mm/yy" showTime="true" hourFormat="24"></p-calendar>
             </div>
             <div class="col-lg-4 col-md-6">
-                <label for="titulo">Título</label>
+                <em>*</em><label for="titulo">Título</label>
                 <input type="text" class="form-control" formControlName="titulo" id="titulo" pInputText>
             </div>
 
             <div class="col-lg-6 col-md-6">
-                <label for="responsavel">Responsável</label>
+                <em>*</em><label for="responsavel">Responsável</label>
                 <input type="text" class="form-control" formControlName="responsavel" id="responsavel" pInputText>
             </div>
             <div class="col-lg-6 col-md-12">
