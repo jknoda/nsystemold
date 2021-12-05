@@ -28,6 +28,15 @@ p {
     overflow: scroll;
 }
 
+.divListaOcorrencias{
+    max-height: 350px;
+    overflow: scroll;
+}
+
 :host ::ng-deep .p-dropdown {
     width: 14rem;
+}
+
+.btparti{
+    min-width: 2rem !important;
 }

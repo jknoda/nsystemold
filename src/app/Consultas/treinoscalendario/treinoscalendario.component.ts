@@ -12,23 +12,30 @@ import { AtividadeService } from 'src/app/Cadastros/atividadelista/atividade.ser
 import { AtividadeModel } from 'src/app/model/atividade.model';
 import { AlunoService } from 'src/app/Cadastros/aluno/aluno.service';
 import { TreinoalunoService } from 'src/app/Treinos/treinoalu/treinoaluno.service';
+import { OcorrenciaService } from 'src/app/shared/ocorrencia.service';
 
 @Component({
   selector: 'app-treinoscalendario',
   templateUrl: './treinoscalendario.component.html',
   styleUrls: ['./treinoscalendario.component.css'],
-  providers: [TreinoscalendarioService,MessageService,DatePipe,AtividadeService,AlunoService,TreinoalunoService]
+  providers: [TreinoscalendarioService,MessageService,DatePipe,
+    AtividadeService,AlunoService,TreinoalunoService,OcorrenciaService]
 })
 export class TreinoscalendarioComponent implements OnInit, OnDestroy {
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   private EmpIdf: number = ServiceConfig.EMPIDF;
   UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
   TreIdf = 0;
+  AluIdf = 0;
+  RO = false; // Read Only
   
   dadosTreinos: Subscription;
   lerAtividade: Subscription;
   lerAlunos: Subscription;
   addAluno: Subscription;
+  lerOcorrencias: Subscription;
+  lerTipoocorrencia: Subscription;
+  subSalvarOcorrencia: Subscription;
 
   calendarOptions: CalendarOptions;
   isLoading = true;
@@ -39,13 +46,21 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
   titleDet = "";
   titleAtv = "";
   itemAtv: AtividadeModel = new AtividadeModel;
+  ocoTexto = "";
 
   eventos: any[] = [];
+
+  ocorrencias: any[] = [];
+
+  tipoOco: DropDown[] = [];
+  selectedTipoOco: DropDown;
 
   display: boolean = false;
   displayAtv: boolean = false;
   displayCheckin: boolean = false;
   displayParticipantes: boolean = false;
+  displayOcorrencias: boolean = false;
+  displayOcorrenciaDescricao: boolean = false;
 
   alunos: DropDown[] = [];
   selectedAluno: DropDown;
@@ -55,11 +70,38 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
     private messageService: MessageService, 
     private datePipe:DatePipe,
     private srvAluno: AlunoService,
-    private srvTreinoAlu: TreinoalunoService) {}
+    private srvTreinoAlu: TreinoalunoService,
+    private srvOcorrencia: OcorrenciaService) {}
 
   ngOnInit(): void {  
     this.eventos = [];
     this.lerTreinos();
+    this.lerTipoOco();
+  }
+
+  private lerTipoOco()
+  {
+    let dados = {
+      EmpIdf: this.EmpIdf
+    }
+    this.isLoading = true;
+    this.tipoOco = [];
+    this.lerTipoocorrencia = this.srvOcorrencia.findalltipo(dados).subscribe(
+      (dados:any) => {
+        dados.forEach(element => {
+          this.alunos.push({
+            name: element.OcoDescricao,
+            code: element.OcoTipo
+          });
+        });
+      },
+      err => { 
+        let msg = err.error.errors.toString();
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+      },
+      ()=>{
+        this.isLoading = false;
+      });    
   }
 
   carregaCalendario(){
@@ -271,6 +313,91 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
     this.displayParticipantes = false;
   }
 
+  atividadesOk(){
+    this.display = false;
+  }
+
+
+  listaOcorrencias(dado,tipo){
+    if (tipo == 'ATV'){
+      this.AluIdf = 0;
+    }else{
+      this.AluIdf = parseInt(dado.code);
+    }
+    let dados = {
+      EmpIdf: this.EmpIdf,
+      TreIdf: this.TreIdf,
+      AluIdf: this.AluIdf
+    }
+    this.isLoading = true;
+    this.ocorrencias = [];
+    this.lerOcorrencias = this.srvOcorrencia.findall(dados).subscribe(
+      (dados:any) => {
+        dados.forEach(element => {
+          this.ocorrencias.push({
+            name: element.OcoDescricao,
+            code: element.OcoIdf.toString()
+          });
+        });
+      },
+      err => { 
+        let msg = err.error.errors.toString();
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+      },
+      ()=>{
+        this.isLoading = false;
+        this.displayOcorrencias = true;
+      });       
+  }
+
+  incluirOcorrencia()
+  {
+    this.RO = false;
+    this.ocoTexto = "";
+    this.displayOcorrenciaDescricao = true;
+  }
+
+  detalheOcorrencia(detalhe)
+  {
+    this.RO = true;
+    this.ocoTexto = detalhe;
+    this.displayOcorrenciaDescricao = true;
+  }
+
+  salvarOcorrencia()
+  {
+    this.displayOcorrenciaDescricao = false;
+    if (this.RO) {
+      return;
+    }
+    let dados = {
+      EmpIdf: this.EmpIdf,
+      TreIdf: this.TreIdf,
+      AluIdf: this.AluIdf,
+      OcoTipo: "I",
+      OcoDescricao: this.ocoTexto,
+      UsuIdf: this.UsuIdf
+    }
+    this.isLoading = true;
+    this.subSalvarOcorrencia = this.srvOcorrencia.create(dados).subscribe(
+      () => {
+        this.messageService.add({severity:'success', summary: 'Successo', detail: 'Ocorrência incluida!'});
+      },
+      err => { 
+        let msg = err.error.errors.toString();
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+      },
+      () => {
+        this.isLoading = false;
+        this.listaOcorrencias({code:this.AluIdf},this.AluIdf == 0 ? 'ATV' : 'ALU');
+      }
+    );
+  }
+
+  ocorrenciasOk(){
+    this.displayOcorrencias = false;
+  }
+
   ngOnDestroy(): void {
     if (this.dadosTreinos != null)
     {
@@ -285,6 +412,12 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
     if (this.addAluno != null){
       this.addAluno.unsubscribe();
     }
+    if (this.lerTipoocorrencia != null){
+      this.lerTipoocorrencia.unsubscribe();
+    }    
+    if (this.subSalvarOcorrencia != null){
+      this.subSalvarOcorrencia.unsubscribe();
+    }    
 
   }
 }

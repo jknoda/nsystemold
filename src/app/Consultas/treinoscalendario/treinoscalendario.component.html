@@ -18,12 +18,14 @@
                 <td>{{atividade.descricao}}</td>
                 <td>{{atividade.tempo}}</td>
                 <td style="text-align: right !important;">
+                    <button pButton pRipple icon="fas fa-book" class="btparti p-button-rounded p-button-success" (click)="listaOcorrencias(atividade,'ATV')" title="Ocorrências"></button>
                     <button pButton icon="fas fa-info" class="p-button-default" (click)="verDetalhe(atividade)" title="Detalhe" style="font-size: smaller;"></button>
                 </td>
             </tr>
         </ng-template>
     </p-table>
     <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="atividadesOk();" label="Ok" styleClass="p-button-text"></p-button>
         <p-button icon="pi pi-check" (click)="listaParticipantes();" label="Participantes" styleClass="p-button-text"></p-button>
         <p-button icon="pi pi-check" (click)="checkin();" label="Check-in" styleClass="p-button-text"></p-button>
     </ng-template>
@@ -51,19 +53,56 @@
                 <tr>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-aluno  let-i="rowIndex" >
                 <tr class="listaSystem">
                     <td>{{i+1}}</td>
                     <td>{{aluno.name}}</td>
+                    <td>
+                        <button pButton pRipple icon="fas fa-book" class="btparti p-button-rounded p-button-success" (click)="listaOcorrencias(aluno, 'ALU')" title="Ocorrências"></button>
+                    </td>
                 </tr>
             </ng-template>
         </p-table>
-        <ng-template pTemplate="footer">
-            <p-button icon="pi pi-check" (click)="participantesOk();" label="Ok" styleClass="p-button-text"></p-button>
-        </ng-template>
-    </div>
+   </div>
+   <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="participantesOk();" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
 </p-dialog>
  
- 
+<p-dialog header="Ocorrencias" [(visible)]="displayOcorrencias" [modal]="true">
+    <div class="divListaOcorrencias">
+        <p-button icon="fa fa-plus" (click)="incluirOcorrencia();" label="Incluir" styleClass="p-button-text"></p-button>
+        <p-table [value]="ocorrencias" responsiveLayout="scroll" class="atividades">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-ocorrencia  let-i="rowIndex" >
+                <tr class="listaSystem">
+                    <td>{{i+1}}</td>
+                    <td style="max-width: 30ch ; overflow: hidden;">{{ocorrencia.name}}</td>
+                    <td>
+                        <button pButton pRipple icon="fas fa-book" class="btparti p-button-rounded p-button-success" (click)="detalheOcorrencia(ocorrencia.name)" title="Detalhe"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+   </div>
+   <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="ocorrenciasOk();" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog header="Ocorrência" [(visible)]="displayOcorrenciaDescricao" [modal]="true" [style]="{width: '50vw'}"
+  [draggable]="false" [resizable]="false">
+    <textarea rows="5" pInputTextarea id="msgocorrencia" [(ngModel)]="ocoTexto" style="width: 100%;" [readonly]="RO"></textarea>                
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="displayModal=false; salvarOcorrencia();" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
