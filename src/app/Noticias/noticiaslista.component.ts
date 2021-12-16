@@ -23,7 +23,7 @@ export class NoticiaslistaComponent implements OnInit {
   isUpdate = true;
   isLoading = true;
 
-  isAdm = JSON.parse(localStorage.getItem('userData')).perfil == 'A';
+  isAdm = false;
   
   constructor(private router: Router, private route: ActivatedRoute, 
     private srvNews: NewsService, private messageService: MessageService, 
@@ -32,6 +32,7 @@ export class NoticiaslistaComponent implements OnInit {
   }
   
   ngOnInit() {
+    this.isAdm = JSON.parse(localStorage.getItem('userData')).perfil == 'A';
     this.getNews();
   }
 
