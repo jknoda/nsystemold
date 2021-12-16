@@ -61,7 +61,6 @@ export class MenuComponent implements OnInit, OnDestroy {
                 items: [
                     {label: 'Notícias', icon: 'fas fa-newspaper', routerLink:'noticiaslista', command:()=>{this.onClick();}},
                 ],
-                visible:this.isAuxiliar
             },
             {
                 label: 'Cadastros',

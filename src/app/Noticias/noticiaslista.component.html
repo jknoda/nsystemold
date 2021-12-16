@@ -34,7 +34,11 @@
                 <td>{{Item.NewsData | date:'dd/MM/yyyy'}}</td>                                
                 <td>{{Item.NewsTitulo}}</td>
                 <td>
-                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-danger" (click)="delete(Item)" title="Excluir"></button>
+                    <div *ngIf="Item.NewsAutor == Autor">
+                        <button pButton pRipple icon="fas fa-trash-alt" 
+                        class="p-button-rounded p-button-danger" (click)="delete(Item)" 
+                        title="Excluir"></button>
+                    </div>
                 </td>
             </tr>
         </ng-template>

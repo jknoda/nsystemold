@@ -16,6 +16,7 @@ export class NoticiaslistaComponent implements OnInit {
   private EmpIdf: number = ServiceConfig.EMPIDF;
   deleteDados: Subscription;
   lerDados: Subscription;
+  Autor = JSON.parse(localStorage.getItem('userData')).nome;
 
   News: NewsModel[];
   submitted: boolean;
