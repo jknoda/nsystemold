@@ -49,6 +49,8 @@ import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.componen
 import { TesteModule } from './teste/teste.module';
 import { ConsultasModule } from './Consultas/consultas.module';
 import { ConfiguracaoService } from './shared/configuracao.service';
+import { NoticiaslistaComponent } from './Noticias/noticiaslista.component';
+import { NoticiasComponent } from './Noticias/noticias.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 
 @NgModule({
@@ -69,7 +71,9 @@ import { ConfiguracaoService } from './shared/configuracao.service';
     TreinoatvComponent,
     TreinoatvlistaComponent,
     TreinoaluComponent,
-    TreinoalulistaComponent
+    TreinoalulistaComponent,
+    NoticiaslistaComponent,
+    NoticiasComponent
     //TestepdfComponent
   ],
   imports: [

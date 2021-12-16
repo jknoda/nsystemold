@@ -1,0 +1,59 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<form [formGroup]="dadosForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading" class="yForm">
+    <div class="form-group">
+        <div class="tituloCadastro">CADASTRO DE NOTÍCIA</div>
+        <div><em>*</em> Campo obrigatório</div> 
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <em>*</em><label for="titulo">Título</label>
+                <input type="text" class="form-control" formControlName="titulo" id="titulo" pInputText>
+            </div>
+            <div class="col-lg-12 col-md-12">
+                <em>*</em><label for="noticia">Notícia</label>
+                <p-editor id="noticia" formControlName="noticia" [style]="{'height':'220px'}">
+                    <ng-template pTemplate="header">
+                        <span class="ql-formats">
+                            <button type="button" class="ql-bold" aria-label="Bold"></button>
+                            <button type="button" class="ql-italic" aria-label="Italic"></button>
+                            <button type="button" class="ql-underline" aria-label="Underline"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <select class="ql-align" [title]="'Aligment'">
+                                <option selected></option>
+                                <option value="center"></option>
+                                <option value="right"></option>
+                                <option value="justify"></option>
+                            </select>
+                        </span>
+                        <span class="ql-formats">
+                            <select class="ql-size"></select>
+                            <select class="ql-color"></select>
+                            <select class="ql-background"></select>
+                        </span>
+                    </ng-template>
+                </p-editor>
+            </div>
+        </div>
+        <div class="row editButtonSystem">            
+            <div class="floatLeft col-sm-1">
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  [disabled]="!dadosForm.valid" *ngIf="!editMode">Salvar</button>
+                <button
+                  type="submit"
+                  class="floatLeft btn btn-success"
+                  [disabled]="!dadosForm.valid" *ngIf="editMode">Alterar</button>
+            </div>       
+            <div class="floatLeft col-sm-1">
+                <button
+                type="button"
+                class="btn btn-danger"
+                (click)="cancelar()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+  </form>

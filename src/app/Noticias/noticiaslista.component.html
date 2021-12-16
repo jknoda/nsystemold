@@ -1,0 +1,45 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="yForm card" *ngIf="!isLoading">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Nova notícia" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table responsiveLayout="scroll" #dt [value]="News" [rows]="10" [paginator]="true" 
+        [rowHover]="true" dataKey="id"
+        [globalFilterFields]="['NewsTitulo','NewData']">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="NewsData">Data <p-sortIcon field="NewsData"></p-sortIcon></th>
+                <th pSortableColumn="NewsTitulo">Titulo <p-sortIcon field="NewsTitulo"></p-sortIcon></th>                
+                <th></th>
+            </tr>
+            <tr style="background-color: white;">
+                <th class="newsdata">
+                    <p-columnFilter  type="date" field="NewsData"></p-columnFilter>
+                </th>
+                <th style="align-items: right; width: 30%; margin-left:100px;">
+                    <p-columnFilter type="text" field="NewsTitulo"></p-columnFilter>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-Item>
+            <tr class="listaSystem">
+                <td>{{Item.NewsData | date:'dd/MM/yyyy'}}</td>                                
+                <td>{{Item.NewsTitulo}}</td>
+                <td>
+                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-danger" (click)="delete(Item)" title="Excluir"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}" translate="yes">
+</p-confirmDialog>

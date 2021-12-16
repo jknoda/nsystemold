@@ -21,6 +21,8 @@ import { TesteComponent } from './teste/teste.component';
 import { TreinoscalendarioComponent } from './Consultas/treinoscalendario/treinoscalendario.component';
 import { SugestoesComponent } from './Consultas/sugestoes/sugestoes.component';
 import { treinoviacalenComponent } from './Treinos/treinoviacalendario/treinoviacalen.component';
+import { NoticiaslistaComponent } from './Noticias/noticiaslista.component';
+import { NoticiasComponent } from './Noticias/noticias.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -44,6 +46,8 @@ const appRoutes: Routes = [
         {path: 'treinoatv', component: TreinoatvComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treinoalulista', component: TreinoalulistaComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treinoalu', component: TreinoaluComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
+        {path: 'noticiaslista', component: NoticiaslistaComponent, canActivate: [AuthGuard]},
+        {path: 'noticias', component: NoticiasComponent, canActivate: [AuthGuard]},
         {path: 'auth', component: AuthComponent},
         {path: 'denied', component: DeniedComponent},
         {path: 'treinoscalendario', component: TreinoscalendarioComponent},
