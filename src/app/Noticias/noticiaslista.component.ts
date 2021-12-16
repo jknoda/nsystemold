@@ -22,6 +22,8 @@ export class NoticiaslistaComponent implements OnInit {
   submitted: boolean;
   isUpdate = true;
   isLoading = true;
+
+  isAdm = JSON.parse(localStorage.getItem('userData')).perfil == 'A';
   
   constructor(private router: Router, private route: ActivatedRoute, 
     private srvNews: NewsService, private messageService: MessageService, 

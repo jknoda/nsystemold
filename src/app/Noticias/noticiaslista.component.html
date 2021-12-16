@@ -34,7 +34,7 @@
                 <td>{{Item.NewsData | date:'dd/MM/yyyy'}}</td>                                
                 <td>{{Item.NewsTitulo}}</td>
                 <td>
-                    <div *ngIf="Item.NewsAutor == Autor">
+                    <div *ngIf="Item.NewsAutor == Autor || isAdmin">
                         <button pButton pRipple icon="fas fa-trash-alt" 
                         class="p-button-rounded p-button-danger" (click)="delete(Item)" 
                         title="Excluir"></button>
