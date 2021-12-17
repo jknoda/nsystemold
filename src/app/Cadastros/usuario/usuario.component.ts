@@ -34,6 +34,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   isAdm = false;
   isLoading = true;
   viaLista = false;
+  acessoSubscription: Subscription;
 
   constructor(private srvUsuario: UsuarioService, private route: ActivatedRoute, private router: Router, private messageService: MessageService) { 
     this.perfis = [
@@ -125,6 +126,13 @@ export class UsuarioComponent implements OnInit, OnDestroy {
             let user = JSON.parse(localStorage.getItem('userData'));
             user.usuidf = ret;
             localStorage.setItem('userData', JSON.stringify(user));
+            let dados = {
+              Origem: 'A',
+              Usuario: user.nome,
+              Email: user.email,
+              UsuIdf: user.usuidf
+            };
+            this.acessoSubscription = this.srvUsuario.saveAcesso(dados).subscribe();            
             this.messageService.add({severity:'success', summary: 'Successo', detail: 'Cadastro incluido!'});
         },
         err => { 
@@ -198,6 +206,9 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     }
     if (this.lerDadosUsuario != null){
       this.lerDadosUsuario.unsubscribe();
+    }
+    if (this.acessoSubscription != null){
+      this.acessoSubscription.unsubscribe();
     }
   }  
 }

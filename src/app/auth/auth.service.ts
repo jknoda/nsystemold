@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy  } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, UrlSegment } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, user } from "@angular/fire/auth";
 import { TopoService } from '../principal/topo/topo.service';
@@ -28,6 +28,7 @@ export class AuthService implements OnDestroy {
   getUsuarioSubscription: Subscription;
 
   getConfigSubscription: Subscription;
+  acessoSubscription: Subscription;
    
   constructor(public auth: Auth, private router: Router, private http: HttpClient, private topoService: TopoService, private configSrv: ConfiguracaoService) {}
    
@@ -158,10 +159,22 @@ export class AuthService implements OnDestroy {
         if (usuidf == null || usuidf == 0){
           this.router.navigate(["usuario"]);
         }else{
+          this.acesso(user);
           this.router.navigate(["home"]);
         }
       }
     )
+  }
+
+  private acesso(user)
+  {
+    let dados = {
+      Origem: 'A',
+      Usuario: user.nome,
+      Email: user.email,
+      UsuIdf: user.usuidf
+    };
+    this.acessoSubscription = this.saveAcesso(dados).subscribe();
   }
 
   private setEmail(EmpIdf){
@@ -205,12 +218,22 @@ export class AuthService implements OnDestroy {
     return this.http.post<UsuarioModel>(this.url + "/api/usuario/finduser", body, httpOptions);
   }
 
+  saveAcesso(body:any): Observable<UsuarioModel> {
+    let httpOptions = {
+        headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
+    };        
+    return this.http.post<UsuarioModel>(this.url + "/api/acesso/create", body, httpOptions);
+  }
+
   ngOnDestroy(): void {
     if (this.getConfigSubscription != null){
       this.getUsuarioSubscription.unsubscribe();
     }
     if (this.getConfigSubscription != null){
       this.getConfigSubscription.unsubscribe();
+    }
+    if (this.acessoSubscription != null){
+      this.acessoSubscription.unsubscribe();
     }
 
   }

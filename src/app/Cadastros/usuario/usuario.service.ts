@@ -44,4 +44,10 @@ export class UsuarioService {
         return this.http.post<UsuarioModel>(this.url + "/api/usuario/delete", body, httpOptions);
     }
 
+    saveAcesso(body:any): Observable<UsuarioModel> {
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
+        };        
+        return this.http.post<UsuarioModel>(this.url + "/api/acesso/create", body, httpOptions);
+    }
 }
