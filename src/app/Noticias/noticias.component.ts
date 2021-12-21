@@ -57,7 +57,7 @@ export class NoticiasComponent implements OnInit, OnDestroy {
     };    
     this.addDados = this.srvNews.addNewsDados(dados).subscribe(
       () => {
-        this.sendMail(dados.NewsAutor,dados.NewsEmail,dados.NewsTexto,dados.NewsTexto);
+        this.sendMail(dados.NewsAutor,dados.NewsEmail,dados.NewsTexto,dados.NewsTexto, dados.NewsTitulo);
         this.messageService.add({severity:'success', summary: 'Successo', detail: 'Notícia incluida!'});
       },
       err => { 
@@ -100,12 +100,13 @@ export class NoticiasComponent implements OnInit, OnDestroy {
     this.messageService.clear();
   }    
 
-  sendMail(nome, email, texto, textoHtml){
-    this.mail.subject = "Nova notícia";
+  sendMail(nome, email, texto, textoHtml, titulo){
+    this.mail.subject = "News - " + titulo;
     this.mail.cc = "";
-    this.mail.subject += " enviado por " + nome + " - "+email;
-    this.mail.text = "Notícia: \n" + "( " + texto +" )";
-    this.mail.html = "Notícia: <br/>" + "( " + textoHtml +" )";
+    this.mail.text = " Enviado por " + nome + " - "+email+"\n\n";
+    this.mail.text += "Notícia: \n" + "( " + texto +" )";
+    this.mail.html = " Enviado por " + nome + " - "+email+"<br/><br/>";
+    this.mail.html += "Notícia: <br/>" + "( " + textoHtml +" )";
     this.sendMailSub = this.sendmailService.sendMail(this.mail).subscribe(
       () => {
         //this.messageService.add({severity:'success', summary: 'Successo', detail: 'Comentário excluído!'});
