@@ -22,6 +22,7 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {EditorModule} from 'primeng/editor';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {CheckboxModule} from 'primeng/checkbox';
+import {FileUploadModule} from 'primeng/fileupload';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -105,6 +106,8 @@ import { NoticiasComponent } from './Noticias/noticias.component';
     PanelMenuModule,
     ConsultasModule,
     CheckboxModule,
+    FileUploadModule,
+
     TesteModule
   ],
   providers: [    

@@ -8,5 +8,7 @@ export class NewsModel {
     public NewsTexto: string;
     public NewsData: Date;
     public NewsAutor: string;
+    public NewsImage: Blob;
+    public NewsImageFile: string;
     public DataStr: string;
 }

@@ -36,6 +36,23 @@
                     </ng-template>
                 </p-editor>
             </div>
+            <div class="col-lg-12 col-md-12">
+                <label for="noticia">Imagem</label>
+                <p-fileUpload 
+                    name="myFile[]" 
+                    customUpload="true" 
+                    (uploadHandler)="myUploader($event)" 
+                    (onRemove)="remove()"
+                    (onClear)="remove()"
+                    accept="image/*" 
+                    chooseLabel="Selecionar"
+                    cancelLabel="Cancelar"
+                    maxFileSize="2097152"
+                    invalidFileSizeMessageSummary="{0}: Tamanho do arquivo inválido, "
+                    invalidFileSizeMessageDetail="tamanho máximo é {0}."                   
+                    >
+                </p-fileUpload>
+            </div>            
         </div>
         <div class="row editButtonSystem">            
             <div class="floatLeft col-sm-1">

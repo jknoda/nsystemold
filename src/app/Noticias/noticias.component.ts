@@ -28,12 +28,40 @@ export class NoticiasComponent implements OnInit, OnDestroy {
   isLoading = true;
   editMode = false;
 
+  uploadedFile : any;
+  uploadedName: any;
+
   constructor(private router: Router, private route: ActivatedRoute, 
     private srvNews: NewsService, private messageService: MessageService, private sendmailService: SendmailService) 
   {    
   }
+  myUploader(event) {
+    let fileReader = new FileReader();
+    let _this = this;
+    for (let file of event.files) {
+      fileReader.readAsDataURL(file);
+      fileReader.onloadend = function () {
+          _this.ler(file.name, fileReader.result);
+      };
+    }
+  }
+
+  remove()
+  {
+    this.uploadedFile = null;
+    this.uploadedName = null;
+  }
+
+  private ler(nome, arquivo)
+  {
+    this.uploadedFile = arquivo;
+    console.log(arquivo);
+    this.uploadedName = nome;
+    this.messageService.add({severity:'success', summary: 'Successo', detail: 'Imagem incluida!'});
+  }
 
   ngOnInit() {
+    console.log("Start")
     this.mail = JSON.parse(localStorage.getItem('emailConfig'));
     this.route.queryParams
       .subscribe(params => {
@@ -53,7 +81,9 @@ export class NoticiasComponent implements OnInit, OnDestroy {
       NewsTexto: this.dadosForm.value['noticia'],
       NewsData: new Date(),
       NewsAutor: JSON.parse(localStorage.getItem('userData')).nome,
-      NewsEmail: JSON.parse(localStorage.getItem('userData')).email
+      NewsEmail: JSON.parse(localStorage.getItem('userData')).email,
+      NewsImage: this.uploadedFile,
+      NewsImageFile: this.uploadedName
     };    
     this.addDados = this.srvNews.addNewsDados(dados).subscribe(
       () => {
