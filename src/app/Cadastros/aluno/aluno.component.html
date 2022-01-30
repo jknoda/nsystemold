@@ -5,6 +5,36 @@
 <form [formGroup]="dadosForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
     <div class="form-group">
         <div class="tituloCadastro">CADASTRO DE ALUNO</div>
+        <div style="margin-bottom: 20px;">
+            <fieldset>
+                <legend>Foto</legend>
+                <div class="col-lg-6 col-md-6">
+                    <label for="fotoatual">Atual</label>
+                    <div>
+                        <img class="fotoAluno" [src]="fotoAluno" alt="Foto">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label for="foto">Nova</label>
+                    <p-fileUpload 
+                        name="myFile[]" 
+                        customUpload="true" 
+                        (uploadHandler)="myUploader($event)" 
+                        (onRemove)="remove()"
+                        (onClear)="remove()"
+                        accept="image/*" 
+                        chooseLabel="Selecionar"
+                        cancelLabel="Cancelar"
+                        maxFileSize="2097152"
+                        [auto]="true"
+                        invalidFileSizeMessageSummary="{0}: Tamanho da foto inválido, "
+                        invalidFileSizeMessageDetail="tamanho máximo é {0}."                   
+                        >
+                    </p-fileUpload>
+                </div>
+            </fieldset>
+        </div>                    
+
         <div><em>*</em> Campo obrigatório</div> 
         <div class="row">
             <div class="col-lg-3 col-md-6">

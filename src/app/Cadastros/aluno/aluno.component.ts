@@ -6,6 +6,7 @@ import { ServiceConfig } from 'src/app/_config/services.config';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-aluno',
@@ -33,8 +34,13 @@ export class AlunoComponent implements OnInit, OnDestroy {
   isUpdate = true;
   isOk = false;
 
+  uploadedFile : any;
+  uploadedName: any;
+  fotoAluno: SafeResourceUrl;
+
   constructor(private router: Router, private route: ActivatedRoute, 
-    private srvAluno: AlunoService, private messageService: MessageService) {
+    private srvAluno: AlunoService, private messageService: MessageService,
+    private sanitizer:DomSanitizer) {
 
     this.estados = [
       {name: 'Acre', code: 'AC'},
@@ -96,6 +102,31 @@ export class AlunoComponent implements OnInit, OnDestroy {
     );
   }
 
+  myUploader(event) {
+    let fileReader = new FileReader();
+    let _this = this;
+    for (let file of event.files) {
+      fileReader.readAsDataURL(file);
+      fileReader.onloadend = function () {
+          _this.ler(file.name, fileReader.result);
+      };
+    }
+  }
+
+  remove()
+  {
+    this.uploadedFile = null;
+    this.uploadedName = null;
+  }
+
+  private ler(nome, arquivo)
+  {
+    this.uploadedFile = arquivo;
+    console.log(arquivo);
+    this.uploadedName = nome;
+    this.messageService.add({severity:'success', summary: 'Successo', detail: 'Foto incluido!'});
+  }
+  
   private getAluno() {
     let Aluno: AlunoModel;
     let dados = {
@@ -108,7 +139,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
         Aluno.AluDataNasc = new Date(Aluno.AluDataNasc);
       },
       err => { 
-        let msg = err.error.errors.toString();
+        let msg = err.message; //error.errors.toString();
         this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
       },
       ()=>{
@@ -135,7 +166,8 @@ export class AlunoComponent implements OnInit, OnDestroy {
       AluUF: this.dadosForm.value['uf'],
       AluEmail: this.dadosForm.value['email'],
       AluPeso: this.dadosForm.value['peso'],
-      AluAltura: this.dadosForm.value['altura']
+      AluAltura: this.dadosForm.value['altura'],
+      AluFoto: this.uploadedFile
     };    
     if (this.editMode)
     {
@@ -206,6 +238,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
     let AluPeso = null;
     let AluAltura = null;
     let UsuIdf = this.UsuIdf;
+    //let objectURL = null;
    
     if (dados != null)
     {
@@ -226,6 +259,12 @@ export class AlunoComponent implements OnInit, OnDestroy {
       AluPeso = dados.AluPeso;
       AluAltura = dados.AluAltura;
       UsuIdf = dados.UsuIdf;
+
+      if (dados.AluFoto){
+        let imagem = this.bin2String(dados.AluFoto["data"]);
+        this.fotoAluno = this.sanitizer.bypassSecurityTrustUrl(imagem);
+      }
+
     }
     let perfil = JSON.parse(localStorage.getItem('userData')).perfil;
     let isTecnico = (perfil == 'A' || perfil == 'T');
@@ -250,6 +289,15 @@ export class AlunoComponent implements OnInit, OnDestroy {
       'peso': new FormControl(AluPeso, Validators.max(300)),
       'altura': new FormControl(AluAltura, Validators.max(2.9))
     });
+  }
+
+  bin2String(array) {
+    var retorno = '';
+    //var j = 0;
+    for(let j=0;j<array.length;j++){
+      retorno = retorno + String.fromCharCode(array[j])
+    }
+    return retorno;
   }
 
   clear() {

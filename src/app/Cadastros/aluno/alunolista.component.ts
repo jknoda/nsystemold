@@ -49,7 +49,7 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
         })
       },
       err => { 
-        let msg = err.error.errors.toString();
+        let msg = err.message; //error.errors.toString();
         this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
       },
       ()=>{
@@ -141,7 +141,7 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
             this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Aluno excluido!', life: 3000});
           },
           err => { 
-            let msg = err.error.errors.toString();
+            let msg = err.message; //error.errors.toString();
             this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
           },
           ()=>{
