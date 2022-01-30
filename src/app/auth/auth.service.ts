@@ -186,11 +186,13 @@ export class AuthService implements OnDestroy {
     this.getConfigSubscription = this.configSrv.findArray(dados).subscribe(
       data => {
         let emailConfig = {
+          /*
           "service": data[0].CfgVlrStr,
           "user": data[1].CfgVlrStr,
           "pass": data[2].CfgVlrStr,
           "from": data[3].CfgVlrStr,
           "to": data[4].CfgVlrStr,
+          */
           "subject": "",
           "text": "",
           "html": ""
