@@ -21,6 +21,8 @@ export class AnamneseModel {
     public AnaCirurgia: string;
     public AnaOsseo: string;
     public AnaFratura: string;
+    public AnaCns6: string;
+    public AnaTratamento: string;
     public AnaStatus: string;
     public DataInc: Date;
     public DataAlt: Date;

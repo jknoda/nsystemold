@@ -62,12 +62,16 @@
             <div class="col-lg-3 col-md-3">
                 <label for="depressao">Depressão</label>  
                 <p-inputSwitch class="form-control transparente" formControlName="depressao" id="depressao" ></p-inputSwitch>
-            </div>            
+            </div>         
             <div class="col-lg-3 col-md-3">
+                <label for="cns6">Cons.ult.6 meses atv.física</label>  
+                <p-inputSwitch class="form-control transparente" formControlName="cns6" id="cns6" ></p-inputSwitch>
+            </div>      
+              
+            <div class="col-lg-6 col-md-6">
                 <label for="outras">Outras patologias</label>  
                 <input type="text" id="outras" class="form-control" formControlName="outras" pInputText>
             </div>
-
             <div class="col-lg-6 col-md-6">
                 <label for="sangue">Tipo sanguíneo</label>
                 <input type="text" class="form-control" formControlName="sangue" id="sangue" pInputText>
@@ -89,9 +93,9 @@
                 <input type="text" id="osseo" class="form-control" formControlName="osseo" pInputText>
             </div>       
             <div class="col-lg-6 col-md-6">
-                <label for="fratura">Fratura</label>  
-                <input type="text" id="fratura" class="form-control" formControlName="fratura" pInputText>
-            </div>            
+                <label for="tratamento">Tratamento médico (especifique)</label>  
+                <input type="text" id="tratamento" class="form-control" formControlName="tratamento" pInputText>
+            </div>        
         </div>
         <div class="row editButtonSystem">            
             <div class="floatLeft col-sm-1" *ngIf="isOk">

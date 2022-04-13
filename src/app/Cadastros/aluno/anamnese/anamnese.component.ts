@@ -129,7 +129,9 @@ export class AnamneseComponent implements OnInit, OnDestroy {
       AnaMedicamentos: this.dadosForm.value['medicamentos'],
       AnaCirurgia: this.dadosForm.value['cirurgia'],
       AnaOsseo: this.dadosForm.value['osseo'],
-      AnaFratura: this.dadosForm.value['fratura']
+      AnaFratura: this.dadosForm.value['fratura'],
+      AnaCns6: this.dadosForm.value['cns6'],
+      AnaTratamento: this.dadosForm.value['tratamento']
     };    
     if (this.editMode)
     {
