@@ -14,7 +14,7 @@ import { AuthService } from './auth.service';
 export class AuthComponent {
   isLoginMode = true;
   isLoading = false;
-  displayOk = false;
+  //displayOk = false;
   aceito = false;
 
   constructor(private authService: AuthService, private router: Router, private messageService: MessageService) {}
@@ -27,11 +27,13 @@ export class AuthComponent {
     if (!form.valid) {
       return;
     }
+    /*
     if (!this.isLoginMode && !this.aceito)
     {
       this.messageService.add({severity:'error', summary: 'Erro', detail: "Clique em 'Concordo com a política de privacidade'!"});
       return;
     }
+    */
     const email = form.value.email;
     const password = form.value.password;
     const passwordRep = form.value.passwordRep;
@@ -67,6 +69,7 @@ export class AuthComponent {
     this.messageService.clear();
   }  
 
+  /*
   clickLer(){
     this.displayOk = true;
   }
@@ -75,4 +78,5 @@ export class AuthComponent {
     this.displayOk = false;
     this.aceito = true;
   }
+  */
 }

@@ -44,7 +44,7 @@ import { TreinoListaComponent } from './Treinos/treino/treinolista.component';
 import { TreinoatvComponent } from './Treinos/treinoatv/treinoatv.component';
 import { TreinoatvlistaComponent } from './Treinos/treinoatv/treinoatvlista.component';
 import { AnamneseComponent } from './Cadastros/aluno/anamnese/anamnese.component';
- import { TreinoalulistaComponent } from './Treinos/treinoalu/treinoalulista.component';
+import { TreinoalulistaComponent } from './Treinos/treinoalu/treinoalulista.component';
 import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.component';
 import { TesteModule } from './teste/teste.module';
@@ -52,6 +52,7 @@ import { ConsultasModule } from './Consultas/consultas.module';
 import { ConfiguracaoService } from './shared/configuracao.service';
 import { NoticiaslistaComponent } from './Noticias/noticiaslista.component';
 import { NoticiasComponent } from './Noticias/noticias.component';
+import { AlterComponent } from './principal/alter/alter.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 
 @NgModule({
@@ -65,6 +66,7 @@ import { NoticiasComponent } from './Noticias/noticias.component';
     AlunoListaComponent,
     AnamneseComponent,
     DeniedComponent,
+    AlterComponent,
     AtividadeListaComponent,
     AtividadeComponent,
     TreinoComponent,

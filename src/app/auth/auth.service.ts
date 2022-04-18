@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy  } from '@angular/core';
 import { Router, UrlSegment } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, user } from "@angular/fire/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, user, updatePassword } from "@angular/fire/auth";
 import { TopoService } from '../principal/topo/topo.service';
 
 import { User } from './user.model';
@@ -64,6 +64,16 @@ export class AuthService implements OnDestroy {
       this.topoService.isAuthenticated.emit(true);
       return userCredential;
     }).catch((error) => {
+      this.topoService.isAuthenticated.emit(false);
+      this.handleError(error);
+    });
+  }
+
+  redefine (senha: string){
+    //console.log('senha:',senha);
+    //console.log('user',this.auth.currentUser);
+    return updatePassword(this.auth.currentUser, senha)
+    .catch((error) => {
       this.topoService.isAuthenticated.emit(false);
       this.handleError(error);
     });

@@ -54,16 +54,16 @@
           {{ isLoginMode ? 'Novo Usuário' : 'Logar' }}
         </button>
       </div>
-      <div style="margin-top: 50px;" *ngIf="!isLoginMode">
+      <!--<div style="margin-top: 50px;" *ngIf="!isLoginMode">
         <p-checkbox [(ngModel)]="aceito" [binary]="true" [ngModelOptions]="{standalone: true}"></p-checkbox>
         <span>&nbsp;&nbsp;</span>
         <a id="myLink" (click)="clickLer();" style="cursor: pointer;">Li e concordo com a Política de privacidade da Yamazaki Judô.</a>
-      </div>
+      </div>-->
     </form>
   </div>
 </div>
 
-
+<!--
 <p-dialog header="Polícita de privacidade" [(visible)]="displayOk" [modal]="true">
   <div class="politica">
     <h2>Política Privacidade</h2>
@@ -89,3 +89,4 @@
     <p-button icon="pi pi-check" (click)="this.displayOk=false;" label="Ok" styleClass="p-button-text"></p-button>
   </ng-template>
 </p-dialog>
+-->
