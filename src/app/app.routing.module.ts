@@ -24,6 +24,7 @@ import { treinoviacalenComponent } from './Treinos/treinoviacalendario/treinovia
 import { NoticiaslistaComponent } from './Noticias/noticiaslista.component';
 import { NoticiasComponent } from './Noticias/noticias.component';
 import { AlterComponent } from './principal/alter/alter.component';
+import { CheckinComponent } from './principal/checkin/checkin.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
         {path: 'auth', component: AuthComponent},
         {path: 'denied', component: DeniedComponent},
         {path: 'alter', component: AlterComponent},
+        {path: 'checkin', component: CheckinComponent},
         {path: 'treinoscalendario', component: TreinoscalendarioComponent},
         {path: 'sugestoes', component: SugestoesComponent},
         {path: 'teste', component: TesteComponent},

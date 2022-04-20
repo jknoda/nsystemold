@@ -30,6 +30,13 @@ export class TreinoService {
         return this.http.post<TreinoModel>(this.url + "/api/treino/findall", body, httpOptions);
     }
 
+    getTreTodosData(body:any): Observable<TreinoModel> {
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
+        };        
+        return this.http.post<TreinoModel>(this.url + "/api/treino/findalldate", body, httpOptions);
+    }
+
     updateTreDados(body:any): Observable<TreinoModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })

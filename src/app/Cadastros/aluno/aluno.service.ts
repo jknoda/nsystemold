@@ -39,6 +39,13 @@ export class AlunoService {
         return this.http.post<AlunoModel>(this.url + "/api/aluno/findallstatus", body, httpOptions);
     }
 
+    getAluTodosResp(body:any): Observable<AlunoModel> {
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
+        };        
+        return this.http.post<AlunoModel>(this.url + "/api/aluno/findallresp", body, httpOptions);
+    }
+
     updateAluDados(body:any): Observable<AlunoModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })

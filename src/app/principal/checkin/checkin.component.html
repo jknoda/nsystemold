@@ -1,0 +1,36 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="card" *ngIf="!isLoading">
+    <div class="tituloCadastro">CHECK-IN</div>
+    <div class="row">
+        <div class="col-lg-3 col-md-3">
+            <label for="data">Data</label>
+            <p-calendar appendTo="body" class="form-control" [(ngModel)]="data" id="data" dateFormat="dd/mm/yy" (ngModelChange)="changeData($event)"></p-calendar>
+        </div>
+        <div class="col-lg-3 col-md-3">
+            <label for="treinos">Selecione</label>
+            <p-dropdown class="form-control" [options]="Treinos" [(ngModel)]="selectTreinoCode" optionLabel="name" optionValue="code"></p-dropdown>
+        </div>
+    </div>
+    <hr>
+    <p-table responsiveLayout="scroll" #dt [value]="Alunos" [paginator]="false" 
+        [rowHover]="true" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="AluNome">Nome <p-sortIcon field="AluNome"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-Aluno>
+            <tr class="listaSystem">
+                <td [ngClass]="{'vermelho' : !Aluno.isAtivo}">{{Aluno.AluNome}}</td>
+                <td>
+                    <button pButton pRipple icon="fas fa-calendar-check" class="p-button-rounded p-button-rounded" (click)="checkinAluno(Aluno.AluIdf, Aluno.AluNome)" title="Check-in"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

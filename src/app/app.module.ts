@@ -53,6 +53,7 @@ import { ConfiguracaoService } from './shared/configuracao.service';
 import { NoticiaslistaComponent } from './Noticias/noticiaslista.component';
 import { NoticiasComponent } from './Noticias/noticias.component';
 import { AlterComponent } from './principal/alter/alter.component';
+import { CheckinComponent } from './principal/checkin/checkin.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 
 @NgModule({
@@ -67,6 +68,7 @@ import { AlterComponent } from './principal/alter/alter.component';
     AnamneseComponent,
     DeniedComponent,
     AlterComponent,
+    CheckinComponent,
     AtividadeListaComponent,
     AtividadeComponent,
     TreinoComponent,

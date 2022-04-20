@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   selector: 'app-alunolista',
   templateUrl: './alunolista.component.html',
   styleUrls: ['./aluno.component.css'],
-  providers: [MessageService,ConfirmationService,AlunoService,MessageService]
+  providers: [MessageService,ConfirmationService,AlunoService]
 })
 export class AlunoListaComponent implements OnInit, OnDestroy {
   private EmpIdf: number = ServiceConfig.EMPIDF;

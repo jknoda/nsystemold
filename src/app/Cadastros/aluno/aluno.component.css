@@ -17,17 +17,17 @@ textarea.ng-invalid.ng-touched {
 }
 
 fieldset {
-    border: 1px solid #999;
-  }
+  border: 1px solid #999;
+}
   
-  legend {
-    display: inline;
-    width: auto;
-    border: 0;
-    padding: 10px;
-    margin-bottom: 0px !important;
-  }
+legend {
+  display: inline;
+  width: auto;
+  border: 0;
+  padding: 10px;
+  margin-bottom: 0px !important;
+}
 
-  .fotoAluno {
-    height: 100px;
-  }
+.fotoAluno {
+  height: 100px;
+}

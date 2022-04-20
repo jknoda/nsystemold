@@ -81,6 +81,13 @@ export class MenuComponent implements OnInit, OnDestroy {
                 visible:this.isAuxiliar
             },
             {
+                label: 'Checkin',
+                icon: 'fas fa-check',
+                routerLink:'checkin',
+                visible: true,
+                command:()=>{this.onClick();}
+            },
+            {
                 label: 'Alterar senha',
                 icon: 'fa fa-key',
                 routerLink:'alter',
