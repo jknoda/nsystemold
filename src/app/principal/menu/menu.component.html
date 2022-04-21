@@ -10,6 +10,12 @@
             <li class="nav-item" *ngIf="isAuthenticated">
                 <p-panelMenu [model]="items" [style]="{'width':'300px', 'margin-left':'10px'}"></p-panelMenu>
             </li>
+            <li class="nav-item" *ngIf="!isAuthenticated">
+                <a href="http://www.yamazakijudo.com.br">
+                    <i class="icon-exit" aria-hidden="true"></i>
+                    <span>Sair</span>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
