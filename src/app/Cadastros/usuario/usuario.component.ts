@@ -1,3 +1,4 @@
+import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -34,7 +35,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   isAdm = false;
   isLoading = true;
   viaLista = false;
-  acessoSubscription: Subscription;
+  //acessoSubscription: Subscription;
 
   constructor(private srvUsuario: UsuarioService, private route: ActivatedRoute, private router: Router, private messageService: MessageService) { 
     this.perfis = [
@@ -61,7 +62,27 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     if (!this.viaLista){
       this.UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
       this.UsuEmail = JSON.parse(localStorage.getItem('userData')).email;
+    }    
+    if (this.UsuIdf == null || this.UsuIdf == 0)
+    {
+      // Incluir usuario
+      let dados = {
+        EmpIdf: this.EmpIdf,
+        UsuEmail: this.UsuEmail,
+        UsuNome:  this.UsuEmail,
+        UsuCPF:  0,
+        UsuPerfil:  'U'
+      };
+      this.incluirUser(dados);
     }
+    else
+    {
+      this.editUser();
+    }
+  }
+
+  editUser()
+  {    
     if (this.UsuIdf != 0 && this.UsuIdf != null){
       this.editMode = true;
       let dados = {
@@ -78,17 +99,13 @@ export class UsuarioComponent implements OnInit, OnDestroy {
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
         },
         ()=>{
+          this.isLoading = false;
           this.initForm(dadosOk);      
         }
       );
-    }
-    else {
-      this.editMode = false;
-      this.initForm(null);
-    }    
+    }   
   }
 
-  
   onSubmit() {
     let dados = {
       EmpIdf: this.EmpIdf,
@@ -112,41 +129,50 @@ export class UsuarioComponent implements OnInit, OnDestroy {
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
         },
         ()=>{
+          this.isLoading = false;
           this.retorno();
         }
-
       );
     }else{
-      let dadosAdd = {
-        ...dados,
-        UsuEmail: this.userForm.value['email']
-      }
-      this.addDadosUsuario = this.srvUsuario.addDados(dadosAdd).subscribe(
-        (ret) => {
-            let user = JSON.parse(localStorage.getItem('userData'));
-            user.usuidf = ret;
-            localStorage.setItem('userData', JSON.stringify(user));
-            let dados = {
-              Origem: 'A',
-              Usuario: user.nome,
-              Email: user.email,
-              UsuIdf: user.usuidf
-            };
-            this.acessoSubscription = this.srvUsuario.saveAcesso(dados).subscribe();            
-            this.messageService.add({severity:'success', summary: 'Successo', detail: 'Cadastro incluido!'});
-        },
-        err => { 
-          let msg = err.error.errors.toString();
-          if (msg.includes('usuemail_UNIQUE')){
-            msg = 'Email já cadastrado!';
-          }
-          this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
-        },
-        ()=>{
-          this.retorno();
-        }
-      );
+      this.incluirUser(dados);
     }
+  }
+
+  incluirUser(dados)
+  {
+    let dadosAdd = {
+      ...dados,
+      UsuEmail: this.UsuEmail
+    }
+    this.addDadosUsuario = this.srvUsuario.addDados(dadosAdd).subscribe(
+      (ret) => {
+          let user = JSON.parse(localStorage.getItem('userData'));
+          user.usuidf = ret;
+          this.UsuIdf = user.usuidf;
+          localStorage.setItem('userData', JSON.stringify(user));
+          //let dados = {
+            //Origem: 'A',
+            //Usuario: user.nome,
+            //Email: user.email,
+            //UsuIdf: user.usuidf
+          //};
+          //this.acessoSubscription = this.srvUsuario.saveAcesso(dados).subscribe();            
+          this.messageService.add({severity:'success', summary: 'Successo', detail: 'Cadastro incluido!'});
+      },
+      err => { 
+        let msg = err.error.errors.toString();
+        if (msg.includes('usuemail_UNIQUE')){
+          msg = 'Email já cadastrado!';
+        }
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+      },
+      ()=>{
+        this.isLoading = false;
+        this.initForm(null);
+        this.editMode = true;
+        this.editUser();
+      }
+    );
   }
 
   onCancel() {
@@ -207,9 +233,9 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     if (this.lerDadosUsuario != null){
       this.lerDadosUsuario.unsubscribe();
     }
-    if (this.acessoSubscription != null){
-      this.acessoSubscription.unsubscribe();
-    }
+    //if (this.acessoSubscription != null){
+//      this.acessoSubscription.unsubscribe();
+    //}
   }  
 }
 
