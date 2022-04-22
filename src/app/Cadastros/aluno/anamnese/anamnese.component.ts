@@ -125,12 +125,12 @@ export class AnamneseComponent implements OnInit, OnDestroy {
       AnaConvulcoes: this.dadosForm.value['convulcoes'],
       AnaAlergia: this.dadosForm.value['alergia'],
       AnaDepressao: this.dadosForm.value['depressao'],
+      AnaCns6: this.dadosForm.value['cns6'],
       AnaOutras: this.dadosForm.value['outras'],
       AnaMedicamentos: this.dadosForm.value['medicamentos'],
       AnaCirurgia: this.dadosForm.value['cirurgia'],
       AnaOsseo: this.dadosForm.value['osseo'],
       AnaFratura: this.dadosForm.value['fratura'],
-      AnaCns6: this.dadosForm.value['cns6'],
       AnaTratamento: this.dadosForm.value['tratamento']
     };    
     if (this.editMode)
@@ -198,11 +198,13 @@ export class AnamneseComponent implements OnInit, OnDestroy {
     let AnaConvulcoes = false;
     let AnaAlergia = null;
     let AnaDepressao = false;
+    let AnaCns6 = false;
     let AnaOutras = null;
     let AnaMedicamentos = null;
     let AnaCirurgia = null;
     let AnaOsseo = null;
     let AnaFratura = null;
+    let AnaTratamento = null;
    
     if (dados != null)
     {
@@ -220,11 +222,13 @@ export class AnamneseComponent implements OnInit, OnDestroy {
       AnaConvulcoes = dados.AnaConvulcoes == '1';
       AnaAlergia = dados.AnaAlergia;
       AnaDepressao = dados.AnaDepressao == '1';
+      AnaCns6 = dados.AnaCns6 == '1';
       AnaOutras = dados.AnaOutras;
       AnaMedicamentos = dados.AnaMedicamentos;
       AnaCirurgia = dados.AnaCirurgia;
       AnaOsseo = dados.AnaOsseo;
       AnaFratura = dados.AnaFratura;
+      AnaTratamento = dados.AnaTratamento;
     }
 
     let perfil = JSON.parse(localStorage.getItem('userData')).perfil;
@@ -249,11 +253,13 @@ export class AnamneseComponent implements OnInit, OnDestroy {
       'convulcoes': new FormControl(AnaConvulcoes),
       'alergia': new FormControl(AnaAlergia),
       'depressao': new FormControl(AnaDepressao),
+      'cns6': new FormControl(AnaCns6),
       'outras': new FormControl(AnaOutras),
       'medicamentos': new FormControl(AnaMedicamentos),
       'cirurgia': new FormControl(AnaCirurgia),
       'osseo': new FormControl(AnaOsseo),
-      'fratura': new FormControl(AnaFratura)
+      'fratura': new FormControl(AnaFratura),
+      'tratamento': new FormControl(AnaTratamento)
     });
   }
 
