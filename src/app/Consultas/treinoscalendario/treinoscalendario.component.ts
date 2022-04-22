@@ -269,7 +269,7 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
       (dados) => {
       },
       err => { 
-        console.log('error',err);
+        //console.log('error',err);
         let msg = err.error.errors.toString();
         if (msg.toUpperCase().includes('PRIMARY'))
         {

@@ -157,7 +157,7 @@ export class AuthService implements OnDestroy {
         }
       },
       err => {
-         console.log('ERRO:',err);
+         //console.log('ERRO:',err);
          this.handleError(err);
          this.router.navigate(["auth"]);
       },

@@ -10,7 +10,7 @@ export class SendmailService {
     constructor(private http: HttpClient) { }
 
     sendMail(body:any): Observable<MailModel> {
-        console.log('email:',body);
+        //console.log('email:',body);
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        

@@ -55,13 +55,13 @@ export class NoticiasComponent implements OnInit, OnDestroy {
   private ler(nome, arquivo)
   {
     this.uploadedFile = arquivo;
-    console.log(arquivo);
+    //console.log(arquivo);
     this.uploadedName = nome;
     this.messageService.add({severity:'success', summary: 'Successo', detail: 'Imagem incluida!'});
   }
 
   ngOnInit() {
-    console.log("Start")
+    //console.log("Start")
     this.mail = JSON.parse(localStorage.getItem('emailConfig'));
     this.route.queryParams
       .subscribe(params => {

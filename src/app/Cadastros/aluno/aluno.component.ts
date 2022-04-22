@@ -122,7 +122,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
   private ler(nome, arquivo)
   {
     this.uploadedFile = arquivo;
-    console.log(arquivo);
+    //console.log(arquivo);
     this.uploadedName = nome;
     this.messageService.add({severity:'success', summary: 'Successo', detail: 'Foto incluido!'});
   }
@@ -197,7 +197,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
           dados.AluIdf = ret;
         },
         err => { 
-          console.log('err',err);
+          //console.log('err',err);
           let msg = err.error.errors.toString();
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
         },
