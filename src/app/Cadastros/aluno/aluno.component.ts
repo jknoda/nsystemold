@@ -154,7 +154,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
       AluIdf: this.AluIdf,
       UsuIdf: this.UsuIdf,
       AluNome: this.dadosForm.value['nome'],
-      AluCPF:  this.dadosForm.value['cpf'],
+      AluCPF:  this.dadosForm.value['cpf'].replace(/[^\d]+/g,''),
       AluDataNasc: this.dadosForm.value['nascimento'],
       AluNomeResp: this.dadosForm.value['resp'],
       AluFoneResp: this.dadosForm.value['foneresp'],
