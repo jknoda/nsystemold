@@ -7,17 +7,22 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ThisReceiver } from '@angular/compiler';
+import { UsuarioModel } from 'src/app/model/usuario.model';
+import { UsuarioService } from '../usuario/usuario.service';
+import { elementMatches } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-aluno',
   templateUrl: './aluno.component.html',
   styleUrls: ['./aluno.component.css'],
-  providers: [ConfirmationService,AlunoService,MessageService]
+  providers: [ConfirmationService,AlunoService,MessageService,UsuarioService]
 })
 export class AlunoComponent implements OnInit, OnDestroy {
   private EmpIdf: number = ServiceConfig.EMPIDF;
   private AluIdf: number = 0;
   UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
+  isTecnico = false;
 
   dadosForm: FormGroup;
 
@@ -25,11 +30,14 @@ export class AlunoComponent implements OnInit, OnDestroy {
   updateDadosAluno: Subscription;
   deleteDadosAluno: Subscription;
   lerDadosAluno: Subscription;
+  lerDadosUsuario: Subscription;
 
   isLoading = true;
   editMode = false;
 
-  estados: UF[];
+  estados: DD[];
+
+  usuarios: DD[];
   
   isUpdate = true;
   isOk = false;
@@ -39,7 +47,9 @@ export class AlunoComponent implements OnInit, OnDestroy {
   fotoAluno: SafeResourceUrl;
 
   constructor(private router: Router, private route: ActivatedRoute, 
-    private srvAluno: AlunoService, private messageService: MessageService,
+    private srvAluno: AlunoService, 
+    private srvUsuario: UsuarioService, 
+    private messageService: MessageService,
     private sanitizer:DomSanitizer) {
 
     this.estados = [
@@ -82,9 +92,14 @@ export class AlunoComponent implements OnInit, OnDestroy {
     if (this.updateDadosAluno != null){
       this.updateDadosAluno.unsubscribe();
     }
+    if (this.lerDadosUsuario != null){
+      this.lerDadosUsuario.unsubscribe();
+    }
   }
 
   ngOnInit() {
+    let perfil = JSON.parse(localStorage.getItem('userData')).perfil;
+    this.isTecnico = (perfil == 'A' || perfil == 'T');
     this.route.queryParams
       .subscribe(params => {
         this.EmpIdf = params.EmpIdf;
@@ -94,6 +109,10 @@ export class AlunoComponent implements OnInit, OnDestroy {
           this.editMode = true;
           this.getAluno();
         } else {
+          if (this.isTecnico)
+          {
+            this.getUsuario();
+          }
           this.editMode = false;
           let Aluno: AlunoModel;
           this.initForm(Aluno);
@@ -127,6 +146,29 @@ export class AlunoComponent implements OnInit, OnDestroy {
     this.messageService.add({severity:'success', summary: 'Successo', detail: 'Foto incluido!'});
   }
   
+  private getUsuario() {
+    let dados = {
+      EmpIdf: this.EmpIdf
+    };
+    this.usuarios = [];
+    this.lerDadosUsuario = this.srvUsuario.getTodos(dados).subscribe(
+      (dadosRet:any) => {        
+        dadosRet.forEach(element => {
+            this.usuarios.push({
+              name:  element.UsuIdf.toString() + "-" + element.UsuNome + " - " + element.UsuEmail,
+              code: element.UsuIdf.toString()
+            });
+        });
+      },
+      err => { 
+        let msg = err.message; //error.errors.toString();
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+      },
+      ()=>{
+        return;
+      });
+  }
+
   private getAluno() {
     let Aluno: AlunoModel;
     let dados = {
@@ -137,6 +179,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
       (dados) => {
         Aluno = JSON.parse(JSON.stringify(dados));
         Aluno.AluDataNasc = new Date(Aluno.AluDataNasc);
+        this.UsuIdf = Aluno.UsuIdf;
       },
       err => { 
         let msg = err.message; //error.errors.toString();
@@ -152,9 +195,9 @@ export class AlunoComponent implements OnInit, OnDestroy {
     let dados = {
       EmpIdf: this.EmpIdf,
       AluIdf: this.AluIdf,
-      UsuIdf: this.UsuIdf,
+      UsuIdf: JSON.parse(localStorage.getItem('userData')).usuidf,
       AluNome: this.dadosForm.value['nome'],
-      AluCPF:  this.dadosForm.value['cpf'].replace(/[^\d]+/g,''),
+      AluCPF:  this.dadosForm.value['cpf'],
       AluDataNasc: this.dadosForm.value['nascimento'],
       AluNomeResp: this.dadosForm.value['resp'],
       AluFoneResp: this.dadosForm.value['foneresp'],
@@ -169,11 +212,17 @@ export class AlunoComponent implements OnInit, OnDestroy {
       AluAltura: this.dadosForm.value['altura'],
       AluFoto: this.uploadedFile
     };    
+    if (dados.AluCPF != null)
+    {
+      dados.AluCPF = dados.AluCPF.replace(/[^\d]+/g,'');
+    }
+    //console.log('edit',this.editMode);
     if (this.editMode)
     {
       let dadosUpdate = {
         ...dados
       }
+      dadosUpdate.UsuIdf = this.UsuIdf;
       this.updateDadosAluno = this.srvAluno.updateAluDados(dadosUpdate).subscribe(
         () => {
           this.messageService.add({severity:'success', summary: 'Successo', detail: 'Aluno atualizado!'});
@@ -274,6 +323,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
     }
 
     this.dadosForm = new FormGroup({
+      'usuidf': new FormControl(UsuIdf, Validators.required),
       'nome': new FormControl(AluNome, Validators.required),
       'cpf': new FormControl(AluCPF),
       'nascimento': new FormControl(AluDataNasc),
@@ -306,7 +356,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
 
 }
 
-interface UF {
+interface DD {
   name: string,
   code: string
 }
