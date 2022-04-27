@@ -6,6 +6,16 @@
     </div>
     <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
       <div class="form-group authform">
+        <button class="btn btn-primary" (click)="onSwitchMode()" type="button" style="font-size: smaller;">
+          {{ isLoginMode ? 'Novo Usuário' : 'Logar' }}
+        </button>
+        <hr>
+        <div class="tituloCadastro">
+          <span>
+            {{ isLoginMode ? 'Fazer login' : 'Cadastrar novo login' }}
+          </span>
+        </div>
+        <br/>
         <label for="email">e-Mail</label>
         <input
           type="email"
@@ -48,11 +58,7 @@
           [disabled]="!authForm.valid"
         >
           {{ isLoginMode ? 'Login' : 'Novo' }}
-        </button>
-        |
-        <button class="btn btn-primary" (click)="onSwitchMode()" type="button">
-          {{ isLoginMode ? 'Novo Usuário' : 'Logar' }}
-        </button>
+        </button>     
       </div>
       <!--<div style="margin-top: 50px;" *ngIf="!isLoginMode">
         <p-checkbox [(ngModel)]="aceito" [binary]="true" [ngModelOptions]="{standalone: true}"></p-checkbox>

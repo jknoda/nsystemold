@@ -44,6 +44,13 @@ em {
     min-height: 550px;
 }
 
+.maxDisplay{
+    display: block;
+}
+
+.minDisplay{
+    display: none;
+}
 
 @media screen and (max-width: 800px) {
    .listaSystem td {
@@ -58,4 +65,13 @@ em {
     .editButtonSystem {
         display: flex;
     }
+    
+    .maxDisplay{
+        display: none;
+    }
+    
+    .minDisplay{
+        display: block;
+    }
+
 } 

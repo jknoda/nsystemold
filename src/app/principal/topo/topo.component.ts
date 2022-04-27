@@ -59,4 +59,9 @@ export class TopoComponent implements OnInit, OnDestroy {
         }
     }
 
+    menuClose() {
+        this.showMenu  = false;
+        this.class = "hideMenu";
+    }
+
 }

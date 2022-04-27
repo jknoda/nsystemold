@@ -4,8 +4,16 @@
             <i class="minDisplay fas fa-bars">&nbsp;</i>
         </a> 
         <a class="navbar-brand" routerLink="/" routerLinkActive="active">
-            <span class="maxDisplay">Associação Yamazaki de Judô</span>
-            <span class="minDisplay">AYJudô</span>
+            <span class="maxDisplay">
+                <i class="fas fa-home">
+                Associação Yamazaki de Judô
+                </i>
+            </span>
+            <span class="minDisplay" (click)="menuClose()">
+                <i class="fas fa-home">
+                AYJudô
+                </i>                
+            </span>
         </a>
         <ul class="nav right-section navbar-nav">
             <li *ngIf="!isAuthenticated">
