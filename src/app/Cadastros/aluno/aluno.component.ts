@@ -246,8 +246,12 @@ export class AlunoComponent implements OnInit, OnDestroy {
           dados.AluIdf = ret;
         },
         err => { 
-          //console.log('err',err);
+          console.log('err',err);
           let msg = err.error.errors.toString();
+          if (!msg)
+          {
+            msg = err.error.msg;
+          }
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
         },
         () => {
