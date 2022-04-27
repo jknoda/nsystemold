@@ -2,13 +2,13 @@
     <div class="minDisplay">
         <div *ngIf="isAuthenticated">
             <div class="row" style="text-align: right; margin-right: 10px;">
-                <button class="btn btn-primary botaoMenu" type="button" style="font-size: smaller;" title="Cadastro de Aluno" routerLink='alunolista'>
+                <button class="btn btn-primary botaoMenu" type="button" style="font-size: smaller;" title="Cadastro de Aluno" routerLink='../alunolista'>
                     <i class='fas fa-user-graduate'></i>
                 </button>
-                <button class="btn btn-primary botaoMenu" type="button" style="font-size: smaller;" title="Check-in" routerLink='checkin'>
+                <button class="btn btn-primary botaoMenu" type="button" style="font-size: smaller;" title="Check-in" routerLink='../checkin'>
                     <i class='fas fa-check'></i>
                 </button>
-                <button class="btn btn-primary botaoMenu" type="button" style="font-size: smaller;" title="Alterar Senha"  routerLink='alter'>
+                <button class="btn btn-primary botaoMenu" type="button" style="font-size: smaller;" title="Alterar Senha"  routerLink='../alter'>
                     <i class='fa fa-key'></i>
                 </button>
                 <button class="btn btn-primary botaoMenu" type="button" style="font-size: smaller; "title="Sair" (click)="logout()">
@@ -18,7 +18,7 @@
         </div>
         <div *ngIf="!isAuthenticated">
             <div class="row">
-                <button class="btn btn-primary botaoMenu" type="button" style="font-size: smaller;" title="Login" routerLink='auth'>
+                <button class="btn btn-primary botaoMenu" type="button" style="font-size: smaller;" title="Login" routerLink='../auth'>
                     <i class='fa fa-sign-in'>&nbsp;&nbsp;Acessar</i>
                 </button>
             </div>
