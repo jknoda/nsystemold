@@ -211,9 +211,11 @@ export class AlunoComponent implements OnInit, OnDestroy {
       AluTImg: this.dadosForm.value['timagem'],
       AluFoto: this.uploadedFile
     };    
-    if (dados.AluCPF != null)
-    {
+    if (dados.AluCPF != null){
       dados.AluCPF = dados.AluCPF.replace(/[^\d]+/g,'');
+    }
+    if (dados.AluCPF == ''){
+      dados.AluCPF = 0;
     }
     if (this.editMode)
     {
