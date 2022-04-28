@@ -37,10 +37,14 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
   }
 
   private getAlunos() {
+    let usuidf = this.UsuIdf;
+    if (this.isTecnico) usuidf = 0;
     let dados = {
-      EmpIdf: this.EmpIdf
+      EmpIdf: this.EmpIdf,
+      AluStatus: 'A',
+      UsuIdf: usuidf
     };
-    this.lerDadosAluno = this.srvAluno.getAluTodos(dados).subscribe(
+    this.lerDadosAluno = this.srvAluno.getAluTodosResp(dados).subscribe(
       (dados) => {
         this.Alunos = JSON.parse(JSON.stringify(dados));
         this.Alunos.forEach(item=>{

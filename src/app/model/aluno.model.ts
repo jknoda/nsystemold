@@ -17,8 +17,8 @@ export class AlunoModel {
     public AluAltura: number;
     public AluStatus: string;
     public UsuIdf: number;
-    public UsuTPri: Date;
-    public UsuTImg: Date;
+    public AluTPri: string;
+    public AluTImg: string;
     public AluFoto: Blob;
     public DataInc: Date;
     public DataAlt: Date;

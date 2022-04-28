@@ -7,10 +7,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ThisReceiver } from '@angular/compiler';
-import { UsuarioModel } from 'src/app/model/usuario.model';
 import { UsuarioService } from '../usuario/usuario.service';
-import { elementMatches } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-aluno',
@@ -37,7 +34,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
 
   estados: DD[];
 
-  usuarios: DD[];
+  usuarios: DD[];  
   
   isUpdate = true;
   isOk = false;
@@ -100,6 +97,10 @@ export class AlunoComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let perfil = JSON.parse(localStorage.getItem('userData')).perfil;
     this.isTecnico = (perfil == 'A' || perfil == 'T');
+    if (this.isTecnico)
+    {
+      this.getUsuario();
+    }
     this.route.queryParams
       .subscribe(params => {
         this.EmpIdf = params.EmpIdf;
@@ -109,10 +110,6 @@ export class AlunoComponent implements OnInit, OnDestroy {
           this.editMode = true;
           this.getAluno();
         } else {
-          if (this.isTecnico)
-          {
-            this.getUsuario();
-          }
           this.editMode = false;
           let Aluno: AlunoModel;
           this.initForm(Aluno);
@@ -195,7 +192,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
     let dados = {
       EmpIdf: this.EmpIdf,
       AluIdf: this.AluIdf,
-      UsuIdf: JSON.parse(localStorage.getItem('userData')).usuidf,
+      UsuIdf: this.dadosForm.value['usuidf'], // JSON.parse(localStorage.getItem('userData')).usuidf,
       AluNome: this.dadosForm.value['nome'],
       AluCPF:  this.dadosForm.value['cpf'],
       AluDataNasc: this.dadosForm.value['nascimento'],
@@ -210,19 +207,21 @@ export class AlunoComponent implements OnInit, OnDestroy {
       AluEmail: this.dadosForm.value['email'],
       AluPeso: this.dadosForm.value['peso'],
       AluAltura: this.dadosForm.value['altura'],
+      AluTPri: this.dadosForm.value['tprivacidade'],
+      AluTImg: this.dadosForm.value['timagem'],
       AluFoto: this.uploadedFile
     };    
     if (dados.AluCPF != null)
     {
       dados.AluCPF = dados.AluCPF.replace(/[^\d]+/g,'');
     }
-    //console.log('edit',this.editMode);
     if (this.editMode)
     {
       let dadosUpdate = {
         ...dados
       }
-      dadosUpdate.UsuIdf = this.UsuIdf;
+      //console.log('DADOSUPDATE',dadosUpdate);
+      //dadosUpdate.UsuIdf = this.UsuIdf;
       this.updateDadosAluno = this.srvAluno.updateAluDados(dadosUpdate).subscribe(
         () => {
           this.messageService.add({severity:'success', summary: 'Successo', detail: 'Aluno atualizado!'});
@@ -290,8 +289,9 @@ export class AlunoComponent implements OnInit, OnDestroy {
     let AluEmail = null;
     let AluPeso = null;
     let AluAltura = null;
+    let AluTPri = "N";
+    let AluTImg = "N";
     let UsuIdf = this.UsuIdf;
-    //let objectURL = null;
    
     if (dados != null)
     {
@@ -311,6 +311,8 @@ export class AlunoComponent implements OnInit, OnDestroy {
       AluEmail = dados.AluEmail;
       AluPeso = dados.AluPeso;
       AluAltura = dados.AluAltura;
+      AluTPri = dados.AluTPri;
+      AluTImg = dados.AluTImg;
       UsuIdf = dados.UsuIdf;
 
       if (dados.AluFoto){
@@ -319,15 +321,17 @@ export class AlunoComponent implements OnInit, OnDestroy {
       }
 
     }
+    //console.log('USUARIOS',this.usuarios);
+    //console.log('USUIDF',UsuIdf);
+    //console.log('DADOS',dados);
     let perfil = JSON.parse(localStorage.getItem('userData')).perfil;
     let isTecnico = (perfil == 'A' || perfil == 'T');
     this.isOk = UsuIdf == this.UsuIdf || isTecnico;
     if (!this.isOk){
       this.router.navigate(['/denied']);
     }
-
     this.dadosForm = new FormGroup({
-      'usuidf': new FormControl(UsuIdf, Validators.required),
+      'usuidf': new FormControl(UsuIdf.toString(), Validators.required),
       'nome': new FormControl(AluNome, Validators.required),
       'cpf': new FormControl(AluCPF),
       'nascimento': new FormControl(AluDataNasc),
@@ -341,7 +345,9 @@ export class AlunoComponent implements OnInit, OnDestroy {
       'uf': new FormControl(AluUF),
       'email': new FormControl(AluEmail, Validators.email),
       'peso': new FormControl(AluPeso, Validators.max(300)),
-      'altura': new FormControl(AluAltura, Validators.max(2.9))
+      'altura': new FormControl(AluAltura, Validators.max(2.9)),
+      'tprivacidade': new FormControl(AluTPri),
+      'timagem':new FormControl(AluTImg)
     });
   }
 
