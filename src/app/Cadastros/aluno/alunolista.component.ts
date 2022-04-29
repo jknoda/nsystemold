@@ -71,7 +71,7 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
         EmpIdf: item.EmpIdf,
         AluIdf: item.AluIdf
       };
-      item.isUser = (item.UsuIdf == this.UsuIdf);
+      item.isUser = true; //(item.UsuIdf == this.UsuIdf);
       this.lerDadosAnamnese = this.srvAluno.hasAnamnese(dados).subscribe(
         (dados) => {
           ret = dados;
@@ -154,6 +154,10 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
           });
         }
     });
+  }
+
+  responsaveis(Aluno: AlunoModel) {
+    this.router.navigate(['responsaveis'], { queryParams: { EmpIdf: Aluno.EmpIdf, AluIdf: Aluno.AluIdf, AluNome: Aluno.AluNome } });
   }
 
   esportesAluno(Aluno: AlunoModel) {

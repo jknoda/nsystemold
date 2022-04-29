@@ -25,6 +25,7 @@ import { NoticiaslistaComponent } from './Noticias/noticiaslista.component';
 import { NoticiasComponent } from './Noticias/noticias.component';
 import { AlterComponent } from './principal/alter/alter.component';
 import { CheckinComponent } from './principal/checkin/checkin.component';
+import { ResponsaveisComponent } from './Cadastros/aluno/responsaveis/responsaveis.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
         {path: 'alunolista', component: AlunoListaComponent, canActivate: [AuthGuard]},
         {path: 'aluno', component: AlunoComponent, canActivate: [AuthGuard], data: {roles:['USU']}},
         {path: 'anamnese', component: AnamneseComponent, canActivate: [AuthGuard], data: {roles:['USU']}},
+        {path: 'responsaveis', component: ResponsaveisComponent, canActivate: [AuthGuard], data: {roles:['USU']}},
         {path: 'atividadelista', component: AtividadeListaComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'atividade', component: AtividadeComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},
         {path: 'treinolista', component: TreinoListaComponent, canActivate: [AuthGuard], data: {roles:['TEC']}},

@@ -7,7 +7,7 @@
     <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
       <div class="form-group authform">
         <button class="btn btn-primary" (click)="onSwitchMode()" type="button" style="font-size: smaller;">
-          {{ isLoginMode ? 'Novo Usuário' : 'Logar' }}
+          {{ isLoginMode ? 'Novo Usuário' : 'Fazer Login' }}
         </button>
         <hr>
         <div class="tituloCadastro">
@@ -57,7 +57,7 @@
           type="submit"
           [disabled]="!authForm.valid"
         >
-          {{ isLoginMode ? 'Login' : 'Novo' }}
+          {{ isLoginMode ? 'Logar' : 'Salvar' }}
         </button>     
       </div>
       <!--<div style="margin-top: 50px;" *ngIf="!isLoginMode">

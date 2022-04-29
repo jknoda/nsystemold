@@ -52,6 +52,10 @@ em {
     display: none;
 }
 
+.dd .p-dropdown-label{
+    max-width: 200px;
+}
+
 @media screen and (max-width: 800px) {
    .listaSystem td {
         white-space: nowrap;

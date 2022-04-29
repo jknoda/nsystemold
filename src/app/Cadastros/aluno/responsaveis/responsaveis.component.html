@@ -1,0 +1,38 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="card" *ngIf="!isLoading">
+    <div class="tituloCadastro">CADASTRO DE RESPONSÁVEIS PARA {{aluno}}</div>    
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <p-dropdown id="usuidf" [options]="usuarios" [(ngModel)]="usuSelect" class="form-control dd" optionLabel="name" optionValue="code">
+            </p-dropdown>
+            <button pButton pRipple icon="fa fa-plus-circle" class="p-button-rounded p-button-success" (click)="incluirResponsavel()" title="Incluir"  style="margin-left: 10px;"></button>            
+            <button pButton pRipple icon="fa fa-undo" class="p-button-rounded p-button-default" (click)="cancelar()" title="Incluir"  style="margin-left: 10px;"></button>            
+        </ng-template>
+    </p-toolbar>    
+    <p-table responsiveLayout="scroll" #dt [value]="Responsaveis" [rows]="10" [paginator]="true" 
+        [rowHover]="true" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="UsuIdf">Idf <p-sortIcon field="UsuIdf"></p-sortIcon></th>
+                <th pSortableColumn="UsuNome">Nome <p-sortIcon field="UsuNome"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-Responsavel>
+            <tr class="listaSystem">
+                <td>{{Responsavel.UsuIdf}}</td>                
+                <td>{{Responsavel.UsuNome}}</td>
+                <td>
+                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-danger" (click)="deleteResponsavel(Responsavel)" title="Excluir"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}" translate="yes">
+</p-confirmDialog>

@@ -54,6 +54,7 @@ import { NoticiaslistaComponent } from './Noticias/noticiaslista.component';
 import { NoticiasComponent } from './Noticias/noticias.component';
 import { AlterComponent } from './principal/alter/alter.component';
 import { CheckinComponent } from './principal/checkin/checkin.component';
+import { ResponsaveisComponent } from './Cadastros/aluno/responsaveis/responsaveis.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 
 @NgModule({
@@ -66,6 +67,7 @@ import { CheckinComponent } from './principal/checkin/checkin.component';
     AlunoComponent,
     AlunoListaComponent,
     AnamneseComponent,
+    ResponsaveisComponent,
     DeniedComponent,
     AlterComponent,
     CheckinComponent,
