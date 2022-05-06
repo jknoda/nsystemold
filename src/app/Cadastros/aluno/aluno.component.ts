@@ -101,12 +101,18 @@ export class AlunoComponent implements OnInit, OnDestroy {
     {
       this.getUsuario();
     }
+    else
+    {
+      this.alunos();
+    }
+  }
+
+  private alunos() {
     this.route.queryParams
       .subscribe(params => {
         this.EmpIdf = params.EmpIdf;
         this.AluIdf = params.AluIdf;
-        if (params.Modo == "EDIT")
-        {
+        if (params.Modo == "EDIT") {
           this.editMode = true;
           this.getAluno();
         } else {
@@ -115,7 +121,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
           this.initForm(Aluno);
         }
       }
-    );
+      );
   }
 
   myUploader(event) {
@@ -162,6 +168,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
         this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
       },
       ()=>{
+        this.alunos();
         return;
       });
   }

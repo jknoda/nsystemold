@@ -41,7 +41,7 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
     if (this.isTecnico) usuidf = 0;
     let dados = {
       EmpIdf: this.EmpIdf,
-      AluStatus: 'A',
+      AluStatus: 'X',
       UsuIdf: usuidf
     };
     this.lerDadosAluno = this.srvAluno.getAluTodosResp(dados).subscribe(

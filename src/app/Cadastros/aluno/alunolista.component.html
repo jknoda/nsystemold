@@ -31,7 +31,7 @@
                     <button pButton pRipple icon="fa fa-users" class="p-button-rounded p-button-success" (click)="responsaveis(Aluno)" title="Responsáveis"></button>
                     <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-danger" (click)="deleteAluno(Aluno)" title="Excluir"></button>
                     <button *ngIf="Aluno.isAtivo" pButton pRipple icon="far fa-stop-circle" class="p-button-rounded p-button-default" (click)="alterarStatus(Aluno)" title="Inativar aluno"></button>
-                    <button *ngIf="!Aluno.isAtivo" pButton pRipple icon="far fa-play-circle" class="p-button-rounded p-button-default" (click)="alterarStatus(Aluno)" title="Ativar aluno"></button>
+                    <button *ngIf="!Aluno.isAtivo" pButton pRipple icon="far fa-play-circle" class="p-button-rounded p-button-warning" (click)="alterarStatus(Aluno)" title="Ativar aluno"></button>
                 </td>
             </tr>
         </ng-template>
