@@ -1,10 +1,8 @@
-import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MessageService} from 'primeng/api';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/auth/user.model';
 import { UsuarioModel } from 'src/app/model/usuario.model';
 import { ServiceConfig } from 'src/app/_config/services.config';
 import { UsuarioService } from './usuario.service';
@@ -31,7 +29,6 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   UsuIdf = 0;
   UsuPerfil = 'U';
   UsuEmail = "";
-  ReceberEmail = "S";
   
   isAdm = false;
   isLoading = true;
@@ -202,7 +199,8 @@ export class UsuarioComponent implements OnInit, OnDestroy {
       'email': new FormControl(UserEmail, Validators.required),
       'nome': new FormControl(UserNome, Validators.required),
       'cpf': new FormControl(UserCpf, Validators.required),
-      'perfil': new FormControl(UserPerfil, Validators.required)
+      'perfil': new FormControl(UserPerfil, Validators.required),
+      'receberEmail': new FormControl(ReceberEmail, Validators.required)
     });
   }
 
