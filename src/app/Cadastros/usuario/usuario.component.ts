@@ -112,7 +112,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
       UsuNome:  this.userForm.value['nome'],
       UsuCPF:  this.userForm.value['cpf'].replace(/[^\d]+/g,''),
       UsuPerfil:  this.userForm.value['perfil'],
-      ReceberEmail: this.userForm.valid['receberEmail']
+      ReceberEmail: this.userForm.value['receberEmail']
     };    
     if (this.editMode)
     {
@@ -120,6 +120,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
         ...dados,
         UsuIdf: this.UsuIdf,
       }
+      console.log("update ",dadosUpdate);
       this.updateDadosUsuario = this.srvUsuario.updateDados(dadosUpdate).subscribe(
         () => {
           this.messageService.add({severity:'success', summary: 'Successo', detail: 'Cadastro atualizado!'});
