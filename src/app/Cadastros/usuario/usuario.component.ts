@@ -31,6 +31,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   UsuIdf = 0;
   UsuPerfil = 'U';
   UsuEmail = "";
+  ReceberEmail = "S";
   
   isAdm = false;
   isLoading = true;
@@ -71,7 +72,8 @@ export class UsuarioComponent implements OnInit, OnDestroy {
         UsuEmail: this.UsuEmail,
         UsuNome:  this.UsuEmail,
         UsuCPF:  0,
-        UsuPerfil:  'U'
+        UsuPerfil:  'U',
+        ReceberEmail: 'S'
       };
       this.incluirUser(dados);
     }
@@ -112,7 +114,8 @@ export class UsuarioComponent implements OnInit, OnDestroy {
       UsuEmail: this.userForm.value['email'],
       UsuNome:  this.userForm.value['nome'],
       UsuCPF:  this.userForm.value['cpf'].replace(/[^\d]+/g,''),
-      UsuPerfil:  this.userForm.value['perfil']
+      UsuPerfil:  this.userForm.value['perfil'],
+      ReceberEmail: this.userForm.valid['receberEmail']
     };    
     if (this.editMode)
     {
@@ -185,11 +188,13 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     let UserNome = null;
     let UserCpf = null;
     let UserPerfil = 'U';
+    let ReceberEmail = 'S';
     if (dados != null)
     {
       UserNome = dados.UsuNome;
       UserCpf = dados.UsuCPF;
       UserPerfil = dados.UsuPerfil;
+      ReceberEmail = dados.ReceberEmail;
     }
     let meuPerfil = JSON.parse(localStorage.getItem('userData')).perfil;
     this.isAdm = meuPerfil == 'A';

@@ -10,7 +10,7 @@
                 <label for="email">Email</label>
                 <input type="text" class="form-control" formControlName="email" id="email" pInputText readonly>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label for="cpf">CPF</label>
                 <p-inputMask class="form-control" formControlName="cpf" id="CPF" mask="999.999.999-99" ></p-inputMask>
             </div>
@@ -18,12 +18,16 @@
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" formControlName="nome" id="nome" pInputText>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label for="perfil">Perfil</label>  
                 <p-dropdown class="form-control" id="perfil" [options]="perfis" 
                 formControlName="perfil" optionLabel="name" 
                 optionValue="code"  [readonly]="!isAdm">
                 </p-dropdown>
+            </div>
+            <div class="col-md-2">
+                <label for="receberEmail">Receber emails</label>
+                <p-inputSwitch trueValue="S" falseValue="N"  class="form-control transparente" formControlName="receberEmail" id="receberEmail" ></p-inputSwitch>
             </div>
         </div>
         <div class="row editButtonSystem">

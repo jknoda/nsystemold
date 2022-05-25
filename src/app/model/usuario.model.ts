@@ -7,4 +7,5 @@ export class UsuarioModel {
     public UsuPerfil: string;
     public DataInc: Date;
     public DataAlt: Date;
+    public ReceberEmail: string;
 }
