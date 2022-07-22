@@ -28,6 +28,7 @@ import { CheckinComponent } from './principal/checkin/checkin.component';
 import { ResponsaveisComponent } from './Cadastros/aluno/responsaveis/responsaveis.component';
 import { QuizlistaComponent } from './Participe/quizresp/quizlista.component';
 import { QuizrespComponent } from './Participe/quizresp/quizresp.component';
+import { QuestoeslistaComponent } from './Cadastros/questoes/questoeslista.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -62,6 +63,7 @@ const appRoutes: Routes = [
         {path: 'sugestoes', component: SugestoesComponent},
         {path: 'quizlista', component: QuizlistaComponent},
         {path: 'quizresp', component: QuizrespComponent},
+        {path: 'questoeslista', component: QuestoeslistaComponent},
         {path: 'teste', component: TesteComponent},
         //{path: 'testepdf', component: TestepdfComponent},
         {path: '**', component: HomeComponent}

@@ -4,6 +4,7 @@ export class QuizAlterModel {
     public QuizResSeq: number;
     public QuizResposta: string;
     public QuizCerta: Boolean;
+    public QuizResCompl: string;
     public UsuIdf: number;
     public DataInc: Date;
     public DataAlt: Date

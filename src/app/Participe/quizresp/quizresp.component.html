@@ -22,6 +22,9 @@
                     class="btn btn-success"
                     (click)="alterClick()">Tentar novamente</button>
                 </div>
+                <p-card header="Informação:" *ngIf="existeInfo">
+                    {{selectedAlter.QuizResCompl}}
+                </p-card>
             </div>
         </div>
         <ng-template pTemplate="footer">

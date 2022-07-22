@@ -35,6 +35,7 @@ export class QuizrespComponent implements OnInit, OnDestroy {
   QuizIdf = 0;
   
   isLoading = true;
+  existeInfo = false;
   mostraImagem = false;
   respostaCerta = false;
 
@@ -89,7 +90,7 @@ export class QuizrespComponent implements OnInit, OnDestroy {
       },
       ()=>{
         this.isLoading = false;
-        this.selectedAlter = this.QuizAlternativas[0];
+        this.selectedAlter = this.QuizAlternativas[0];        
         return;
       });
   }
@@ -101,6 +102,7 @@ export class QuizrespComponent implements OnInit, OnDestroy {
   responder(){
     this.mostraImagem = true;
     this.respostaCerta = this.selectedAlter.QuizCerta == true;
+    this.existeInfo = this.selectedAlter.QuizResCompl != null && this.selectedAlter.QuizResCompl.length > 0;
     this.gravarResposta();
   }
 
