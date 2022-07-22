@@ -18,14 +18,16 @@ import { TreinoalulistaComponent } from './Treinos/treinoalu/treinoalulista.comp
 import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.component';
 import { TesteComponent } from './teste/teste.component';
-import { TreinoscalendarioComponent } from './Consultas/treinoscalendario/treinoscalendario.component';
-import { SugestoesComponent } from './Consultas/sugestoes/sugestoes.component';
+import { TreinoscalendarioComponent } from './Participe/treinoscalendario/treinoscalendario.component';
+import { SugestoesComponent } from './Participe/sugestoes/sugestoes.component';
 import { treinoviacalenComponent } from './Treinos/treinoviacalendario/treinoviacalen.component';
 import { NoticiaslistaComponent } from './Noticias/noticiaslista.component';
 import { NoticiasComponent } from './Noticias/noticias.component';
 import { AlterComponent } from './principal/alter/alter.component';
 import { CheckinComponent } from './principal/checkin/checkin.component';
 import { ResponsaveisComponent } from './Cadastros/aluno/responsaveis/responsaveis.component';
+import { QuizlistaComponent } from './Participe/quizresp/quizlista.component';
+import { QuizrespComponent } from './Participe/quizresp/quizresp.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -58,6 +60,8 @@ const appRoutes: Routes = [
         {path: 'checkin', component: CheckinComponent},
         {path: 'treinoscalendario', component: TreinoscalendarioComponent},
         {path: 'sugestoes', component: SugestoesComponent},
+        {path: 'quizlista', component: QuizlistaComponent},
+        {path: 'quizresp', component: QuizrespComponent},
         {path: 'teste', component: TesteComponent},
         //{path: 'testepdf', component: TestepdfComponent},
         {path: '**', component: HomeComponent}

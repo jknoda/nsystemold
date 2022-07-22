@@ -13,6 +13,6 @@ export class TreinoviacalenService {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<TreinoModel>(this.url + "/api/consulta/findmonthyear", body, httpOptions);
+        return this.http.post<TreinoModel>(this.url + "/api/participe/findmonthyear", body, httpOptions);
     }
 }

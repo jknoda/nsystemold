@@ -48,7 +48,7 @@ import { TreinoalulistaComponent } from './Treinos/treinoalu/treinoalulista.comp
 import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 import { UsuarioListaComponent } from './Cadastros/usuario/usuariolista.component';
 import { TesteModule } from './teste/teste.module';
-import { ConsultasModule } from './Consultas/consultas.module';
+import { ParticipeModule } from './Participe/participe.module';
 import { ConfiguracaoService } from './shared/configuracao.service';
 import { NoticiaslistaComponent } from './Noticias/noticiaslista.component';
 import { NoticiasComponent } from './Noticias/noticias.component';
@@ -110,7 +110,7 @@ import { ResponsaveisComponent } from './Cadastros/aluno/responsaveis/responsave
     //MenuModule,    
     TopoModule,
     PanelMenuModule,
-    ConsultasModule,
+    ParticipeModule,
     CheckboxModule,
     FileUploadModule,
 

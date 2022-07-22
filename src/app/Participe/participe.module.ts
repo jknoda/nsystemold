@@ -10,6 +10,8 @@ import {EditorModule} from 'primeng/editor';
 import {DataViewModule} from 'primeng/dataview';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {DropdownModule} from 'primeng/dropdown';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {CardModule} from 'primeng/card';
 
 import {FullCalendarModule} from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -21,6 +23,8 @@ import { TreinoscalendarioComponent } from './treinoscalendario/treinoscalendari
 import { SugestoesComponent } from './sugestoes/sugestoes.component';
 import { LoadingSpinner2Component } from '../shared/loading-spinner/loading-spinner2.component';
 import { treinoviacalenComponent } from '../Treinos/treinoviacalendario/treinoviacalen.component';
+import { QuizlistaComponent } from './quizresp/quizlista.component';
+import { QuizrespComponent } from './quizresp/quizresp.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -33,7 +37,9 @@ FullCalendarModule.registerPlugins([
     LoadingSpinner2Component,
     TreinoscalendarioComponent,
     SugestoesComponent,
-    treinoviacalenComponent
+    treinoviacalenComponent,
+    QuizlistaComponent,
+    QuizrespComponent
   ],
   exports: [
   ],
@@ -50,8 +56,10 @@ FullCalendarModule.registerPlugins([
     DataViewModule,    
     ConfirmPopupModule,
     DropdownModule,
+    RadioButtonModule,
+    CardModule,
 
     ConfirmDialogModule
   ]
 })
-export class ConsultasModule { }
+export class ParticipeModule { }

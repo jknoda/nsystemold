@@ -1,0 +1,39 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="tituloCadastro">Q U I Z</div>
+<div class="divresp">
+    <p-card header="{{Quiz.QuizPergunta}}" [style]="{width: '90%'}" styleClass="p-card-shadow" *ngIf="!isLoading">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div *ngFor="let alternativa of QuizAlternativas" class="field-checkbox" style="padding-bottom: 10px;">
+                    <p-radioButton [inputId]="alternativa.QuizResSeq" name="alternativa" [value]="alternativa" [(ngModel)]="selectedAlter"></p-radioButton>
+                    <label [for]="alternativa.QuizResSeq">&nbsp;&nbsp;&nbsp;{{alternativa.QuizResposta}}</label>            
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6" *ngIf="mostraImagem">
+                <img src="../../assets/image/Acertou.png" alt="Resposta correta" class="imgResp" *ngIf="respostaCerta">
+                <img src="../../assets/image/Errou.png"  alt="Resposta errada" class="imgResp" *ngIf="!respostaCerta">
+                <div *ngIf="!respostaCerta">
+                    <button
+                    style="margin-right: 10px; margin-top: 10px;"
+                    type="button"
+                    class="btn btn-success"
+                    (click)="alterClick()">Tentar novamente</button>
+                </div>
+            </div>
+        </div>
+        <ng-template pTemplate="footer">
+            <button
+                style="margin-right: 10px;"
+                type="button"
+                class="btn btn-success"
+                (click)="responder()"  *ngIf="!mostraImagem">Responder</button>
+            <button
+            type="button"
+            class="btn btn-danger"
+            (click)="cancelar()">Encerrar</button>
+        </ng-template>
+    </p-card>
+</div>
