@@ -1,1 +1,68 @@
-<p>questoes works!</p>
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<form [formGroup]="dadosForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+    <div class="form-group">
+        <div class="tituloCadastro">CADASTRO DE QUIZ</div>
+        <div style="margin-bottom: 20px;">
+            <fieldset>
+                <legend>Imagem</legend>
+                <div class="col-lg-6 col-md-6">
+                    <label for="imgatual">Atual</label>
+                    <div>
+                        <img class="quizImg" [src]="quizImg" alt="Imagem">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label for="imagem">Nova</label>
+                    <p-fileUpload 
+                        name="myFile[]" 
+                        customUpload="true" 
+                        (uploadHandler)="myUploader($event)" 
+                        (onRemove)="remove()"
+                        (onClear)="remove()"
+                        accept="image/*" 
+                        chooseLabel="Selecionar"
+                        cancelLabel="Cancelar"
+                        maxFileSize="524288"
+                        [auto]="true"
+                        invalidFileSizeMessageSummary="{0}: Tamanho da imagem inválido, "
+                        invalidFileSizeMessageDetail="tamanho máximo é {0}."                   
+                        >
+                    </p-fileUpload>
+                </div>
+            </fieldset>
+        </div>                    
+
+        <div><em>*</em> Campo obrigatório</div> 
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <em>*</em><label for="pergunta">Pergunta</label>
+                <input type="text" class="form-control" formControlName="pergunta" id="pergunta" pInputText>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <label for="liberado">Liberado</label>
+                <p-inputSwitch trueValue="S" falseValue="N" class="form-control transparente" formControlName="liberado" id="liberado" ></p-inputSwitch>
+            </div>
+        </div>
+        <div class="row editButtonSystem">            
+            <div class="floatLeft col-sm-1">
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  [disabled]="!dadosForm.valid" *ngIf="!editMode">Salvar</button>
+                <button
+                  type="submit"
+                  class="floatLeft btn btn-success"
+                  [disabled]="!dadosForm.valid" *ngIf="editMode">Alterar</button>
+            </div>       
+            <div class="floatLeft col-sm-1">
+                <button
+                type="button"
+                class="btn btn-danger"
+                (click)="cancelar()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+  </form>

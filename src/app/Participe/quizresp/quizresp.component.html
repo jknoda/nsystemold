@@ -7,9 +7,16 @@
     <p-card header="{{Quiz.QuizPergunta}}" [style]="{width: '90%'}" styleClass="p-card-shadow" *ngIf="!isLoading">
         <div class="row">
             <div class="col-lg-6 col-md-6">
-                <div *ngFor="let alternativa of QuizAlternativas" class="field-checkbox" style="padding-bottom: 10px;">
-                    <p-radioButton [inputId]="alternativa.QuizResSeq" name="alternativa" [value]="alternativa" [(ngModel)]="selectedAlter"></p-radioButton>
-                    <label [for]="alternativa.QuizResSeq">&nbsp;&nbsp;&nbsp;{{alternativa.QuizResposta}}</label>            
+                <div class="col-lg-8 col-md-8">
+                    <div *ngFor="let alternativa of QuizAlternativas" class="field-checkbox" style="padding-bottom: 10px;">
+                        <p-radioButton [inputId]="alternativa.QuizResSeq" name="alternativa" [value]="alternativa" [(ngModel)]="selectedAlter"></p-radioButton>
+                        <label [for]="alternativa.QuizResSeq">&nbsp;&nbsp;&nbsp;{{alternativa.QuizResposta}}</label>            
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div>
+                        <img class="quizImg" [src]="quizImg" alt="Imagem">
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6" *ngIf="mostraImagem">

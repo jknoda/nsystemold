@@ -15,11 +15,14 @@
         </ng-template>
 
         <ng-template pTemplate="body" let-Quiz>
-            <tr class="listaSystem">
+            <tr class="listaSystem" *ngIf="Quiz.QuizLiberado == 'S'">
                 <td>{{Quiz.QuizIdf}}</td>
                 <td>{{Quiz.QuizPergunta}}</td>
                 <td>
-                    <button pButton pRipple icon="fa fa-hand-pointer-o" class="p-button-rounded p-button-success" (click)="responder(Quiz)" title="Responder"></button>
+                    <button pButton pRipple icon="fa fa-hand-pointer-o" class="p-button-rounded p-button-danger" 
+                    (click)="responder(Quiz)" title="Já respondido" *ngIf="Quiz.JaRepondeu"></button>
+                    <button pButton pRipple icon="fa fa-hand-pointer-o" class="p-button-rounded p-button-success" 
+                    (click)="responder(Quiz)" title="Responder" *ngIf="!Quiz.JaRepondeu"></button>
                 </td>
             </tr>
         </ng-template>

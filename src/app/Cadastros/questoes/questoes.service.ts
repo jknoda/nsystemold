@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ServiceConfig } from '../../_config/services.config';
+import { ServiceConfig } from '../../_config/services.config'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {QuizModel} from '../../model/quiz.model';
-import {QuizAlterModel} from '../../model/quizalter.model';
-import {QuizRespModel} from '../../model/quizresp.model';
 
 @Injectable()
-export class QuizrespService {
+export class QuestaoService {
     private url: string = ServiceConfig.API_ENDPOINT;
     constructor(private http: HttpClient) { }
 
     addDados(body:any): Observable<QuizModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
-        };        
-        return this.http.post<QuizModel>(this.url + "/api/quizresp/create", body, httpOptions);
+        };    
+        return this.http.post<QuizModel>(this.url + "/api/quiz/create", body, httpOptions);
     }
 
     getDados(body:any): Observable<QuizModel> {
@@ -39,24 +37,10 @@ export class QuizrespService {
         return this.http.post<QuizModel>(this.url + "/api/quiz/update", body, httpOptions);
     }
 
-    delDado(body:any): Observable<QuizModel> {
+    deleteDados(body:any): Observable<QuizModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
         return this.http.post<QuizModel>(this.url + "/api/quiz/delete", body, httpOptions);
-    }
-
-    getAlternativas(body:any): Observable<QuizAlterModel> {
-        let httpOptions = {
-            headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
-        };        
-        return this.http.post<QuizAlterModel>(this.url + "/api/quizalter/findall", body, httpOptions);
-    }
-
-    getJaRespondeu(body:any): Observable<boolean> {
-        let httpOptions = {
-            headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
-        };        
-        return this.http.post<boolean>(this.url + "/api/quizresp/has", body, httpOptions);
-    }
+    }    
 }

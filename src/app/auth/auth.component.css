@@ -5,6 +5,24 @@
 .authform{
     padding: 10px !important;
 }
+
+.left{
+    text-align:  left;
+}
+
+.right{
+    text-align: right;
+}
+
+.msg{
+    align-items: center;
+    text-align: center;
+    margin-top: 50px;
+    padding: 10px;
+    width: 400px;
+    font-size: large;
+}
+
 @media screen and (max-width: 800px) {
     .politica{
         width: 340px;

@@ -1,0 +1,33 @@
+.row
+{
+    margin-bottom: 40px;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.floatLeft{
+    display: inline-block;
+}
+
+.vermelho{
+    color: red;
+}
+
+fieldset {
+  border: 1px solid #999;
+}
+  
+legend {
+  display: inline;
+  width: auto;
+  border: 0;
+  padding: 10px;
+  margin-bottom: 0px !important;
+}
+
+.imgQuiz {
+  height: 100px;
+}

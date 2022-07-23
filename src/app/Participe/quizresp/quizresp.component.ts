@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MessageService} from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { QuizModel } from 'src/app/model/quiz.model';
-import { QuizRespModel } from 'src/app/model/quizresp.model';
 import { QuizAlterModel } from 'src/app/model/quizalter.model';
 import { ServiceConfig } from 'src/app/_config/services.config';
 import { QuizrespService } from './quizresp.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-quizresp',
@@ -39,7 +38,10 @@ export class QuizrespComponent implements OnInit, OnDestroy {
   mostraImagem = false;
   respostaCerta = false;
 
-  constructor(private srvQuizResp: QuizrespService, private route: ActivatedRoute, private router: Router, private messageService: MessageService) { 
+  quizImg: SafeResourceUrl;
+
+  constructor(private srvQuizResp: QuizrespService, private route: ActivatedRoute, 
+    private router: Router, private messageService: MessageService, private sanitizer:DomSanitizer) { 
   }
 
   ngOnInit(): void {
@@ -68,6 +70,10 @@ export class QuizrespComponent implements OnInit, OnDestroy {
         this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
       },
       ()=>{
+        if (this.Quiz.QuizImagem){
+          let imagem = this.bin2String(this.Quiz.QuizImagem["data"]);
+          this.quizImg = this.sanitizer.bypassSecurityTrustUrl(imagem);
+        }
         this.isLoading = false;
         this.getAlter();
       });
@@ -101,7 +107,7 @@ export class QuizrespComponent implements OnInit, OnDestroy {
 
   responder(){
     this.mostraImagem = true;
-    this.respostaCerta = this.selectedAlter.QuizCerta == true;
+    this.respostaCerta = this.selectedAlter.QuizCerta == 'S';
     this.existeInfo = this.selectedAlter.QuizResCompl != null && this.selectedAlter.QuizResCompl.length > 0;
     this.gravarResposta();
   }
@@ -114,7 +120,7 @@ export class QuizrespComponent implements OnInit, OnDestroy {
       QuizIdf: this.selectedAlter.QuizIdf,
       QuizRespEmail: this.UsuEmail,
       QuizResSeq: this.selectedAlter.QuizResSeq,
-      QuizRespAcerto: this.selectedAlter.QuizCerta,
+      QuizRespAcerto: this.selectedAlter.QuizCerta == 'S',
       UsuIdf: this.UsuIdf
     }
     this.addDadosQuizResp = this.srvQuizResp.addDados(dados).subscribe(
@@ -155,4 +161,12 @@ export class QuizrespComponent implements OnInit, OnDestroy {
     }
   
   }  
+
+  bin2String(array) {
+    var retorno = '';
+    for(let j=0;j<array.length;j++){
+      retorno = retorno + String.fromCharCode(array[j])
+    }
+    return retorno;
+  }
 }

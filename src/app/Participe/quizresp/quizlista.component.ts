@@ -15,8 +15,11 @@ import { Router } from '@angular/router';
 export class QuizlistaComponent implements OnInit, OnDestroy {
 
   private EmpIdf: number = ServiceConfig.EMPIDF;
+  UsuIdf = 0;
+
   deleteQuiz: Subscription;
   lerQuiz: Subscription;
+  lerJaRespondeu: Subscription;
 
   Quizes: QuizModel[];
   submitted: boolean;
@@ -27,6 +30,7 @@ export class QuizlistaComponent implements OnInit, OnDestroy {
     private messageService: MessageService, private confirmationService: ConfirmationService) {}
 
   ngOnInit() {
+    this.UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
     this.getQuizes();
   }
 
@@ -43,9 +47,33 @@ export class QuizlistaComponent implements OnInit, OnDestroy {
         this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
       },
       ()=>{
+        this.VerRespondida();
         this.isLoading = false;
         return;
       });
+  }
+
+  private VerRespondida()
+  {
+    let ret = false;
+    this.Quizes.forEach(item=>{
+      let dados = {
+        EmpIdf: item.EmpIdf,
+        QuizIdf: item.QuizIdf,
+        UsuIdf: this.UsuIdf
+      };
+      this.lerJaRespondeu = this.srvQuiz.getJaRespondeu(dados).subscribe(
+        (dados) => {
+          ret = dados;
+        },
+        err => { 
+          let msg = err.error.errors.toString();
+          this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+        },
+        ()=>{
+          item.JaRespondeu = ret;
+      });
+    })
   }
 
   responder(Quiz: QuizModel) {
@@ -61,6 +89,9 @@ export class QuizlistaComponent implements OnInit, OnDestroy {
     if ( this.lerQuiz != null){
       this.lerQuiz.unsubscribe();
     }
+    if ( this.lerJaRespondeu != null){
+      this.lerJaRespondeu.unsubscribe();
+    }    
   }
 
 }

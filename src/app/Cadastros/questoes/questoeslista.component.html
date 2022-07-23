@@ -1,1 +1,39 @@
-<p>questoeslista works!</p>
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="tituloCadastro">CADASTRO DE QUIZ</div>
+<div class="card" *ngIf="!isLoading">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Novo QUIZ" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+        </ng-template>
+    </p-toolbar>
+    <p-table responsiveLayout="scroll" #dt [value]="Questoes" [rows]="10" [paginator]="true" 
+        [rowHover]="true" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="QuizIdf">Idf <p-sortIcon field="QuizIdf"></p-sortIcon></th>
+                <th pSortableColumn="QuizPergunta">Pergunta <p-sortIcon field="QuizPergunta"></p-sortIcon></th>
+                <th pSortableColumn="QuizLiberado">Liberado <p-sortIcon field="QuizLiberado"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-Quiz>
+            <tr class="listaSystem">
+                <td>{{Quiz.QuizIdf}}</td>
+                <td>{{Quiz.QuizPergunta}}</td>                
+                <td>{{Quiz.QuizLiberado}}</td>                
+                <td>
+                    <button pButton pRipple icon="fa fa-hand-pointer-o" class="p-button-rounded p-button-default" (click)="alterQuiz(Quiz)" title="Respostas"></button>
+                    <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editQuiz(Quiz)" title="Alterar"></button>
+                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-danger" (click)="deleteQuiz(Quiz)" title="Excluir"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}" translate="yes">
+</p-confirmDialog>

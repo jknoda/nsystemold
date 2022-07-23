@@ -1,0 +1,43 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<form [formGroup]="dadosForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+    <div class="form-group">
+        <div class="tituloCadastro">CADASTRO DE ALTERNATIVAS - QUIZ</div>
+        <div class="subTituloCadastro">{{QuizPergunta}}</div>
+        <div><em>*</em> Campo obrigatório</div> 
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <em>*</em><label for="pergunta">Resposta</label>
+                <input type="text" class="form-control" formControlName="resposta" id="resposta" pInputText>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <label for="certa">Resposta certa</label>
+                <p-inputSwitch trueValue="S" falseValue="N" class="form-control transparente" formControlName="certa" id="certa" ></p-inputSwitch>
+            </div>
+            <div class="col-lg-12 col-md-12" style="margin-bottom: 10px;">
+                <label for="complemento">Informação complementar</label>
+                <input type="text" class="form-control" formControlName="complemento" id="complemento" pInputText>
+            </div>
+        </div>
+        <div class="row editButtonSystem">            
+            <div class="floatLeft col-sm-1">
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  [disabled]="!dadosForm.valid" *ngIf="!editMode">Salvar</button>
+                <button
+                  type="submit"
+                  class="floatLeft btn btn-success"
+                  [disabled]="!dadosForm.valid" *ngIf="editMode">Alterar</button>
+            </div>       
+            <div class="floatLeft col-sm-1">
+                <button
+                type="button"
+                class="btn btn-danger"
+                (click)="cancelar()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+  </form>

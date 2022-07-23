@@ -28,6 +28,10 @@ margin-bottom: 40px;
     width: 100px;
 }
 
+.quizImg{
+    width: 130px;
+}
+
 @media screen and (max-width: 800px) {
     .divresp
     {

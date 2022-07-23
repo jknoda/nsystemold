@@ -55,6 +55,10 @@ import { NoticiasComponent } from './Noticias/noticias.component';
 import { AlterComponent } from './principal/alter/alter.component';
 import { CheckinComponent } from './principal/checkin/checkin.component';
 import { ResponsaveisComponent } from './Cadastros/aluno/responsaveis/responsaveis.component';
+import { QuestoeslistaComponent } from './Cadastros/questoes/questoeslista.component';
+import { QuestoesComponent } from './Cadastros/questoes/questoes.component';
+import { QuizalterlistaComponent } from './Cadastros/questoes/quizalternativas/quizalterlista.component';
+import { QuizalternativasComponent } from './Cadastros/questoes/quizalternativas/quizalternativas.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 
 @NgModule({
@@ -80,7 +84,11 @@ import { ResponsaveisComponent } from './Cadastros/aluno/responsaveis/responsave
     TreinoaluComponent,
     TreinoalulistaComponent,
     NoticiaslistaComponent,
-    NoticiasComponent
+    NoticiasComponent,
+    QuestoeslistaComponent,
+    QuestoesComponent,
+    QuizalterlistaComponent,
+    QuizalternativasComponent
     //TestepdfComponent
   ],
   imports: [

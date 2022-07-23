@@ -29,6 +29,9 @@ import { ResponsaveisComponent } from './Cadastros/aluno/responsaveis/responsave
 import { QuizlistaComponent } from './Participe/quizresp/quizlista.component';
 import { QuizrespComponent } from './Participe/quizresp/quizresp.component';
 import { QuestoeslistaComponent } from './Cadastros/questoes/questoeslista.component';
+import { QuestoesComponent } from './Cadastros/questoes/questoes.component';
+import { QuizalterlistaComponent } from './Cadastros/questoes/quizalternativas/quizalterlista.component';
+import { QuizalternativasComponent } from './Cadastros/questoes/quizalternativas/quizalternativas.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -64,6 +67,9 @@ const appRoutes: Routes = [
         {path: 'quizlista', component: QuizlistaComponent},
         {path: 'quizresp', component: QuizrespComponent},
         {path: 'questoeslista', component: QuestoeslistaComponent},
+        {path: 'questoes', component: QuestoesComponent},
+        {path: 'quizalterlista', component: QuizalterlistaComponent},
+        {path: 'quizalter', component: QuizalternativasComponent},
         {path: 'teste', component: TesteComponent},
         //{path: 'testepdf', component: TestepdfComponent},
         {path: '**', component: HomeComponent}

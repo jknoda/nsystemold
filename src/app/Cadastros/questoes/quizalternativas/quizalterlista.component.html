@@ -1,0 +1,42 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="tituloCadastro">CADASTRO DE ALTERNATIVAS - QUIZ</div>
+<div class="subTituloCadastro">{{QuizPergunta}}</div>
+<div class="card" *ngIf="!isLoading">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Nova alternativa QUIZ" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="Retonnar" icon="pi pi-undo" class="p-button-success p-mr-2" (click)="retornar()"></button>
+        </ng-template>
+    </p-toolbar>
+    <p-table responsiveLayout="scroll" #dt [value]="Alternativas" [rows]="10" [paginator]="true" 
+        [rowHover]="true" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="QuizResSeq">Seq <p-sortIcon field="QuizResSeq"></p-sortIcon></th>
+                <th pSortableColumn="QuizResposta">Resposta <p-sortIcon field="QuizResposta"></p-sortIcon></th>
+                <th pSortableColumn="QuizCerta">Certa <p-sortIcon field="QuizCerta"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-QuizAlter>
+            <tr class="listaSystem">
+                <td>{{QuizAlter.QuizResSeq}}</td>
+                <td>{{QuizAlter.QuizResposta}}</td>                
+                <td>{{QuizAlter.QuizCerta}}</td>                
+                <td>
+                    <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editar(QuizAlter)" title="Alterar"></button>
+                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-danger" (click)="deletar(QuizAlter)" title="Excluir"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}" translate="yes">
+</p-confirmDialog>

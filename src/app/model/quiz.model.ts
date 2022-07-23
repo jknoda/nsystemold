@@ -4,7 +4,9 @@ export class QuizModel {
     public QuizPergunta: string;
     public QuizData: Date;
     public UsuIdf: number;
+    public QuizLiberado: string;
     public QuizImagem: Blob;
     public DataInc: Date;
-    public DataAlt: Date
+    public DataAlt: Date;
+    public JaRespondeu: Boolean
 }
