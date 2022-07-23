@@ -15,7 +15,8 @@
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div>
-                        <img class="quizImg" [src]="quizImg" alt="Imagem">
+                        <img class="quizImg" [src]="quizImg" alt="Imagem" *ngIf="quizImg != null">
+                        <img class="quizImg" src="../../assets/image/logo.png"  alt="Imagem" *ngIf="quizImg == null">
                     </div>
                 </div>
             </div>
