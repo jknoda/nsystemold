@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { QuizlistaComponent } from 'src/app/Participe/quizresp/quizlista.component';
 
 @Component({
   selector: 'app-questoes',
@@ -111,6 +112,13 @@ export class QuestoesComponent implements OnInit, OnDestroy{
     this.lerDadosQuiz = this.srvQuiz.getDados(dados).subscribe(
       (dados) => {
         Quiz = JSON.parse(JSON.stringify(dados));
+        Quiz.QuizDataIni = new Date(dados.QuizDataIni);
+        Quiz.QuizDataFim = new Date(dados.QuizDataFim);  
+        if (Quiz.QuizDataIni.getFullYear() < 2000) Quiz.QuizDataIni = new Date;
+        if (Quiz.QuizDataFim.getFullYear() < 2000){
+          Quiz.QuizDataFim = new Date;
+          Quiz.QuizDataFim.setDate(Quiz.QuizDataFim.getDate() + 30);
+        }
         this.UsuIdf = Quiz.UsuIdf;
       },
       err => { 
@@ -132,6 +140,8 @@ export class QuestoesComponent implements OnInit, OnDestroy{
       QuizImagem: this.uploadedFile,
       QuizPergunta: this.dadosForm.value['pergunta'],
       QuizLiberado: this.dadosForm.value['liberado'],
+      QuizDataIni: this.dadosForm.value['inicio'],
+      QuizDataFim: this.dadosForm.value['fim']
     }; 
     
     if (this.editMode)
@@ -192,19 +202,25 @@ export class QuestoesComponent implements OnInit, OnDestroy{
     this.isLoading = false;
     let QuizPergunta = null;
     let QuizLiberado = 'N';
-  
+    let QuizDataIni = new Date;
+    let QuizDataFim = new Date;
+    QuizDataFim.setDate(QuizDataFim.getDate() + 30);
     if (dados != null)
     {
       QuizPergunta = dados.QuizPergunta;
+      QuizLiberado = dados.QuizLiberado;
       if (dados.QuizImagem){
         let imagem = this.bin2String(dados.QuizImagem["data"]);
         this.quizImg = this.sanitizer.bypassSecurityTrustUrl(imagem);
       }
-
+      QuizDataIni = dados.QuizDataIni;
+      QuizDataFim = dados.QuizDataFim;
     }
     this.dadosForm = new FormGroup({
       'pergunta': new FormControl(QuizPergunta, Validators.required),
       'liberado': new FormControl(QuizLiberado),
+      'inicio': new FormControl(QuizDataIni),
+      'fim': new FormControl(QuizDataFim)
     });
   }
 

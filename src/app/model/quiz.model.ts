@@ -5,6 +5,8 @@ export class QuizModel {
     public QuizData: Date;
     public UsuIdf: number;
     public QuizLiberado: string;
+    public QuizDataIni: Date;
+    public QuizDataFim: Date;
     public QuizImagem: Blob;
     public DataInc: Date;
     public DataAlt: Date;

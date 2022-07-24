@@ -8,7 +8,6 @@
         [rowHover]="true" dataKey="id">
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="QuizIdf">Idf <p-sortIcon field="QuizIdf"></p-sortIcon></th>
                 <th pSortableColumn="QuizPergunta">Pergunta <p-sortIcon field="QuizPergunta"></p-sortIcon></th>
                 <th></th>
             </tr>
@@ -16,13 +15,12 @@
 
         <ng-template pTemplate="body" let-Quiz>
             <tr class="listaSystem" *ngIf="Quiz.QuizLiberado == 'S'">
-                <td>{{Quiz.QuizIdf}}</td>
                 <td>{{Quiz.QuizPergunta}}</td>
                 <td>
                     <button pButton pRipple icon="fa fa-hand-pointer-o" class="p-button-rounded p-button-danger" 
-                    (click)="responder(Quiz)" title="Já respondido" *ngIf="Quiz.JaRepondeu"></button>
+                    (click)="responder(Quiz)" title="Já respondido" *ngIf="Quiz.JaRespondeu"></button>
                     <button pButton pRipple icon="fa fa-hand-pointer-o" class="p-button-rounded p-button-success" 
-                    (click)="responder(Quiz)" title="Responder" *ngIf="!Quiz.JaRepondeu"></button>
+                    (click)="responder(Quiz)" title="Responder" *ngIf="!Quiz.JaRespondeu"></button>
                 </td>
             </tr>
         </ng-template>

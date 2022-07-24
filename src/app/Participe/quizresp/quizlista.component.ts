@@ -57,6 +57,14 @@ export class QuizlistaComponent implements OnInit, OnDestroy {
   {
     let ret = false;
     this.Quizes.forEach(item=>{
+      if (item.QuizLiberado == 'S'){
+        let data = new Date;
+        data = new Date(data.getFullYear(), data.getMonth(), data.getDate()); // data sem hh
+        let dataIni = new Date(item.QuizDataIni);
+        let dataFim = new Date(item.QuizDataFim);
+        if (dataIni >= data && dataIni.getFullYear() > 2000) item.QuizLiberado = 'S';
+        if (data > dataFim && dataFim.getFullYear() > 2000) item.QuizLiberado = 'N';
+      }
       let dados = {
         EmpIdf: item.EmpIdf,
         QuizIdf: item.QuizIdf,
