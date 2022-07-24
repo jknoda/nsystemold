@@ -16,6 +16,7 @@
                 <th pSortableColumn="QuizIdf">Idf <p-sortIcon field="QuizIdf"></p-sortIcon></th>
                 <th pSortableColumn="QuizPergunta">Pergunta <p-sortIcon field="QuizPergunta"></p-sortIcon></th>
                 <th pSortableColumn="QuizLiberado">Liberado <p-sortIcon field="QuizLiberado"></p-sortIcon></th>
+                <th pSortableColumn="Vencido">Vencido <p-sortIcon field="Vencido"></p-sortIcon></th>
                 <th></th>
             </tr>
         </ng-template>
@@ -25,6 +26,7 @@
                 <td>{{Quiz.QuizIdf}}</td>
                 <td>{{Quiz.QuizPergunta}}</td>                
                 <td>{{Quiz.QuizLiberado}}</td>                
+                <td>{{Quiz.Vencido}}</td>                
                 <td>
                     <button pButton pRipple icon="fa fa-hand-pointer-o" class="p-button-rounded p-button-default" (click)="alterQuiz(Quiz)" title="Respostas"></button>
                     <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editQuiz(Quiz)" title="Alterar"></button>

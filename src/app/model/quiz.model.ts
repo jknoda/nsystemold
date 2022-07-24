@@ -11,4 +11,5 @@ export class QuizModel {
     public DataInc: Date;
     public DataAlt: Date;
     public JaRespondeu: Boolean
+    public Vencido: string
 }

@@ -40,6 +40,14 @@ export class QuestoeslistaComponent implements OnInit, OnDestroy {
     this.lerDadosQuiz = this.srvQuiz.getTodos(dados).subscribe(
       (dados) => {
         this.Questoes = JSON.parse(JSON.stringify(dados));
+        this.Questoes.forEach(item=>{
+          let data = new Date;
+          data = new Date(data.getFullYear(), data.getMonth(), data.getDate()); // data sem hh
+          let dataIni = new Date(item.QuizDataIni);
+          let dataFim = new Date(item.QuizDataFim);
+          if (dataIni >= data && dataIni.getFullYear() > 2000) item.Vencido = 'NÃO';
+          if (data > dataFim && dataFim.getFullYear() > 2000) item.Vencido = 'SIM';
+        });
       },
       err => { 
         let msg = err.message;
