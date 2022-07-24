@@ -89,6 +89,16 @@ export class QuizrespComponent implements OnInit, OnDestroy {
     this.lerQuiz = this.srvQuizResp.getAlternativas(dados).subscribe(
       (dados) => {
         this.QuizAlternativas = JSON.parse(JSON.stringify(dados));
+        // embaralhar
+        let QuizAux: QuizAlterModel; 
+        for(let i=0; i<100; i++){
+          let ind1 = Math.floor(Math.random() * this.QuizAlternativas.length);
+          let ind2 = Math.floor(Math.random() * this.QuizAlternativas.length);
+          QuizAux = this.QuizAlternativas[ind1];
+          this.QuizAlternativas[ind1] = this.QuizAlternativas[ind2];
+          this.QuizAlternativas[ind2] = QuizAux;
+        }
+        
       },
       err => { 
         let msg = err.error.errors.toString();
