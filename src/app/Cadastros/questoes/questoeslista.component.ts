@@ -47,8 +47,8 @@ export class QuestoeslistaComponent implements OnInit, OnDestroy {
           let dataFim = new Date(item.QuizDataFim);
           if (dataIni >= data && dataIni.getFullYear() > 2000) item.Vencido = 'NÃO';
           if (data > dataFim && dataFim.getFullYear() > 2000) item.Vencido = 'SIM';
-          item.DataInicio = dataIni.getDate().toString() + '/' + dataIni.getMonth().toString() + '/' + dataIni.getFullYear().toString();
-          item.DataFim = dataFim.getDate().toString() + '/' + dataFim.getMonth().toString() + '/' + dataFim.getFullYear().toString();
+          item.DataInicio = dataIni.getFullYear().toString() + '/' + (dataIni.getMonth()+1).toString() + '/' + dataIni.getDate().toString();
+          item.DataFim = dataFim.getFullYear().toString() + '/' + (dataFim.getMonth()+1).toString() + '/' + dataFim.getDate().toString();
         });
       },
       err => { 

@@ -117,7 +117,7 @@ export class QuestoesComponent implements OnInit, OnDestroy{
         if (Quiz.QuizDataIni.getFullYear() < 2000) Quiz.QuizDataIni = new Date;
         if (Quiz.QuizDataFim.getFullYear() < 2000){
           Quiz.QuizDataFim = new Date;
-          Quiz.QuizDataFim.setDate(Quiz.QuizDataFim.getDate() + 30);
+          Quiz.QuizDataFim.setDate(Quiz.QuizDataFim.getDate() + 10);
         }
         this.UsuIdf = Quiz.UsuIdf;
       },
