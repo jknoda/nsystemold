@@ -9,7 +9,7 @@
             <button pButton pRipple label="Novo QUIZ" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
         </ng-template>
     </p-toolbar>
-    <p-table responsiveLayout="scroll" #dt [value]="Questoes" [rows]="10" [paginator]="true" 
+    <p-table responsiveLayout="scroll" #dt [value]="Questoes" [rows]="20" [paginator]="true" 
         [rowHover]="true" dataKey="id">
         <ng-template pTemplate="header">
             <tr>
