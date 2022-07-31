@@ -59,6 +59,10 @@ import { QuestoeslistaComponent } from './Cadastros/questoes/questoeslista.compo
 import { QuestoesComponent } from './Cadastros/questoes/questoes.component';
 import { QuizalterlistaComponent } from './Cadastros/questoes/quizalternativas/quizalterlista.component';
 import { QuizalternativasComponent } from './Cadastros/questoes/quizalternativas/quizalternativas.component';
+import { MantercardlistaComponent } from './JudoCardGame/mantercard/mantercardlista.component';
+import { MantercardComponent } from './JudoCardGame/mantercard/mantercard.component';
+import { CardgameComponent } from './JudoCardGame/cardgame/cardgame.component';
+import { CardModule } from 'primeng/card';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 
 @NgModule({
@@ -88,7 +92,10 @@ import { QuizalternativasComponent } from './Cadastros/questoes/quizalternativas
     QuestoeslistaComponent,
     QuestoesComponent,
     QuizalterlistaComponent,
-    QuizalternativasComponent
+    QuizalternativasComponent,
+    MantercardlistaComponent,
+    MantercardComponent,
+    CardgameComponent
     //TestepdfComponent
   ],
   imports: [
@@ -115,6 +122,7 @@ import { QuizalternativasComponent } from './Cadastros/questoes/quizalternativas
     InputSwitchModule,
     FieldsetModule,
     EditorModule,
+    CardModule,
     //MenuModule,    
     TopoModule,
     PanelMenuModule,

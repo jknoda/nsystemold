@@ -7,7 +7,6 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { QuizlistaComponent } from 'src/app/Participe/quizresp/quizlista.component';
 
 @Component({
   selector: 'app-questoes',

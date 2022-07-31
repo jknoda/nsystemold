@@ -32,6 +32,9 @@ import { QuestoeslistaComponent } from './Cadastros/questoes/questoeslista.compo
 import { QuestoesComponent } from './Cadastros/questoes/questoes.component';
 import { QuizalterlistaComponent } from './Cadastros/questoes/quizalternativas/quizalterlista.component';
 import { QuizalternativasComponent } from './Cadastros/questoes/quizalternativas/quizalternativas.component';
+import { MantercardlistaComponent } from './JudoCardGame/mantercard/mantercardlista.component';
+import { MantercardComponent } from './JudoCardGame/mantercard/mantercard.component';
+import { CardgameComponent } from './JudoCardGame/cardgame/cardgame.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -70,6 +73,9 @@ const appRoutes: Routes = [
         {path: 'questoes', component: QuestoesComponent},
         {path: 'quizalterlista', component: QuizalterlistaComponent},
         {path: 'quizalter', component: QuizalternativasComponent},
+        {path: 'mantercardlista', component: MantercardlistaComponent},
+        {path: 'mantercard', component: MantercardComponent},
+        {path: 'cardgame', component: CardgameComponent},
         {path: 'teste', component: TesteComponent},
         //{path: 'testepdf', component: TestepdfComponent},
         {path: '**', component: HomeComponent}

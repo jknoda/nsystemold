@@ -1,0 +1,71 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="tituloCadastro">GAME CARD</div>
+<div class="filtroCard" *ngIf="!showCard">
+    <div class="col-lg-4 col-xs-12">
+        <label for="cat">Categoria</label>
+        <div>
+            <p-dropdown id="cat" [options]="categorias" [(ngModel)]="selectedCatCode" optionLabel="name" optionValue="code">
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xs-12">
+        <label for="clas">Classe</label>
+        <div>
+            <p-dropdown id="clas" [options]="classes" [(ngModel)]="selectedClasCode" optionLabel="name" optionValue="code">
+            </p-dropdown>
+        </div>
+    </div>    
+    <div class="col-lg-4 col-xs-12">
+        <label></label>
+        <div>
+            <button pButton pRipple label="CARTA" class="p-button-success p-mr-2" (click)="getCard()"></button>
+        </div>
+    </div>    
+</div>
+<div *ngIf="showErro">
+    <div class="col-lg-12 col-xs-12 erroCard">
+        <span class="erroCard">*** NÃO HÁ CARDS PARA ESTA CATEGORIA/CLASSE ***</span>
+    </div>
+</div>
+<div *ngIf="showCard">
+    <div class="row botoes">
+        <div class="col-lg-6 col-xs-6 left">
+            <button pButton pRipple label="Resposta" class="p-button-success p-mr-2" (click)="resposta()"></button>
+        </div>
+        <div class="col-lg-6 col-xs-6 right">
+            <button pButton pRipple label="Retornar" class="p-button-success p-mr-2" (click)="retCard()"></button>
+        </div>
+    </div>
+    <div class="gameCard">
+        <div class="row" style="text-align: center;">
+            <div class="col-lg-6 col-xs-6">
+                <div class="categoria">{{selectedCatName}}</div>
+            </div>
+            <div class="col-lg-6 col-xs-6">
+                <div class="classe">{{selectedClasName}}</div>
+            </div>
+        </div>
+        <div class="row" style="text-align: center;">
+            <div class="col-lg-12 col-xs-12">
+                <div class="desafio">{{card.Desafio}}</div>
+            </div>
+        </div>
+        <div class="row" style="text-align: center;" *ngIf="hasImagem">
+            <fieldset>
+                <div class="col-lg-6 col-xs-12">
+                    <div>
+                        <img class="img" [src]="JudocardImg" alt="Imagem">
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div class="row resposta" *ngIf="showResposta">
+        <div class="col-lg-12 col-xs-12">
+            <div class="desafio">{{card.Resposta}}</div>
+        </div>
+    </div>
+</div>

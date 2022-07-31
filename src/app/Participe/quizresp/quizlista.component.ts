@@ -35,6 +35,7 @@ export class QuizlistaComponent implements OnInit, OnDestroy {
   }
 
   private getQuizes() {
+    this.isLoading = true;
     let dados = {
       EmpIdf: this.EmpIdf
     };
@@ -45,16 +46,17 @@ export class QuizlistaComponent implements OnInit, OnDestroy {
       err => { 
         let msg = err.error.errors.toString();
         this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+        this.isLoading = false;
       },
       ()=>{
         this.VerRespondida();
-        this.isLoading = false;
         return;
       });
   }
 
   private VerRespondida()
   {
+    this.isLoading = true;
     let ret = false;
     this.Quizes.forEach(item=>{
       if (item.QuizLiberado == 'S'){
@@ -77,9 +79,11 @@ export class QuizlistaComponent implements OnInit, OnDestroy {
         err => { 
           let msg = err.error.errors.toString();
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+          this.isLoading = false;
         },
         ()=>{
           item.JaRespondeu = ret;
+          this.isLoading = false;
       });
     })
   }

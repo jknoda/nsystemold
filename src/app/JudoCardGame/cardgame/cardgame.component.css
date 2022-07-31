@@ -1,0 +1,71 @@
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.floatLeft{
+    display: inline-block;
+}
+
+fieldset {
+  border: 1px solid #999;
+}
+  
+legend {
+  display: inline;
+  width: auto;
+  border: 0;
+  padding: 10px;
+  margin-bottom: 0px !important;
+}
+
+.img {
+  width: 300px;
+}
+
+.row{
+    margin-bottom: 10px;
+}
+
+.filtroCard{
+    margin-top: 10px;
+}
+
+.gameCard{
+    background-color: rgb(246, 228, 204);
+}
+
+.categoria{
+
+}
+
+.classe{
+
+}
+
+.desafio{
+
+}
+
+.botoes{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.left{
+    text-align: left;
+}
+
+.right{
+    text-align: right;
+}
+
+.resposta{
+    background-color: aquamarine;
+}
+
+.erroCard{
+    margin-top: 20px;
+    color: red;
+    text-align: center;
+}

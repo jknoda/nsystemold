@@ -82,6 +82,15 @@ export class MenuComponent implements OnInit, OnDestroy {
                 visible:this.isAuxiliar
             },
             {
+                label: 'Card Game',
+                icon: 'fa fa-gamepad',
+                items: [
+                    {label: 'Cadastrar Cards', icon: 'fa fa-columns', routerLink:'mantercardlista',visible:this.isAdm, command:()=>{this.onClick();}},
+                    {label: 'Game Cards', icon: 'fa fa-hand-o-up', routerLink:'cardgame',visible:this.isAdm, command:()=>{this.onClick();}},
+                ],
+                visible:this.isAdm
+            },
+            {
                 label: 'Checkin',
                 icon: 'fas fa-check',
                 routerLink:'checkin',
