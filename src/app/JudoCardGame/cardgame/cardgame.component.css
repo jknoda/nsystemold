@@ -20,7 +20,8 @@ legend {
 }
 
 .img {
-  width: 300px;
+    max-width: 300px;
+    height: 250px;
 }
 
 .row{
@@ -31,25 +32,9 @@ legend {
     margin-top: 10px;
 }
 
-.gameCard{
-    background-color: rgb(246, 228, 204);
-}
-
-.categoria{
-
-}
-
-.classe{
-
-}
-
-.desafio{
-
-}
-
 .botoes{
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .left{
@@ -60,12 +45,44 @@ legend {
     text-align: right;
 }
 
-.resposta{
-    background-color: aquamarine;
-}
-
 .erroCard{
     margin-top: 20px;
     color: red;
     text-align: center;
+}
+
+.gameCard{
+
+}
+
+.gameCardTop{
+    background-color: gold;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.gameCardDesafio{
+    background-color:aquamarine ;
+    padding: 50px 10px 50px 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.gameCardDesafioImg
+{
+    background-color: yellow;
+    padding: 10px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.gameCardImg{
+    background-color: rgb(246, 228, 204);
+    padding: 10px;
+}
+
+.gameCardResp{
+    background-color: black;
+    color: whitesmoke;
+    padding: 10px;
 }

@@ -7,7 +7,7 @@
     <div class="col-lg-4 col-xs-12">
         <label for="cat">Categoria</label>
         <div>
-            <p-dropdown id="cat" [options]="categorias" [(ngModel)]="selectedCatCode" optionLabel="name" optionValue="code">
+            <p-dropdown id="cat" [options]="categorias" [(ngModel)]="selectedCatCode" (onChange)="alterCat()" optionLabel="name" optionValue="code">
             </p-dropdown>
         </div>
     </div>
@@ -40,30 +40,33 @@
         </div>
     </div>
     <div class="gameCard">
-        <div class="row" style="text-align: center;">
+        <div class="row gameCardTop" style="text-align: center;">
             <div class="col-lg-6 col-xs-6">
                 <div class="categoria">{{selectedCatName}}</div>
             </div>
             <div class="col-lg-6 col-xs-6">
-                <div class="classe">{{selectedClasName}}</div>
+                <div class="classe"><span>{{selectedClasNameAux}}</span></div>
             </div>
         </div>
-        <div class="row" style="text-align: center;">
+        <div class="row gameCardDesafioImg" style="text-align: center;" *ngIf="hasImagem">
             <div class="col-lg-12 col-xs-12">
                 <div class="desafio">{{card.Desafio}}</div>
             </div>
         </div>
-        <div class="row" style="text-align: center;" *ngIf="hasImagem">
-            <fieldset>
-                <div class="col-lg-6 col-xs-12">
-                    <div>
-                        <img class="img" [src]="JudocardImg" alt="Imagem">
-                    </div>
+        <div class="row gameCardDesafio" style="text-align: center;" *ngIf="!hasImagem">
+            <div class="col-lg-12 col-xs-12">
+                <div class="desafio">{{card.Desafio}}</div>
+            </div>
+        </div>
+        <div class="row gameCardImg" style="text-align: center;" *ngIf="hasImagem">
+            <div class="col-lg-6 col-xs-12">
+                <div>
+                    <img class="img" [src]="JudocardImg" alt="Imagem">
                 </div>
-            </fieldset>
+            </div>
         </div>
     </div>
-    <div class="row resposta" *ngIf="showResposta">
+    <div class="row gameCardResp" *ngIf="showResposta">
         <div class="col-lg-12 col-xs-12">
             <div class="desafio">{{card.Resposta}}</div>
         </div>

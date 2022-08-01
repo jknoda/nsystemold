@@ -28,6 +28,7 @@ export class CardgameComponent implements OnInit, OnDestroy{
   selectedCatCode : string;
   selectedClasName : string;
   selectedCatName : string;
+  selectedClasNameAux: string;
 
   card : JudocardModel;
   allCards : JudocardModel[];
@@ -81,7 +82,7 @@ export class CardgameComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
-    this.selectedClasCode = "1";
+    this.selectedClasCode = "4";
     this.selectedCatCode = "1";  
     let perfil = JSON.parse(localStorage.getItem('userData')).perfil;
     this.getAllCards();
@@ -207,6 +208,7 @@ export class CardgameComponent implements OnInit, OnDestroy{
           this.JudocardImg = this.sanitizer.bypassSecurityTrustUrl(imagem);
           this.hasImagem = true;
         }        
+        this.selectedClasNameAux = this.selectedClasName + '&nbsp;(' + this.card.CardIdf.toString()+')';
         this.isLoading = false;
         this.showCard = true;
       });
@@ -234,7 +236,19 @@ export class CardgameComponent implements OnInit, OnDestroy{
 
   clear() {
     this.messageService.clear();
-  }    
+  }  
+  
+  alterCat()
+  {
+    if (this.selectedCatCode == '1' || this.selectedCatCode == '5')
+    {
+      this.selectedClasCode = '4';
+    }
+    else
+    {
+      this.selectedClasCode = '1';
+    }
+  }
 
 }
 
