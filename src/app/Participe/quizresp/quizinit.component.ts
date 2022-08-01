@@ -50,11 +50,11 @@ export class QuizinitComponent implements OnInit {
 
   private initForm() {   
     this.isLoading = false;
-    let UserEmail = this.UsuEmail;
-    let UserNome = null;
+    let UserEmail = '';
+    let UserNome = '';
     this.userForm = new FormGroup({
-      'email': new FormControl(UserEmail, Validators.required),
-      'nome': new FormControl(UserNome, Validators.required),
+      'email': new FormControl(UserEmail),
+      'nome': new FormControl(UserNome),
     });
   }
 
