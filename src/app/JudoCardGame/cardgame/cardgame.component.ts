@@ -208,7 +208,7 @@ export class CardgameComponent implements OnInit, OnDestroy{
           this.JudocardImg = this.sanitizer.bypassSecurityTrustUrl(imagem);
           this.hasImagem = true;
         }        
-        this.selectedClasNameAux = this.selectedClasName + '&nbsp;(' + this.card.CardIdf.toString()+')';
+        this.selectedClasNameAux = this.selectedClasName + ' (' + this.card.CardIdf.toString()+')';
         this.isLoading = false;
         this.showCard = true;
       });
