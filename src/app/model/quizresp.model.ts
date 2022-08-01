@@ -5,6 +5,7 @@ export class QuizRespModel {
     public QuizRespEmail: string;
     public QuizResSeq: number;
     public UsuIdf: number;
+    public QuizNome: string;
     public QuizRespAcerto: boolean;
     public DataInc: Date
 }

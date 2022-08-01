@@ -25,6 +25,7 @@ import { LoadingSpinner2Component } from '../shared/loading-spinner/loading-spin
 import { treinoviacalenComponent } from '../Treinos/treinoviacalendario/treinoviacalen.component';
 import { QuizlistaComponent } from './quizresp/quizlista.component';
 import { QuizrespComponent } from './quizresp/quizresp.component';
+import { QuizinitComponent } from './quizresp/quizinit.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -39,7 +40,8 @@ FullCalendarModule.registerPlugins([
     SugestoesComponent,
     treinoviacalenComponent,
     QuizlistaComponent,
-    QuizrespComponent
+    QuizrespComponent,
+    QuizinitComponent
   ],
   exports: [
   ],

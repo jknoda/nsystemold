@@ -32,6 +32,7 @@ export class QuizrespComponent implements OnInit, OnDestroy {
   UsuIdf = 0;
   UsuEmail = "";
   QuizIdf = 0;
+  QuizNome = "";
   
   isLoading = true;
   existeInfo = false;
@@ -51,6 +52,7 @@ export class QuizrespComponent implements OnInit, OnDestroy {
     });
     this.UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
     this.UsuEmail = JSON.parse(localStorage.getItem('userData')).email;
+    this.QuizNome = JSON.parse(localStorage.getItem('userData')).nome;
     this.getQuiz();
   }
 
@@ -131,7 +133,8 @@ export class QuizrespComponent implements OnInit, OnDestroy {
       QuizRespEmail: this.UsuEmail,
       QuizResSeq: this.selectedAlter.QuizResSeq,
       QuizRespAcerto: this.selectedAlter.QuizCerta == 'S',
-      UsuIdf: this.UsuIdf
+      UsuIdf: this.UsuIdf,
+      QuizNome: this.QuizNome
     }
     this.addDadosQuizResp = this.srvQuizResp.addDados(dados).subscribe(
       (ret:any) => {

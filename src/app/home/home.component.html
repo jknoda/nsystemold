@@ -21,9 +21,12 @@
         </div>
         <div *ngIf="!isAuthenticated">
             <div class="row">
+                <button class="btn btn-primary botaoMenu" type="button" style="font-size: smaller;" title="Quiz" routerLink='../quizinit'>
+                    <i class='fa fa-question-circle'></i>
+                </button>
                 <button class="btn btn-primary botaoMenu" type="button" style="font-size: smaller;" title="Login" routerLink='../auth'>
                     <i class='fa fa-sign-in'>&nbsp;&nbsp;Acessar</i>
-                </button>
+                </button>                
             </div>
         </div>
         <hr>    

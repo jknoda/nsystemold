@@ -35,6 +35,7 @@ import { QuizalternativasComponent } from './Cadastros/questoes/quizalternativas
 import { MantercardlistaComponent } from './JudoCardGame/mantercard/mantercardlista.component';
 import { MantercardComponent } from './JudoCardGame/mantercard/mantercard.component';
 import { CardgameComponent } from './JudoCardGame/cardgame/cardgame.component';
+import { QuizinitComponent } from './Participe/quizresp/quizinit.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -69,6 +70,7 @@ const appRoutes: Routes = [
         {path: 'sugestoes', component: SugestoesComponent},
         {path: 'quizlista', component: QuizlistaComponent},
         {path: 'quizresp', component: QuizrespComponent},
+        {path: 'quizinit', component: QuizinitComponent},
         {path: 'questoeslista', component: QuestoeslistaComponent},
         {path: 'questoes', component: QuestoesComponent},
         {path: 'quizalterlista', component: QuizalterlistaComponent},

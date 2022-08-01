@@ -1,0 +1,33 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner2></app-loading-spinner2>
+</div>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+    <div class="form-group">
+        <div class="tituloCadastro">QUIZ)</div>
+        <div class="row">
+            <div class="col-md-4">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" formControlName="email" id="email" pInputText>
+            </div>
+            <div class="col-md-8">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" formControlName="nome" id="nome" pInputText>
+            </div>
+        </div>
+        <div class="row editButtonSystem">
+            <div class="col-md-1">
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  [disabled]="!userForm.valid">Quiz</button>
+            </div>      
+            <div class="floatLeft col-sm-1">
+                <button
+                type="button"
+                class="btn btn-danger"
+                (click)="cancelar()">Cancelar</button>
+            </div> 
+        </div>
+    </div>
+  </form>

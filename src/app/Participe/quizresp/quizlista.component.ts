@@ -72,19 +72,26 @@ export class QuizlistaComponent implements OnInit, OnDestroy {
         QuizIdf: item.QuizIdf,
         UsuIdf: this.UsuIdf
       };
-      this.lerJaRespondeu = this.srvQuiz.getJaRespondeu(dados).subscribe(
-        (dados) => {
-          ret = dados;
-        },
-        err => { 
-          let msg = err.error.errors.toString();
-          this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
-          this.isLoading = false;
-        },
-        ()=>{
-          item.JaRespondeu = ret;
-          this.isLoading = false;
-      });
+      if (this.UsuIdf != 0){
+        this.lerJaRespondeu = this.srvQuiz.getJaRespondeu(dados).subscribe(
+          (dados) => {
+            ret = dados;
+          },
+          err => { 
+            let msg = err.error.errors.toString();
+            this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+            this.isLoading = false;
+          },
+          ()=>{
+            item.JaRespondeu = ret;
+            this.isLoading = false;
+        });
+      }
+      else
+      {
+        item.JaRespondeu = false;
+        this.isLoading = false;
+      }
     })
   }
 

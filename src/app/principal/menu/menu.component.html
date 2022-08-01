@@ -11,6 +11,12 @@
                 <p-panelMenu [model]="items" [style]="{'width':'300px', 'margin-left':'10px'}"></p-panelMenu>
             </li>
             <li class="nav-item" *ngIf="!isAuthenticated">
+                <a routerLink="quizinit" routerLinkActive="active" class="nav-link">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <span>Quiz</span>
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="!isAuthenticated">
                 <a href="http://www.yamazakijudo.com.br">
                     <i class="icon-exit" aria-hidden="true"></i>
                     <span>Sair</span>
