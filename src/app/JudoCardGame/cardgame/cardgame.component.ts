@@ -43,6 +43,7 @@ export class CardgameComponent implements OnInit, OnDestroy{
   hasImagem = false;
   showResposta = false;
   showErro = false;
+  isSortReves = 'N';
 
   uploadedFile : any;
   uploadedName: any;
@@ -209,6 +210,12 @@ export class CardgameComponent implements OnInit, OnDestroy{
           this.hasImagem = true;
         }        
         this.selectedClasNameAux = this.selectedClasName + ' (' + this.card.CardIdf.toString()+')';
+        this.isSortReves = 'N';
+        if (this.selectedCatCode == '5') {
+           // Sorte ou reves
+          this.isSortReves = this.card.Resposta.substring(0,1);
+          this.card.Desafio = this.card.Desafio.replace('REVÉS','').replace('SORTE','');          
+        }
         this.isLoading = false;
         this.showCard = true;
       });

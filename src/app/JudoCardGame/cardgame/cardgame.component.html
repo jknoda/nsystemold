@@ -48,6 +48,16 @@
                 <div class="classe"><span>{{selectedClasNameAux}}</span></div>
             </div>
         </div>
+        <div class="row gameCardReves" style="text-align: center;" *ngIf="isSortReves == 'R'">
+            <div class="col-lg-12 col-xs-12">
+                <div class="desafio">{{card.Resposta}}</div>
+            </div>
+        </div>
+        <div class="row gameCardSorte" style="text-align: center;" *ngIf="isSortReves == 'S'">
+            <div class="col-lg-12 col-xs-12">
+                <div class="desafio">{{card.Resposta}}</div>
+            </div>
+        </div>
         <div class="row gameCardDesafioImg" style="text-align: center;" *ngIf="hasImagem">
             <div class="col-lg-12 col-xs-12">
                 <div class="desafio">{{card.Desafio}}</div>
