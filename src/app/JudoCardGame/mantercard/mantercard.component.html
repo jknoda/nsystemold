@@ -1,6 +1,6 @@
 <p-toast></p-toast>
 <div *ngIf="isLoading" style="text-align: center;">
-    <app-loading-spinner3></app-loading-spinner3>
+    <app-loading-spinner></app-loading-spinner>
 </div>
 <form [formGroup]="dadosForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
     <div class="form-group">
