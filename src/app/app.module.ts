@@ -63,6 +63,7 @@ import { MantercardlistaComponent } from './JudoCardGame/mantercard/mantercardli
 import { MantercardComponent } from './JudoCardGame/mantercard/mantercard.component';
 import { CardgameComponent } from './JudoCardGame/cardgame/cardgame.component';
 import { CardModule } from 'primeng/card';
+import { QuizresplistComponent } from './Diversos/quizresplist/quizresplist.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 
 @NgModule({
@@ -95,7 +96,8 @@ import { CardModule } from 'primeng/card';
     QuizalternativasComponent,
     MantercardlistaComponent,
     MantercardComponent,
-    CardgameComponent
+    CardgameComponent,
+    QuizresplistComponent
     //TestepdfComponent
   ],
   imports: [

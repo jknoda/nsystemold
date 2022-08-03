@@ -1,0 +1,31 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner2></app-loading-spinner2>
+</div>
+<div class="tituloCadastro">QUIZ REPOSTAS</div>
+<div class="card">
+    <p-table responsiveLayout="scroll" #dt [value]="Quizes" [rows]="20" [paginator]="true" 
+        [rowHover]="true" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="QuizPergunta">Pergunta/Nome <p-sortIcon field="QuizPergunta"></p-sortIcon></th>
+                <th pSortableColumn="QuizQde">Qde/Resposta <p-sortIcon field="QuizQde"></p-sortIcon></th>
+                <th pSortableColumn="QuizData">Data <p-sortIcon field="QuizData"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-Quiz>
+            <tr class="listaSystem" *ngIf="Quiz.First == 'S'">
+                <td><span class="pergunta">{{Quiz.QuizPergunta}}</span></td>
+                <td><span class="pergunta">{{Quiz.QuizResposta}}</span></td>
+            </tr>
+            <tr class="listaSystem">
+                <td>{{Quiz.QuizNome}}</td>
+                <td>{{Quiz.Qde}}</td>
+                <td>{{Quiz.Data}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}" translate="yes">
+</p-confirmDialog>

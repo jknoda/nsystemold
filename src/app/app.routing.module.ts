@@ -36,6 +36,7 @@ import { MantercardlistaComponent } from './JudoCardGame/mantercard/mantercardli
 import { MantercardComponent } from './JudoCardGame/mantercard/mantercard.component';
 import { CardgameComponent } from './JudoCardGame/cardgame/cardgame.component';
 import { QuizinitComponent } from './Participe/quizresp/quizinit.component';
+import { QuizresplistComponent } from './Diversos/quizresplist/quizresplist.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -78,6 +79,7 @@ const appRoutes: Routes = [
         {path: 'mantercardlista', component: MantercardlistaComponent},
         {path: 'mantercard', component: MantercardComponent},
         {path: 'cardgame', component: CardgameComponent},
+        {path: 'quizresplist', component: QuizresplistComponent},
         {path: 'teste', component: TesteComponent},
         //{path: 'testepdf', component: TestepdfComponent},
         {path: '**', component: HomeComponent}
