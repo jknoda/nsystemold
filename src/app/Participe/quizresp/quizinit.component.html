@@ -3,16 +3,17 @@
     <app-loading-spinner2></app-loading-spinner2>
 </div>
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+    <div><em>*</em> Campo obrigatório</div> 
     <div class="form-group">
         <div class="tituloCadastro">QUIZ)</div>
         <div class="row">
+            <div class="col-md-8">
+                <em>*</em><label for="nome">Nome</label>
+                <input type="text" class="form-control" formControlName="nome" id="nome" pInputText>
+            </div>            
             <div class="col-md-4">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" formControlName="email" id="email" pInputText>
-            </div>
-            <div class="col-md-8">
-                <label for="nome">Nome</label>
-                <input type="text" class="form-control" formControlName="nome" id="nome" pInputText>
             </div>
         </div>
         <div class="row editButtonSystem">

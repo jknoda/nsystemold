@@ -54,7 +54,7 @@ export class QuizinitComponent implements OnInit {
     let UserNome = '';
     this.userForm = new FormGroup({
       'email': new FormControl(UserEmail),
-      'nome': new FormControl(UserNome),
+      'nome': new FormControl(UserNome, Validators.required),
     });
   }
 
