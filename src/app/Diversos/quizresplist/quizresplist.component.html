@@ -8,9 +8,9 @@
         [rowHover]="true" dataKey="id">
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="QuizPergunta">Pergunta/Nome <p-sortIcon field="QuizPergunta"></p-sortIcon></th>
-                <th pSortableColumn="QuizQde">Qde/Resposta <p-sortIcon field="QuizQde"></p-sortIcon></th>
-                <th pSortableColumn="QuizData">Data <p-sortIcon field="QuizData"></p-sortIcon></th>
+                <th pSortableColumn="QuizPergunta"><span class="pergunta">Pergunta</span>/Nome </th>
+                <th pSortableColumn="QuizQde"><span class="pergunta">Resposta</span>/Qde </th>
+                <th pSortableColumn="QuizData">Data </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-Quiz>
@@ -19,7 +19,7 @@
                 <td><span class="pergunta">{{Quiz.QuizResposta}}</span></td>
             </tr>
             <tr class="listaSystem">
-                <td>{{Quiz.QuizNome}}</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{Quiz.QuizNome}}</td>
                 <td>{{Quiz.Qde}}</td>
                 <td>{{Quiz.Data}}</td>
             </tr>
