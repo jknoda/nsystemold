@@ -5,6 +5,7 @@ import { QuizModel } from 'src/app/model/quiz.model';
 import { ServiceConfig } from 'src/app/_config/services.config';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { QuizlistaComponent } from 'src/app/Participe/quizresp/quizlista.component';
 
 @Component({
   selector: 'app-questoeslista',
@@ -20,6 +21,7 @@ export class QuestoeslistaComponent implements OnInit, OnDestroy {
   deleteDadosQuiz: Subscription;
   lerDadosQuiz: Subscription;
   statusDadosQuiz: Subscription;
+  updateDadosQuiz: Subscription;
 
   Questoes: QuizModel[];
   submitted: boolean;
@@ -72,6 +74,43 @@ export class QuestoeslistaComponent implements OnInit, OnDestroy {
     this.router.navigate(['questoes'], { queryParams: { Modo:'EDIT', EmpIdf: Quiz.EmpIdf, QuizIdf: Quiz.QuizIdf } });
   }
 
+  liberarQuiz(Quiz: QuizModel) {
+    this.isLoading = true;
+    let liberado = Quiz.QuizLiberado;
+    let texto = 'liberado';
+    if (liberado == 'S'){
+       liberado = 'N';
+       texto = 'bloqueado';
+    }
+    else {
+       liberado = 'S';
+       texto = 'liberado';
+    }
+    let dados = {
+      EmpIdf: this.EmpIdf,
+      QuizIdf: Quiz.QuizIdf,
+      UsuIdf: this.UsuIdf,
+      QuizLiberado: liberado
+    }; 
+    
+    let dadosUpdate = {
+      ...dados
+    }
+    this.updateDadosQuiz = this.srvQuiz.updateDados(dadosUpdate).subscribe(
+      () => {
+        this.messageService.add({severity:'success', summary: 'Successo', detail: 'Quiz liberado!'});
+      },
+      err => { 
+        let msg = err.error.errors.toString();
+        this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
+      },
+      () => {
+        this.isLoading = false;
+        this.refresh();
+      }
+    );
+  }
+
   deleteQuiz(Quiz: QuizModel) {
     this.confirmationService.confirm({
       message: 'Confirma exclusão de <b>' + Quiz.QuizPergunta + '</b> ?',
@@ -112,6 +151,9 @@ export class QuestoeslistaComponent implements OnInit, OnDestroy {
     }
     if (this.deleteDadosQuiz != null){
       this.deleteDadosQuiz.unsubscribe();
+    }
+    if (this.updateDadosQuiz != null){
+      this.updateDadosQuiz.unsubscribe();
     }
   }
 }
