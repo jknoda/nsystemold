@@ -3,9 +3,9 @@
     <app-loading-spinner2></app-loading-spinner2>
 </div>
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
-    <div><em>*</em> Campo obrigatório</div> 
     <div class="form-group">
         <div class="tituloCadastro">QUIZ)</div>
+        <div><em>*</em> Campo obrigatório</div> 
         <div class="row">
             <div class="col-md-8">
                 <em>*</em><label for="nome">Nome</label>
