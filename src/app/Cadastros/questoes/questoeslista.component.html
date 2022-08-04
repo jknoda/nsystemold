@@ -32,8 +32,8 @@
                 <td>{{Quiz.QuizLiberado}}</td>                
                 <td>{{Quiz.Vencido}}</td>                
                 <td>
-                    <button pButton pRipple icon="fa fa-check-square-o" class="p-button-rounded p-button-success" (click)="liberarQuiz(Quiz)" title="Liberar" *ngIf="Quiz.QuizLiberado != 'S'"></button>
-                    <button pButton pRipple icon="fa fa-times" class="p-button-rounded p-button-danger" (click)="liberarQuiz(Quiz)" title="Bloquear" *ngIf="Quiz.QuizLiberado == 'S'"></button>
+                    <button pButton pRipple icon="fa-solid fa-unlock" class="p-button-rounded p-button-success" (click)="liberarQuiz(Quiz)" title="Liberar" *ngIf="Quiz.QuizLiberado != 'S'"></button>
+                    <button pButton pRipple icon="fa-solid fa-lock" class="p-button-rounded p-button-danger" (click)="liberarQuiz(Quiz)" title="Bloquear" *ngIf="Quiz.QuizLiberado == 'S'"></button>
                     <button pButton pRipple icon="fa fa-hand-pointer-o" class="p-button-rounded p-button-default" (click)="alterQuiz(Quiz)" title="Respostas"></button>
                     <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editQuiz(Quiz)" title="Alterar"></button>
                     <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-danger" (click)="deleteQuiz(Quiz)" title="Excluir"></button>

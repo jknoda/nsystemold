@@ -98,7 +98,7 @@ export class QuestoeslistaComponent implements OnInit, OnDestroy {
     }
     this.updateDadosQuiz = this.srvQuiz.updateDados(dadosUpdate).subscribe(
       () => {
-        this.messageService.add({severity:'success', summary: 'Successo', detail: 'Quiz liberado!'});
+        this.messageService.add({severity:'success', summary: 'Successo', detail: 'Quiz '+texto+'!'});
       },
       err => { 
         let msg = err.error.errors.toString();
