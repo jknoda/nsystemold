@@ -64,6 +64,7 @@ import { MantercardComponent } from './JudoCardGame/mantercard/mantercard.compon
 import { CardgameComponent } from './JudoCardGame/cardgame/cardgame.component';
 import { CardModule } from 'primeng/card';
 import { QuizresplistComponent } from './Diversos/quizresplist/quizresplist.component';
+import { CdTimerModule } from 'angular-cd-timer';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 
 @NgModule({
@@ -131,7 +132,7 @@ import { QuizresplistComponent } from './Diversos/quizresplist/quizresplist.comp
     ParticipeModule,
     CheckboxModule,
     FileUploadModule,
-
+    CdTimerModule,
     TesteModule
   ],
   providers: [    

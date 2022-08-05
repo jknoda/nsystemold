@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="row gameCardImg" style="text-align: center;" *ngIf="hasImagem">
-            <div class="col-lg-6 col-xs-12">
+            <div class="col-lg-6 col-xs-12" >
                 <div>
                     <img class="img" [src]="JudocardImg" alt="Imagem">
                 </div>
@@ -79,6 +79,11 @@
     <div class="row gameCardResp" *ngIf="showResposta">
         <div class="col-lg-12 col-xs-12">
             <div class="desafio">{{card.Resposta}}</div>
+        </div>
+    </div>
+    <div class="row gameCardResp" *ngIf="!showResposta">
+        <div class="col-lg-12 col-xs-12">
+            <cd-timer format="user">[seconds] segundos</cd-timer>
         </div>
     </div>
 </div>
