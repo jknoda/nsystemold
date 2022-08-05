@@ -4,6 +4,7 @@ export class TreinoaluModel {
     public AluIdf: number;
     public TreAluObs: string;    
     public TreAluNome: string;
+    public UsuIdf: number;
     public DataInc: Date;
     public DataAlt: Date;
 }

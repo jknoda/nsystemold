@@ -1,14 +1,10 @@
 import { DatePipe } from '@angular/common';
-import { TransitiveCompileNgModuleMetadata } from '@angular/compiler';
-import { RESTORED_VIEW_CONTEXT_NAME } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DateProfileGenerator } from '@fullcalendar/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { AlunoService } from 'src/app/Cadastros/aluno/aluno.service';
 import { AlunoModel } from 'src/app/model/aluno.model';
-import { TreinoModel } from 'src/app/model/treino.model';
 import { TreinoService } from 'src/app/Treinos/treino/treino.service';
 import { TreinoalunoService } from 'src/app/Treinos/treinoalu/treinoaluno.service';
 import { ServiceConfig } from 'src/app/_config/services.config';
@@ -129,6 +125,7 @@ export class CheckinComponent implements OnInit {
       TreIdf: Number(this.selectTreinoCode),
       AluIdf: AluIdf,
       TreAluNome: AluNome,
+      UsuIdf: this.UsuIdf,
       TreAluObs: 'Checkin'
     }
     if (dados.TreIdf == 0)
@@ -149,7 +146,8 @@ export class CheckinComponent implements OnInit {
       TreIdf: Number(this.selectTreinoCode),
       AluIdf: AluIdf,
       TreAluNome: AluNome,
-      TreAluObs: 'Checkin'
+      TreAluObs: 'Checkin',
+      UsuIdf: this.UsuIdf
     }
     this.addAluno = this.srvTreinoAlu.addTreAluDados(dados).subscribe(
       () => {

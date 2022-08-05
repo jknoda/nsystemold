@@ -19,17 +19,17 @@
         [rowHover]="true" dataKey="id">
         <ng-template pTemplate="header">
             <tr>
+                <th></th>                
                 <th pSortableColumn="AluNome">Nome <p-sortIcon field="AluNome"></p-sortIcon></th>
-                <th></th>
             </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-Aluno>
             <tr class="listaSystem">
-                <td [ngClass]="{'vermelho' : !Aluno.isAtivo}">{{Aluno.AluNome}}</td>
                 <td>
                     <button pButton pRipple icon="fas fa-calendar-check" class="p-button-rounded p-button-rounded" (click)="checkinAluno(Aluno.AluIdf, Aluno.AluNome)" title="Check-in"></button>
-                </td>
+                </td>                
+                <td [ngClass]="{'vermelho' : !Aluno.isAtivo}">{{Aluno.AluNome}}</td>
             </tr>
         </ng-template>
     </p-table>
