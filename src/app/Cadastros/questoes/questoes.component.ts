@@ -131,6 +131,7 @@ export class QuestoesComponent implements OnInit, OnDestroy{
   }
 
   onSubmit() {
+    this.isLoading = true;
     let dados = {
       EmpIdf: this.EmpIdf,
       QuizIdf: this.QuizIdf,
@@ -157,6 +158,7 @@ export class QuestoesComponent implements OnInit, OnDestroy{
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
         },
         () => {
+          this.isLoading = false;
           this.retorno();
         }
       );
@@ -179,7 +181,8 @@ export class QuestoesComponent implements OnInit, OnDestroy{
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
         },
         () => {
-          this.retorno();
+          this.isLoading = false;
+          this.alterQuiz(dados);
         }
       );
     }
@@ -234,5 +237,10 @@ export class QuestoesComponent implements OnInit, OnDestroy{
   clear() {
     this.messageService.clear();
   }    
+
+  alterQuiz(Quiz) {
+    console.log(Quiz);
+    this.router.navigate(['quizalterlista'], { queryParams: { EmpIdf: this.EmpIdf, QuizIdf: Quiz.QuizIdf, QuizPergunta: Quiz.QuizPergunta } });
+  }
 
 }
