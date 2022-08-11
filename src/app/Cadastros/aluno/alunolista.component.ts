@@ -160,9 +160,8 @@ export class AlunoListaComponent implements OnInit, OnDestroy {
     this.router.navigate(['responsaveis'], { queryParams: { EmpIdf: Aluno.EmpIdf, AluIdf: Aluno.AluIdf, AluNome: Aluno.AluNome } });
   }
 
-  esportesAluno(Aluno: AlunoModel) {
-    //this.router.navigate(['aluno'], { queryParams: { Modo:'EDIT', EmpIdf: Aluno.EmpIdf, AluIdf: Aluno.AluIdf } });
-    console.log('esportes');
+  judoAluno(Aluno: AlunoModel) {
+    this.router.navigate(['judolista'], { queryParams: { EmpIdf: Aluno.EmpIdf, AluIdf: Aluno.AluIdf, AluNome:Aluno.AluNome } });
   }
 
   private refresh(){

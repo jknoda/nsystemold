@@ -65,6 +65,8 @@ import { CardgameComponent } from './JudoCardGame/cardgame/cardgame.component';
 import { CardModule } from 'primeng/card';
 import { QuizresplistComponent } from './Diversos/quizresplist/quizresplist.component';
 import { CdTimerModule } from 'angular-cd-timer';
+import { JudoComponent } from './Cadastros/aluno/judo/judo.component';
+import { JudolistaComponent } from './Cadastros/aluno/judo/judolista.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 
 @NgModule({
@@ -98,7 +100,9 @@ import { CdTimerModule } from 'angular-cd-timer';
     MantercardlistaComponent,
     MantercardComponent,
     CardgameComponent,
-    QuizresplistComponent
+    QuizresplistComponent,
+    JudoComponent,
+    JudolistaComponent
     //TestepdfComponent
   ],
   imports: [

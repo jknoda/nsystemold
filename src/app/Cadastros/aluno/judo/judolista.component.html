@@ -1,0 +1,41 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="tituloCadastro">DADOS JUDÔ - {{aluno}}</div>
+<div class="card" *ngIf="!isLoading">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Nova faixa" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="Retornar" icon="fa-solid fa-arrow-rotate-left" class="p-button-default p-mr-2" (click)="retornar()"></button>
+        </ng-template>
+    </p-toolbar>
+    <p-table responsiveLayout="scroll" #dt [value]="AluJudos" [rows]="20" [paginator]="true" 
+        [rowHover]="true" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="Data">Data promoção <p-sortIcon field="data"></p-sortIcon></th>
+                <th pSortableColumn="Faixa">Faixa <p-sortIcon field="Faixa"></p-sortIcon></th>
+                <th pSortableColumn="AluJuNrFed">Nº FPJ <p-sortIcon field="FPJ"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-Alujudo>
+            <tr class="listaSystem">
+                <td>{{Alujudo.Data}}</td>
+                <td>{{Alujudo.FaixaCor}}</td>
+                <td>{{Alujudo.AluJuNrFed}}</td>
+                <td>
+                    <button pButton pRipple icon="fas fa-user-edit" class="p-button-rounded p-button-success" (click)="editFaixa(Alujudo)" title="Alterar"></button>
+                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-danger" (click)="deleteFaixa(Alujudo)" title="Excluir"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}" translate="yes">
+</p-confirmDialog>
