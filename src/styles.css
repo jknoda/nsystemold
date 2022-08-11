@@ -31,7 +31,7 @@ h1, h2{
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    overflow: hidden;
+/*    overflow: hidden;  */
 }
 
 .p-inputtext {
@@ -47,6 +47,6 @@ h1, h2{
         -webkit-box-flex: 1;
         -ms-flex: 1;
         flex: 1;
-        overflow: hidden;
+        /*overflow: hidden;*/
     }
   } 
