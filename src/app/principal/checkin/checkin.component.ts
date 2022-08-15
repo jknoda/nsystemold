@@ -154,7 +154,7 @@ export class CheckinComponent implements OnInit {
       },
       err => { 
         let msg = err.error.errors.toString();
-        if (msg.toUpperCase().includes('PRIMARY'))
+        if (msg.toUpperCase().includes('MUST BE UNIQUE'))
         {
           msg = "Aluno '" + AluNome + "' já fez checkin neste treino!";
           this.messageService.add({severity:'warn', summary: 'Aviso!', detail: msg});

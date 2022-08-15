@@ -110,7 +110,7 @@ export class ResponsaveisComponent implements OnInit, OnDestroy {
         {
           msg = err.error.msg;
         }
-        if (msg.includes("must be unique"))
+        if (msg.includes("MUST BE UNIQUE"))
         {
           msg = "Responsável já incluido!";
         }

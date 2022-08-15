@@ -152,7 +152,7 @@ export class TreinoaluComponent implements OnInit, OnDestroy {
         },
         err => { 
           let msg = err.error.errors.toString();
-          if (msg.includes('PRIMARY must be unique')){
+          if (msg.includes('MUST BE UNIQUE')){
                msg = 'Aluno já incluído!';
           }
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});

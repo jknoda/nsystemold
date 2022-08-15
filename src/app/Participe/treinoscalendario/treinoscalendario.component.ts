@@ -271,7 +271,7 @@ export class TreinoscalendarioComponent implements OnInit, OnDestroy {
       err => { 
         //console.log('error',err);
         let msg = err.error.errors.toString();
-        if (msg.toUpperCase().includes('PRIMARY'))
+        if (msg.toUpperCase().includes('MUST BE UNIQUE'))
         {
           msg = "Aluno '" + this.selectedAluno.name + "' já fez checkin neste treino!";
         }
