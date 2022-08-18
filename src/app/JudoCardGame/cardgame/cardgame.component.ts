@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { sharedStylesheetJitUrl } from '@angular/compiler';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-cardgame',
@@ -48,6 +49,8 @@ export class CardgameComponent implements OnInit, OnDestroy{
   uploadedFile : any;
   uploadedName: any;
   JudocardImg: SafeResourceUrl;
+
+  cont = 0;
 
   constructor(private router: Router, private route: ActivatedRoute, 
     private srvJudocard: JudocardService, 
@@ -107,7 +110,8 @@ export class CardgameComponent implements OnInit, OnDestroy{
   sorteiaCard()
   {
     let Aux : JudocardModel;
-    for(let i=0; i<100; i++){
+    let nMax = this.allCards.length;
+    for(let i=0; i<nMax; i++){
       let ind1 = Math.floor(Math.random() * this.allCards.length);
       let ind2 = Math.floor(Math.random() * this.allCards.length);
       Aux = this.allCards[ind1];
@@ -122,6 +126,7 @@ export class CardgameComponent implements OnInit, OnDestroy{
       this.Idf = -1;
       return;
     }
+    this.cont += 1;
     this.Idf = this.allCards[ind].Idf;
     this.allCards[ind].Selecionado = 'S';
   }
@@ -137,7 +142,13 @@ export class CardgameComponent implements OnInit, OnDestroy{
     this.sorteiaCard();
     if (this.Idf == -1)
     {
-      this.allCards.forEach(item=>item.Selecionado = 'N');
+      let clasIdf = parseInt(this.selectedClasCode);
+      let catIdf = parseInt(this.selectedCatCode);
+      this.allCards.forEach(item=>{
+        if (item.CatIdf == catIdf && item.ClasIdf == clasIdf){
+          item.Selecionado = 'N';
+        }
+      });
       this.sorteiaCard();
     }
     if (this.Idf == -1)
