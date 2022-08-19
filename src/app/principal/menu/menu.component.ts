@@ -95,6 +95,7 @@ export class MenuComponent implements OnInit, OnDestroy {
                 icon: 'fa fa-table',
                 items: [
                     {label: 'Respostas QUIZ', icon: 'fa fa-columns', routerLink:'quizresplist',visible:this.isAdm, command:()=>{this.onClick();}},
+                    {label: 'Placar', icon: 'fa fa-columns', routerLink:'placar',visible:this.isAdm, command:()=>{this.onClick();}},
                 ],
                 visible:this.isAdm
             },            

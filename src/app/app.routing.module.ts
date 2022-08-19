@@ -39,6 +39,7 @@ import { QuizinitComponent } from './Participe/quizresp/quizinit.component';
 import { QuizresplistComponent } from './Diversos/quizresplist/quizresplist.component';
 import { JudolistaComponent } from './Cadastros/aluno/judo/judolista.component';
 import { JudoComponent } from './Cadastros/aluno/judo/judo.component';
+import { PlacarComponent } from './Diversos/placar/placar.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -84,6 +85,7 @@ const appRoutes: Routes = [
         {path: 'quizresplist', component: QuizresplistComponent},
         {path: 'judolista', component: JudolistaComponent},
         {path: 'judo', component: JudoComponent},
+        {path: 'placar', component: PlacarComponent},
         {path: 'teste', component: TesteComponent},
         //{path: 'testepdf', component: TestepdfComponent},
         {path: '**', component: HomeComponent}
