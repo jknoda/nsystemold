@@ -18,15 +18,15 @@
 </fieldset>
 <fieldset class="azul">
     <div class="row">
-        <div class="col-xs-4">
+        <div class="col-xs-4" style="text-align: center;">
             <p-inputNumber [(ngModel)]="ipponA" min="0" max="2" size="8px" mode="decimal" [showButtons]="true" buttonLayout="vertical" spinnerMode="vertical"
             decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"></p-inputNumber>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4" style="text-align: center;">
             <p-inputNumber [(ngModel)]="wazariA" min="0" max="2" size="8px" mode="decimal" [showButtons]="true" buttonLayout="vertical" spinnerMode="vertical"
             decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"></p-inputNumber>
         </div>      
-        <div class="col-xs-4">
+        <div class="col-xs-4" style="text-align: center;">
             <p-inputNumber [(ngModel)]="shidoA" min="0" max="3" size="8px" mode="decimal" [showButtons]="true" buttonLayout="vertical" spinnerMode="vertical"
             decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"></p-inputNumber>
         </div>
@@ -35,17 +35,46 @@
 
 <fieldset class="branco">
     <div class="row">
-        <div class="col-xs-4">
+        <div class="col-xs-4" style="text-align: center;">
             <p-inputNumber [(ngModel)]="ipponB" min="0" max="2" size="8px" mode="decimal" [showButtons]="true" buttonLayout="vertical" spinnerMode="vertical"
             decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"></p-inputNumber>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4" style="text-align: center;">
             <p-inputNumber [(ngModel)]="wazariB" min="0" max="2" size="8px" mode="decimal" [showButtons]="true" buttonLayout="vertical" spinnerMode="vertical"
             decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"></p-inputNumber>
         </div>      
-        <div class="col-xs-4">
+        <div class="col-xs-4" style="text-align: center;">
             <p-inputNumber [(ngModel)]="shidoB" min="0" max="3" size="8px" mode="decimal" [showButtons]="true" buttonLayout="vertical" spinnerMode="vertical"
             decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"></p-inputNumber>
         </div>
     </div>  
+</fieldset>
+<fieldset>
+    <div class="row">
+        <div class="col-xs-3">
+            <button pButton pRipple label="Hajime" class="p-button-success p-mr-2" (click)="hajime()"></button>
+        </div>
+        <div class="col-xs-3">
+            <button pButton pRipple label="Matte" class="p-button-success p-mr-2" (click)="matte()"></button>
+        </div>
+        <div class="col-xs-3">
+            <button pButton pRipple label="Osaekomi" class="p-button-success p-mr-2" (click)="osae()"></button>
+        </div>
+        <div class="col-xs-3">
+            <button pButton pRipple label="Toketa" class="p-button-success p-mr-2" (click)="toketa()"></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <cd-timer #jikan format="user" [autoStart]="false">[seconds] segundos</cd-timer>
+        </div>
+        <div class="col-xs-6">
+            <cd-timer #osaekomi format="user" [autoStart]="false">[seconds] segundos</cd-timer>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button pButton pRipple label="Reset" class="p-button-success p-mr-2" (click)="zerar()"></button>
+        </div>
+    </div>
 </fieldset>
