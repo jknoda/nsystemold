@@ -1,9 +1,39 @@
 .azul{
     background-color: blue;
     padding: 10px;
+    height: 150px;
+}
+
+.vcenter{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);     
 }
 
 .branco{
     background-color: white;
     padding: 10px;
+    height: 150px;
+}
+
+.timer{
+    background-color: black;
+    color: white;
+    padding: 20px;
+    height: 160px;
+}
+
+.jikan{
+    font-size: 25px !important;
+}
+
+.placar
+{
+    text-align: center;
+    vertical-align: center;
+}
+
+.inputPlacar{
+    font-size: 25px !important;
+    background-color: red !important;
 }
