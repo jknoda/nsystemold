@@ -85,6 +85,12 @@
                 class="btn btn-danger"
                 (click)="cancelar()">Cancelar</button>
             </div>
+            <div class="floatLeft col-sm-1" *ngIf="editMode">
+                <button
+                type="button"
+                class="btn button-default"
+                (click)="respostas()">Respostas</button>
+            </div>
         </div>
     </div>
   </form>

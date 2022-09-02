@@ -20,6 +20,10 @@ export class MantercardComponent implements OnInit, OnDestroy{
   private Data: Date = new Date();
   UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
   Idf = 0;
+  IdfAux = 0;
+  IdfSeqAux = 0;
+  Questao = '';
+
   isTecnico = false;
 
   dadosForm: FormGroup;
@@ -200,6 +204,10 @@ export class MantercardComponent implements OnInit, OnDestroy{
     this.retorno(0);
   }
 
+  respostas(){
+    this.router.navigate(['respcardlista'], { queryParams: { Modo:'LISTA', Idf: this.IdfAux, Questao: this.Questao } });
+  }
+
   private retorno(tempo=1010){
     setTimeout(() => 
     {
@@ -219,6 +227,8 @@ export class MantercardComponent implements OnInit, OnDestroy{
     let OnLine = 'S';
     if (dados != null)
     {
+      this.IdfAux = dados.Idf;
+      this.Questao = dados.Desafio;
       Desafio = dados.Desafio;
       CatIdf = dados.CatIdf;
       ClassIdf = dados.ClasIdf;
