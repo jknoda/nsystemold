@@ -2,37 +2,37 @@
 <div *ngIf="isLoading" style="text-align: center;">
     <app-loading-spinner></app-loading-spinner>
 </div>
-<div class="tituloCadastro">CADASTRO DE CARDS - GAMEBOARD</div>
-
+<div class="tituloCadastro">CADASTRO DE RESPOSTAS CARDS - GAMEBOARD</div>
+<div class="subTituloCadastro">{{Questao}}</div>
 <div class="card" *ngIf="!isLoading">
     <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
             <button pButton pRipple label="Novo CARD" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
         </ng-template>
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="Retonnar" icon="pi pi-undo" class="p-button-success p-mr-2" (click)="retornar()"></button>
+        </ng-template>        
     </p-toolbar>
     <p-table responsiveLayout="scroll" #dt [value]="Judocards" [rows]="20" [paginator]="true" 
         [rowHover]="true" dataKey="id">
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="Idf">Idf <p-sortIcon field="Idf"></p-sortIcon></th>
-                <th pSortableColumn="CatDes">Categoria <p-sortIcon field="CatDes"></p-sortIcon></th>
-                <th pSortableColumn="CardIdf">Card IDF <p-sortIcon field="CardIdf"></p-sortIcon></th>
-                <th pSortableColumn="ClasDes">Classe <p-sortIcon field="ClasDes"></p-sortIcon></th>
-                <th pSortableColumn="Desafio">Desafio <p-sortIcon field="Desafio"></p-sortIcon></th>
+                <th pSortableColumn="Idf">Seq <p-sortIcon field="Idf"></p-sortIcon></th>
+                <th pSortableColumn="Correto">Correto <p-sortIcon field="Correto"></p-sortIcon></th>
+                <th pSortableColumn="RespostaTxt">Resposta TXT <p-sortIcon field="RepostaTxt"></p-sortIcon></th>
+                <th pSortableColumn="RespostaUrl">Resposta URL <p-sortIcon field="RespostaUrl"></p-sortIcon></th>
                 <th></th>
             </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-Judocard>
             <tr class="listaSystem">
-                <td>{{Judocard.Idf}}</td>
-                <td>{{Judocard.CatDes}}</td>                
-                <td>{{Judocard.CardIdf}}</td>                
-                <td>{{Judocard.ClasDes}}</td>                
-                <td>{{Judocard.Desafio}}</td>                
+                <td>{{Judocard.IdfSeq}}</td>                
+                <td>{{Judocard.Correto}}</td>                
+                <td>{{Judocard.RespostaTxt}}</td>                
+                <td>{{Judocard.RespostaUrl}}</td>                
                 <td>
                     <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editJudocard(Judocard)" title="Alterar"></button>
-                    <button pButton pRipple icon="fa-solid fa-magnifying-glass" class="p-button-rounded p-button-default" (click)="respostasJudocard(Judocard)" title="Respostas"></button>
                     <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-danger" (click)="deleteJudocard(Judocard)" title="Excluir"></button>
                 </td>
             </tr>

@@ -40,6 +40,8 @@ import { QuizresplistComponent } from './Diversos/quizresplist/quizresplist.comp
 import { JudolistaComponent } from './Cadastros/aluno/judo/judolista.component';
 import { JudoComponent } from './Cadastros/aluno/judo/judo.component';
 import { PlacarComponent } from './Diversos/placar/placar.component';
+import { RespcardComponent } from './JudoCardGame/respcard/respcard.component';
+import { RespcardlistaComponent } from './JudoCardGame/respcard/respcardlista.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -86,6 +88,8 @@ const appRoutes: Routes = [
         {path: 'judolista', component: JudolistaComponent},
         {path: 'judo', component: JudoComponent},
         {path: 'placar', component: PlacarComponent},
+        {path: 'respcard', component: RespcardComponent},
+        {path: 'respcardlista', component: RespcardlistaComponent},
         {path: 'teste', component: TesteComponent},
         //{path: 'testepdf', component: TestepdfComponent},
         {path: '**', component: HomeComponent}

@@ -1,8 +1,4 @@
 export class JudocardModel {
-  findIndex(arg0: (x: any) => boolean) {
-    throw new Error('Method not implemented.');
-  }
-  
     public Idf: number;
     public CatIdf: number;
     public ClasIdf: number;
@@ -13,5 +9,7 @@ export class JudocardModel {
     public CardIdf: number;
     public CatDes: string;
     public ClasDes: string;
-    public Selecionado: string
+    public Selecionado: string;
+    public ImageUrl: string;
+    public OnLine: string;
 }

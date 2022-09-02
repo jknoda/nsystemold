@@ -112,7 +112,7 @@ export class QuizalternativasComponent implements OnInit, OnDestroy {
       let dadosUpdate = {
         ...dados
       }
-      console.log(dadosUpdate);
+      //console.log(dadosUpdate);
       this.updateDadosQuizAlt = this.srvQuizAlt.updateDados(dadosUpdate).subscribe(
         () => {
           this.messageService.add({severity:'success', summary: 'Successo', detail: 'Resposta atualizada!'});

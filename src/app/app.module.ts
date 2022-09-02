@@ -68,6 +68,8 @@ import { CdTimerModule } from 'angular-cd-timer';
 import { JudoComponent } from './Cadastros/aluno/judo/judo.component';
 import { JudolistaComponent } from './Cadastros/aluno/judo/judolista.component';
 import { PlacarComponent } from './Diversos/placar/placar.component';
+import { RespcardComponent } from './JudoCardGame/respcard/respcard.component';
+import { RespcardlistaComponent } from './JudoCardGame/respcard/respcardlista.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 
 @NgModule({
@@ -104,7 +106,9 @@ import { PlacarComponent } from './Diversos/placar/placar.component';
     QuizresplistComponent,
     JudoComponent,
     JudolistaComponent,
-    PlacarComponent
+    PlacarComponent,
+    RespcardComponent,
+    RespcardlistaComponent
     //TestepdfComponent
   ],
   imports: [

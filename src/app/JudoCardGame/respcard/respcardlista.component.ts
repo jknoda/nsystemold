@@ -1,41 +1,48 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import { JudocardService } from '../judocard.service';
-import { JudocardModel } from 'src/app/model/judocard.model';
-import { ServiceConfig } from 'src/app/_config/services.config';
+import { RespcardService } from './respcard.service';
+import { JudocardrespModel } from 'src/app/model/judocardresp.model';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-mantercardlista',
-  templateUrl: './mantercardlista.component.html',
-  styleUrls: ['./mantercard.component.css'],
-  providers: [MessageService,ConfirmationService,JudocardService]
+  templateUrl: './respcardlista.component.html',
+  styleUrls: ['./respcard.component.css'],
+  providers: [MessageService,ConfirmationService,RespcardService]
 })
-export class MantercardlistaComponent implements OnInit, OnDestroy {
-
-  private EmpIdf: number = ServiceConfig.EMPIDF;
-  UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
+export class RespcardlistaComponent implements OnInit, OnDestroy {
 
   deleteDadosJudocard: Subscription;
   lerDadosJudocard: Subscription;
   statusDadosJudocard: Subscription;
 
-  Judocards: JudocardModel[];
+  Judocards: JudocardrespModel[];
   submitted: boolean;
   isUpdate = true;
   isLoading = true;
+
+  Idf = 0;
+  Questao = "";
   
-  constructor(private router: Router, private srvJudocard: JudocardService, 
+  constructor(private router: Router,private route: ActivatedRoute,  private srvJudocard: RespcardService, 
     private messageService: MessageService, private confirmationService: ConfirmationService) {}
 
   ngOnInit() {
+    this.route.queryParams
+      .subscribe(params => {
+        this.Idf = params.Idf;
+        this.Questao = params.Questao;
+      })
     this.getJudocard();
   }
 
   private getJudocard() {
-    this.lerDadosJudocard = this.srvJudocard.getTodos().subscribe(
+    let dados = {
+      Idf: this.Idf
+    };
+    this.lerDadosJudocard = this.srvJudocard.getTodos(dados).subscribe(
       (dados) => {
         this.Judocards = JSON.parse(JSON.stringify(dados));
       },
@@ -49,28 +56,25 @@ export class MantercardlistaComponent implements OnInit, OnDestroy {
       });
   }
 
-  openNew() {
-    this.router.navigate(['mantercard'], { queryParams: { Modo:'INSERT', Idf: 0 } });
+  openNew(Judocard: JudocardrespModel) {
+    this.router.navigate(['respcard'], { queryParams: { Modo:'INSERT', Idf: this.Idf, IdfSeq: 0, Questao: this.Questao } });
   }
 
-  editJudocard(Judocard: JudocardModel) {
-    this.router.navigate(['mantercard'], { queryParams: { Modo:'EDIT', Idf: Judocard.Idf } });
+  editJudocard(Judocard: JudocardrespModel) {
+    this.router.navigate(['respcard'], { queryParams: { Modo:'EDIT', Idf: this.Idf, IdfSeq: Judocard.IdfSeq, Questao: this.Questao } });
   }
 
-  respostasJudocard(Judocard: JudocardModel) {
-    this.router.navigate(['respcardlista'], { queryParams: { Modo:'LISTA', Idf: Judocard.Idf, Questao: Judocard.Desafio } });
-  }
-
-  deleteJudocard(Judocard: JudocardModel) {
+  deleteJudocard(Judocard: JudocardrespModel) {
     this.confirmationService.confirm({
-      message: 'Confirma exclusão de <b>' + Judocard.Desafio + '</b> ?',
+      message: 'Confirma exclusão de <b>' + Judocard.RespostaTxt + '</b> ?',
       header: 'Confirmar',
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: "Sim",
       rejectLabel: "Não",
       accept: () => {
         let dados = {
-          Idf: Judocard.Idf
+          Idf: Judocard.Idf,
+          IdfSeq: Judocard.IdfSeq
         };
         this.isLoading = true;
         this.deleteDadosJudocard = this.srvJudocard.deleteDados(dados).subscribe(
@@ -88,7 +92,9 @@ export class MantercardlistaComponent implements OnInit, OnDestroy {
         }
     });
   }
-
+  retornar(){
+    this.router.navigate(['mantercardlista']);
+  }
   private refresh(){
     this.submitted = true;
     this.getJudocard();

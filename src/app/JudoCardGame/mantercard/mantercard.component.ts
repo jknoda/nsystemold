@@ -150,6 +150,8 @@ export class MantercardComponent implements OnInit, OnDestroy{
       ClasIdf: parseInt(this.dadosForm.value['classe']),
       Resposta: this.dadosForm.value['resposta'],
       CardIdf: this.dadosForm.value['cardidf'],
+      ImageUrl: this.dadosForm.value['imageurl'],
+      OnLine: this.dadosForm.value['online'],
     }; 
     if (this.editMode)
     {
@@ -213,6 +215,8 @@ export class MantercardComponent implements OnInit, OnDestroy{
     let ClassIdf = 1;
     let Resposta = '';
     let CardIdf = 0;
+    let ImageUrl = '';
+    let OnLine = 'S';
     if (dados != null)
     {
       Desafio = dados.Desafio;
@@ -220,6 +224,8 @@ export class MantercardComponent implements OnInit, OnDestroy{
       ClassIdf = dados.ClasIdf;
       Resposta = dados.Resposta;
       CardIdf = dados.CardIdf;
+      ImageUrl = dados.ImageUrl;
+      OnLine = dados.OnLine;
       if (dados.Imagem){
         let imagem = this.bin2String(dados.Imagem["data"]);
         this.JudocardImg = this.sanitizer.bypassSecurityTrustUrl(imagem);
@@ -230,7 +236,9 @@ export class MantercardComponent implements OnInit, OnDestroy{
       'categoria': new FormControl(CatIdf.toString(), Validators.required),
       'classe': new FormControl(ClassIdf.toString(), Validators.required),
       'resposta': new FormControl(Resposta, Validators.required),
-      'cardidf': new FormControl(String(CardIdf))
+      'cardidf': new FormControl(String(CardIdf)),
+      'imageurl': new FormControl(String(ImageUrl)),
+      'online': new FormControl(String(OnLine))
     });
   }
 
