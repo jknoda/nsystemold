@@ -156,6 +156,7 @@ export class MantercardComponent implements OnInit, OnDestroy{
       CardIdf: this.dadosForm.value['cardidf'],
       ImageUrl: this.dadosForm.value['imageurl'],
       OnLine: this.dadosForm.value['online'],
+      SorteReves: this.dadosForm.value['sortereves']
     }; 
     if (this.editMode)
     {
@@ -225,6 +226,7 @@ export class MantercardComponent implements OnInit, OnDestroy{
     let CardIdf = 0;
     let ImageUrl = '';
     let OnLine = 'S';
+    let SorteReves = '';
     if (dados != null)
     {
       this.IdfAux = dados.Idf;
@@ -236,6 +238,7 @@ export class MantercardComponent implements OnInit, OnDestroy{
       CardIdf = dados.CardIdf;
       ImageUrl = dados.ImageUrl;
       OnLine = dados.OnLine;
+      SorteReves = dados.SorteReves;
       if (dados.Imagem){
         let imagem = this.bin2String(dados.Imagem["data"]);
         this.JudocardImg = this.sanitizer.bypassSecurityTrustUrl(imagem);
@@ -248,7 +251,8 @@ export class MantercardComponent implements OnInit, OnDestroy{
       'resposta': new FormControl(Resposta, Validators.required),
       'cardidf': new FormControl(String(CardIdf)),
       'imageurl': new FormControl(String(ImageUrl)),
-      'online': new FormControl(String(OnLine))
+      'online': new FormControl(String(OnLine)),
+      'sortereves': new FormControl(String(SorteReves))
     });
   }
 
