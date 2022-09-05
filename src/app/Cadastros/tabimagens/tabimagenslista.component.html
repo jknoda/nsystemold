@@ -1,0 +1,39 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="tituloCadastro">CADASTRO DE IMAGENS</div>
+
+<div class="card" *ngIf="!isLoading">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Nova Imagem" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+        </ng-template>
+    </p-toolbar>
+    <p-table responsiveLayout="scroll" #dt [value]="Tabimagens" [rows]="20" [paginator]="true" 
+        [rowHover]="true" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="Idf">Idf <p-sortIcon field="Idf"></p-sortIcon></th>
+                <th pSortableColumn="ImgNom">Nome <p-sortIcon field="ImgNom"></p-sortIcon></th>
+                <th pSortableColumn="CatIdf">Cat <p-sortIcon field="CatIdf"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-Imagens>
+            <tr class="listaSystem">
+                <td>{{Imagens.Idf}}</td>
+                <td>{{Imagens.ImgNom}}</td>                
+                <td>{{Imagens.CatIdf}}</td>                
+                <td>
+                    <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editImagens(Imagens)" title="Alterar"></button>
+                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-danger" (click)="deleteImagens(Imagens)" title="Excluir"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}" translate="yes">
+</p-confirmDialog>

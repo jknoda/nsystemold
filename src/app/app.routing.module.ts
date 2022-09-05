@@ -42,6 +42,8 @@ import { JudoComponent } from './Cadastros/aluno/judo/judo.component';
 import { PlacarComponent } from './Diversos/placar/placar.component';
 import { RespcardComponent } from './JudoCardGame/respcard/respcard.component';
 import { RespcardlistaComponent } from './JudoCardGame/respcard/respcardlista.component';
+import { TabimagensComponent } from './Cadastros/tabimagens/tabimagens.component';
+import { TabimagenslistaComponent } from './Cadastros/tabimagens/tabimagenslista.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -90,6 +92,9 @@ const appRoutes: Routes = [
         {path: 'placar', component: PlacarComponent},
         {path: 'respcard', component: RespcardComponent},
         {path: 'respcardlista', component: RespcardlistaComponent},
+        {path: 'tabimagens', component: TabimagensComponent},
+        {path: 'tabimagenslista', component: TabimagenslistaComponent},
+
         {path: 'teste', component: TesteComponent},
         //{path: 'testepdf', component: TestepdfComponent},
         {path: '**', component: HomeComponent}

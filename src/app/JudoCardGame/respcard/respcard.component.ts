@@ -94,7 +94,8 @@ export class RespcardComponent implements OnInit,OnDestroy {
       IdfSeq: this.IdfSeq,
       Correto: this.dadosForm.value['correto'],
       RespostaTxt: this.dadosForm.value['respostatxt'],
-      RespostaUrl: this.dadosForm.value['respostaurl']
+      RespostaUrl: this.dadosForm.value['respostaurl'],
+      ImgNom: this.dadosForm.value['imgnom']
     };   
 
     if (this.editMode)
@@ -154,16 +155,19 @@ export class RespcardComponent implements OnInit,OnDestroy {
     let Correto = 'N';
     let RespostaTxt = '';
     let RespostaUrl = '';
+    let ImgNom = '';
     if (dados != null)
     {
       Correto = dados.Correto;
       RespostaTxt = dados.RespostaTxt;
       RespostaUrl = dados.RespostaUrl;
+      ImgNom = dados.ImgNom;
     }
     this.dadosForm = new FormGroup({
       'correto': new FormControl(Correto, Validators.required),
       'respostatxt': new FormControl(RespostaTxt),
-      'respostaurl': new FormControl(RespostaUrl)
+      'respostaurl': new FormControl(RespostaUrl),
+      'imgnom': new FormControl(ImgNom)
     });
   }
 }

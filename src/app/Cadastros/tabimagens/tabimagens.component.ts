@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import { JudocardService } from '../judocard.service';
-import { JudocardModel } from 'src/app/model/judocard.model';
+import { TabimagensService } from './tabimagens.service';
+import { TabImagensModel } from 'src/app/model/tabimagens.model';
 import { ServiceConfig } from 'src/app/_config/services.config';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,12 +9,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-mantercard',
-  templateUrl: './mantercard.component.html',
-  styleUrls: ['./mantercard.component.css'],
-  providers: [ConfirmationService,JudocardService,MessageService]
+  selector: 'app-tabimagens',
+  templateUrl: './tabimagens.component.html',
+  styleUrls: ['./tabimagens.component.css'],
+  providers: [ConfirmationService,TabimagensService,MessageService]
 })
-export class MantercardComponent implements OnInit, OnDestroy{
+export class TabimagensComponent implements OnInit , OnDestroy{
 
   private EmpIdf: number = ServiceConfig.EMPIDF;
   private Data: Date = new Date();
@@ -31,10 +31,10 @@ export class MantercardComponent implements OnInit, OnDestroy{
   classes : DD[];
   categorias: DD[];
 
-  addDadosJudocard: Subscription;
-  updateDadosJudocard: Subscription;
-  deleteDadosJudocard: Subscription;
-  lerDadosJudocard: Subscription;
+  addDadosTabImagens: Subscription;
+  updateDadosTabImagens: Subscription;
+  deleteDadosTabImagens: Subscription;
+  lerDadosTabImagens: Subscription;
 
   isLoading = true;
   editMode = false;
@@ -43,59 +43,52 @@ export class MantercardComponent implements OnInit, OnDestroy{
 
   uploadedFile : any;
   uploadedName: any;
-  JudocardImg: SafeResourceUrl;
+  TabImagensImg: SafeResourceUrl;
 
   constructor(private router: Router, private route: ActivatedRoute, 
-    private srvJudocard: JudocardService, 
+    private srvTabImagens: TabimagensService, 
     private messageService: MessageService,
     private sanitizer:DomSanitizer) {
 
       this.categorias = [
+        {name: 'GERAL', code: '0'},
         {name: 'KIHON-Fundamentos', code: '1'},
         {name: 'GOKYO', code: '2'},
         {name: 'KATAMEWAZA', code: '3'},
         {name: 'DIVERSOS', code: '4'},
         {name: 'SORTE ou REVES', code: '5'}
       ]
-
-      this.classes = [
-        {name: 'INFANTIL', code: '1'},
-        {name: 'JUVENIL', code: '2'},
-        {name: 'SÊNIOR', code: '3'},
-        {name: 'GERAL', code: '4'}
-      ]
   }
 
- 
   
   ngOnDestroy(): void {
-    if (this.lerDadosJudocard != null){
-      this.lerDadosJudocard.unsubscribe();
+    if (this.lerDadosTabImagens != null){
+      this.lerDadosTabImagens.unsubscribe();
     }
-    if (this.addDadosJudocard != null){
-      this.addDadosJudocard.unsubscribe();
+    if (this.addDadosTabImagens != null){
+      this.addDadosTabImagens.unsubscribe();
     }
-    if (this.updateDadosJudocard != null){
-      this.updateDadosJudocard.unsubscribe();
+    if (this.updateDadosTabImagens != null){
+      this.updateDadosTabImagens.unsubscribe();
     }
   }
 
   ngOnInit() {
     let perfil = JSON.parse(localStorage.getItem('userData')).perfil;
-    this.Judocards();
+    this.TabImagens();
   }
 
-  private Judocards() {
+  private TabImagens() {
     this.route.queryParams
       .subscribe(params => {
         this.Idf = params.Idf;
         if (params.Modo == "EDIT") {
           this.editMode = true;
-          this.getJudocard();
+          this.getTabImagens();
         } else {
           this.editMode = false;
-          let Judocard: JudocardModel;
-          this.initForm(Judocard);
+          let TabImagens: TabImagensModel;
+          this.initForm(TabImagens);
         }
       }
       );
@@ -125,14 +118,14 @@ export class MantercardComponent implements OnInit, OnDestroy{
     this.messageService.add({severity:'success', summary: 'Successo', detail: 'Imagem incluida!'});
   }
 
-  private getJudocard() {
-    let Judocard: JudocardModel;
+  private getTabImagens() {
+    let TabImagens: TabImagensModel;
     let dados = {
       Idf: this.Idf
     };
-    this.lerDadosJudocard = this.srvJudocard.getDados(dados).subscribe(
+    this.lerDadosTabImagens = this.srvTabImagens.getDados(dados).subscribe(
       (dados) => {
-        Judocard = JSON.parse(JSON.stringify(dados));
+        TabImagens = JSON.parse(JSON.stringify(dados));
       },
       err => { 
         let msg = err.message; 
@@ -140,33 +133,27 @@ export class MantercardComponent implements OnInit, OnDestroy{
       },
       ()=>{
         this.isLoading = false;
-        this.initForm(Judocard);
+        this.initForm(TabImagens);
       });
   }
 
   onSubmit() {
     let dados = {
       Idf: this.Idf,
-      UsuIdf: this.UsuIdf,
       Imagem: this.uploadedFile,
-      Desafio: this.dadosForm.value['desafio'],
+      ImgIdf: parseInt(this.dadosForm.value['imgidf']),
       CatIdf: parseInt(this.dadosForm.value['categoria']),
-      ClasIdf: parseInt(this.dadosForm.value['classe']),
-      Resposta: this.dadosForm.value['resposta'],
-      CardIdf: this.dadosForm.value['cardidf'],
-      ImageUrl: this.dadosForm.value['imageurl'],
-      OnLine: this.dadosForm.value['online'],
-      SorteReves: this.dadosForm.value['sortereves'],
-      ImgNom: this.dadosForm.value['imgnom']
+      ImgNom: this.dadosForm.value['imgnom'],
+      FileName: this.uploadedName
     }; 
     if (this.editMode)
     {
       let dadosUpdate = {
         ...dados
       }
-      this.updateDadosJudocard = this.srvJudocard.updateDados(dadosUpdate).subscribe(
+      this.updateDadosTabImagens = this.srvTabImagens.updateDados(dadosUpdate).subscribe(
         () => {
-          this.messageService.add({severity:'success', summary: 'Successo', detail: 'Judocard atualizado!'});
+          this.messageService.add({severity:'success', summary: 'Successo', detail: 'Imagem atualizada!'});
         },
         err => { 
           let msg = err.error.errors.toString();
@@ -181,9 +168,9 @@ export class MantercardComponent implements OnInit, OnDestroy{
         ...dados
       }
       dadosAdd.Idf = 0;
-      this.addDadosJudocard = this.srvJudocard.addDados(dadosAdd).subscribe(
+      this.addDadosTabImagens = this.srvTabImagens.addDados(dadosAdd).subscribe(
         (ret:any) => {
-          this.messageService.add({severity:'success', summary: 'Successo', detail: 'Judocard incluido!'});
+          this.messageService.add({severity:'success', summary: 'Successo', detail: 'Imagem incluida!'});
           dados.Idf = ret;
         },
         err => { 
@@ -195,8 +182,8 @@ export class MantercardComponent implements OnInit, OnDestroy{
           this.messageService.add({severity:'error', summary: 'Erro', detail: msg});
         },
         () => {
-          this.Judocards();
-          this.router.navigate(['mantercard'], { queryParams: { Modo:'INSERT', Idf: 0 } });
+          this.TabImagens();
+          this.router.navigate(['tabimagens'], { queryParams: { Modo:'INSERT', Idf: 0 } });
         }
       );
     }
@@ -206,57 +193,38 @@ export class MantercardComponent implements OnInit, OnDestroy{
     this.retorno(0);
   }
 
-  respostas(){
-    this.router.navigate(['respcardlista'], { queryParams: { Modo:'LISTA', Idf: this.IdfAux, Questao: this.Questao } });
-  }
 
   private retorno(tempo=1010){
     setTimeout(() => 
     {
-      this.router.navigate(['../mantercardlista'], {relativeTo: this.route});
+      this.router.navigate(['../tabimagenslista'], {relativeTo: this.route});
     },
     tempo);
   }
 
-  private initForm(dados:JudocardModel) {   
+  private initForm(dados:TabImagensModel) {   
     this.isLoading = false;
-    let Desafio = '';
+    this.Idf = 0;
+    let ImgIdf = 0;
     let CatIdf = 1;
-    let ClassIdf = 1;
-    let Resposta = '';
-    let CardIdf = 0;
-    let ImageUrl = '';
-    let OnLine = 'S';
-    let SorteReves = '';
     let ImgNom = '';
+    let FileName = '';
     if (dados != null)
     {
-      this.IdfAux = dados.Idf;
-      this.Questao = dados.Desafio;
-      Desafio = dados.Desafio;
+      this.Idf = dados.Idf;
+      ImgIdf = dados.ImgIdf;
       CatIdf = dados.CatIdf;
-      ClassIdf = dados.ClasIdf;
-      Resposta = dados.Resposta;
-      CardIdf = dados.CardIdf;
-      ImageUrl = dados.ImageUrl;
-      OnLine = dados.OnLine;
-      SorteReves = dados.SorteReves;
       ImgNom = dados.ImgNom;
+      FileName = dados.FileName;
       if (dados.Imagem){
         let imagem = this.bin2String(dados.Imagem["data"]);
-        this.JudocardImg = this.sanitizer.bypassSecurityTrustUrl(imagem);
+        this.TabImagensImg = this.sanitizer.bypassSecurityTrustUrl(imagem);
       }
     }
     this.dadosForm = new FormGroup({
-      'desafio': new FormControl(Desafio, Validators.required),
-      'categoria': new FormControl(CatIdf.toString(), Validators.required),
-      'classe': new FormControl(ClassIdf.toString(), Validators.required),
-      'resposta': new FormControl(Resposta, Validators.required),
-      'cardidf': new FormControl(String(CardIdf)),
-      'imageurl': new FormControl(String(ImageUrl)),
-      'online': new FormControl(String(OnLine)),
-      'sortereves': new FormControl(String(SorteReves)),
-      'imgnom': new FormControl(String(ImgNom))
+      'imgidf': new FormControl(ImgIdf),
+      'categoria': new FormControl(CatIdf.toString()),
+      'imgnom': new FormControl(ImgNom, Validators.required)
     });
   }
 

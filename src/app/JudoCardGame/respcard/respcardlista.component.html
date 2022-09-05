@@ -21,6 +21,7 @@
                 <th pSortableColumn="Correto">Correto <p-sortIcon field="Correto"></p-sortIcon></th>
                 <th pSortableColumn="RespostaTxt">Resposta TXT <p-sortIcon field="RepostaTxt"></p-sortIcon></th>
                 <th pSortableColumn="RespostaUrl">Resposta URL <p-sortIcon field="RespostaUrl"></p-sortIcon></th>
+                <th pSortableColumn="ImgNom">Img Nome <p-sortIcon field="ImgNom"></p-sortIcon></th>
                 <th></th>
             </tr>
         </ng-template>
@@ -31,6 +32,7 @@
                 <td>{{Judocard.Correto}}</td>                
                 <td>{{Judocard.RespostaTxt}}</td>                
                 <td>{{Judocard.RespostaUrl}}</td>                
+                <td>{{Judocard.ImgNom}}</td>                
                 <td>
                     <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editJudocard(Judocard)" title="Alterar"></button>
                     <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-danger" (click)="deleteJudocard(Judocard)" title="Excluir"></button>

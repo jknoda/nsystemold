@@ -19,6 +19,7 @@
                 <th pSortableColumn="CardIdf">Card IDF <p-sortIcon field="CardIdf"></p-sortIcon></th>
                 <th pSortableColumn="ClasDes">Classe <p-sortIcon field="ClasDes"></p-sortIcon></th>
                 <th pSortableColumn="Desafio">Desafio <p-sortIcon field="Desafio"></p-sortIcon></th>
+                <th pSortableColumn="ImgNom">Imagem <p-sortIcon field="ImgNom"></p-sortIcon></th>
                 <th></th>
             </tr>
         </ng-template>
@@ -30,6 +31,7 @@
                 <td>{{Judocard.CardIdf}}</td>                
                 <td>{{Judocard.ClasDes}}</td>                
                 <td>{{Judocard.Desafio}}</td>                
+                <td>{{Judocard.ImgNom}}</td>     
                 <td>
                     <button pButton pRipple icon="fas fa-edit" class="p-button-rounded p-button-success" (click)="editJudocard(Judocard)" title="Alterar"></button>
                     <button pButton pRipple icon="fa-solid fa-magnifying-glass" class="p-button-rounded p-button-default" (click)="respostasJudocard(Judocard)" title="Respostas"></button>

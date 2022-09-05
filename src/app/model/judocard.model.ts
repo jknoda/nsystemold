@@ -13,4 +13,5 @@ export class JudocardModel {
     public ImageUrl: string;
     public OnLine: string;
     public SorteReves: string;
+    public ImgNom: string;
 }

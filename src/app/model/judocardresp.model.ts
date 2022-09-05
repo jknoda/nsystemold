@@ -5,4 +5,5 @@ export class JudocardrespModel {
     public RespostaTxt: string
     public RespostaUrl: string
     public DataInc: Date;
+    public ImgNom: string;
 }

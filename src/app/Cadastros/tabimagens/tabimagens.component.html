@@ -4,14 +4,14 @@
 </div>
 <form [formGroup]="dadosForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
     <div class="form-group">
-        <div class="tituloCadastro">CADASTRO DE CARD - GAMEBOARD</div>
+        <div class="tituloCadastro">CADASTRO DE IMANGES</div>
         <div style="margin-bottom: 20px;">
             <fieldset>
                 <legend>Imagem</legend>
                 <div class="col-lg-6 col-md-6">
                     <label for="imgatual">Atual</label>
                     <div>
-                        <img class="img" [src]="JudocardImg" alt="Imagem">
+                        <img class="img" [src]="TabImagensImg" alt="Imagem">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -37,9 +37,9 @@
 
         <div><em>*</em> Campo obrigatório</div> 
         <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <em>*</em><label for="desafio">Pergunta</label>
-                <input type="text" class="form-control" formControlName="desafio" id="desafio" pInputText>
+            <div class="col-lg-4 col-md-4">
+                <em>*</em><label for="imgnom">Nome</label>
+                <input type="text" class="form-control" formControlName="imgnom" id="imgnom" pInputText>
             </div>
             <div class="col-lg-4 col-md-4">
                 <em>*</em><label for="cat">Categoria</label>
@@ -47,33 +47,8 @@
                 </p-dropdown>
             </div>
             <div class="col-lg-4 col-md-4">
-                <em>*</em><label for="clas">Classe</label>
-                <p-dropdown id="clas" [options]="classes" class="form-control" formControlName="classe" optionLabel="name" optionValue="code">
-                </p-dropdown>
-            </div>
-            <div class="col-lg-4 col-md-4">
-                <label for="cardidf">Card IDF</label>
-                <input type="number" class="form-control" formControlName="cardidf" id="cardidf" pInputText>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <em>*</em><label for="resposta">Resposta</label>
-                <input type="text" class="form-control" formControlName="resposta" id="resposta" pInputText>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <label for="imageurl">Url Imagem</label>
-                <input type="text" class="form-control" formControlName="imageurl" id="imageurl" pInputText>
-            </div>
-            <div class="col-lg-4 col-md-4">
-                <label for="imgnom">Nome Imagem</label>
-                <input type="text" class="form-control" formControlName="imgnom" id="imgnom" pInputText>
-            </div>
-            <div class="col-lg-4 col-md-4">
-                <label for="online">OnLine</label>
-                <input type="text" class="form-control" formControlName="online" id="online" pInputText>
-            </div>
-            <div class="col-lg-4 col-md-4">
-                <label for="sortereves">ippon/wazari/shido/promocao</label>
-                <input type="text" class="form-control" formControlName="sortereves" id="sortereves" pInputText>
+                <label for="imgidf">Img IDF</label>
+                <input type="number" class="form-control" formControlName="imgidf" id="imgidf" pInputText>
             </div>
         </div>
         <div class="row editButtonSystem">            
@@ -92,13 +67,7 @@
                 type="button"
                 class="btn btn-danger"
                 (click)="cancelar()">Cancelar</button>
-            </div>
-            <div class="floatLeft col-sm-1" *ngIf="editMode">
-                <button
-                type="button"
-                class="btn button-default"
-                (click)="respostas()">Respostas</button>
-            </div>
+            </div>           
         </div>
     </div>
   </form>

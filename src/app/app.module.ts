@@ -70,6 +70,8 @@ import { JudolistaComponent } from './Cadastros/aluno/judo/judolista.component';
 import { PlacarComponent } from './Diversos/placar/placar.component';
 import { RespcardComponent } from './JudoCardGame/respcard/respcard.component';
 import { RespcardlistaComponent } from './JudoCardGame/respcard/respcardlista.component';
+import { TabimagensComponent } from './Cadastros/tabimagens/tabimagens.component';
+import { TabimagenslistaComponent } from './Cadastros/tabimagens/tabimagenslista.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 
 @NgModule({
@@ -108,7 +110,9 @@ import { RespcardlistaComponent } from './JudoCardGame/respcard/respcardlista.co
     JudolistaComponent,
     PlacarComponent,
     RespcardComponent,
-    RespcardlistaComponent
+    RespcardlistaComponent,
+    TabimagensComponent,
+    TabimagenslistaComponent
     //TestepdfComponent
   ],
   imports: [
