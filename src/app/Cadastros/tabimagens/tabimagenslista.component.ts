@@ -5,6 +5,7 @@ import { TabImagensModel } from 'src/app/model/tabimagens.model';
 import { ServiceConfig } from 'src/app/_config/services.config';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class TabimagenslistaComponent implements OnInit, OnDestroy {
   isLoading = true;
   
   constructor(private router: Router, private srvImagens: TabimagensService, 
-    private messageService: MessageService, private confirmationService: ConfirmationService) {}
+    private messageService: MessageService, private sanitizer: DomSanitizer,
+    private confirmationService: ConfirmationService) {}
 
   ngOnInit() {
     this.getImagens();
@@ -41,6 +43,10 @@ export class TabimagenslistaComponent implements OnInit, OnDestroy {
     this.lerDadosImagens = this.srvImagens.getTodos(dados).subscribe(
       (dados) => {
         this.Tabimagens = JSON.parse(JSON.stringify(dados));
+        this.Tabimagens.forEach(item=>{
+          let imagem = this.bin2String(item.Imagem["data"]);
+          item.Img = this.sanitizer.bypassSecurityTrustUrl(imagem);
+        })
       },
       err => { 
         let msg = err.message;
@@ -50,6 +56,14 @@ export class TabimagenslistaComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         return;
       });
+  }
+
+  bin2String(array) {
+    var retorno = '';
+    for(let j=0;j<array.length;j++){
+      retorno = retorno + String.fromCharCode(array[j])
+    }
+    return retorno;
   }
 
   openNew() {

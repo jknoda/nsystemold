@@ -14,7 +14,8 @@
         [rowHover]="true" dataKey="id">
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="Idf">Idf <p-sortIcon field="Idf"></p-sortIcon></th>
+                <th pSortableColumn="Idf">Idf <p-sortIcon field="Idf"></p-sortIcon></th>                
+                <th>Imagem</th>
                 <th pSortableColumn="ImgNom">Nome <p-sortIcon field="ImgNom"></p-sortIcon></th>
                 <th pSortableColumn="CatIdf">Cat <p-sortIcon field="CatIdf"></p-sortIcon></th>
                 <th></th>
@@ -23,7 +24,8 @@
 
         <ng-template pTemplate="body" let-Imagens>
             <tr class="listaSystem">
-                <td>{{Imagens.Idf}}</td>
+                <td>{{Imagens.Idf}}</td>                
+                <td><img [src]="Imagens.Img" [alt]="Imagens.ImgNom" width="100" class="shadow-4" /></td>
                 <td>{{Imagens.ImgNom}}</td>                
                 <td>{{Imagens.CatIdf}}</td>                
                 <td>
