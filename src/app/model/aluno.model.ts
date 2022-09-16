@@ -22,6 +22,7 @@ export class AlunoModel {
     public AluFoto: Blob;
     public AluCEP: number;
     public AluCompl: string;
+    public AluDias: string;
     public DataInc: Date;
     public DataAlt: Date;
     public HasAnamnese: Boolean;

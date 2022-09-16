@@ -218,6 +218,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
       AluTImg: this.dadosForm.value['timagem'],
       AluCEP: this.dadosForm.value['cep'],
       AluCompl: this.dadosForm.value['complemento'],
+      AluDias: this.dadosForm.value['dias'],
       AluFoto: this.uploadedFile
     };    
     if (dados.AluCPF != null){
@@ -304,6 +305,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
     let AluTImg = "N";
     let AluCEP = 0;
     let AluCompl = "";
+    let AluDias = "";
     let UsuIdf = this.UsuIdf;
    
     if (dados != null)
@@ -328,6 +330,7 @@ export class AlunoComponent implements OnInit, OnDestroy {
       AluTImg = dados.AluTImg;
       AluCEP = dados.AluCEP;
       AluCompl = dados.AluCompl;
+      AluDias = dados.AluDias;
       UsuIdf = dados.UsuIdf;
 
       if (dados.AluFoto){
@@ -364,7 +367,8 @@ export class AlunoComponent implements OnInit, OnDestroy {
       'tprivacidade': new FormControl(AluTPri),
       'timagem':new FormControl(AluTImg),
       'cep':new FormControl(AluCEP),
-      'complemento':new FormControl(AluCompl)
+      'complemento':new FormControl(AluCompl),
+      'dias':new FormControl(AluDias)
     });
   }
 

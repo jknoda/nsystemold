@@ -33,6 +33,9 @@ export class CheckinComponent implements OnInit {
 
   Treinos: treinos[];
   selectTreinoCode: string;
+
+  Semanas: semanas[];
+  selectSemanaCode: string;
   
   data = new Date();
 
@@ -43,6 +46,11 @@ export class CheckinComponent implements OnInit {
     private datePipe:DatePipe) {}
 
   ngOnInit() {
+    this.Semanas = [
+      {name: 'Sim', code: 'S'},
+      {name: 'Não', code: 'N'}
+    ];
+    this.selectSemanaCode = 'N';
     let perfil = JSON.parse(localStorage.getItem('userData')).perfil;
     this.isTecnico = (perfil == 'A' || perfil == 'T');
     this.getAlunos();
@@ -53,11 +61,14 @@ export class CheckinComponent implements OnInit {
     this.isLoading = true;
     let perfil = JSON.parse(localStorage.getItem('userData')).perfil;
     let usuidf = JSON.parse(localStorage.getItem('userData')).usuidf;
+    let semana = this.data.getDay() + 1;
+    if (this.selectSemanaCode == 'N') semana = 0;
     if (perfil == 'A' || perfil == 'T') usuidf = 0;
     let dados = {
       EmpIdf: this.EmpIdf,
-      AluStatus: 'A',
-      UsuIdf: usuidf
+      AluStatus: 'A',      
+      UsuIdf: usuidf,
+      Semana: semana
     };
     this.lerDadosAluno = this.srvAluno.getAluTodosResp(dados).subscribe(
       (dados) => {
@@ -112,8 +123,14 @@ export class CheckinComponent implements OnInit {
       }); 
   }
 
+  filtroSemana(e)  
+  {
+    this.getAlunos();
+  }
+
   changeData(e)
   {
+    this.getAlunos();
     this.getTreino(0,"");
   }
 
@@ -217,6 +234,11 @@ export class CheckinComponent implements OnInit {
 }
 
 interface treinos {
+  name: string,
+  code: string
+}
+
+interface semanas {
   name: string,
   code: string
 }

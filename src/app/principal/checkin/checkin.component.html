@@ -5,11 +5,15 @@
 <div class="card" *ngIf="!isLoading">
     <div class="tituloCadastro">CHECK-IN</div>
     <div class="row">
-        <div class="col-lg-3 col-md-3">
+        <div class="col-lg-4 col-md-4">
+            <label for="semanas">Só da semana</label>
+            <p-dropdown class="form-control" [options]="Semanas" [(ngModel)]="selectSemanaCode" optionLabel="name" optionValue="code" (ngModelChange)="filtroSemana($event)"></p-dropdown>
+        </div>
+        <div class="col-lg-4 col-md-4">
             <label for="data">Data</label>
             <p-calendar appendTo="body" class="form-control" [(ngModel)]="data" id="data" dateFormat="dd/mm/yy" (ngModelChange)="changeData($event)"></p-calendar>
         </div>
-        <div class="col-lg-3 col-md-3">
+        <div class="col-lg-4 col-md-4">
             <label for="treinos">Selecione</label>
             <p-dropdown class="form-control" [options]="Treinos" [(ngModel)]="selectTreinoCode" optionLabel="name" optionValue="code"></p-dropdown>
         </div>
