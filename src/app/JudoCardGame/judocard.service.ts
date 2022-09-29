@@ -23,11 +23,11 @@ export class JudocardService {
         return this.http.post<JudocardModel>(this.url + "/api/judocard/find", body, httpOptions);
     }
 
-    getTodos(): Observable<JudocardModel> {
+    getTodos(body:any): Observable<JudocardModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<JudocardModel>(this.url + "/api/judocard/findall", null, httpOptions);
+        return this.http.post<JudocardModel>(this.url + "/api/judocard/findall", body, httpOptions);
     }
 
     updateDados(body:any): Observable<JudocardModel> {

@@ -93,7 +93,7 @@ export class CardgameComponent implements OnInit, OnDestroy{
   }
 
   private getAllCards() {
-    this.lerDadosJudocard = this.srvJudocard.getTodos().subscribe(
+    this.lerDadosJudocard = this.srvJudocard.getTodos(null).subscribe(
       (dados) => {
         this.allCards = JSON.parse(JSON.stringify(dados));
       },

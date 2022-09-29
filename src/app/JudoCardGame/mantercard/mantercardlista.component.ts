@@ -26,16 +26,49 @@ export class MantercardlistaComponent implements OnInit, OnDestroy {
   submitted: boolean;
   isUpdate = true;
   isLoading = true;
+
+  classes : DD[];
+  categorias: DD[];
+  selectedClasCode : string;
+  selectedCatCode : string;
+
+  CatIdf = 0;
+  ClasIdf = 0;
   
   constructor(private router: Router, private srvJudocard: JudocardService, 
-    private messageService: MessageService, private confirmationService: ConfirmationService) {}
+    private messageService: MessageService, private confirmationService: ConfirmationService) {
+      this.categorias = [
+        {name: 'Todas', code: '-1'},
+        {name: 'KIHON-Fundamentos', code: '1'},
+        {name: 'GOKYO', code: '2'},
+        {name: 'KATAMEWAZA', code: '3'},
+        {name: 'DIVERSOS', code: '4'},
+        {name: 'SORTE ou REVES', code: '5'}
+      ]
+
+      this.classes = [
+        {name: 'Todas', code: '-1'},
+        {name: 'INFANTIL', code: '1'},
+        {name: 'JUVENIL', code: '2'},
+        {name: 'SÊNIOR', code: '3'},
+        {name: 'GERAL', code: '4'}
+      ]
+  }
 
   ngOnInit() {
     this.getJudocard();
   }
 
   private getJudocard() {
-    this.lerDadosJudocard = this.srvJudocard.getTodos().subscribe(
+    this.ClasIdf = parseInt(localStorage.getItem("clasidf"));
+    this.CatIdf = parseInt(localStorage.getItem("catidf"));
+    this.selectedCatCode = localStorage.getItem("catidf");
+    this.selectedClasCode = localStorage.getItem("clasidf");
+    let dadosParm = {
+      CatIdf: this.CatIdf,
+      ClasIdf: this.ClasIdf
+    };
+    this.lerDadosJudocard = this.srvJudocard.getTodos(dadosParm).subscribe(
       (dados) => {
         this.Judocards = JSON.parse(JSON.stringify(dados));
       },
@@ -89,12 +122,23 @@ export class MantercardlistaComponent implements OnInit, OnDestroy {
     });
   }
 
+  alterFiltro()
+  {
+    this.ClasIdf = parseInt(this.selectedClasCode);
+    this.CatIdf = parseInt(this.selectedCatCode);
+    localStorage.setItem('clasidf', this.selectedClasCode);
+    localStorage.setItem('catidf', this.selectedCatCode);
+    this.getJudocard();
+  }
+
   private refresh(){
     this.submitted = true;
     this.getJudocard();
   }
 
   ngOnDestroy() {
+    //localStorage.removeItem('catidf');
+    //localStorage.removeItem('clasidf');
     if ( this.lerDadosJudocard != null){
       this.lerDadosJudocard.unsubscribe();
     }
@@ -103,3 +147,9 @@ export class MantercardlistaComponent implements OnInit, OnDestroy {
     }
   }
 }
+
+interface DD {
+  name: string,
+  code: string
+}
+

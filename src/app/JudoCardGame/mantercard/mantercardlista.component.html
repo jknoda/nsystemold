@@ -9,6 +9,22 @@
         <ng-template pTemplate="left">
             <button pButton pRipple label="Novo CARD" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
         </ng-template>
+        <div class="row">
+            <div class="col-lg-6 col-xs-12">
+                <label for="cat">Categoria</label>
+                <div>
+                    <p-dropdown id="cat" [options]="categorias" [(ngModel)]="selectedCatCode" (onChange)="alterFiltro()" optionLabel="name" optionValue="code">
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xs-12">
+                <label for="clas">Classe</label>
+                <div>
+                    <p-dropdown id="clas" [options]="classes" [(ngModel)]="selectedClasCode" (onChange)="alterFiltro()" optionLabel="name" optionValue="code">
+                    </p-dropdown>
+                </div>
+            </div>    
+        </div>
     </p-toolbar>
     <p-table responsiveLayout="scroll" #dt [value]="Judocards" [rows]="20" [paginator]="true" 
         [rowHover]="true" dataKey="id">
