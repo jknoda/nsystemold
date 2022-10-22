@@ -13,7 +13,8 @@
         [rowHover]="true" dataKey="id">
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="AluIdf">Idf <p-sortIcon field="AluIdf"></p-sortIcon></th>
+                <th></th>
+                <!--<th pSortableColumn="AluIdf">Idf <p-sortIcon field="AluIdf"></p-sortIcon></th>-->
                 <th pSortableColumn="AluNome">Nome <p-sortIcon field="AluNome"></p-sortIcon></th>
                 <th pSortableColumn="AluFone">Fone <p-sortIcon field="AluFone"></p-sortIcon></th>
                 <th></th>
@@ -22,18 +23,20 @@
 
         <ng-template pTemplate="body" let-Aluno>
             <tr class="listaSystem" *ngIf="Aluno.isUser || isTecnico">
-                <td>{{Aluno.AluIdf}}</td>
+                <td>
+                    <button pButton pRipple icon="fas fa-user-edit" class="p-button-rounded p-button-success" (click)="editAluno(Aluno)" title="Alterar"></button>
+                    <button *ngIf="Aluno.HasAnamnese" pButton pRipple icon="fas fa-briefcase-medical" class="p-button-rounded" (click)="anamneseAluno(Aluno)" title="Anamnese"></button>
+                    <button *ngIf="!Aluno.HasAnamnese" pButton pRipple icon="fas fa-briefcase-medical" class="p-button-rounded p-button-warning" (click)="anamneseAluno(Aluno)" title="Falta Anamnese"></button>
+                </td>
+                <!--<td>{{Aluno.AluIdf}}</td>-->
                 <td [ngClass]="{'vermelho' : !Aluno.isAtivo}">{{Aluno.AluNome}}</td>
                 <td>{{Aluno.AluFone}}</td>
                 <td>
                     <button pButton pRipple icon="icon-judo" class="p-button-rounded" (click)="judoAluno(Aluno)" title="Judô"></button>
-                    <button pButton pRipple icon="fas fa-user-edit" class="p-button-rounded p-button-success" (click)="editAluno(Aluno)" title="Alterar"></button>
-                    <button *ngIf="Aluno.HasAnamnese" pButton pRipple icon="fas fa-briefcase-medical" class="p-button-rounded" (click)="anamneseAluno(Aluno)" title="Anamnese"></button>
-                    <button *ngIf="!Aluno.HasAnamnese" pButton pRipple icon="fas fa-briefcase-medical" class="p-button-rounded p-button-warning" (click)="anamneseAluno(Aluno)" title="Falta Anamnese"></button>
                     <button pButton pRipple icon="fa fa-users" class="p-button-rounded p-button-success" (click)="responsaveis(Aluno)" title="Responsáveis"></button>
-                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-danger" (click)="deleteAluno(Aluno)" title="Excluir"></button>
                     <button *ngIf="Aluno.isAtivo" pButton pRipple icon="far fa-stop-circle" class="p-button-rounded p-button-default" (click)="alterarStatus(Aluno)" title="Inativar aluno"></button>
                     <button *ngIf="!Aluno.isAtivo" pButton pRipple icon="far fa-play-circle" class="p-button-rounded p-button-warning" (click)="alterarStatus(Aluno)" title="Ativar aluno"></button>
+                    <button pButton pRipple icon="fas fa-trash-alt" class="p-button-rounded p-button-danger" (click)="deleteAluno(Aluno)" title="Excluir"></button>                    
                 </td>
             </tr>
         </ng-template>
