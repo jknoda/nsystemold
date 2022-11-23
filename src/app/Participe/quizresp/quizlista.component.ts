@@ -49,9 +49,23 @@ export class QuizlistaComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       },
       ()=>{
+        this.Embaralhar();
         this.VerRespondida();
         return;
       });
+  }
+
+  private Embaralhar()
+  {
+    let Aux : QuizModel;
+    let nMax = this.Quizes.length;
+    for(let i=0; i<nMax; i++){
+      let ind1 = Math.floor(Math.random() * this.Quizes.length);
+      let ind2 = Math.floor(Math.random() * this.Quizes.length);
+      Aux = this.Quizes[ind1];
+      this.Quizes[ind1] = this.Quizes[ind2];
+      this.Quizes[ind2] = Aux;
+    }
   }
 
   private VerRespondida()
