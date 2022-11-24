@@ -44,6 +44,7 @@ import { RespcardComponent } from './JudoCardGame/respcard/respcard.component';
 import { RespcardlistaComponent } from './JudoCardGame/respcard/respcardlista.component';
 import { TabimagensComponent } from './Cadastros/tabimagens/tabimagens.component';
 import { TabimagenslistaComponent } from './Cadastros/tabimagens/tabimagenslista.component';
+import { SugestoesinitComponent } from './Participe/sugestoes/sugestoesinit.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -76,9 +77,10 @@ const appRoutes: Routes = [
         {path: 'checkin', component: CheckinComponent},
         {path: 'treinoscalendario', component: TreinoscalendarioComponent},
         {path: 'sugestoes', component: SugestoesComponent},
+        {path: 'sugestoesinit', component: SugestoesinitComponent},
         {path: 'quizlista', component: QuizlistaComponent},
         {path: 'quizresp', component: QuizrespComponent},
-        {path: 'quizinit', component: QuizinitComponent},
+        {path: 'quizinit', component: QuizinitComponent},        
         {path: 'questoeslista', component: QuestoeslistaComponent},
         {path: 'questoes', component: QuestoesComponent},
         {path: 'quizalterlista', component: QuizalterlistaComponent},

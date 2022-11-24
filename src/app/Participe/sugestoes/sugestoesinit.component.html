@@ -4,7 +4,7 @@
 </div>
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
     <div class="form-group">
-        <div class="tituloCadastro">QUIZ</div>
+        <div class="tituloCadastro">SUGESTÕES</div>
         <div><em>*</em> Campo obrigatório</div> 
         <div class="row">
             <div class="col-md-8">
@@ -12,7 +12,7 @@
                 <input type="text" class="form-control" formControlName="nome" id="nome" pInputText>
             </div>            
             <div class="col-md-4">
-                <label for="email">Email</label>
+                <em>*</em><label for="email">Email</label>
                 <input type="email" class="form-control" formControlName="email" id="email" pInputText>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <button
                   type="submit"
                   class="btn btn-success"
-                  [disabled]="!userForm.valid">Quiz</button>
+                  [disabled]="!userForm.valid">Sugestões</button>
             </div>      
             <div class="floatLeft col-sm-1">
                 <button

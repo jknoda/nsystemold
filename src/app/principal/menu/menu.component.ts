@@ -19,6 +19,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     private userSub: Subscription;
 
     items: MenuItem[];
+    itemsNA: MenuItem[];
     
     constructor(private authService: AuthService) {
     }
@@ -41,7 +42,8 @@ export class MenuComponent implements OnInit, OnDestroy {
             this.isTecnico = (perfil == 'A' || perfil == 'T');
             this.isAuxiliar = (perfil == 'A' || perfil == 'T' || perfil == 'X');
             this.menuInit();
-        });   
+        });
+        this.menuInitNA();   
     }
 
     private menuInit() {
@@ -124,6 +126,14 @@ export class MenuComponent implements OnInit, OnDestroy {
             },
         ];        
     }
+
+    private menuInitNA() {
+        this.itemsNA = [
+            {label: 'QUIZ', icon: 'fa fa-question-circle', routerLink:'quizinit', command:()=>{this.onClick();}},
+            {label: 'Sugestões', icon: 'fa-solid fa-comment', routerLink:'sugestoesinit', command:()=>{this.onClick();}},
+        ];        
+    }
+
 
     ngOnDestroy() {
         this.userSub.unsubscribe();

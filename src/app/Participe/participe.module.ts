@@ -26,6 +26,7 @@ import { treinoviacalenComponent } from '../Treinos/treinoviacalendario/treinovi
 import { QuizlistaComponent } from './quizresp/quizlista.component';
 import { QuizrespComponent } from './quizresp/quizresp.component';
 import { QuizinitComponent } from './quizresp/quizinit.component';
+import { SugestoesinitComponent } from './sugestoes/sugestoesinit.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -41,7 +42,8 @@ FullCalendarModule.registerPlugins([
     treinoviacalenComponent,
     QuizlistaComponent,
     QuizrespComponent,
-    QuizinitComponent
+    QuizinitComponent,
+    SugestoesinitComponent
   ],
   exports: [
   ],

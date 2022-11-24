@@ -49,6 +49,7 @@ export class SugestoesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.mail = JSON.parse(localStorage.getItem('emailConfig'));
+    console.log(this.mail);
     this.carregaDados();
   }
 
