@@ -53,8 +53,8 @@ export class MenuComponent implements OnInit, OnDestroy {
                 icon: 'icon-party',
                 items: [
                     {label: 'Calendário', icon: 'far fa-calendar-alt', routerLink:'treinoscalendario', command:()=>{this.onClick();}},
-                    {label: 'QUIZ', icon: 'fa fa-question-circle', routerLink:'quizlista', command:()=>{this.onClick();}},
-                    {label: 'QUIZ2', icon: 'fa fa-question-circle', routerLink:'quiz2lista', command:()=>{this.onClick();}},
+                    //{label: 'QUIZ', icon: 'fa fa-question-circle', routerLink:'quizlista', command:()=>{this.onClick();}},
+                    {label: 'QUIZ', icon: 'fa fa-question-circle', routerLink:'quiz2lista', command:()=>{this.onClick();}},
                     {label: 'Sugestões', icon: 'fa-solid fa-comment', routerLink:'sugestoes', command:()=>{this.onClick();}},
                 ]
             },
@@ -130,7 +130,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
     private menuInitNA() {
         this.itemsNA = [
-            {label: 'QUIZ', icon: 'fa fa-question-circle', routerLink:'quizinit', command:()=>{this.onClick();}},
+            {label: 'QUIZ', icon: 'fa fa-question-circle', routerLink:'quiz2init', command:()=>{this.onClick();}},
             {label: 'Sugestões', icon: 'fa-solid fa-comment', routerLink:'sugestoesinit', command:()=>{this.onClick();}},
         ];        
     }

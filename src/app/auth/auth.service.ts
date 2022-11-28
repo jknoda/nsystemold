@@ -168,6 +168,11 @@ export class AuthService implements OnDestroy {
          this.router.navigate(["auth"]);
       },
       () => {
+        localStorage.removeItem('userData');
+        localStorage.removeItem('emailConfig');
+        localStorage.removeItem('clasidf');
+        localStorage.removeItem('catidf');
+        localStorage.removeItem('selectedCatCode');
         const user = new User(email, userId, token, expirationDate, empidf, usuidf, perfil, nome);
         this.setEmail(empidf);
         this.user.next(user);
