@@ -20,6 +20,7 @@ export class Quiz2listaComponent implements OnInit, OnDestroy {
 
   private EmpIdf: number = ServiceConfig.EMPIDF;
   UsuIdf = 0;
+  UsuEmail = "";
 
   lerQuiz: Subscription;
   lerImagem: Subscription;
@@ -49,6 +50,7 @@ export class Quiz2listaComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.UsuIdf = JSON.parse(localStorage.getItem('userData')).usuidf;
     this.selectedCatCode = localStorage.getItem("selectedCatCode");
+    this.UsuEmail = JSON.parse(localStorage.getItem('userData')).email;
     this.getQuizes();
   }
 
@@ -102,7 +104,8 @@ export class Quiz2listaComponent implements OnInit, OnDestroy {
       if (this.UsuIdf != 0){
         let dados = {
           Idf: item.Idf,
-          UsuIdf: this.UsuIdf
+          UsuIdf: this.UsuIdf,
+          RespEmail: this.UsuEmail
         };        
         this.lerJaRespondeu = this.srvQuiz.getJaRespondeu(dados).subscribe(
           (dados) => {
