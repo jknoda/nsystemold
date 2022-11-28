@@ -12,6 +12,7 @@ import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {DropdownModule} from 'primeng/dropdown';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {CardModule} from 'primeng/card';
+import {ToolbarModule} from 'primeng/toolbar';
 
 import {FullCalendarModule} from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -23,10 +24,12 @@ import { TreinoscalendarioComponent } from './treinoscalendario/treinoscalendari
 import { SugestoesComponent } from './sugestoes/sugestoes.component';
 import { LoadingSpinner2Component } from '../shared/loading-spinner/loading-spinner2.component';
 import { treinoviacalenComponent } from '../Treinos/treinoviacalendario/treinoviacalen.component';
-import { QuizlistaComponent } from './quizresp/quizlista.component';
-import { QuizrespComponent } from './quizresp/quizresp.component';
+import { QuizlistaComponent } from './quizresp/quiz/quizlista.component';
+import { QuizrespComponent } from './quizresp/quiz/quizresp.component';
 import { QuizinitComponent } from './quizresp/quizinit.component';
 import { SugestoesinitComponent } from './sugestoes/sugestoesinit.component';
+import { Quiz2listaComponent } from './quizresp/quiz2/quiz2lista.component';
+import { Quiz2respComponent } from './quizresp/quiz2/quiz2resp.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -41,6 +44,8 @@ FullCalendarModule.registerPlugins([
     SugestoesComponent,
     treinoviacalenComponent,
     QuizlistaComponent,
+    Quiz2listaComponent,
+    Quiz2respComponent,
     QuizrespComponent,
     QuizinitComponent,
     SugestoesinitComponent
@@ -62,6 +67,7 @@ FullCalendarModule.registerPlugins([
     DropdownModule,
     RadioButtonModule,
     CardModule,
+    ToolbarModule,
 
     ConfirmDialogModule
   ]

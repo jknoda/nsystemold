@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ServiceConfig } from '../../_config/services.config';
+import { ServiceConfig } from '../../../_config/services.config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {QuizModel} from '../../model/quiz.model';
-import {QuizAlterModel} from '../../model/quizalter.model';
-import {QuizRespModel} from '../../model/quizresp.model';
+import {QuizModel} from '../../../model/quiz.model';
+import {QuizAlterModel} from '../../../model/quizalter.model';
+import {QuizRespModel} from '../../../model/quizresp.model';
 
 @Injectable()
 export class QuizrespService {
     private url: string = ServiceConfig.API_ENDPOINT;
     constructor(private http: HttpClient) { }
 
-    addDados(body:any): Observable<QuizModel> {
+    addDados(body:any): Observable<QuizRespModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<QuizModel>(this.url + "/api/quizresp/create", body, httpOptions);
+        return this.http.post<QuizRespModel>(this.url + "/api/quizresp/create", body, httpOptions);
     }
 
     getDados(body:any): Observable<QuizModel> {

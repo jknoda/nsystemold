@@ -1,0 +1,56 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner2></app-loading-spinner2>
+</div>
+<div class="tituloCadastro">Q U I Z  2</div>
+<div class="divresp">
+    <p-card header="{{Quiz.Desafio}}" [style]="{width: '90%'}" styleClass="p-card-shadow" *ngIf="!isLoading">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="col-lg-8 col-md-8">
+                    <div *ngFor="let alternativa of QuizAlternativas" class="field-checkbox" style="padding-bottom: 10px;">
+                        <div *ngIf="!alternativa.Img">
+                            <p-radioButton [inputId]="alternativa.IdfSeq" name="alternativa" [value]="alternativa" [(ngModel)]="selectedAlter"></p-radioButton>
+                            <label [for]="alternativa.IdfSeq">&nbsp;&nbsp;&nbsp;{{alternativa.RespostaTxt}}</label>
+                        </div>
+                        <div *ngIf="alternativa.Img">
+                            <p-radioButton [inputId]="alternativa.IdfSeq" name="alternativa" [value]="alternativa" [(ngModel)]="selectedAlter"></p-radioButton>
+                            <img class="quizImgAlter" [src]="alternativa.Img" alt="Imagem">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div>
+                        <img class="quizImg" [src]="quizImg" alt="Imagem" *ngIf="quizImg != null">
+                        <img class="quizImg" src="../../assets/image/logo.png"  alt="Imagem" *ngIf="quizImg == null">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6" *ngIf="mostraImagem">
+                <img src="../../assets/image/Acertou.png" alt="Resposta correta" class="imgResp" *ngIf="respostaCerta">
+                <img src="../../assets/image/Errou.png"  alt="Resposta errada" class="imgResp" *ngIf="!respostaCerta">
+                <div *ngIf="!respostaCerta">
+                    <button
+                    style="margin-right: 10px; margin-top: 10px;"
+                    type="button"
+                    class="btn btn-success"
+                    (click)="alterClick()">Tentar novamente</button>
+                </div>
+                <p-card header="Informação:" *ngIf="existeInfo">
+                    {{selectedAlter.QuizResCompl}}
+                </p-card>
+            </div>
+        </div>
+        <ng-template pTemplate="footer">
+            <button
+                style="margin-right: 10px;"
+                type="button"
+                class="btn btn-success"
+                (click)="responder()"  *ngIf="!mostraImagem">Responder</button>
+            <button
+            type="button"
+            class="btn btn-danger"
+            (click)="cancelar()">Encerrar</button>
+        </ng-template>
+    </p-card>
+</div>

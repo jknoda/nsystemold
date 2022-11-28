@@ -5,7 +5,7 @@ import { QuizModel } from 'src/app/model/quiz.model';
 import { ServiceConfig } from 'src/app/_config/services.config';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { QuizlistaComponent } from 'src/app/Participe/quizresp/quizlista.component';
+import { QuizlistaComponent } from 'src/app/Participe/quizresp/quiz/quizlista.component';
 
 @Component({
   selector: 'app-questoeslista',

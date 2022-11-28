@@ -8,7 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-quizinit',
   templateUrl: './quizinit.component.html',
-  styleUrls: ['./quizresp.component.css'],
+  styleUrls: ['./quiz/quizresp.component.css'],
   providers: [MessageService]
 })
 export class QuizinitComponent implements OnInit {
@@ -41,7 +41,8 @@ export class QuizinitComponent implements OnInit {
     user.email = dados.UsuEmail;
     user.nome = dados.UsuNome;
     localStorage.setItem('userData', JSON.stringify(user));
-    this.router.navigate(['../quizlista'], {relativeTo: this.route});
+    //this.router.navigate(['../quizlista'], {relativeTo: this.route});
+    this.router.navigate(['../quiz2lista'], {relativeTo: this.route});
   }
 
   onCancel() {

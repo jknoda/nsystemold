@@ -26,8 +26,8 @@ import { NoticiasComponent } from './Noticias/noticias.component';
 import { AlterComponent } from './principal/alter/alter.component';
 import { CheckinComponent } from './principal/checkin/checkin.component';
 import { ResponsaveisComponent } from './Cadastros/aluno/responsaveis/responsaveis.component';
-import { QuizlistaComponent } from './Participe/quizresp/quizlista.component';
-import { QuizrespComponent } from './Participe/quizresp/quizresp.component';
+import { QuizlistaComponent } from './Participe/quizresp/quiz/quizlista.component';
+import { QuizrespComponent } from './Participe/quizresp/quiz/quizresp.component';
 import { QuestoeslistaComponent } from './Cadastros/questoes/questoeslista.component';
 import { QuestoesComponent } from './Cadastros/questoes/questoes.component';
 import { QuizalterlistaComponent } from './Cadastros/questoes/quizalternativas/quizalterlista.component';
@@ -45,6 +45,8 @@ import { RespcardlistaComponent } from './JudoCardGame/respcard/respcardlista.co
 import { TabimagensComponent } from './Cadastros/tabimagens/tabimagens.component';
 import { TabimagenslistaComponent } from './Cadastros/tabimagens/tabimagenslista.component';
 import { SugestoesinitComponent } from './Participe/sugestoes/sugestoesinit.component';
+import { Quiz2listaComponent } from './Participe/quizresp/quiz2/quiz2lista.component';
+import { Quiz2respComponent } from './Participe/quizresp/quiz2/quiz2resp.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -79,7 +81,9 @@ const appRoutes: Routes = [
         {path: 'sugestoes', component: SugestoesComponent},
         {path: 'sugestoesinit', component: SugestoesinitComponent},
         {path: 'quizlista', component: QuizlistaComponent},
+        {path: 'quiz2lista', component: Quiz2listaComponent},
         {path: 'quizresp', component: QuizrespComponent},
+        {path: 'quiz2resp', component: Quiz2respComponent},
         {path: 'quizinit', component: QuizinitComponent},        
         {path: 'questoeslista', component: QuestoeslistaComponent},
         {path: 'questoes', component: QuestoesComponent},

@@ -1,3 +1,5 @@
+import { SafeResourceUrl } from "@angular/platform-browser";
+
 export class JudocardModel {
     public Idf: number;
     public CatIdf: number;
@@ -14,4 +16,7 @@ export class JudocardModel {
     public OnLine: string;
     public SorteReves: string;
     public ImgNom: string;
+    public QuizLiberado: string;
+    public JaRespondeu: Boolean;
+    public QuizImgAux: SafeResourceUrl;
 }
