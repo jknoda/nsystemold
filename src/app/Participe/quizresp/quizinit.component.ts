@@ -28,7 +28,12 @@ export class QuizinitComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initForm();
+    if (localStorage.getItem('userData') != null && JSON.parse(localStorage.getItem('userData')).usuidf > 0){
+      this.router.navigate(['../quiz2lista'], {relativeTo: this.route});
+    }
+    else{
+      this.initForm();
+    }
   }
 
   onSubmit() {
