@@ -104,5 +104,8 @@
       }
     }
   },
-  "defaultProject": "nsystem"
+  "defaultProject": "nsystem",
+  "cli": {
+    "analytics": "f7ca35a4-4431-4d62-b1ac-d2f9a6af0892"
+  }
 }
