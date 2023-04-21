@@ -13,7 +13,7 @@ export class DiversosService {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<QuizEstatRespModel>(this.url + "/api/quiz/findresp", body, httpOptions);
+        return this.http.post<QuizEstatRespModel>(this.url + "/api/quiz2resp/findresp", body, httpOptions);
     }
 
 }
