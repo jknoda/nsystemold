@@ -73,7 +73,7 @@ export class MenuComponent implements OnInit, OnDestroy {
                     {label: 'Usuários', icon: 'fas fa-users', routerLink: 'usuariolista',visible:this.isAdm, command:()=>{this.onClick();}},
                     {label: 'Alunos',  icon: 'fas fa-user-graduate', routerLink: 'alunolista', command:()=>{this.onClick();}},
                     {label: 'Atividades',  icon: 'fas fa-cogs', routerLink: 'atividadelista',visible:this.isAuxiliar, command:()=>{this.onClick();}},
-                    {label: 'QUIZ',  icon: 'fa fa-question-circle', routerLink: 'questoeslista',visible:this.isAuxiliar, command:()=>{this.onClick();}},
+                    {label: 'QUIZ',  icon: 'fa fa-question-circle', routerLink: 'questoes2lista',visible:this.isAuxiliar, command:()=>{this.onClick();}},
                     {label: 'Imagens',  icon: 'fa-regular fa-image', routerLink: 'tabimagenslista',visible:this.isAuxiliar, command:()=>{this.onClick();}}
                 ]
             },

@@ -1,0 +1,35 @@
+<p-toast></p-toast>
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="tituloCadastro">CADASTRO DE QUIZ 2</div>
+<div class="card" *ngIf="!isLoading">
+    <p-table responsiveLayout="scroll" #dt [value]="Questoes" [rows]="20" [paginator]="true" 
+        [rowHover]="true" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="Idf">Idf <p-sortIcon field="QuizIdf"></p-sortIcon></th>
+                <th pSortableColumn="Desafio">Pergunta <p-sortIcon field="QuizPergunta"></p-sortIcon></th>
+                <th pSortableColumn="Resposta">Resposta <p-sortIcon field="QuizPergunta"></p-sortIcon></th>                
+                <th pSortableColumn="Quiz">Liberado <p-sortIcon field="QuizLiberado"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-Quiz>
+            <tr class="listaSystem">
+                <td>{{Quiz.Idf}}</td>
+                <td>{{Quiz.Desafio}}</td>                
+                <td>{{Quiz.Resposta}}</td>                
+                <td>{{Quiz.Quiz}}</td>                
+                <td>
+                    <button pButton pRipple icon="fa-solid fa-unlock" class="p-button-rounded p-button-success" (click)="liberarQuiz(Quiz)" title="Liberar" *ngIf="Quiz.Quiz != 'S'"></button>
+                    <button pButton pRipple icon="fa-solid fa-lock" class="p-button-rounded p-button-danger" (click)="liberarQuiz(Quiz)" title="Bloquear" *ngIf="Quiz.Quiz == 'S'"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}" translate="yes">
+</p-confirmDialog>

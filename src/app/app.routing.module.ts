@@ -47,6 +47,7 @@ import { TabimagenslistaComponent } from './Cadastros/tabimagens/tabimagenslista
 import { SugestoesinitComponent } from './Participe/sugestoes/sugestoesinit.component';
 import { Quiz2listaComponent } from './Participe/quizresp/quiz2/quiz2lista.component';
 import { Quiz2respComponent } from './Participe/quizresp/quiz2/quiz2resp.component';
+import { Questoes2listaComponent } from './Cadastros/questoes2/questoes2lista.component';
 //import { TestepdfComponent } from './testepdf/testepdf.component';
 // import { TreinoaluComponent } from './Treinos/treinoalu/treinoalu.component';
 
@@ -85,7 +86,7 @@ const appRoutes: Routes = [
         {path: 'quizresp', component: QuizrespComponent},
         {path: 'quiz2resp', component: Quiz2respComponent},
         {path: 'quizinit', component: QuizinitComponent},        
-        {path: 'questoeslista', component: QuestoeslistaComponent},
+        {path: 'questoes2lista', component: Questoes2listaComponent},
         {path: 'questoes', component: QuestoesComponent},
         {path: 'quizalterlista', component: QuizalterlistaComponent},
         {path: 'quizalter', component: QuizalternativasComponent},

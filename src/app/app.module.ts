@@ -56,6 +56,7 @@ import { AlterComponent } from './principal/alter/alter.component';
 import { CheckinComponent } from './principal/checkin/checkin.component';
 import { ResponsaveisComponent } from './Cadastros/aluno/responsaveis/responsaveis.component';
 import { QuestoeslistaComponent } from './Cadastros/questoes/questoeslista.component';
+import { Questoes2listaComponent } from './Cadastros/questoes2/questoes2lista.component';
 import { QuestoesComponent } from './Cadastros/questoes/questoes.component';
 import { QuizalterlistaComponent } from './Cadastros/questoes/quizalternativas/quizalterlista.component';
 import { QuizalternativasComponent } from './Cadastros/questoes/quizalternativas/quizalternativas.component';
@@ -100,6 +101,7 @@ import { TabimagenslistaComponent } from './Cadastros/tabimagens/tabimagenslista
     NoticiasComponent,
     QuestoeslistaComponent,
     QuestoesComponent,
+    Questoes2listaComponent,
     QuizalterlistaComponent,
     QuizalternativasComponent,
     MantercardlistaComponent,

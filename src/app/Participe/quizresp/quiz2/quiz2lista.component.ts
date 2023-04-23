@@ -63,7 +63,8 @@ export class Quiz2listaComponent implements OnInit, OnDestroy {
     }
     let dados = {
       CatIdf: catIdfFiltro,
-      ClasIdf: 0
+      ClasIdf: 0,
+      Quiz: 'S'
     };
     this.lerQuiz = this.srvQuiz.getTodos(dados).subscribe(
       (dados) => {

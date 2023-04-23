@@ -19,4 +19,5 @@ export class JudocardModel {
     public QuizLiberado: string;
     public JaRespondeu: Boolean;
     public QuizImgAux: SafeResourceUrl;
+    public Quiz: string;
 }
