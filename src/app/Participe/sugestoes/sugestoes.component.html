@@ -5,16 +5,16 @@
 <p-confirmPopup></p-confirmPopup>
 
 <div class="divSugestoes" *ngIf="!isLoading">
-    <div class="tituloCadastro">SUGESTÕES</div>
+    <div class="tituloCadastro">ASSUNTOS</div>
     <p-dataView [value]="Sugestoes">
         <ng-template let-msg pTemplate="listItem">
             <div class="itemMsg">
                 <div style="display: inline;" class="itemCab">{{msg.MsgNome}} - {{msg.DataInc | date : 'dd/MM/yyyy HH:mm'}}</div>
                 <span>&nbsp;&nbsp;&nbsp;</span>
-                <a (click)="confirm($event,msg)" title="excluir sugestão" *ngIf="msg.MsgEmail == UsuEmail">
+                <a (click)="confirm($event,msg)" title="excluir assunto" *ngIf="msg.MsgEmail == UsuEmail">
                     <i style="color: red;" class="fas fa-trash-alt" aria-hidden="true">&nbsp;&nbsp;</i>
                 </a>
-                <a (click)="comentar(msg)" title="comentar sugestão">
+                <a (click)="comentar(msg)" title="comentar assunto">
                     <i style="color: rgb(53, 19, 202);" class="far fa-comment-alt" aria-hidden="true"></i>
                 </a>
                 <div [innerHtml]="msg.MsgTexto"></div>
@@ -41,7 +41,7 @@
     <div class="form-group">
         <div class="row">
             <div class="col-lg-12 col-md-12">
-                <label for="texto">Sugestão</label>
+                <label for="texto">Novo assunto</label>
                 <p-editor id="texto" formControlName="texto" [style]="{'height':'100px'}">
                     <ng-template pTemplate="header">
                         <span class="ql-formats">

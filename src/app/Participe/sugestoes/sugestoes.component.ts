@@ -82,7 +82,7 @@ export class SugestoesComponent implements OnInit, OnDestroy {
     this.addDados = this.srvMensagem.addDados(dados).subscribe(
       () => {
         this.sendMail(dados.MsgNome,dados.MsgEmail,dados.MsgTexto,dados.MsgTexto,"S");
-        this.messageService.add({severity:'success', summary: 'Successo', detail: 'Sugestão incluida!'});
+        this.messageService.add({severity:'success', summary: 'Successo', detail: 'Assunto incluido!'});
       },
       err => { 
         let msg = err.error.errors.toString();
@@ -109,7 +109,7 @@ export class SugestoesComponent implements OnInit, OnDestroy {
   confirm(event: Event, msg) {
     this.confirmationService.confirm({
         target: event.target,
-        message: 'Confirma exclusão desta sugestão ?',
+        message: 'Confirma exclusão deste assunto ?',
         icon: 'pi pi-exclamation-triangle',
         acceptLabel: 'Sim',
         rejectLabel: 'Não',
@@ -130,7 +130,7 @@ export class SugestoesComponent implements OnInit, OnDestroy {
     };    
     this.delDados = this.srvMensagem.delDado(dados).subscribe(
       () => {
-        this.messageService.add({severity:'success', summary: 'Successo', detail: 'Sugestão excluída!'});
+        this.messageService.add({severity:'success', summary: 'Successo', detail: 'Assunto excluído!'});
       },
       err => { 
         let msg = err.error.errors.toString();
@@ -210,14 +210,14 @@ export class SugestoesComponent implements OnInit, OnDestroy {
   }
 
   sendMail(nome, email, texto, textoHtml, tipo){
-    this.mail.subject = tipo == "S" ? "Sugestão" : "Comentário";
+    this.mail.subject = tipo == "S" ? "Assunto" : "Comentário";
     this.mail.cc = "";
     if (tipo == "C"){
       this.mail.cc = email;
     }
     this.mail.subject += " enviado por " + nome + " - "+email;
-    this.mail.text = (tipo == "S" ? "Nova sugestão: " : "Comentário ref. sugestão: " + this.MsgSugestao + "\n") + "( " + texto +" )";
-    this.mail.html = (tipo == "S" ? "Nova sugestão: " : "Comentário ref. sugestão: " + this.MsgSugestao + "<br/>") + "( " + textoHtml +" )";
+    this.mail.text = (tipo == "S" ? "Novo assunto: " : "Comentário ref. assunto: " + this.MsgSugestao + "\n") + "( " + texto +" )";
+    this.mail.html = (tipo == "S" ? "Novo assunto: " : "Comentário ref. assunto: " + this.MsgSugestao + "<br/>") + "( " + textoHtml +" )";
     this.sendMailSub = this.sendmailService.sendMail(this.mail).subscribe(
       () => {
         //this.messageService.add({severity:'success', summary: 'Successo', detail: 'Comentário excluído!'});

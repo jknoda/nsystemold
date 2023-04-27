@@ -131,7 +131,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     private menuInitNA() {
         this.itemsNA = [
             {label: 'QUIZ', icon: 'fa fa-question-circle', routerLink:'quizinit', command:()=>{this.onClick();}},
-            {label: 'Sugestões', icon: 'fa-solid fa-comment', routerLink:'sugestoesinit', command:()=>{this.onClick();}},
+            {label: 'Assuntos', icon: 'fa-solid fa-comment', routerLink:'sugestoesinit', command:()=>{this.onClick();}},
         ];        
     }
 
