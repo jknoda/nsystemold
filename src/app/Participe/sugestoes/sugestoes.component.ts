@@ -39,6 +39,7 @@ export class SugestoesComponent implements OnInit, OnDestroy {
   MsgIdf = 0;  
   MsgTexto = "";
   MsgSugestao = "";
+  perfil = "";
 
 
   constructor(private srvMensagem:SugestoesService, 
@@ -48,6 +49,7 @@ export class SugestoesComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.perfil = JSON.parse(localStorage.getItem('userData')).perfil;
     this.mail = JSON.parse(localStorage.getItem('emailConfig'));
     console.log(this.mail);
     this.carregaDados();

@@ -16,6 +16,10 @@ textarea.ng-invalid.ng-touched {
     padding: 10px;
 }
 
+.itemMsg div {
+    line-height: 0.7;
+}
+
 .itemMsg:nth-child(even) {
     background: rgb(209, 231, 195);
 }
@@ -25,7 +29,7 @@ textarea.ng-invalid.ng-touched {
 }
 
 .itemMsgComentario div {
-    line-height: 0.5;
+    line-height: 0.7;
 }
 
 .itemCabComentario{
@@ -49,6 +53,6 @@ hr {
 
 @media screen and (max-width: 800px){
     .divSugestoes{
-        max-height: 250px;
+        max-height: 600px;
     }
 }
