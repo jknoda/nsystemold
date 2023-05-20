@@ -8,4 +8,5 @@ export class UsuarioModel {
     public DataInc: Date;
     public DataAlt: Date;
     public ReceberEmail: string;
+    public UserSenha: string;
 }
